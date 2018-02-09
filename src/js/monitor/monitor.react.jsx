@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import findKey from 'lodash/findKey';
-import findLastIndex from 'lodash/findLastIndex';
-import isEmpty from 'lodash/isEmpty';
-import forIn from 'lodash/forIn';
-import pickBy from 'lodash/pickBy';
-import { Col, Row, Button } from 'react-bootstrap';
+// import findKey from 'lodash/findKey';
+// import findLastIndex from 'lodash/findLastIndex';
+// import isEmpty from 'lodash/isEmpty';
+// import forIn from 'lodash/forIn';
+// import pickBy from 'lodash/pickBy';
+// import { Col, Row, Button } from 'react-bootstrap';
 import './monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -23,7 +23,8 @@ class Monitor extends Component {
     chamberId: 1,
     chamberData: [],
     growingPlants: [],
-    chambers: []
+    chambers: [],
+    isLoading: true
   };
 
   async componentDidMount() {
@@ -35,7 +36,7 @@ class Monitor extends Component {
       const growingResults = await this.growingPlants();
       const chamberResults = await this.getAllChamberData();
       const sensorResults = await this.getSensorMeasurementData();
-      this.setGrowingPlants(growingResults);
+      this.setstate({growingPlants: growingResults});
       this.setChambers(chamberResults);
       this.setSensorData(sensorResults);
     } catch(e) {
@@ -121,40 +122,40 @@ class Monitor extends Component {
 
   render() {
     console.log('render monitor');
-    const { chamberData, chamberId, growingPlants } = this.state;
-    const currentPlantDataByChamber = [];
+    const { chamberData, chamberId} = this.state;
+    // const currentPlantDataByChamber = [];
 
-    forIn(chamberData, reading => {
-      if (reading.chamber_id === chamberId) {
-        currentPlantDataByChamber.push(reading);
-      }
-      return currentPlantDataByChamber;
-    });
+    // forIn(chamberData, reading => {
+    //   if (reading.chamber_id === chamberId) {
+    //     currentPlantDataByChamber.push(reading);
+    //   }
+    //   return currentPlantDataByChamber;
+    // });
 
-    const phReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 3);
-    const ppmReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 4);
-    const temperatureReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 2);
-    const humidityReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 1);
-    //
-    const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
-    const plantKey = findKey(currentPlantInfo);
-    const now = new Date().getTime();
-    let dayOfCycle = 1;
+    // const phReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 3);
+    // const ppmReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 4);
+    // const temperatureReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 2);
+    // const humidityReadingIdx = findLastIndex(currentPlantDataByChamber, data => data.sensor_id === 1);
+    // //
+    // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
+    // const plantKey = findKey(currentPlantInfo);
+    // const now = new Date().getTime();
+    // let dayOfCycle = 1;
 
-    if (isEmpty(currentPlantInfo) === false) {
-      const startedOn = Date.parse(currentPlantInfo[plantKey].started_datetime);
-      dayOfCycle = new Date(now - startedOn).getDate();
-    }
+    // if (isEmpty(currentPlantInfo) === false) {
+    //   const startedOn = Date.parse(currentPlantInfo[plantKey].started_datetime);
+    //   dayOfCycle = new Date(now - startedOn).getDate();
+    // }
 
     return (
       <div className="monitor container">
         <FilterButtonGroup
           onChange={this.handleChamberIdChange}
-          chamberId={this.state.chamberId}
-          options={this.state.chambers}
+          chamberId={chamberId}
+          options={chamberData}
         />
-
-        {this.state.chamberData.length >= 1 ? (
+        {JSON.stringify(this.state.growingPlants)}
+        {/*this.state.chamberData.length >= 1 ? (
           <Row className="readings">
             <Col className="bubble ph" xs={12} md={10} mdOffset={2}>
               <a href={`${this.props.match.path}/ph`}>
@@ -196,7 +197,7 @@ class Monitor extends Component {
               <Button>Start New Garden</Button>
             </a>
           </div>
-        )}
+        ) */}
       </div>
     );
   }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import findKey from 'lodash/findKey';
-import isEmpty from 'lodash/isEmpty';
-import pickBy from 'lodash/pickBy';
+// import findKey from 'lodash/findKey';
+// import isEmpty from 'lodash/isEmpty';
+// import pickBy from 'lodash/pickBy';
 
-import { invokeApig } from '../../libs/awsLibs';
-import LineGraph from '../D3/lineGraph';
-import FilterButtonGroup from '../components/filter_button.react';
+import { invokeApig } from '../../../libs/awsLibs';
+import LineGraph from '../../D3/lineGraph';
+import FilterButtonGroup from '../../components/filter_button.react';
 
 class Sensor extends Component {
   static propTypes = {
@@ -22,15 +22,14 @@ class Sensor extends Component {
     graphWidth: 300,
     graphHeight: 200,
     chambers: [],
-    sensorData: [],
-    growingPlants: []
+    sensorData: []
   };
 
   componentDidMount() {
     console.log('componentDidMount sensor');
     this.getAllChamberData();
     this.getSensorData();
-    this.getGrowingPlantsData();
+    // this.getGrowingPlantsData();
   }
 
   shouldComponentUpdate(newProps, newState) {
@@ -51,25 +50,26 @@ class Sensor extends Component {
   getAllChamberData = () => {
     console.log('get chamber info');
 
-    invokeApig({ path: '/chambers' }).then(chambers => {
+    const test = invokeApig({ path: '/chambers' }).then(chambers => {
       this.setState({ chambers });
     });
+    console.log(test);
   };
 
-  getGrowingPlantsData = () => {
-    console.log('get growing plant data- sensor measurement data');
-
-    invokeApig({ path: '/gardens' }).then(gardens => {
-      this.setState({ growingPlants: gardens });
-    });
-  };
+  // getGrowingPlantsData = () => {
+  //   console.log('get growing plant data- sensor measurement data');
+  //
+  //   return invokeApig({ path: '/gardens' }).then(gardens => {
+  //     this.setState({ growingPlants: gardens });
+  //   });
+  // };
 
   getSensorData = () => {
     console.log('get sensor data');
-    const { chamberId } = this.state;
+    // const { chamberId } = this.state;
     const sensor = this.props.match.url.slice(9);
     if (sensor !== '') {
-      invokeApig({ path: '/sensorData', chamberId }).then(sensorData => {
+      invokeApig({ path: '/sensorData' }).then(sensorData => {
         this.setState({ sensorData });
       })
     //     // return sensorMeasurements;
@@ -152,29 +152,31 @@ class Sensor extends Component {
 
   render() {
     console.log('render sensor');
-    const { growingPlants, chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
+    const { chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
     const today = new Date();
     const yesterday = new Date(today - 1000 * 60 * 60 * 24 * 1);
     const oneWeekAgo = new Date(today - 1000 * 60 * 60 * 24 * 7);
     const full = new Date(today - 1000 * 60 * 60 * 24 * 8);
     // let startedOnMonth = 0;
     let startedOn = 0;
-    const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
-    const plantKey = findKey(currentPlantInfo);
+    // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
+    // const plantKey = findKey(currentPlantInfo);
 
-    if (isEmpty(currentPlantInfo) === false) {
-      startedOn = new Date(Date.parse(currentPlantInfo[plantKey].started_datetime)).toLocaleString();
-
-      // startedOnMonth = Date.parse(currentPlantInfo[plantKey].started_datetime).getDate();
-    }
+    // if (isEmpty(currentPlantInfo) === false) {
+    //   startedOn = new Date(Date.parse(currentPlantInfo[plantKey].started_datetime)).toLocaleString();
+    //   // startedOnMonth = Date.parse(currentPlantInfo[plantKey].started_datetime).getDate();
+    // }
 
     const sensorName = this.props.match.url.slice(9);
+    console.log(sensorData);
+    console.log(chambers);
     console.log(sensorData);
     return (
       <div className="sensor container">
         <div className="filter">
           <FilterButtonGroup onChange={this.handleChamberIdChange} chamberId={chamberId} options={chambers} />
         </div>
+
 
         <LineGraph
           chamberId={chamberId}

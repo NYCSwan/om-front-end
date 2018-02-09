@@ -42,7 +42,6 @@ class ExistingGrow extends Component {
     console.log('component did mount existing grow');
    try {
      const chamberResults = await this.getChamberOptions();
-     debugger
      const gardenResults = await this.getGrowingPlants();
      const climateResults = await this.getClimates();
      this.setChambers(chamberResults);
@@ -58,18 +57,18 @@ class ExistingGrow extends Component {
     // this.getClimates();
   }
 
-  // shouldComponentUpdate(newState) {
-  //   console.log('shouldComponentUpdate existing grow');
-  //   return (
-  //     this.state.chamberOptions !== newState.chamberOptions ||
-  //     // this.state.selectedChamber !== newState.selectedChamber ||
-  //     // this.state.showPause !== newState.showPause ||
-  //     // this.state.showBalance !== newState.showBalance ||
-  //     // this.state.showInitialPopup !== newState.showInitialPopup ||
-  //     this.state.growingPlants !== newState.growingPlants
-  //     // || this.state.isBalanced !== newState.isBalanced
-  //   );
-  // }
+  shouldComponentUpdate(newState) {
+    console.log('shouldComponentUpdate existing grow');
+    return (
+      this.state.chamberOptions !== newState.chamberOptions ||
+      // this.state.selectedChamber !== newState.selectedChamber ||
+      // this.state.showPause !== newState.showPause ||
+      // this.state.showBalance !== newState.showBalance ||
+      // this.state.showInitialPopup !== newState.showInitialPopup ||
+      this.state.growingPlants !== newState.growingPlants
+      // || this.state.isBalanced !== newState.isBalanced
+    );
+  }
 
   // componentDidUpdate() {
     // console.log('componentDidUpdate existing grow');
@@ -107,17 +106,17 @@ class ExistingGrow extends Component {
   getGrowingPlants = () => {
     console.log('get plant recipes');
     // debugger
-    return invokeApig({ path: 'gardens' });
+    return invokeApig({ path: '/gardens' });
   };
 
   getChamberOptions = () => {
     console.log('get chamber options');
-    return invokeApig({ path: 'chambers' });
+    return invokeApig({ path: '/chambers' });
   };
 
   getClimates = () => {
     console.log('get chambers');
-    return invokeApig({ path: 'climates' });
+    return invokeApig({ path: '/climates' });
   };
 
   setGardens = (garden) => {

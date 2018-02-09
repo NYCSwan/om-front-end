@@ -13,7 +13,7 @@ import Signup from './login/signup.react';
 import PlantContainer from './plants/plant_container.react';
 import PlantList from './plants/plant_list.react';
 import Monitor from './monitor/monitor.react';
-import Sensor from './monitor/sensor.react';
+import Sensor from './monitor/sensors/sensor.react';
 import Progress from './monitor/progress.react';
 
 const Routes = (props) => (
