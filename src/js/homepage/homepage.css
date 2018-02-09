@@ -1,0 +1,24 @@
+                                  /*Homepage*/
+                                  /************/
+
+.homepage.links.container{
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  margin-top: 20px;
+  min-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.monitorOrGrow.container, .grow.links.container {
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  margin-top: 20px;
+  /* min-width: 500px; */
+  margin-left: auto;
+  margin-right: auto;
+}

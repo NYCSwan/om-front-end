@@ -1,0 +1,196 @@
+/*New Grow*/
+/***********/
+
+div.selectedPlant {
+text-align: center;
+position: relative;
+}
+.selectedPlant h3 {
+font-family: Futura-Lig;
+font-size: 18px;
+}
+
+div.selectedPlant .form-group {
+display: flex;
+flex-flow: row wrap;
+margin-right: auto;
+margin-left: auto;
+margin-top: 20px;
+min-height: 300px;
+height: auto;
+width: 75%;
+align-items: baseline;
+justify-content: center;
+align-content: center;
+border-radius: 5%;
+background-color: rgba(0,0,0,0.4);
+}
+
+.Basil, .Bell.Pepper, .Broccoli, .Cilantro, .Green.Beans, .Lettuce, .Tomato, .Kale, .Customize {
+font-family: Futura-Lig;
+background-repeat:no-repeat;
+background-size: 100% 100%;
+max-width: 35%;
+min-width: 200px;
+margin-top: 10px;
+font-size: 18px;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+flex: 1 100%;
+height: 70px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+
+}
+
+.newgrow.container {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+margin-left: 20px;
+margin-top: 20px;
+width: 80%;
+text-align: center;
+}
+
+.link.Basil {
+background-image: url(/public/img/basil_button.png);
+
+}
+
+.link.Bell.Pepper {
+background-image: url(/public/img/bell_pepper_button.png);
+
+}
+
+.link.Broccoli {
+background-image: url(/public/img/broccoli_button.png);
+
+}
+
+.link.Cilantro{
+background-image: url(/public/img/cilantro_button.png);
+}
+
+.link.Kale{
+background-image: url(/public/img/kale_button.png);
+}
+
+.link.Lettuce{
+background-image: url(/public/img/lettuce_button.png);
+}
+
+.link.Tomato{
+background-image: url(/public/img/tomato_button.png);
+}
+
+.link.Customize {
+background-image: url(/public/img/customize_button.jpg);
+}
+
+.link.Green.Beans {
+background-image: url(/public/img/green_bean_button.png)
+}
+.text.Futura-Lig.center h3{
+font-size: 20px;
+}
+
+/*.new_grow_form {
+width: 90%;
+min-height: 800px;
+}*/
+
+div.chamberOptions {
+min-height: 800px;
+min-width: 500px;
+}
+
+
+.chamberImage, .existing_grow_form {
+background-image: url(/public/img/oasis_mini_icon_raw.png);
+background-repeat:no-repeat;
+background-size: 100% 100%;
+width: 45%;
+min-height: 400px;
+padding-top: 20px;
+padding-bottom: 20px;
+margin-top: 30px;
+/* margin-left: auto; */
+/* margin-right: auto; */
+}
+
+/*Chamber*/
+div.chamberImage .form-group {
+background: none;
+font-size: 18px;
+position: relative;
+font-family: Futura-Lig;
+}
+
+#chambers {
+background-color: blue;
+}
+
+h3#chamber.directions.Futura-Lig {
+width: 180px;
+margin-top: 30px;
+margin-left: auto;
+margin-right: auto;
+}
+
+div.link.Chamber1.radio {
+position: absolute;
+/*margin-left: 145px;*/
+/*margin-top: 245px;*/
+margin-left: 355px;
+margin-top: 295px;
+}
+
+div.link.Chamber2.radio {
+position: absolute;
+margin-left: 130px;
+margin-top: 80px;
+}
+
+div.link.Chamber3.radio {
+position: absolute;
+margin-left: -90px;
+margin-top: 150px;
+}
+
+.directions.container {
+margin: 10%;
+}
+
+.directions.left {
+width: 40%;
+font-size: 24px;
+display: inline-block;
+}
+
+.directions.right {
+right:0;
+width: 45%;
+display: inline-block;
+font-size: 18px;
+}
+
+.directions.right div.container {
+width: 100%;
+}
+
+.directions.right button {
+background-color: rgba(0,0,0,0.3);
+border-radius: 20px;
+}
+
+.directions.right .row {
+position: relative;
+width: 100%;
+padding-bottom: 10px;
+}
+div.Futura-Lig.col-md-6.col-xs-5 {
+width: 100%;
+}

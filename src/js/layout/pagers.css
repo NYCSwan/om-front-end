@@ -1,0 +1,35 @@
+/* Pagers */
+/***********/
+.pagers {
+width: 100%;
+display: inline;
+}
+
+span.glyphicon.glyphicon-glyphicon.glyphicon-chevron-left, span.glyphicon.glyphicon-glyphicon.glyphicon-chevron-right {
+/*width: 100px;*/
+/*height: 100px;*/
+position: relative;
+zoom: 3;
+color: green;
+}
+
+ul.grow.pager {
+z-index: 200;
+position: fixed;
+bottom: 300px;
+margin-top: 300px;
+}
+
+ul.grow.pager .previous {
+height: 50px;
+}
+
+ul.grow.pager .next {
+margin-left: 900px;
+height: 50px;
+}
+
+li.next a, li.previous a {
+background-color: transparent;
+border:none;
+}

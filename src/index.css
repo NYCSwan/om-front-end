@@ -1,0 +1,48 @@
+
+/*****************/
+/*Universal Styling*/
+.Futura-Lig {
+font-family: Futura-Lig;
+font-weight: normal;
+font-style: normal;
+}
+
+h1, h2, h3, h4 {
+font-weight: bold;
+}
+
+body {
+background-image: url(/public/img/BG_12_23.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+background-color: grey;
+color: #fff;
+font-family: 'Futura-Lig';
+margin:0;
+padding: 0;
+min-height:  100vh;
+}
+
+li {
+list-style-type:none;
+}
+
+img {
+max-width:150px;
+}
+
+#app {
+position: relative;
+/* width: auto; */
+/* height: 100%; */
+}
+
+.container {
+margin: 0;
+padding: 0;
+}
+
+.links {
+display: flex;
+flex-direction: column;
+}
