@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
+import './filter_button.css';
 class FilterButtonGroup extends Component {
   static propTypes = {
     chamberId: PropTypes.number.isRequired,

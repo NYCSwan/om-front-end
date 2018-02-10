@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Aeroasis",
+  "name": "Oasis Mini Garden App",
+  "default_locale": "en",
+  "description": "A plain text description",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +13,12 @@
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "src/js/*/*.css"
+  ],
 }

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
 // import pickBy from 'lodash/pickBy';
-// import { Col, Row, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, PageHeader } from 'react-bootstrap';
 import './monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -34,14 +34,16 @@ class Monitor extends Component {
     // }
     try {
       const growingResults = await this.growingPlants();
+      debugger
       const chamberResults = await this.getAllChamberData();
-      const sensorResults = await this.getSensorMeasurementData();
-      this.setstate({growingPlants: growingResults});
+      // const sensorResults = await this.getSensorMeasurementData();
+      this.setState({growingPlants: growingResults});
       this.setChambers(chamberResults);
-      this.setSensorData(sensorResults);
+      // this.setSensorData(sensorResults);
     } catch(e) {
       console.log(e);
     }
+    this.setState({ isLoading: false });
   }
 
   shouldComponentUpdate(newState) {
@@ -120,6 +122,46 @@ class Monitor extends Component {
     }
   };
 
+  renderChambersList(chambers) {
+    return [{}].concat(chambers).map(
+      (chamber, i) =>
+        i !== 0
+          ? <ListGroupItem
+              key={chamber.chamberId}
+              href={`/chambers/${chamber.chamberId}`}
+              onClick={this.handleNoteClick}
+              header={chamber.chamberName}
+            >
+              {"Created: " + new Date(chamber.createdAt).toLocaleString()}
+            </ListGroupItem>
+          : <ListGroupItem
+              key="new"
+              href="/NewGrow"
+              onClick={this.handleChamberClick}
+            >
+              <h4>
+                <b>{"\uFF0B"}</b> Start a new Garden
+              </h4>
+            </ListGroupItem>
+    );
+  }
+
+  handleGardenClick = event => {
+    event.preventDefault();
+    this.props.history.push(event.currentTarget.getAttribute("href"));
+  }
+
+  renderChambers() {
+   return (
+     <div className="chambers">
+       <PageHeader>Your Chambers</PageHeader>
+       <ListGroup>
+         {!this.state.isLoading && this.renderChambersList(this.state.chambers)}
+       </ListGroup>
+     </div>
+   );
+ }
+
   render() {
     console.log('render monitor');
     const { chamberData, chamberId} = this.state;
@@ -154,6 +196,7 @@ class Monitor extends Component {
           chamberId={chamberId}
           options={chamberData}
         />
+        {this.props.isAuthenticated ? this.renderChambers() : this.renderLander()}
         {JSON.stringify(this.state.growingPlants)}
         {/*this.state.chamberData.length >= 1 ? (
           <Row className="readings">

@@ -19,12 +19,12 @@ import Progress from './monitor/progress.react';
 const Routes = (props) => (
   <Switch>
     <Route path="/" exact component={Homepage} {...props} />
-    <Route {...props} path='/login' render={(routeProps) => { // eslint-disable-line
+    <Route {...props} path='/login' exact render={(routeProps) => { // eslint-disable-line
         return <Login
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
-    <Route {...props} path="/signup" render={(routeProps) => { // eslint-disable-line
+    <Route {...props} path="/signup" exact render={(routeProps) => { // eslint-disable-line
         return <Signup
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
@@ -59,7 +59,7 @@ const Routes = (props) => (
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
-    <Route {...props} path='/tutorials' render={(routeProps) => { // eslint-disable-line
+    <Route {...props} path='/tutorials' exact render={(routeProps) => { // eslint-disable-line
         return <Tutorials
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}

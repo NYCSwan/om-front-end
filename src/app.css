@@ -1,19 +1,48 @@
-
-.half-circle {
-background-color: rgba(255,255,255,0.3);
-border-top-left-radius: 100px;
-border-top-right-radius: 100px;
-border-bottom: 0;
-
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-box-sizing: border-box;
+/*****************/
+/*Universal Styling*/
+.Futura-Lig {
+font-family: Futura-Lig;
+font-weight: normal;
+font-style: normal;
 }
 
-.xBigFont {
-font-size: 35px;
-font-weight: bolder;
-text-align: center;
+h1, h2, h3, h4 {
+font-weight: bold;
+}
+
+#root {
+background-image: url(/img/BG_12_23.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+color: #fff;
+font-family: Futura-Lig;
+margin:0;
+padding: 0;
+min-height:  100vh;
+}
+
+li {
+list-style-type:none;
+}
+
+img {
+max-width:150px;
+}
+
+#app {
+position: relative;
+/* width: auto; */
+/* height: 100%; */
+}
+
+.container {
+margin: 0;
+padding: 0;
+}
+
+.links {
+display: flex;
+flex-direction: column;
 }
 
 .appContainer {
@@ -34,13 +63,6 @@ font-size: 16px;
 color: #fff;
 }
 
-/* Header buttons */
-button.chamber-1.btn.btn-default:active, button.chamber-2.btn.btn-default:active, button.chamber-3.btn.btn-default:active, button.chamber-1.btn.btn-default:focus, button.chamber-2.btn.btn-default:focus, button.chamber-3.btn.btn-default:focus  {
-background:linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.1));
-color: #fff;
-font-weight: bolder;
-border:0;
-}
 
 .homepage.link.Futura-Lig, .temperate.link, .custom.link, .tropical.link {
 background-color: rgba(115,115,115,0.4);
@@ -65,51 +87,22 @@ border-right: solid 1px rgba(115,115,115,0.5);
 border-left: solid 1px rgba(115,115,115,0.5);
 }
 
-div.filterById.filter.flex-row.row.btn-group.btn-group-justified {
-width: 100%;
-padding:0;
-
-}
-button.chamber-1.btn.btn-default, button.chamber-2.btn.btn-default, button.chamber-3.btn.btn-default {
-padding: 0;
-width: 300px;
-align-self: baseline;
-padding-top: 10px;
-padding-bottom: 10px;
-padding-left: 20px;
-padding-right: 20px;
-}
-button.chamber-2.btn.btn-default {
-border-left: 2px solid #fff;
-border-right: 2px solid #fff;
-}
-/* loader bttons */
-.LoaderButton .spinning.glyphicon {
-margin-right: 7px;
-top: 2px;
-animation: spin 1s infinite linear;
-}
-@keyframes spin {
-from { transform: scale(1) rotate(0deg); }
-to { transform: scale(1) rotate(360deg); }
-}
-
 /* Header */
 /***********/
-.brandLogo {
+.app .brandLogo {
 margin-left: 0;
 width: 100%;
 height: auto;
 display: block;
 }
-.logo.img-responsive.center-block {
+.app .logo.img-responsive.center-block {
 background-image: url(/public/img/logo.png);
 width: inherit;
 margin-left: 0;
 max-height: 75px;
 display: inline;
 }
-div.backImage {
+.app div.backImage {
 display: none;
 position: relative;
 background-image: url(/public/img/white_back_button.png);
@@ -120,12 +113,12 @@ width: 150px;
 height: auto;
 }
 
-img.headerLinks.img-responsive {
+.app img.headerLinks.img-responsive {
 max-width: 80px;
 height: auto;
 }
 
-h1.title.Futura-Lig {
+.app h1.title.Futura-Lig {
 font-weight: bolder;
 }
 
@@ -133,7 +126,7 @@ ul.nav.nav-pillsnavbar-nav.navbar-right {
 }
 /* NAVBAR MENU*/
 /***************/
-.navbar {
+.app .navbar {
 background-color: rgba(255,255,255,0.0);
 border-top:0;
 border-left: 0;
@@ -143,34 +136,34 @@ margin: 0;
 padding: 0;
 width: 100%;
 }
-.navItem {
+.app .navItem {
 display: inline-block;
 background-color: inherit;
 width: 100%;
 }
 
-.navItem li {
+.app .navItem li {
 text-align: center;
 }
 
-.navbar-toggle {
+.app .navbar-toggle {
 border:0;
 background-color: rgba(255,255,255,0.0);
 }
 
-.navbar-toggler:focus,
-.navbar-toggler:active {
+.app .navbar-toggler:focus,
+.app .navbar-toggler:active {
 border:0;
 outline: 0;
 background-color: rgba(255,255,255,0.0);
 }
-.navbar-toggle:hover {
+.app .navbar-toggle:hover {
 background-color: #3333337d;
 }
-.navbar-collapse {
+.app .navbar-collapse {
 border: none;
 }
-.navbar-toggler span {
+.app .navbar-toggler span {
 display: inline-block;
 background-color: rgba(255,255,255, 0.0);
 height: 3px;
@@ -185,15 +178,15 @@ position: relative;
 right: 0;
 }
 
-.navbar-toggler span:nth-child(1),
-.navbar-toggler span:nth-child(2) {
+.app .navbar-toggler span:nth-child(1),
+.app .navbar-toggler span:nth-child(2) {
 -webkit-transition: transform .35s ease-in-out;
 -moz-transition: transform .35s ease-in-out;
 -o-transition: transform .35s ease-in-out;
 transition: transform .35s ease-in-out;
 }
 
-.navbar-toggler:not(.collapsed) span:nth-child(1) {
+.app .navbar-toggler:not(.collapsed) span:nth-child(1) {
 position: absolute;
 right: 12px;
 top: 10px;
@@ -204,7 +197,7 @@ transform: rotate(135deg);
 opacity: 0.9;
 }
 
-.navbar-toggler:not(.collapsed) span:nth-child(2) {
+.app .navbar-toggler:not(.collapsed) span:nth-child(2) {
 height: 12px;
 visibility: hidden;
 background-color: blue;

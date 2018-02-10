@@ -23,7 +23,7 @@ class ExistingGrow extends Component {
   state = {
     isLoading: true,
     chamberOptions: [],
-    // selectedPlant: '',
+    selectedPlant: 'Basil',
     // selectedChamber: '',
     // plantTypes: [],
     climates: [],
@@ -42,10 +42,10 @@ class ExistingGrow extends Component {
     console.log('component did mount existing grow');
    try {
      const chamberResults = await this.getChamberOptions();
-     const gardenResults = await this.getGrowingPlants();
+     // const gardenResults = await this.getGrowingPlants();
      const climateResults = await this.getClimates();
      this.setChambers(chamberResults);
-     this.setGardens(gardenResults);
+     // this.setGardens(gardenResults);
      this.setClimates(climateResults);
    } catch (e) {
      console.log(e);
@@ -80,7 +80,7 @@ class ExistingGrow extends Component {
   renderGrowingPlantsList(plants) {
     return [{}].concat(plants).map(
     (plant, i) =>
-      <p>{plant.plantName}</p>
+      <p key={plant.plantName}>{plant.plantName}</p>
   );
   }
 
@@ -103,20 +103,21 @@ class ExistingGrow extends Component {
     );
   }
 
-  getGrowingPlants = () => {
-    console.log('get plant recipes');
-    // debugger
-    return invokeApig({ path: '/gardens' });
-  };
+  // getGrowingPlants = () => {
+  //   console.log('get plant recipe');
+  //   // debugger
+  //   const test = 1518179860859;
+  //   return invokeApig({ path: `/gardens/${test}`});
+  // };
 
   getChamberOptions = () => {
     console.log('get chamber options');
-    return invokeApig({ path: '/chambers' });
+    return invokeApig({ path: '/climates' });
   };
 
   getClimates = () => {
-    console.log('get chambers');
-    return invokeApig({ path: '/climates' });
+    console.log('get recipes');
+    return invokeApig({ path: '/recipes' });
   };
 
   setGardens = (garden) => {

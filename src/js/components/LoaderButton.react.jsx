@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Glyphicon } from "react-bootstrap";
 import PropTypes from 'prop-types';
+import './LoaderButton.css';
 
 const LoaderButton = props => (
   <Button

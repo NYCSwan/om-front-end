@@ -8,7 +8,7 @@ import { IndexLinkContainer } from 'react-router-bootstrap';
 import PagerBack from './js/layout/pagerBack.react';
 import Routes from './js/routes';
 import { authUser, signOutUser } from "./libs/awsLibs";
-import './app.css';
+import styles from './app.css';
 
 class App extends Component {
   static propTypes = {
@@ -67,7 +67,7 @@ class App extends Component {
 
     // debugger
     return (
-      <div>
+      <div className={styles.app}>
       { !this.state.isAuthenticating &&
         <div>
         <Navbar inverse collapseOnSelect fluid className="container-fluid">
@@ -103,7 +103,6 @@ class App extends Component {
               </IndexLinkContainer>
             </Nav>
           </Navbar.Collapse>
-          <h1 className="title Futura-Lig">title</h1>
           <Nav pullRight>
           {this.state.isAuthenticated
             ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
