@@ -13,12 +13,23 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
-
+  .monitor {
+    height: 100%;
+    background-image: url(/media/Bubbles.png);
+  }
   .lander {
-    background-color: grayBackground from './variables.css';
+    composes: grayBackground from './variables.css';
   }
   .newGrow {
     composes: large from './buttons.css';
+  }
+  .listGroup {
+    composes: grayBackground from './variables.css';
+    display: flex;
+  }
+  .groupItem {
+    composes: white from './variables.css';
+    background: transparent;
   }
 }
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
 // import pickBy from 'lodash/pickBy';
-import { ListGroup, ListGroupItem, PageHeader, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -30,12 +30,12 @@ class Monitor extends Component {
   async componentDidMount() {
     console.log('componentDidMount monitor');
     try {
-      const growingResults = await this.growingPlants();
-      debugger
-      const chamberResults = await this.getAllChamberData();
+      const results = await this.growingPlants();
+      this.setState({growingPlants: results});
+      // const chamberResults = await this.getAllChamberData();
+      // this.setChambers(chamberResults);
+      // debugger
       // const sensorResults = await this.getSensorMeasurementData();
-      this.setState({growingPlants: growingResults});
-      this.setChambers(chamberResults);
       // this.setSensorData(sensorResults);
     } catch(e) {
       console.log(e);
@@ -43,14 +43,14 @@ class Monitor extends Component {
     this.setState({ isLoading: false });
   }
 
-  shouldComponentUpdate(newState) {
-    console.log('shouldComponentUpdate monitor');
-    return (  // eslint-disable-line
-      this.state.chamberId !== newState.chamberId ||
-      this.state.chamberData !== newState.chamberData ||
-      this.state.growingPlants !== newState.growingPlants
-    );
-  }
+  // shouldComponentUpdate(newState) {
+  //   console.log('shouldComponentUpdate monitor');
+  //   return (  // eslint-disable-line
+  //     this.state.chamberId !== newState.chamberId ||
+  //     this.state.chamberData !== newState.chamberData ||
+  //     this.state.growingPlants !== newState.growingPlants
+  //   );
+  // }
 
   // componentDidUpdate(newState) {
   //   console.log('componentDidUpdate monitor');
@@ -70,7 +70,7 @@ class Monitor extends Component {
   //   });
   // };
 
-  getAllChamberData = () => {
+  getAllChamberData() {
     console.log('get chamber info');
     return invokeApig({ path: '/chambers' });
   };
@@ -99,7 +99,7 @@ class Monitor extends Component {
     this.setState({ chamberData: sensorResults });
   }
 
-  growingPlants = () => {
+  growingPlants() {
     console.log('get growing plants from db');
     return invokeApig({ path: "/gardens" });  // eslint-disable-line
   }
@@ -128,14 +128,16 @@ class Monitor extends Component {
   }
 
   renderChambersList(chambers) {
+    console.log(chambers);
     return [{}].concat(chambers).map(
       (chamber, i) =>
-        i !== 0
+        i > 0
           ? <ListGroupItem
               key={chamber.chamberId}
               href={`/chambers/${chamber.chamberId}`}
               onClick={this.handleNoteClick}
               header={chamber.chamberName}
+              className={styles.groupItem}
             >
               {"Created: " + new Date(chamber.createdAt).toLocaleString()}
             </ListGroupItem>
@@ -143,9 +145,10 @@ class Monitor extends Component {
               key="new"
               href="/controls/NewGrow"
               onClick={this.handleChamberClick}
+              className={styles.groupItem}
             >
               <Button className={styles.newGrow}>
-                <b>{"\uFF0B"}</b> Start a new Garden
+                Start a new Garden
               </Button>
             </ListGroupItem>
     );
@@ -158,12 +161,9 @@ class Monitor extends Component {
 
   renderChambers() {
    return (
-     <div className={styles.chambers}>
-       <PageHeader>Your Chambers</PageHeader>
-       <ListGroup>
+       <ListGroup className={styles.listGroup}>
          {!this.state.isLoading && this.renderChambersList(this.state.chambers)}
        </ListGroup>
-     </div>
    );
  }
 

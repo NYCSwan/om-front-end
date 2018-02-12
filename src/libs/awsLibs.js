@@ -36,15 +36,11 @@ export async function invokeApig({
       headers,
       body
     });
-    // debugger
-    console.log(`results:`);
-    console.log(results);
-
+    
     if (results.status !== 200) {
       alert(results.text());
       throw new Error(await results.text());
     }
-    console.log(results.json());
     return results.json();
 }
 
