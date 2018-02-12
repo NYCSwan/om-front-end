@@ -209,6 +209,7 @@ sigV4Client.newClient = function(config) { // eslint-disable-line
     }
 
     let body = {...request.body};
+    // debugger
     console.log('body:' + body);
 
     // override request body and set to empty when signing GET requests

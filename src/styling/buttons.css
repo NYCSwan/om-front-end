@@ -1,0 +1,49 @@
+/* BUTTONS */
+/************/
+.button {
+/* align-items: stretch; */
+  font-family: Futura-Lig;
+  background-color: transparent;
+  border:0;
+  color: #fff;
+  width: 100px;
+  height: auto;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.default {
+  font-size: 16px;
+  font-family: Futura-Lig;
+  background-color: transparent;
+  border:1px solid black;
+  border-radius: 20%;
+  color: white from './variables.css';
+  max-width: 150px;
+  height: auto;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.large {
+  background-color: transparent;
+  border:0;
+  color: #fff;
+  width: 175px;
+  height: auto;
+  font-size: 24px;
+  white-space: normal;
+  border:1px solid black;
+  border-radius: 20%;
+  color: white from './variables.css';
+  word-wrap: break-word;
+}
+
+.default:active, .large:active {
+  background-color: grayBackground from './variables.css';
+  color: accentDarkGreen from './variables.css';
+}
+
+.default:hover, .large:hover {
+  background-color: lightGray from './variables.css';
+}

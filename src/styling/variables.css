@@ -1,0 +1,32 @@
+/*  VARIABLES */
+
+/* text colors */
+.white {
+  color: #fff;
+};
+
+.mainGreen {
+  color: #009933;
+}
+
+.accentDarkGreen {
+  color: #3b9626;
+}
+
+.accentLightGreen {
+  color: #04a12b;
+}
+.gray {
+  color: #aaaaaa;
+}
+
+
+/* background colors */
+
+.grayBackground {
+  background-color: #aaaaaa;
+}
+
+.lightGray {
+  background-color: #cccccc;
+}

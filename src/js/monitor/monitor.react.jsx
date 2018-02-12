@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import forIn from 'lodash/forIn';
 // import pickBy from 'lodash/pickBy';
 import { ListGroup, ListGroupItem, PageHeader } from 'react-bootstrap';
-import './monitor.css';
+import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
 
@@ -34,7 +34,7 @@ class Monitor extends Component {
     // }
     try {
       const growingResults = await this.growingPlants();
-      debugger
+      // debugger
       const chamberResults = await this.getAllChamberData();
       // const sensorResults = await this.getSensorMeasurementData();
       this.setState({growingPlants: growingResults});
@@ -121,6 +121,14 @@ class Monitor extends Component {
       );
     }
   };
+  renderLander = () => {
+    return (
+      <div className={styles.lander}>
+        <h3>It doesnt look like you have started a garden yet!</h3>
+        <button className={styles.newGrow}><b>{"\uFF0B"}</b> Start a new Garden</button>
+      </div>
+    )
+  }
 
   renderChambersList(chambers) {
     return [{}].concat(chambers).map(
@@ -136,7 +144,7 @@ class Monitor extends Component {
             </ListGroupItem>
           : <ListGroupItem
               key="new"
-              href="/NewGrow"
+              href="/controls/NewGrow"
               onClick={this.handleChamberClick}
             >
               <h4>
@@ -153,7 +161,7 @@ class Monitor extends Component {
 
   renderChambers() {
    return (
-     <div className="chambers">
+     <div className={styles.chambers}>
        <PageHeader>Your Chambers</PageHeader>
        <ListGroup>
          {!this.state.isLoading && this.renderChambersList(this.state.chambers)}
@@ -190,7 +198,7 @@ class Monitor extends Component {
     // }
 
     return (
-      <div className="monitor container">
+      <div className={styles.monitor}>
         <FilterButtonGroup
           onChange={this.handleChamberIdChange}
           chamberId={chamberId}
@@ -199,38 +207,38 @@ class Monitor extends Component {
         {this.props.isAuthenticated ? this.renderChambers() : this.renderLander()}
         {JSON.stringify(this.state.growingPlants)}
         {/*this.state.chamberData.length >= 1 ? (
-          <Row className="readings">
-            <Col className="bubble ph" xs={12} md={10} mdOffset={2}>
+          <Row className={styles.readings}>
+            <Col className={styles.bubblePh>
               <a href={`${this.props.match.path}/ph`}>
-                <h2 className="xBigFont" key={currentPlantDataByChamber[phReadingIdx].time}>
+                <h2 className={button.xBigFont} key={currentPlantDataByChamber[phReadingIdx].time}>
                   {currentPlantDataByChamber[phReadingIdx].value}
                 </h2>
                 <h4>pH</h4>
               </a>
             </Col>
-            <Col className="bubble empty small" />
-            <Col className="bubble ppm" xs={6} xsOffset={6} md={6}>
+            <Col className={styles.bubbleEmpty} />
+            <Col className={styles.bubblePpm}>
               <a href={`${this.props.match.path}/ppm`}>
                 <h2 className="xBigFont">{currentPlantDataByChamber[ppmReadingIdx].value}</h2>
                 <h4>PPM</h4>
               </a>
             </Col>
-            <Col className="bubble temperature" xs={4} md={4} mdOffset={8} xsOffset={8}>
+            <Col className={styles.bubbleTemperature}>
               <a href={`${this.props.match.path}/temperature`}>
-                <h2 className="xBigFont">{currentPlantDataByChamber[temperatureReadingIdx].value}*</h2>
+                <h2 className={styles.xBigFont}>{currentPlantDataByChamber[temperatureReadingIdx].value}*</h2>
                 <h4>F</h4>
               </a>
             </Col>
-            <Col className="bubble empty md" />
-            <Col className="bubble empty small" />
-            <Col className="bubble humidity" xs={8} md={8} xsOffset={4} mdOffset={4}>
+            <Col className={styles.bubbleEmpty} />
+            <Col className={styles.bubbleEmpty} />
+            <Col className={styles.bubbleHumidity}>
               <a href={`${this.props.match.path}/humidity`}>
-                <h2 className="xBigFont">{currentPlantDataByChamber[humidityReadingIdx].value}%</h2>
+                <h2 className={styles.xBigFont}>{currentPlantDataByChamber[humidityReadingIdx].value}%</h2>
                 <h4>RH</h4>
               </a>
             </Col>
-            <Col className="bubble dayOfCycle" xs={3} md={3}>
-              <h4 className="xBigFont">Day {dayOfCycle}</h4>
+            <Col className={styles.bubbleDayOfCycle}>
+              <h4 className={styles.xBigFont}>Day {dayOfCycle}</h4>
             </Col>
           </Row>
         ) : (

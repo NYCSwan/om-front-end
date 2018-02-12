@@ -9,8 +9,8 @@ import {
 import { AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import config from "./../../config";
 import LoaderButton from "../components/LoaderButton.react";
-import './signup.css';
-
+import styles from '../../styling/signup.css';
+import button from '../../styling/buttons.css';
 export default class Signup extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -130,7 +130,7 @@ export default class Signup extends Component {
   renderConfirmationForm = () => { // eslint-disable-line
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
+        <FormGroup controlId="confirmationCode" className={button.large}>
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
             autoFocus
@@ -142,7 +142,7 @@ export default class Signup extends Component {
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
+          className={button.large}
           disabled={!this.validateConfirmationForm()}
           type="submit"
           isLoading={this.state.isLoading}
@@ -157,7 +157,7 @@ export default class Signup extends Component {
   renderForm = () => { // eslint-disable-line
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
+        <FormGroup controlId="email" className={button.large}>
           <ControlLabel>Email</ControlLabel>
           <FormControl
             autoFocus
@@ -166,7 +166,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup controlId="deviceId" bsSize="large">
+        <FormGroup controlId="deviceId" className={button.large}>
         <ControlLabel>Oasis Mini Serial Number</ControlLabel>
         <FormControl
           value={this.state.deviceId}
@@ -174,7 +174,7 @@ export default class Signup extends Component {
           type="text"
         />
         </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
+        <FormGroup controlId="password" className={button.large}>
           <ControlLabel>Password</ControlLabel>
           <FormControl
             value={this.state.password}
@@ -182,7 +182,7 @@ export default class Signup extends Component {
             type="password"
           />
         </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
+        <FormGroup controlId="confirmPassword" className={button.large}>
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
@@ -192,7 +192,7 @@ export default class Signup extends Component {
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
+          className={button.large}
           disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}
@@ -205,7 +205,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="Signup">
+      <div className={styles.Signup}>
         {this.state.newUser === null
           ? this.renderForm()
           : this.renderConfirmationForm()

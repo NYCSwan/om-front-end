@@ -1,0 +1,60 @@
+/* Monitor */
+/************/
+.chambers {
+  background-image: url(/static/media/Bubbles.png);
+}
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .lander {
+    background-color: grayBackground from './variables.css';
+  }
+  .newGrow {
+    composes: large from './buttons.css';
+  }
+}
+
+/* div.bottom.container.readings.row {
+position: relative;
+margin: 0;
+padding: 0;
+width: 100%;
+}
+
+.dayOfCycle.col-md-4.col-sm-4.col-xs-4 {
+bottom: 0;
+position: absolute;
+}
+
+.bubble {
+border-radius: 50%;
+width: 200px;
+height: 200px;
+background-color: rgba(0,0,0, 0.8);
+text-align: center;
+}
+
+.bubble.humidity, .bubble.temperature, .bubble.ppm, .bubble.ph {
+margin-top: 5%;
+color: white;
+}
+
+.buble a {
+color: rgb(0, 0, 0);
+}
+
+.bubble a h4 {
+position: absolute;
+margin-left: 30%;
+margin-right: auto;
+width: 40px;
+text-align: center;
+} */

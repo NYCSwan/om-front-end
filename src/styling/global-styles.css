@@ -1,0 +1,35 @@
+/* eslint no-unused-expressions: 0 */
+:global {
+  .font {
+    font-family: 'Futura-Lig';
+    src: url(/public/webfonts/3541CB_0_0.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  .body {
+    font-family: 'Futura-Lig';
+    background-image: url(/media/BG_12_23.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .link {
+    list-style: none;
+  }
+
+  .img {
+    max-width:150px;
+  }
+
+  .container {
+    margin: 0;
+    padding: 0;
+  }
+}

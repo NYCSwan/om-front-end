@@ -1,10 +1,10 @@
 import React from 'react';
 import { Pager, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import './pagers.css';
+import styles from '../../styling/pagers.css';
 
 const PagerFwd = props => (
-  <Pager className={props.className}>
+  <Pager className={styles.pagers}>
     <Pager.Item next href="#">
       <Glyphicon glyph="glyphicon glyphicon-chevron-right" />
     </Pager.Item>

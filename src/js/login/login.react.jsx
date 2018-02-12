@@ -4,7 +4,8 @@ import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
 import config from './../../config';
 import LoaderButton from "../components/LoaderButton.react";
-import './login.css';
+import styles from '../../styling/login.css';
+import button from '../../styling/buttons.css';
 
 class Login extends Component {
   static propTypes = {
@@ -64,19 +65,19 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className={styles.Login}>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" className={button.large}>
             <ControlLabel>Email</ControlLabel>
             <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup   controlId="password"     className={button.large}>
             <ControlLabel>Password</ControlLabel>
             <FormControl value={this.state.password} onChange={this.handleChange} type="password" />
           </FormGroup>
           <LoaderButton
             block
-            bsSize="large"
+            className={button.large}
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
