@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
 // import pickBy from 'lodash/pickBy';
-import { ListGroup, ListGroupItem, PageHeader } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, PageHeader, Button } from 'react-bootstrap';
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -29,12 +29,9 @@ class Monitor extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount monitor');
-    // if(!this.props.isAuthenticated) {
-    //   return;
-    // }
     try {
       const growingResults = await this.growingPlants();
-      // debugger
+      debugger
       const chamberResults = await this.getAllChamberData();
       // const sensorResults = await this.getSensorMeasurementData();
       this.setState({growingPlants: growingResults});
@@ -125,7 +122,7 @@ class Monitor extends Component {
     return (
       <div className={styles.lander}>
         <h3>It doesnt look like you have started a garden yet!</h3>
-        <button className={styles.newGrow}><b>{"\uFF0B"}</b> Start a new Garden</button>
+        <Button className={styles.newGrow}><b>{"\uFF0B"}</b> Start a new Garden</Button>
       </div>
     )
   }
@@ -147,9 +144,9 @@ class Monitor extends Component {
               href="/controls/NewGrow"
               onClick={this.handleChamberClick}
             >
-              <h4>
+              <Button className={styles.newGrow}>
                 <b>{"\uFF0B"}</b> Start a new Garden
-              </h4>
+              </Button>
             </ListGroupItem>
     );
   }
@@ -204,7 +201,10 @@ class Monitor extends Component {
           chamberId={chamberId}
           options={chamberData}
         />
-        {this.props.isAuthenticated ? this.renderChambers() : this.renderLander()}
+        {this.props.isAuthenticated
+          ? this.renderChambers()
+          : this.renderLander()
+        }
         {JSON.stringify(this.state.growingPlants)}
         {/*this.state.chamberData.length >= 1 ? (
           <Row className={styles.readings}>

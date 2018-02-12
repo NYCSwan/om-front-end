@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pager, Glyphicon } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styles from '../../styling/pagers.css';
 
 const PagerBack = props => (
@@ -10,7 +10,5 @@ const PagerBack = props => (
     </Pager.Item>
   </Pager>
 );
-PagerBack.propTypes = {
-  className: PropTypes.string.isRequired
-};
+
 export default PagerBack;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pager, Glyphicon } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styles from '../../styling/pagers.css';
 
 const PagerFwd = props => (
@@ -11,7 +11,7 @@ const PagerFwd = props => (
   </Pager>
 );
 
-PagerFwd.propTypes = {
-  className: PropTypes.string.isRequired
-};
+// PagerFwd.propTypes = {
+//  className: PropTypes.string.isRequired
+// };
 export default PagerFwd;
