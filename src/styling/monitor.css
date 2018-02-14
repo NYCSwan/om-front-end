@@ -16,6 +16,7 @@
   .monitor {
     height: 100%;
     background-image: url(/media/Bubbles.png);
+    width: 100%;
   }
   .lander {
     composes: grayBackground from './variables.css';

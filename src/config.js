@@ -16,8 +16,3 @@ export default {
     REGION: 'us-east-1'
   }
 }
-
-// have to check and chage url in awslibs,
-// think the cors is a permissions thing. https://dzone.com/articles/retrieve-items-from-dynamodb-using-lambda-and-api
-
-// the arns have to go somewhere

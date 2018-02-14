@@ -69,69 +69,7 @@ class Sensor extends Component {
     // const { chamberId } = this.state;
     const sensor = this.props.match.url.slice(9);
     if (sensor !== '') {
-      invokeApig({ path: '/sensorData' }).then(sensorData => {
-        this.setState({ sensorData });
-      })
-    //     // return sensorMeasurements;
-    //
-    // } else if (sensor === 'temperature' && chamberId === 2) {
-    //   //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     // return sensorMeasurements;
-    //
-    // } else if (sensor === 'temperature' && chamberId === 3) {
-    //   //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     // return sensorMeasurements;
-    //
-    // } else if (sensor === 'humidity' && chamberId === 1) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     // return sensorMeasurements;
-    //
-    // } else if (sensor === 'humidity' && chamberId === 2) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     // return sensorMeasurements;
-    //
-    // } else if (sensor === 'humidity' && chamberId === 3) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //
-    // } else if (sensor === 'ph' && chamberId === 1) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    //
-    // } else if (sensor === 'ph' && chamberId === 2) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    //
-    // } else if (sensor === 'ph' && chamberId === 3) {
-    //
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    //
-    // } else if (sensor === 'ppm' && chamberId === 1) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    //
-    // } else if (sensor === 'ppm' && chamberId === 2) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    // } else if (sensor === 'ppm' && chamberId === 3) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    // } else if (sensor === 'water' && chamberId === 1) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    // } else if (sensor === 'water' && chamberId === 2) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
-    // } else if (sensor === 'water' && chamberId === 3) {
-    //     this.setState({ sensorData: sensorMeasurements });
-    //     return sensorMeasurements;
+      return invokeApig({ path: '/sensorData' })
     } else {
       console.error('shit went wrong');
     }

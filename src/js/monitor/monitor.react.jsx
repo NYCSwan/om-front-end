@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
 // import pickBy from 'lodash/pickBy';
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -75,7 +75,7 @@ class Monitor extends Component {
     return invokeApig({ path: '/chambers' });
   };
 
-  getSensorMeasurementData = () => {
+  getSensorMeasurementData() {
     console.log('get sensor measurents by chamber id');
     // debugger
       return invokeApig({ path: `/sensorData` })

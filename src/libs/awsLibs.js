@@ -69,7 +69,7 @@ export async function invokeApig({
       UserPoolId: config.cognito.USER_POOL_ID,
       ClientId: config.cognito.APP_CLIENT_ID
     });
-    console.log(userPool.ClientId);
+    // console.log(userPool.ClientId);
     return userPool.getCurrentUser();
   }
 

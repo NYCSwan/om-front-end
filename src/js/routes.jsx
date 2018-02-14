@@ -14,7 +14,7 @@ import PlantContainer from './plants/plant_container.react';
 import PlantList from './plants/plant_list.react';
 import Monitor from './monitor/monitor.react';
 import Sensor from './monitor/sensors/sensor.react';
-import Progress from './monitor/progress.react';
+import Progress from './monitor/timelapse/progress.react';
 
 const Routes = (props) => (
   <Switch>
@@ -34,12 +34,12 @@ const Routes = (props) => (
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
-    <Route path='monitor/progress' exact render={(routeProps) => { // eslint-disable-line
+    <Route {...props} path='/monitor/progress' exact render={(routeProps) => { // eslint-disable-line
         return <Progress
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
-    <Route path='monitor/:sensor_id' exact render={(routeProps) => { // eslint-disable-line
+    <Route {...props} path='/monitor/:sensor_id' exact render={(routeProps) => { // eslint-disable-line
         return <Sensor
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
@@ -69,7 +69,7 @@ const Routes = (props) => (
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
-    <Route path='plants/:plant_id' exact render={(routeProps) => { // eslint-disable-line
+    <Route path='/plants/:plant_id' exact render={(routeProps) => { // eslint-disable-line
         return <PlantContainer
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }} />
