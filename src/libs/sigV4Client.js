@@ -210,7 +210,7 @@ sigV4Client.newClient = function(config) { // eslint-disable-line
 
     let body = {...request.body};
     // debugger
-    console.log('body:' + body);
+    // console.log('body:' + body);
 
     // override request body and set to empty when signing GET requests
     if (body === undefined || verb === "GET") {
@@ -287,7 +287,7 @@ sigV4Client.newClient = function(config) { // eslint-disable-line
       url: url
     };
   };
-  console.log(awsSigV4Client);
+  // console.log(awsSigV4Client);
   return awsSigV4Client;
 };
 

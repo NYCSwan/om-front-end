@@ -14,13 +14,33 @@ export async function invokeApig({
   if (!await authUser()) {
     throw new Error("User is not logged in");
   }
+  // resolve url path
+  let url = "";
+  if (path.includes('gardens')) {
+    url = config.apiGateway.GARDENS_URL;
+  } else if(path.includes('chambers')){
+    url = config.apiGateway.CHAMBERS_URL;
+  } else if(path.includes('climates')){
+    url = config.apiGateway.CLIMATES_URL;
+  } else if(path.includes('sensorData')){
+    url = config.apiGateway.IOT_DATA_URL;
+  } else if(path.includes('sensors')){
+    url = config.apiGateway.SENSORS_URL;
+  } else if (path.includes('images')){
+    url = config.apiGateway.IMAGES_URL;
+  } else if(path.includes('plants')){
+    url = config.apiGateway.PLANT_RECIPE_URL;
+  } else {
+    console.error('path is missing, no url can be provided.');
+  }
+
   const signedRequest = sigV4Client
   .newClient({
     accessKey: AWS.config.credentials.accessKeyId,
     secretKey: AWS.config.credentials.secretAccessKey,
     sessionToken: AWS.config.credentials.sessionToken,
     region: config.apiGateway.REGION,
-    endpoint: config.apiGateway.URL })
+    endpoint: url })
   .signRequest({
     method,
     path,
@@ -36,7 +56,7 @@ export async function invokeApig({
       headers,
       body
     });
-    
+
     if (results.status !== 200) {
       alert(results.text());
       throw new Error(await results.text());

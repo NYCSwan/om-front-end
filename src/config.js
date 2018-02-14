@@ -1,7 +1,13 @@
 export default {
   apiGateway: {
     REGION: 'us-east-1',
-    URL: 'https://az9ohrt4i7.execute-api.us-east-1.amazonaws.com/prod'
+    PLANT_RECIPE_URL: 'https://uvh8hrzzcl.execute-api.us-east-1.amazonaws.com/prod',
+    CLIMATES_URL:'https://8j9wk9cp17.execute-api.us-east-1.amazonaws.com/prod',
+    CHAMBERS_URL:'https://sb1dowmmw4.execute-api.us-east-1.amazonaws.com/prod',
+    IOT_DATA_URL:'https://t2st9y0qa0.execute-api.us-east-1.amazonaws.com/prod',
+    SENSORS_URL:'https://c5pkgxc3i4.execute-api.us-east-1.amazonaws.com/prod',
+    IMAGES_URL:'https://nkys8rkide.execute-api.us-east-1.amazonaws.com/prod',
+    GARDENS_URL:'https://thkavap862.execute-api.us-east-1.amazonaws.com/prod'
   },
   cognito: {
     USER_POOL_ID: 'us-east-1_fMacbcERZ',
@@ -10,3 +16,8 @@ export default {
     REGION: 'us-east-1'
   }
 }
+
+// have to check and chage url in awslibs,
+// think the cors is a permissions thing. https://dzone.com/articles/retrieve-items-from-dynamodb-using-lambda-and-api
+
+// the arns have to go somewhere

@@ -32,11 +32,11 @@ class Monitor extends Component {
     try {
       const results = await this.growingPlants();
       this.setState({growingPlants: results});
-      // const chamberResults = await this.getAllChamberData();
-      // this.setChambers(chamberResults);
+      const chamberResults = await this.getAllChamberData();
+      this.setChambers(chamberResults);
       // debugger
-      // const sensorResults = await this.getSensorMeasurementData();
-      // this.setSensorData(sensorResults);
+      const sensorResults = await this.getSensorMeasurementData();
+      this.setSensorData(sensorResults);
     } catch(e) {
       console.log(e);
     }
