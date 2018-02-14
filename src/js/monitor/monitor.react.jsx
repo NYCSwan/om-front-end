@@ -35,8 +35,8 @@ class Monitor extends Component {
       const chamberResults = await this.getAllChamberData();
       this.setChambers(chamberResults);
       // debugger
-      const sensorResults = await this.getSensorMeasurementData();
-      this.setSensorData(sensorResults);
+      // const sensorResults = await this.getSensorMeasurementData();
+      // this.setSensorData(sensorResults);
     } catch(e) {
       console.log(e);
     }
@@ -126,33 +126,33 @@ class Monitor extends Component {
       </div>
     )
   }
-
-  renderChambersList(chambers) {
-    console.log(chambers);
-    return [{}].concat(chambers).map(
-      (chamber, i) =>
-        i > 0
-          ? <ListGroupItem
-              key={chamber.chamberId}
-              href={`/chambers/${chamber.chamberId}`}
-              onClick={this.handleNoteClick}
-              header={chamber.chamberName}
-              className={styles.groupItem}
-            >
-              {"Created: " + new Date(chamber.createdAt).toLocaleString()}
-            </ListGroupItem>
-          : <ListGroupItem
-              key="new"
-              href="/controls/NewGrow"
-              onClick={this.handleChamberClick}
-              className={styles.groupItem}
-            >
-              <Button className={styles.newGrow}>
-                Start a new Garden
-              </Button>
-            </ListGroupItem>
-    );
-  }
+// should render sensor data
+  // renderChambersList(chambers) {
+  //   console.log(chambers);
+  //   return [{}].concat(chambers).map(
+  //     (chamber, i) =>
+  //       i > 0
+  //         ? <ListGroupItem
+  //             key={chamber.chamberId}
+  //             href={`/chambers/${chamber.chamberId}`}
+  //             onClick={this.handleNoteClick}
+  //             header={chamber.chamberName}
+  //             className={styles.groupItem}
+  //           >
+  //             {"Created: " + new Date(chamber.createdAt).toLocaleString()}
+  //           </ListGroupItem>
+  //         : <ListGroupItem
+  //             key="new"
+  //             href="/controls/NewGrow"
+  //             onClick={this.handleChamberClick}
+  //             className={styles.groupItem}
+  //           >
+  //             <Button className={styles.newGrow}>
+  //               Start a new Garden
+  //             </Button>
+  //           </ListGroupItem>
+  //   );
+  // }
 
   handleGardenClick = event => {
     event.preventDefault();
@@ -169,7 +169,7 @@ class Monitor extends Component {
 
   render() {
     console.log('render monitor');
-    const { chamberData, chamberId} = this.state;
+    const { chambers, chamberId} = this.state;
     // const currentPlantDataByChamber = [];
 
     // forIn(chamberData, reading => {
@@ -199,11 +199,10 @@ class Monitor extends Component {
         <FilterButtonGroup
           onChange={this.handleChamberIdChange}
           chamberId={chamberId}
-          options={chamberData}
+          options={chambers}
+          className={styles.filterByChambersNav}
         />
-        {this.props.isAuthenticated
-          ? this.renderChambers()
-          : this.renderLander()
+        {this.props.isAuthenticated && this.renderLander()
         }
         {JSON.stringify(this.state.growingPlants)}
         {/*this.state.chamberData.length >= 1 ? (

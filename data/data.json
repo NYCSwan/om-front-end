@@ -1,0 +1,31 @@
+{
+  "reading": {
+    "timestamp": {
+      "s": "2018-02-12 10:56:50.337792"
+    },
+    "userID": {
+      "s": "us-east-1:1a372091-157f-48e9-bc27-9d664a7f7718"
+    },
+    "humidity": {
+      "s": "11"
+    },
+    "status": {
+      "s": "OK"
+    },
+    "waterlevel": {
+      "s": "0.00"
+    },
+    "turbidity": {
+      "s": "645.67"
+    },
+    "pH": {
+      "s": "7.12"
+    },
+    "temperature": {
+      "s": "22"
+    },
+    "chamberID": {
+      "s": "1"
+    }
+  }
+}

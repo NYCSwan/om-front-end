@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
-import './filter_button.css';
+import styles from '../../styling/filter_button.css';
 class FilterButtonGroup extends Component {
   static propTypes = {
     chamberId: PropTypes.number.isRequired,
@@ -22,26 +22,23 @@ class FilterButtonGroup extends Component {
         justified
         type="radio"
         name="filterById"
-        className="filterById filter flex-row row"
+        className={styles.filterById}
         options={this.props.options}
         onChange={this.props.onChange}
-        sm={12}
-        md={12}
-        lg={12}
       >
         {this.props.options.map(option => { // eslint-disable-line
 
           return (
             // eslint-disable-line
             <Button
-              key={option.c_id}
-              value={option.name}
-              className={`chamber-${option.c_id}`}
-              checked={this.props.chamberId === option.c_id}
+              key={option.chamberId}
+              value={option.plantName}
+              className={`styles.chamber${option.chamberId}`}
+              checked={this.props.chamberId === option.chamberId}
               onClick={this.handleClick}
-              disabled={option.filled}
+              disabled={option.isFilled}
             >
-              {option.name}
+              {option.plantName ? option.plantName : option.chamberName}
             </Button>
           );
         })}
