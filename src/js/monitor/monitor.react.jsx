@@ -62,13 +62,10 @@ class Monitor extends Component {
   //   }
   // }
 
-  // getGrowingPlantsData = () => {
-  //   console.log('get growing plant data- sensor measurement data');
-  //
-  //   getGrowingPlants().then(plants => {
-  //     this.setState({ growingPlants: plants });
-  //   });
-  // };
+  getGrowingPlantsData = () => {
+    console.log('get growing plant data- sensor measurement data');
+    return invokeApig({ path: '/gardens' });
+  };
 
   getAllChamberData() {
     console.log('get chamber info');
@@ -118,6 +115,7 @@ class Monitor extends Component {
       );
     }
   };
+  
   renderLander = () => {
     return (
       <div className={styles.lander}>
@@ -202,9 +200,7 @@ class Monitor extends Component {
           options={chambers}
           className={styles.filterByChambersNav}
         />
-        {this.props.isAuthenticated && this.renderLander()
-        }
-        {JSON.stringify(this.state.growingPlants)}
+        {this.props.isAuthenticated && this.renderLander()}
         {/*this.state.chamberData.length >= 1 ? (
           <Row className={styles.readings}>
             <Col className={styles.bubblePh>

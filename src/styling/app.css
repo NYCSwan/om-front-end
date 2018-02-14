@@ -2,7 +2,7 @@
   composes: body from './global-styles.css';
   font-family: 'Futura-Lig';
   background-color: gray;
-  background-image: url(/static/media/img/BG_12_23.jpg);
+  background-image: url(/BG_1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   color: white from './variables.css';
