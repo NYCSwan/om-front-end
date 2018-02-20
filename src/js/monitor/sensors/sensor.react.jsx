@@ -96,9 +96,8 @@ class Sensor extends Component {
     console.log('render sensor');
     const { chambers, chamberId, graphHeight, graphWidth, sensorData, growingPlants } = this.state;
     const today = new Date();
-    // const yesterday = new Date(today - 1000 * 60 * 60 * 24 * 1);
-    const oneWeekAgo = new Date(today - 1000 * 60 * 60 * 24 * 7);
-    const full = new Date(today - 1000 * 60 * 60 * 24 * 8);
+    const oneWeekAgo = {'oneWeekAgo': moment(today).subtract(7, 'days')};
+    const oneMonthAgo = {'oneMonthAgo': moment(today).subtract(1, 'months')};
     // let startedOnMonth = 0;
     // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
     // const plantKey = findKey(currentPlantInfo);
@@ -140,7 +139,7 @@ class Sensor extends Component {
               graphHeight={graphHeight}
               graphWidth={graphWidth}
               endDate={today}
-              startDate={full}
+              startDate={oneMonthAgo}
               match={this.props.match}
             />
               <h4> Started</h4>

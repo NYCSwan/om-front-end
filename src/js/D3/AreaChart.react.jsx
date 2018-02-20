@@ -6,9 +6,28 @@ import moment from 'moment';
 import forEach from 'lodash/forEach';
 import dropWhile from 'lodash/dropWhile';
 
+import styles from '../../styling/areaChart.css';
+
 class ChartArea extends Component {
+  static propTypes = {
+    currentData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    graphWidth: PropTypes.number.isRequired,
+    graphHeight: PropTypes.number.isRequired,
+    startDate: PropTypes.instanceOf(Object).isRequired,
+    endDate: PropTypes.instanceOf(Date).isRequired,
+    margin: PropTypes.shape({
+      top: PropTypes.number,
+      bottom: PropTypes.number,
+      right: PropTypes.number,
+      left: PropTypes.number
+    }).isRequired,
+    sensor: PropTypes.string.isRequired,
+    maxY: PropTypes.number.isRequired,
+    minY: PropTypes.number.isRequired
+  }
+
   state = {
-    oneDay: [],
+    // oneDay: [],
     oneWeek: [],
     oneMonth: [],
     dataSeries: []
@@ -35,8 +54,9 @@ class ChartArea extends Component {
 
   shouldComponentUpdate (newProps, newState) {
     console.log('shouldComponentUpdate areaChart');
-    return this.props.endDate !== newProps.endDate || this.props.minY !== newProps.minY  || this.state.oneMonth !== newState.oneMonth || this.props.maxY !== newProps.maxY || this.props.sensor !== newProps.sensor || this.props.currentData !== newProps.currentData ||  this.state.oneDay !== newState.oneDay || this.state.dataSeries !== newState.dataSeries || this.state.oneWeek !== newState.oneWeek
-
+    return (
+      this.props.currentData !== newProps.currentData ||  this.state.oneDay !== newState.oneDay || this.state.dataSeries !== newState.dataSeries || this.state.oneWeek !== newState.oneWeek
+    )
   }
 
   componentDidUpdate() {
@@ -44,34 +64,36 @@ class ChartArea extends Component {
   }
 
 // NOT COLLECTING RIGHT DATA
-  getOneDayOfData = () => {
-    console.log('getOneDayOfData');
-    const { currentData, startDate } = this.props;
-    const oneDayOfDataPoints = [];
-
-    forEach(currentData, (datum) => {
-      // debugger;
-      if(( new Date(datum.timestamp) >= startDate.getTime()) === true) {
-        oneDayOfDataPoints.push(datum);
-      }
-      this.setState({oneDay: oneDayOfDataPoints})
-      return oneDayOfDataPoints;
-    })
-  }
+  // getOneDayOfData = () => {
+  //   console.log('getOneDayOfData');
+  //   const { currentData, startDate } = this.props;
+  //   const oneDayOfDataPoints = [];
+  //
+  //   forEach(currentData, (datum) => {
+  //     debugger;
+  //     // if the date is earlier than the startDate drop it
+  //     if(( new Date(datum.timestamp) >= startDate.getTime()) === true) {
+  //       oneDayOfDataPoints.push(datum);
+  //     }
+  //     this.setState({oneDay: oneDayOfDataPoints})
+  //     // return oneDayOfDataPoints;
+  //   })
+  // }
 
   getOneWeekOfData = () => {
     console.log('getWeekOfData');
     const {startDate, currentData } = this.props;
     const oneWeekOfDataPoints = [];
 
-
     forEach(currentData, (datum) => {
-      if((new Date(datum.timestamp).getTime() <= startDate.getTime()) === true) {
+      // if the date is greater than the start date push into array
+      if((datum.timestamp >= startDate.oneWeekAgo._d.getTime()) === true) {
         oneWeekOfDataPoints.push(datum);
+        // debugger
       }
-      this.setState({ oneWeek: oneWeekOfDataPoints });
-      return oneWeekOfDataPoints;
+      // return oneWeekOfDataPoints;
     })
+    this.setState({ oneWeek: oneWeekOfDataPoints });
   }
 
   getOneMonthOfData = () => {
@@ -80,31 +102,23 @@ class ChartArea extends Component {
     const oneMonthOfDataPoints = [];
 
     forEach(currentData, (datum) => {
-      if((datum.timestamp <= startDate.getTime()) === true) {
+      if((datum.timestamp >= startDate.oneMonthAgo._d.getTime()) === true) {
         // const pair = ;
         // debugger
-        // oneMonthOfDataPoints.push({datum.timestamp: datum.temperature});
+        oneMonthOfDataPoints.push(datum);
       }
-      this.setState({ oneMonth: oneMonthOfDataPoints })
-      return oneMonthOfDataPoints;
+      // return oneMonthOfDataPoints;
     })
+    this.setState({ oneMonth: oneMonthOfDataPoints })
   }
-  transformData = () => {
-    // data -- timestamp, value ? check recharts
-  }
+
   getDataSeries = () => {
     console.log('get data series');
     const {startDate, endDate } = this.props;
-    const { oneMonth, oneWeek, oneDay } = this.state;
+    const { oneMonth, oneWeek } = this.state;
     const tempOneMonth = oneMonth;
     const tempOneWeek = oneWeek;
-    const tempOneDay = oneDay;
-    if( endDate - startDate >= 86400000) {
-      dropWhile(tempOneDay, (datum) => { // eslint-disable-next-line
-        new Date(datum.time).getTime() <= startDate;
-      })
-      this.setState({ dataSeries: tempOneDay});
-    } else if (endDate - startDate <= 604800000 ){
+    if (endDate - startDate <= 604800000 ){
       dropWhile(tempOneWeek, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() <= startDate;
       })
@@ -133,9 +147,13 @@ class ChartArea extends Component {
 
   updateAreaChartData = () => {
     console.log('updateAreaChart data');
-    this.getOneDayOfData();
-    this.getOneWeekOfData();
-    this.getOneMonthOfData();
+    const { startDate } = this.props;
+    // this.getOneDayOfData();
+    if( startDate.oneWeekAgo) {
+      this.getOneWeekOfData();
+    } else {
+      this.getOneMonthOfData();
+    }
     this.getDataSeries();
   }
 
@@ -193,21 +211,5 @@ class ChartArea extends Component {
   }
 }
 
-ChartArea.propTypes = {
-  currentData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  graphWidth: PropTypes.number.isRequired,
-  graphHeight: PropTypes.number.isRequired,
-  startDate: PropTypes.instanceOf(Date).isRequired,
-  endDate: PropTypes.instanceOf(Date).isRequired,
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    bottom: PropTypes.number,
-    right: PropTypes.number,
-    left: PropTypes.number
-  }).isRequired,
-  sensor: PropTypes.string.isRequired,
-  maxY: PropTypes.number.isRequired,
-  minY: PropTypes.number.isRequired
-}
 
 export default ChartArea;

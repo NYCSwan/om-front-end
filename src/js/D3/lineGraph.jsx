@@ -92,10 +92,13 @@ class LineGraph extends Component {
     const tempData = [];
     let temp = {};
     for(let idx in sensorData) {
-      sensorData[idx][`${sensor}`]
-      debugger
+      temp['timestamp'] = sensorData[idx].timestamp;
+      temp['value'] = parseFloat(sensorData[idx][`${sensor}`]);
+      tempData.push(temp);
     }
+    this.setState({ currentData: tempData });
   }
+
   render() {
     console.log('render lineGraph');
     const { graphHeight, graphWidth, sensorData, match, margin, sensor, startDate, endDate } = this.props;
@@ -103,6 +106,7 @@ class LineGraph extends Component {
 
     return (
       <div className={styles.areaChart}>
+      { currentData.length >= 1 &&
         <a href={`${match.url}`} alt={`${sensor} details`}>
           <ChartArea
             graphWidth={graphWidth}
@@ -116,6 +120,7 @@ class LineGraph extends Component {
             minY={this.state.minY}
           />
         </a>
+      }
       </div>
     )
   }
@@ -126,7 +131,7 @@ LineGraph.defaultProps = {
       top: 20,
       right: 20,
       bottom: 20,
-      left: 0
+      left: 10
     }
 }
 
