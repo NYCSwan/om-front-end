@@ -1,8 +1,11 @@
 /* eslint no-unused-expressions: 0 */
 :global {
-  .font {
+  @font-face {
     font-family: 'Futura-Lig';
     src: url(/public/webfonts/3541CB_0_0.ttf) format('truetype');
+
+  }
+  .font {
     font-weight: normal;
     font-style: normal;
   }
@@ -14,10 +17,11 @@
   }
 
   .body {
-    font-family: 'Futura-Lig';
-    background-image: url(/media/BG_12_23.jpg);
+    background-image: url(/src/media/Basil.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
   }
 
   .link {

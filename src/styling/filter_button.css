@@ -1,16 +1,32 @@
 /* Chamber Filter Headers */
+.chamber .chamber1, .chamber2, .chamber3, .Basil, .Kale, .Cilantro, .Lettuce, .Tomato {
+  background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.1));
+  width: 110px;
+  height: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
-
-
 }
 
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
+  .chamber .chamber1, .chamber2, .chamber3, .Basil, .Kale, .Cilantro, .Lettuce, .Tomato {
+    background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.1));
+    width: 110px;
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .chamber1:active, .chamber2:active, .chamber3:active, .chamber1:focus, .chamber2:focus, .chamber3:focus  {
-    background:linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.1));
     color: #fff;
     font-weight: bolder;
     border:0;
@@ -19,21 +35,16 @@
   .filterById {
     width: 100%;
     padding:0;
-    /* display: flex; */
-    /* flex: row wrap; */
+    display: flex;
+    flex: row wrap;
+    background-color: transparent;
+    text-align: center;
+    border-top: '#fff';
 
   }
-  .chamber1, .chamber2, .chamber3 {
-    /* composes: large from './buttons.css'; */
-    align-self: baseline;
-    width: 126px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+
   .chamber2 {
-  border-left: 2px solid #fff;
-  border-right: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
   }
 }

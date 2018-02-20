@@ -1,11 +1,27 @@
 /* Sensor */
 /***********/
-
+.sensor {
+  composes: lightGray from './variables.css';
+}
 .startedOn {
-vertical-align: middle;
+  vertical-align: middle;
+  background-color: rgba(255,255,255,0.3);
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom: 0;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .center {
 vertical-align: center;
 
+}
+
+.currentSensorReading {
+  background: red;
+  border-radius: 50px;
+  width: 50px;
 }

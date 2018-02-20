@@ -2,7 +2,7 @@
 
 /* text colors */
 .white {
-  color: #fff;
+  color: #ffffff;
 };
 
 .mainGreen {
@@ -13,6 +13,9 @@
   color: #3b9626;
 }
 
+.accentLightGray {
+  color: #C0C0C0; 
+}
 .accentLightGreen {
   color: #04a12b;
 }

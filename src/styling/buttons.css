@@ -1,32 +1,41 @@
 /* BUTTONS */
-/************/
-.button {
-/* align-items: stretch; */
-  font-family: Futura-Lig;
-  background-color: transparent;
-  border:0;
-  color: #fff;
-  width: 100px;
-  height: auto;
-  white-space: normal;
-  word-wrap: break-word;
-}
 
 .default {
-  font-size: 16px;
-  font-family: Futura-Lig;
-  background-color: transparent;
-  border:1px solid black;
-  border-radius: 20%;
-  color: white from './variables.css';
-  max-width: 150px;
-  height: auto;
+  width: 180px;
+  height: 70px;
   white-space: normal;
   word-wrap: break-word;
+  display: block;
+  background: #34696f;
+  border: 2px solid rgba(33, 68, 72, 0.5);
+
+  /*Step 3: Text Styles*/
+  color: rgba(255, 255, 255, 1.0);
+  text-align: center;
+  font: bold 2.7em/100px;
+
+  /*Step 4: Fancy CSS3 Styles*/
+  background: -webkit-linear-gradient(to bottom, #000000, #000001);
+  background: -moz-linear-gradient(to bottom, #000000,  #000001);
+  background: -o-linear-gradient(to bottom, #000000,  #000001);
+  background: -ms-linear-gradient(to bottom, #000000, #000001);
+  background: linear-gradient(to bottom, #000000, #000001);
+  opacity: 0.6;
+  -webkit-border-radius: 50px;
+  -khtml-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+
+  -webkit-box-shadow: 0 8px 0 #1b383b;
+  -moz-box-shadow: 0 4px 0 #1b383b;
+  box-shadow: 0 4px 0 #1b383b;
+
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+
 .large {
-  background-color: transparent;
+  /* background-color: transparent; */
   border:0;
   color: #fff;
   width: 175px;
@@ -34,16 +43,17 @@
   font-size: 24px;
   white-space: normal;
   border:1px solid black;
-  border-radius: 20%;
-  color: white from './variables.css';
+  border-radius: 50px;
+  composes: white from './variables.css';
   word-wrap: break-word;
 }
 
 .default:active, .large:active {
-  background-color: grayBackground from './variables.css';
-  color: accentDarkGreen from './variables.css';
+  /* composes: grayBackground from './variables.css'; */
+  /* color:  from './variables.css'; */
 }
 
 .default:hover, .large:hover {
-  background-color: lightGray from './variables.css';
+  /* composes: lightGray from './variables.css'; */
+  border: 1px white solid;
 }
