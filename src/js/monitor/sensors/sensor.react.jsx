@@ -10,6 +10,10 @@ import LineGraph from '../../D3/lineGraph';
 import FilterButtonGroup from '../../components/filter_button.react';
 import styles from '../../../styling/sensor.css';
 import Spinner from '../../helpers/spinner.react';
+import pH from '../../../media/pH_icon.png';
+import humidity from '../../../media/humidity_icon.png';
+import temperature from '../../../media/temperature_icon.png';
+import waterlevel from '../../../media/water_level_icon.png';
 
 class Sensor extends Component {
   static propTypes = {
@@ -91,13 +95,36 @@ class Sensor extends Component {
     return moment(plant[0].createdAt).format("dddd, MMM Do");
 
   }
+  renderCurrentSensorReading() {
+    const {chamberId, sensorData} = this.state;
+    const sensorName = this.props.match.params.sensor_id;
+    let sensorSymbol;
 
+    if (sensorName === "pH") {
+      sensorSymbol = pH;
+    } else if (sensorName === 'temperature') {
+      sensorSymbol = temperature;
+    } else if (sensorName === 'humidity') {
+      sensorSymbol = humidity;
+    } else if (sensorName === 'waterlevel') {
+      sensorSymbol = waterlevel;
+    } else {
+      sensorSymbol = waterlevel;
+    }
+    return (
+      <div className={styles.currentSensorReading}>
+        <h5 className={styles.texttop}>Chamber {chamberId}'s current {sensorName}</h5>
+        <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
+        <img className={styles.icon}src={sensorSymbol} alt={`${sensorName} icon`} />
+      </div>
+    )
+  }
   render() {
     console.log('render sensor');
-    const { chambers, chamberId, graphHeight, graphWidth, sensorData, growingPlants } = this.state;
+    const { chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
     const today = new Date();
-    const oneWeekAgo = {'oneWeekAgo': moment(today).subtract(7, 'days')};
-    const oneMonthAgo = {'oneMonthAgo': moment(today).subtract(1, 'months')};
+    const oneWeekAgo = moment(today).subtract(7, 'days');
+    const oneMonthAgo = moment(today).subtract(1, 'months');
     // let startedOnMonth = 0;
     // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
     // const plantKey = findKey(currentPlantInfo);
@@ -118,10 +145,8 @@ class Sensor extends Component {
           />
           { this.state.sensorData.length >= 1
           ?
-          <div >
-            <div className={styles.currentSensorReading}>
-              { sensorData[0].temperature }
-            </div>
+          <div>
+            { this.renderCurrentSensorReading() }
             <LineGraph
               chamberId={chamberId}
               sensorData={sensorData}

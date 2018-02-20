@@ -26,16 +26,16 @@ class FilterButtonGroup extends Component {
 
           return (
             // eslint-disable-line
-            <div
+            <button
               key={option.chamberId}
               value={option.plantName || option.chamberName}
               className={styles.chamber}
               checked={this.props.chamberId === option.chamberId}
               onClick={this.handleClick}
-              disabled={option.isFilled}
+              disabled={!option.isFilled}
             >
               {option.isFilled ? option.plantName : option.chamberName}
-            </div>
+            </button>
           );
         })}
       </div>

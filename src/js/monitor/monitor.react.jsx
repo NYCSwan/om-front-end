@@ -153,7 +153,7 @@ class Monitor extends Component {
         { this.state.chamberData.length >= 1
           ?
             <div className={styles.bubbles}>
-              <Link to='/monitor/ph'>
+              <Link to='/monitor/pH'>
                 <h2 className={styles.xBigFont} key={latest.timestamp}>
                   {latest.pH}
                 </h2>
