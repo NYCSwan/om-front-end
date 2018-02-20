@@ -31,11 +31,12 @@
   url('webfonts/3541C8_0_0.woff') format('woff'),
   url('webfonts/3541C8_0_0.ttf') format('truetype');
 }
-@font-face {
+
+/* @font-face {
   font-family: 'Futura-Lig';
   src: url('webfonts/3541C8_0_0.eot');
   src: url('webfonts/3541C8_0_0.eot?#iefix') format('embedded-opentype'),
-  url('webfonts/3541C8_0_0.woff2') format('woff2'),
-  url('webfonts/3541C8_0_0.woff') format('woff'),
-  url('webfonts/3541C8_0_0.ttf') format('truetype');
-}
+  url('public/webfonts/3541C8_0_0.woff2') format('woff2'),
+  url('public/webfonts/3541C8_0_0.woff') format('woff'),
+  url('public/webfonts/3541C8_0_0.ttf') format('truetype');
+} */

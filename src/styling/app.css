@@ -1,14 +1,10 @@
 .app {
   composes: body from './global-styles.css';
-  /* background-color: gray; */
-  /* background-image: url('/BG_1.jpg'); */
-  /* background-size: cover; */
-  /* background-repeat: no-repeat; */
-  /* composes: white from './variables.css'; */
+  /* BUSTED composes: fontFace from './MyFontsWebfontsKit.css'; */
   margin: 0;
   padding: 0;
   columns: 12em;
-  min-height: 100vh;
+  min-height: auto;
   width: 100%;
   text-align: center;
   position: relative;
