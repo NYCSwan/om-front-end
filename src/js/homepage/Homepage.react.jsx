@@ -1,20 +1,20 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styles from '../../styling/homepage.css';
 
 const Homepage = () => (
-  <div>
-    <div>
-      <div className={styles.monitorOrGrow}>
-        <Button className={styles.homepage} href="/monitor">
-          Monitor
-          Your Garden
-        </Button>
-        <Button className={styles.homepage} href="/controls">
-          Grow Something
-        </Button>
-      </div>
-    </div>
+  <div className={styles.monitorOrGrow}>
+    <Link to='/monitor'>
+      <button className={styles.homepage} href="/monitor">
+        Monitor
+        Your Garden
+      </button>
+    </Link>
+    <Link to="/controls">
+      <button className={styles.homepage} href="/controls">
+        Grow Something
+      </button>
+    </Link>
   </div>
 );
 

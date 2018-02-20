@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+// import { Row, Col } from 'react-bootstrap';
 // import findKey from 'lodash/findKey';
 // import isEmpty from 'lodash/isEmpty';
-// import pickBy from 'lodash/pickBy';
-
+import pickBy from 'lodash/pickBy';
+import moment from 'moment';
 import { invokeApig } from '../../../libs/awsLibs';
 import LineGraph from '../../D3/lineGraph';
 import FilterButtonGroup from '../../components/filter_button.react';
+import styles from '../../../styling/sensor.css';
+import Spinner from '../../helpers/spinner.react';
 
 class Sensor extends Component {
   static propTypes = {
@@ -22,14 +24,24 @@ class Sensor extends Component {
     graphWidth: 300,
     graphHeight: 200,
     chambers: [],
-    sensorData: []
+    sensorData: [],
+    isLoading: true,
+    growingPlants: []
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log('componentDidMount sensor');
-    this.getAllChamberData();
-    this.getSensorData();
-    // this.getGrowingPlantsData();
+      try {
+        const results = await this.growingPlantsData();
+        this.setState({growingPlants: results});
+        const chamberResults = await this.getAllChamberData();
+        this.setState({chambers: chamberResults});
+        const sensorResults = await this.getSensorMeasurementData();
+        this.setState({sensorData: sensorResults});
+      } catch(e) {
+        console.log(e);
+      }
+    this.setState({ isLoading: false });
   }
 
   shouldComponentUpdate(newProps, newState) {
@@ -43,36 +55,19 @@ class Sensor extends Component {
     );
   }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate sensor');
-  }
-
-  getAllChamberData = () => {
-    console.log('get chamber info');
-
-    const test = invokeApig({ path: '/chambers' }).then(chambers => {
-      this.setState({ chambers });
-    });
-    console.log(test);
+  growingPlantsData = () => {
+    console.log('get growing plant data- sensor measurement data');
+    return invokeApig({ path: '/gardens' });
   };
 
-  // getGrowingPlantsData = () => {
-  //   console.log('get growing plant data- sensor measurement data');
-  //
-  //   return invokeApig({ path: '/gardens' }).then(gardens => {
-  //     this.setState({ growingPlants: gardens });
-  //   });
-  // };
+  getAllChamberData() {
+    console.log('get chamber info');
+    return invokeApig({ path: '/chambers' });
+  };
 
-  getSensorData = () => {
-    console.log('get sensor data');
-    // const { chamberId } = this.state;
-    const sensor = this.props.match.url.slice(9);
-    if (sensor !== '') {
-      return invokeApig({ path: '/sensorData' })
-    } else {
-      console.error('shit went wrong');
-    }
+  getSensorMeasurementData() {
+    console.log('get sensor measurents');
+      return invokeApig({  path: `/sensorData` })
   };
 
   handleChamberIdChange = newChamber => {
@@ -88,15 +83,23 @@ class Sensor extends Component {
     });
   };
 
+  renderStartDate() {
+    console.log('render start date');
+    const { growingPlants, chamberId } = this.state;
+    const tempChamber = `Chamber ${chamberId}`;
+    const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
+    return moment(plant[0].createdAt).format("dddd, MMM Do");
+
+  }
+
   render() {
     console.log('render sensor');
-    const { chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
+    const { chambers, chamberId, graphHeight, graphWidth, sensorData, growingPlants } = this.state;
     const today = new Date();
-    const yesterday = new Date(today - 1000 * 60 * 60 * 24 * 1);
+    // const yesterday = new Date(today - 1000 * 60 * 60 * 24 * 1);
     const oneWeekAgo = new Date(today - 1000 * 60 * 60 * 24 * 7);
     const full = new Date(today - 1000 * 60 * 60 * 24 * 8);
     // let startedOnMonth = 0;
-    let startedOn = 0;
     // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
     // const plantKey = findKey(currentPlantInfo);
 
@@ -105,53 +108,47 @@ class Sensor extends Component {
     //   // startedOnMonth = Date.parse(currentPlantInfo[plantKey].started_datetime).getDate();
     // }
 
-    const sensorName = this.props.match.url.slice(9);
-    console.log(sensorData);
-    console.log(chambers);
-    console.log(sensorData);
+    const sensorName = this.props.match.params.sensor_id;
+
     return (
-      <div className="sensor container">
-        <div className="filter">
-          <FilterButtonGroup onChange={this.handleChamberIdChange} chamberId={chamberId} options={chambers} />
-        </div>
-
-
-        <LineGraph
-          chamberId={chamberId}
-          sensorData={sensorData}
-          sensor={sensorName}
-          graphHeight={graphHeight}
-          graphWidth={graphWidth}
-          endDate={today}
-          startDate={yesterday}
-          match={this.props.match}
-        />
-        <LineGraph
-          chamberId={chamberId}
-          sensorData={sensorData}
-          sensor={sensorName}
-          graphHeight={graphHeight}
-          graphWidth={graphWidth}
-          endDate={today}
-          startDate={oneWeekAgo}
-          match={this.props.match}
-        />
-        <LineGraph
-          chamberId={chamberId}
-          sensorData={sensorData}
-          sensor={sensorName}
-          graphHeight={graphHeight}
-          graphWidth={graphWidth}
-          endDate={today}
-          startDate={full}
-          match={this.props.match}
-        />
-        <Row className="bottom container readings">
-          <Col className="startedOn half-circle center" xs={6} xsOffset={3} sm={6} smOffset={3} md={6} mdOffset={3}>
-            <h4> Started</h4>
-            <h2>{startedOn}</h2>
-          </Col>
-        </Row>
+      <div className={styles.sensor}>
+          <FilterButtonGroup
+            onChange={this.handleChamberIdChange}
+            chamberId={chamberId}
+            options={chambers}
+          />
+          { this.state.sensorData.length >= 1
+          ?
+          <div >
+            <div className={styles.currentSensorReading}>
+              { sensorData[0].temperature }
+            </div>
+            <LineGraph
+              chamberId={chamberId}
+              sensorData={sensorData}
+              sensor={sensorName}
+              graphHeight={graphHeight}
+              graphWidth={graphWidth}
+              endDate={today}
+              startDate={oneWeekAgo}
+              match={this.props.match}
+            />
+            <LineGraph
+              chamberId={chamberId}
+              sensorData={sensorData}
+              sensor={sensorName}
+              graphHeight={graphHeight}
+              graphWidth={graphWidth}
+              endDate={today}
+              startDate={full}
+              match={this.props.match}
+            />
+              <h4> Started</h4>
+              {this.renderStartDate()}
+          </div>
+          :
+          <Spinner />
+        }
       </div>
     );
   }

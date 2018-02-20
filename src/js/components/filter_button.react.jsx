@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { ButtonGroup, Button } from 'react-bootstrap';
+// import { ButtonGroup, Button } from 'react-bootstrap';
 
 import styles from '../../styling/filter_button.css';
+
 class FilterButtonGroup extends Component {
   static propTypes = {
     chamberId: PropTypes.number.isRequired,
@@ -10,6 +11,7 @@ class FilterButtonGroup extends Component {
     onChange: PropTypes.func.isRequired
     // filledChambers: PropTypes.arrayOf(PropTypes.object).isRequired
   };
+
   handleClick = e => {
     console.log(`handle filter click: ${e.target}`);
     this.props.onChange(e);
@@ -18,31 +20,25 @@ class FilterButtonGroup extends Component {
   render() {
     console.log('render filter buttons');
     return (
-      <ButtonGroup
-        justified
-        type="radio"
-        name="filterById"
-        className={styles.filterById}
-        options={this.props.options}
-        onChange={this.props.onChange}
-      >
+      <div
+        className={styles.filterById}>
         {this.props.options.map(option => { // eslint-disable-line
 
           return (
             // eslint-disable-line
-            <Button
+            <div
               key={option.chamberId}
-              value={option.plantName}
-              className={`styles.chamber${option.chamberId}`}
+              value={option.plantName || option.chamberName}
+              className={styles.chamber}
               checked={this.props.chamberId === option.chamberId}
               onClick={this.handleClick}
               disabled={option.isFilled}
             >
-              {option.plantName ? option.plantName : option.chamberName}
-            </Button>
+              {option.isFilled ? option.plantName : option.chamberName}
+            </div>
           );
         })}
-      </ButtonGroup>
+      </div>
     );
   }
 }

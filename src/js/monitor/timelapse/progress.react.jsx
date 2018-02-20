@@ -2,8 +2,9 @@ import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { invokeApig } from '../../../libs/awsLibs'
 import Timelapse from './timelapse.react';
-import styles from '../../../styling/timelapse.css';
+import styles from '../../../styling/progress.css';
 import FilterButtonGroup from '../../components/filter_button.react';
+import Basil from '../../../media/basil.jpeg';
 
 class Progress extends Component {
   static propTypes = {
@@ -80,14 +81,14 @@ class Progress extends Component {
   };
 
   renderPlantDetails() {
-    const { growingPlants } = this.state;
+    const { recipe } = this.state;
     return (
       <div className={styles.plantInfoContainer}>
-        <img src={growingPlants[0].imageUrl} alt={growingPlants[0].plantName} />
-        <h4>{growingPlants[0].plantName}</h4>
-        <p>{growingPlants[0].suggestions}</p>
-        <h5>Avg Market Price: ${growingPlants[0].marketPrice}</h5>
-        <h5>Avg Yield: ${growingPlants[0].yield}</h5>
+        <img src={Basil} alt={recipe.plantName} className={styles.plantImg}/>
+        <h4>{recipe.fullName}</h4>
+        <p>{recipe.suggestions}</p>
+        <h5>Avg Market Price: ${recipe.marketPrice}</h5>
+        <h5>Avg Yield: ${recipe.yield}</h5>
       </div>
     )
   }
@@ -125,7 +126,7 @@ class Progress extends Component {
         />
       { !isLoading
         ?
-        this.renderPlantDetails() && this.renderTimelapse()
+        [this.renderPlantDetails(), this.renderTimelapse()]
         :
         this.renderLander()
       }

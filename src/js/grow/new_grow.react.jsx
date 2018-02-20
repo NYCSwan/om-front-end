@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import { form, FormGroup, Radio, ControlLabel } from 'react-bootstrap';
-// import pickBy from 'lodash/pickBy';
+import { form, FormGroup, Radio} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-
+import pickBy from 'lodash/pickBy';
 import { invokeApig } from "../../libs/awsLibs";
-import PagerBack from '../layout/pagerBack.react';
-import PagerFwd from '../layout/pagerFwd.react';
-// import CustomizeSensors from './customize_sensors.react';
-// import PlantFormGroup from './planttype_form_group.react';
-// import ChamberFormGroup from './chamber_options_form.react';
-// import Directions from './directions.react';
-// import PlantingDirections from './planting_directions.react';
 import LoaderButton from './../components/LoaderButton.react';
-import './new_grow.css';
+import styles from '../../styling/new_grow.css';
 
 class NewGrow extends Component {
   static propTypes = {
@@ -23,98 +15,95 @@ class NewGrow extends Component {
   }
 
   state = {
-    plantTypes: ['Basil', 'Kale', 'Cilantro'],
-    chamberOptions: ['Chamber 1','Chamber 2','Chamber 3'],
-    climates: ['Temperate', 'Tropical', 'Customize'],
+    plantTypes: [],
+    chamberOptions: [],
     selectedPlant: '',
     selectedChamber: '',
     isBalanced: false,
     showDirections: false,
-    isLoading: false,
+    isloading: false,
     newGrowPlant: []
   };
 
-  // async componentDidMount() {
-  //   console.log('component did mount new grow');
-  //   try {
-  //       const recipeResults = await this.getPlantRecipes();
-  //       const chamberResults = await this.getChamberOptions();
-  //       const climateResults = await this.getClimates();
-  //       // debugger
-  //       this.setRecipes(recipeResults);
-  //       this.setChambers(chamberResults);
-  //       this.setClimates(climateResults);
-  //   } catch(e) {
-  //     console.log(e);
-  //   }
-  // }
-  //
-  // shouldComponentUpdate(newState) {
-  //   console.log('shouldComponentUpdate new grow');
-  //   return (
-  //     this.state.selectedChamber !== newState.selectedChamber ||
-  //     this.state.selectedPlant !== newState.selectedPlant ||
-  //     this.state.plantTypes !== newState.plantTypes ||
-  //     this.state.newGrowPlant !== newState.newGrowPlant ||
-  //     this.state.chamberOptions !== newState.chamberOptions ||
-  //     this.state.showDirections !== newState.showDirections ||
-  //     this.state.isBalanced !== newState.isBalanced
-  //   );
-  // }
+  async componentDidMount() {
+    console.log('component did mount new grow');
+    try {
+        const recipeResults = await this.getPlantRecipes();
+        this.setState({plantTypes: recipeResults});
+        const chamberResults = await this.getChamberOptions();
+        // const climateResults = await this.getClimates();
+        debugger
+        this.setState({chamberOptions: chamberResults});
+        // this.setClimates(climateResults);
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
+  shouldComponentUpdate(newState) {
+    console.log('shouldComponentUpdate new grow');
+    return (
+      this.state.selectedChamber !== newState.selectedChamber ||
+      this.state.selectedPlant !== newState.selectedPlant ||
+      this.state.plantTypes !== newState.plantTypes ||
+      this.state.newGrowPlant !== newState.newGrowPlant ||
+      this.state.chamberOptions !== newState.chamberOptions ||
+      this.state.showDirections !== newState.showDirections ||
+      this.state.isBalanced !== newState.isBalanced
+    );
+  }
   //
   // componentDidUpdate() {
   //   console.log('componentDidUpdate new grow');
   // }
-  //
-  // getPlantRecipes = () => {
-  //   const test = invokeApig({ path: 'plants' });
-  //   debugger
-  //   console.log(`get plant recipes ${test}`);
-  //   return invokeApig({ path: 'plants' });
-  // };
-  //
-  // getChamberOptions = () => {
-  //   console.log('get chamber options');
-  //   return invokeApig({ path: 'chambers' });
-  // };
-  //
+
+  getPlantRecipes = () => {
+    console.log(`get plant recipes`);
+    return invokeApig({ path: '/plants' });
+  };
+
+  getChamberOptions = () => {
+    console.log('get chamber options');
+    return invokeApig({ path: '/chambers' });
+  };
+
   // getClimates = () => {
   //   console.log('get climates');
   //   return invokeApig({ path: 'climates' });
   // };
-  //
-  // setRecipes = (recipeResults) => {
-  //   this.setState({ plantTypes: recipeResults })
-  // }
-  //
-  // setChambers = (chamberResults) => {
-  //   this.setState({ chamberOptions: chamberResults })
-  // }
+
+  setRecipes = (recipeResults) => {
+    this.setState({ plantTypes: recipeResults })
+  }
+
+  setChambers = (chamberResults) => {
+    this.setState({ chamberOptions: chamberResults })
+  }
   //
   // setClimates = (climateResults) => {
   //   this.setState({ climates: climateResults});
   // }
-  //
-  // handlePlantRadioClick = e => {
-  //   console.log(`handlePlantRadioClick: ${e.target.labels[0].innerText}`);
-  //   this.setState({ selectedPlant: e.target.labels[0].innerText });
-  //   this.handleNewPlantSelection(e);
-  // };
-  //
-  // handleChamberRadioClick = e => {
-  //   console.log(`handleChamberRadio: ${e.target.labels[0].innerText}`);
-  //   this.setState({
-  //     selectedChamber: e.target.labels[0].innerText
-  //   });
-  //   console.log('handel form shoudl have chamber state');
-  // };
-  //
-  // handleNewPlantSelection = e => {
-  //   console.log('handleNewPlantSelection new grow');
-  //   const tempPlant = e.target.labels[0].innerText;
-  //   const currentPlantType = pickBy(this.state.plantTypes, plant => plant.shortname === tempPlant);
-  //   this.setState({ newGrowPlant: currentPlantType });
-  // };
+
+  handlePlantRadioClick = e => {
+    console.log(`handlePlantRadioClick: ${e.target.labels[0].innerText}`);
+    this.setState({ selectedPlant: e.target.labels[0].innerText });
+    this.handleNewPlantSelection(e);
+  };
+
+  handleChamberRadioClick = e => {
+    console.log(`handleChamberRadio: ${e.target.labels[0].innerText}`);
+    this.setState({
+      selectedChamber: e.target.labels[0].innerText
+    });
+    console.log('handel form shoudl have chamber state');
+  };
+
+  handleNewPlantSelection = e => {
+    console.log('handleNewPlantSelection new grow');
+    const tempPlant = e.target.labels[0].innerText;
+    const currentPlantType = pickBy(this.state.plantTypes, plant => plant.shortname === tempPlant);
+    this.setState({ newGrowPlant: currentPlantType });
+  };
   //
   // updatePhBalance = () => {
   //   console.log('update PH balance');
@@ -129,6 +118,7 @@ class NewGrow extends Component {
   //   console.log('show planting directions');
   //   this.setState({ showDirections: true });
   // };
+
   validateForm() {
     return this.state.selectedPlant.length > 0 && this.state.selectedPlant.length > 0;
   }
@@ -166,20 +156,20 @@ class NewGrow extends Component {
       return;
     }
 
-    this.setState({ isLoading: true });
+    this.setState({ isloading: true });
 
     try {
       await this.createGarden({
         chamberId: this.state.selectedChamber,
-        plantName: this.state.selectedPlant,
-        climateId: '2',
-        plantRecipeId: '2',
+        plantName: this.state.selectedPlant.plantName,
+        climateId: this.state.selectedPlant.climateId,
+        plantRecipeId: this.state.selectedPlant.plantRecipeId,
         createdAt: new Date()
       });
       this.props.history.push("/monitor");
     } catch(e) {
       console.log(e);
-      this.setState({isLoading:false})
+      this.setState({isloading:false})
     }
 
     // window.location = `/plants/${this.state.selectedPlant}`;
@@ -198,12 +188,12 @@ class NewGrow extends Component {
     // debugger
     return ( plantTypes.map((plant) =>
       <Radio
-        name={plant}
-        key={plant}
-        className={`link ${plant}`}
+        name={plant.plantName}
+        key={plant.plantName}
+        className={styles.plant.plantName}
         onChange={this.handlePLantChange}
       >
-        {plant}
+        {plant.plantName}
       </Radio>)
     )
   }
@@ -214,7 +204,7 @@ class NewGrow extends Component {
       <Radio
         name={chamber}
         key={chamber}
-        className={`link ${chamber}`}
+        className={chamber}
         onChange={this.handleChamberChange}
       >
         {chamber}
@@ -229,7 +219,7 @@ class NewGrow extends Component {
 // debugger
     return (
       <div className="newGrow container">
-      {/* this.state.isLoading &&
+      {/* this.state.isloading &&
         <form className="new_grow_form">
           {this.state.selectedPlant === '' && (
             <div className="selectedPlant">
@@ -251,27 +241,17 @@ class NewGrow extends Component {
                 <h3 id="chamber" className="directions Futura-Lig">
                   Select A Chamber
                 </h3>
-                */}
-        <PagerBack className="grow" />
-        <PagerFwd className="grow" />
+      */}
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="plant">
             {this.renderPlantGroup()}
           </FormGroup>
-        <div className="chamberImage">
-        <FormGroup controlId="chambers">
-          <ControlLabel>Chamber</ControlLabel>
-          {this.renderChambers()}
-        </FormGroup>
-        </div>
+
       <LoaderButton
-        block
-        bsStyle="primary"
-        bsSize="large"
         className='sumbit-garden'
         disabled={!this.validateForm()}
         type="submit"
-        isLoading={this.state.isLoading}
+        isloading={this.state.isloading}
         text="Create"
         loadingText="Creating…"
       />

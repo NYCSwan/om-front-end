@@ -50,8 +50,8 @@ class ChartArea extends Component {
     const oneDayOfDataPoints = [];
 
     forEach(currentData, (datum) => {
-      debugger;
-      if(( new Date(datum.time).getTime() >= startDate.getTime()) === true) {
+      // debugger;
+      if(( new Date(datum.timestamp) >= startDate.getTime()) === true) {
         oneDayOfDataPoints.push(datum);
       }
       this.setState({oneDay: oneDayOfDataPoints})
@@ -66,7 +66,7 @@ class ChartArea extends Component {
 
 
     forEach(currentData, (datum) => {
-      if((new Date(datum.time).getTime() <= startDate.getTime()) === true) {
+      if((new Date(datum.timestamp).getTime() <= startDate.getTime()) === true) {
         oneWeekOfDataPoints.push(datum);
       }
       this.setState({ oneWeek: oneWeekOfDataPoints });
@@ -80,14 +80,18 @@ class ChartArea extends Component {
     const oneMonthOfDataPoints = [];
 
     forEach(currentData, (datum) => {
-      if((new Date(datum.time).getTime() <= startDate.getTime()) === true) {
-        oneMonthOfDataPoints.push(datum);
+      if((datum.timestamp <= startDate.getTime()) === true) {
+        // const pair = ;
+        // debugger
+        // oneMonthOfDataPoints.push({datum.timestamp: datum.temperature});
       }
-      this.setState({ oneMonth: oneMonthOfDataPoints})
+      this.setState({ oneMonth: oneMonthOfDataPoints })
       return oneMonthOfDataPoints;
     })
   }
-
+  transformData = () => {
+    // data -- timestamp, value ? check recharts
+  }
   getDataSeries = () => {
     console.log('get data series');
     const {startDate, endDate } = this.props;
@@ -104,6 +108,7 @@ class ChartArea extends Component {
       dropWhile(tempOneWeek, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() <= startDate;
       })
+      debugger
       this.setState({ dataSeries: tempOneWeek});
     } else if (endDate - startDate > 604800000){
       dropWhile(tempOneMonth, (datum) => { // eslint-disable-next-line
@@ -111,6 +116,7 @@ class ChartArea extends Component {
       })
       this.setState({ dataSeries: tempOneMonth});
     }
+    // debugger
   }
 
   dateFormatter = (tick) => { // eslint-disable-line
@@ -136,17 +142,18 @@ class ChartArea extends Component {
 
   render() {
     console.log('render areaChart');
-    const { graphHeight, graphWidth, margin, minY, maxY, currentData } = this.props;
+    const { graphHeight, graphWidth, margin, minY, maxY } = this.props;
+    const { dataSeries } = this.state;
 
     const dataMinRound = (Math.round(minY / 10) * 10);
     const dataMaxRound = (Math.round(maxY / 10) * 10);
-    console.log(currentData);
+    // console.log(currentData);
 
     return (
       <ComposedChart
         width={graphWidth}
         height={graphHeight}
-        data={this.state.dataSeries}
+        data={dataSeries}
         margin={{ top: margin.top, right: margin.right, bottom: margin.bottom, left: margin.left
        }}
       >

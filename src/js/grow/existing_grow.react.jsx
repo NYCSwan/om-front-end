@@ -13,7 +13,7 @@ import PagerFwd from '../layout/pagerFwd.react';
 // import Pause from './pause.react';
 // import PopUp from './popup.react';
 import { invokeApig } from '../../libs/awsLibs';
-import './existing_grow.css';
+import '../../styling/existing_grow.css';
 
 class ExistingGrow extends Component {
   static propTypes = {

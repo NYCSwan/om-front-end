@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
+// import image from './BG_1.jpg';
 
 // import RouteNavItem from './components/RouteNavItem.react';
 import PagerBack from './js/layout/pagerBack.react';
@@ -11,8 +12,13 @@ import Routes from './js/routes';
 import { authUser, signOutUser } from "./libs/awsLibs";
 import styles from './styling/app.css';
 // import GlobalStyles from './styling/global-styles.css';
-import logo from './static/media/logo.png';
+import logo from './media/logo.png';
 import Footer from './js/layout/footer.react';
+
+// const style = {
+//   backgroundImage: 'url('+image+')'
+// }
+
 class App extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -72,49 +78,55 @@ class App extends Component {
       <div className={styles.app}>
       { !this.state.isAuthenticating &&
         <div>
-        <div className={styles.navbar}>
-          <Link to="/" href="/" className={styles.logo}>
-            <img src={logo} className={styles.brandLogo} alt='logo' />
-          </Link>
-          <ul
-            onSelect={this.handleSelect}
-            className={styles.navbarCollapse}>
-            <input type='checkbox' id='collapse' className={styles.collapse} />
-              <label htmlFor='collapse' className={styles.label}></label>
-                <IndexLinkContainer to='/monitor' key={'monitor'}>
-                  <li className={styles.navItem}>
-                    Monitor
-                  </li>
-                </IndexLinkContainer>
-                <IndexLinkContainer to='/controls' key={'controls'}>
-                  <li className={styles.navItem}>
-                    Controls
-                  </li>
-                </IndexLinkContainer>
-                <IndexLinkContainer to='/' key={'userAccount'}>
-                  <li className={styles.navItem}>
-                    My Account
-                  </li>
-                </IndexLinkContainer>
-                <IndexLinkContainer to='/' key={'support'}>
-                  <li className={styles.navItem}>
-                  Support</li>
-                </IndexLinkContainer>
-            </ul>
-          <div className={styles.logging}>
-            {this.state.isAuthenticated
-              ? <Button className={styles.logout} onClick={this.handleLogout}>Logout</Button>
-              : [
-                  <Link to='/signup' key={'signup'}>
-                    Signup
-                  </Link>,
-                  <Link to='/login' key={'login'}>
-                    Login
-                  </Link>
-                ]
-            }
-          </div>
-          </div>
+        <nav className={styles.navbar}>
+          <div className={styles.topNav}>
+            <Link to="/" href="/" className={styles.logo}>
+              <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
+            </Link>
+            <ul
+              onSelect={this.handleSelect}
+              className={styles.navbarCollapse}>
+              <input type='checkbox' id='collapse' className={styles.collapse} />
+                <label htmlFor='collapse' className={styles.label}></label>
+                  <IndexLinkContainer to='/monitor' key={'monitor'} className={styles.indexLinkContainer}>
+                    <li className={styles.navItem}>
+                      Monitor
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer to='/controls' key={'controls'}
+                  className={styles.indexLinkContainer}>
+                    <li className={styles.navItem}>
+                      Controls
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer to='/' key={'userAccount'}
+                  className={styles.indexLinkContainer}>
+                    <li className={styles.navItem}>
+                      My Account
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer to='/' key={'support'}
+                  className={styles.indexLinkContainer}>
+                    <li className={styles.navItem}>
+                    Support</li>
+                  </IndexLinkContainer>
+              </ul>
+            </div>
+            <div className={styles.logging}>
+              {this.state.isAuthenticated
+                ?
+                <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
+                : [
+                    <Link to='/signup' key={'signup'}>
+                      Signup
+                    </Link>,
+                    <Link to='/login' key={'login'}>
+                      Login
+                    </Link>
+                  ]
+              }
+            </div>
+          </nav>
           <Routes
             isAuthenticated={this.state.isAuthenticated}
             userHasAuthenticated={this.userHasAuthenticated} />
