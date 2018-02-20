@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { ComposedChart, Area, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import moment from 'moment';
-import forEach from 'lodash/forEach';
 import dropWhile from 'lodash/dropWhile';
 
 import styles from '../../styling/areaChart.css';
@@ -27,136 +26,64 @@ class ChartArea extends Component {
   }
 
   state = {
-    // oneDay: [],
-    oneWeek: [],
-    oneMonth: [],
+    dataForTimePeriod: [],
     dataSeries: []
   }
 
   componentDidMount() {
     console.log('componentDidMount areaChart');
-    this.updateAreaChartData();
+    this.getDataSeries();
   }
 
-  componentWillReceiveProps({ margin, graphWidth, graphHeight, currentData, endDate, startDate, sensor, maxY, minY }) {
-    console.log('componentWillReceiveProps area chart');
-
-    if (currentData !== this.props.currentData || sensor !== this.props.sensor || maxY !== this.props.maxY || minY !== this.props.minY) {
-      console.log('change data, data, sensor or chamber changed');
-      this.updateAreaChartData();
-    } else if (endDate !== this.props.endDate || startDate !== this.props.startDate) {
-      console.log('change data, dates changed');
-      this.updateAreaChartData();
-    } else if (margin !== this.props.margin || graphWidth !== this.props.graphWidth || graphHeight !== this.props.graphHeight) {
-     console.log('change size');
-    }
-  }
+  // componentWillReceiveProps({ margin, graphWidth, graphHeight, currentData, endDate, startDate, sensor, maxY, minY }) {
+  //   console.log('componentWillReceiveProps area chart');
+  //
+  //   if (currentData !== this.props.currentData || sensor !== this.props.sensor || maxY !== this.props.maxY || minY !== this.props.minY) {
+  //     console.log('change data, data, sensor or chamber changed');
+  //     this.updateAreaChartData();
+  //   } else if (endDate !== this.props.endDate || startDate !== this.props.startDate) {
+  //     console.log('change data, dates changed');
+  //     this.updateAreaChartData();
+  //   } else if (margin !== this.props.margin || graphWidth !== this.props.graphWidth || graphHeight !== this.props.graphHeight) {
+  //    console.log('change size');
+  //   }
+  // }
 
   shouldComponentUpdate (newProps, newState) {
     console.log('shouldComponentUpdate areaChart');
     return (
-      this.props.currentData !== newProps.currentData ||  this.state.oneDay !== newState.oneDay || this.state.dataSeries !== newState.dataSeries || this.state.oneWeek !== newState.oneWeek
+      this.props.currentData !== newProps.currentData ||  this.props.sensor !== newProps.sensor || this.state.dataSeries !== newState.dataSeries || this.state.dataForTimePeriod !== newState.dataForTimePeriod
     )
-  }
-
-  componentDidUpdate() {
-    this.getDataSeries();
-  }
-
-// NOT COLLECTING RIGHT DATA
-  // getOneDayOfData = () => {
-  //   console.log('getOneDayOfData');
-  //   const { currentData, startDate } = this.props;
-  //   const oneDayOfDataPoints = [];
-  //
-  //   forEach(currentData, (datum) => {
-  //     debugger;
-  //     // if the date is earlier than the startDate drop it
-  //     if(( new Date(datum.timestamp) >= startDate.getTime()) === true) {
-  //       oneDayOfDataPoints.push(datum);
-  //     }
-  //     this.setState({oneDay: oneDayOfDataPoints})
-  //     // return oneDayOfDataPoints;
-  //   })
-  // }
-
-  getOneWeekOfData = () => {
-    console.log('getWeekOfData');
-    const {startDate, currentData } = this.props;
-    const oneWeekOfDataPoints = [];
-
-    forEach(currentData, (datum) => {
-      // if the date is greater than the start date push into array
-      if((datum.timestamp >= startDate.oneWeekAgo._d.getTime()) === true) {
-        oneWeekOfDataPoints.push(datum);
-        // debugger
-      }
-      // return oneWeekOfDataPoints;
-    })
-    this.setState({ oneWeek: oneWeekOfDataPoints });
-  }
-
-  getOneMonthOfData = () => {
-    console.log('getMonthOfData');
-    const { startDate, currentData } = this.props;
-    const oneMonthOfDataPoints = [];
-
-    forEach(currentData, (datum) => {
-      if((datum.timestamp >= startDate.oneMonthAgo._d.getTime()) === true) {
-        // const pair = ;
-        // debugger
-        oneMonthOfDataPoints.push(datum);
-      }
-      // return oneMonthOfDataPoints;
-    })
-    this.setState({ oneMonth: oneMonthOfDataPoints })
   }
 
   getDataSeries = () => {
     console.log('get data series');
-    const {startDate, endDate } = this.props;
-    const { oneMonth, oneWeek } = this.state;
-    const tempOneMonth = oneMonth;
-    const tempOneWeek = oneWeek;
+    const {startDate, endDate, currentData } = this.props;
+    // const { dataForTimePeriod } = this.state;
+    const tempData = currentData;
+
     if (endDate - startDate <= 604800000 ){
-      dropWhile(tempOneWeek, (datum) => { // eslint-disable-next-line
+      dropWhile(tempData, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() <= startDate;
       })
-      debugger
-      this.setState({ dataSeries: tempOneWeek});
+      this.setState({ dataSeries: tempData});
     } else if (endDate - startDate > 604800000){
-      dropWhile(tempOneMonth, (datum) => { // eslint-disable-next-line
+      dropWhile(tempData, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() >= startDate;
       })
-      this.setState({ dataSeries: tempOneMonth});
+      this.setState({ dataSeries: tempData});
     }
-    // debugger
   }
 
   dateFormatter = (tick) => { // eslint-disable-line
-    console.log(tick);
+    // console.log(tick);
     const { endDate, startDate } = this.props;
-    if( endDate - startDate === 86400000) {
-      return moment(tick).format('h');
-    } else if (endDate - startDate === 604800000 ){
-      return moment(tick).format('dd');
+    if (endDate - startDate === 604800000 ){
+      return moment(tick).format('dd, Do');
     } else if (endDate - startDate > 604800000){
       return moment(tick).format('dd');
     }
   }
-
-  updateAreaChartData = () => {
-    console.log('updateAreaChart data');
-    const { startDate } = this.props;
-    // this.getOneDayOfData();
-    if( startDate.oneWeekAgo) {
-      this.getOneWeekOfData();
-    } else {
-      this.getOneMonthOfData();
-    }
-    this.getDataSeries();
-  }
-
 
   render() {
     console.log('render areaChart');
@@ -174,6 +101,7 @@ class ChartArea extends Component {
         data={dataSeries}
         margin={{ top: margin.top, right: margin.right, bottom: margin.bottom, left: margin.left
        }}
+       className={styles.chart}
       >
         <defs>
           <linearGradient id="valueColor" x1="0" y1="0" x2="0" y2="1">

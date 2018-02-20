@@ -10,7 +10,7 @@ class LineGraph extends Component {
     sensorData: PropTypes.arrayOf(PropTypes.object).isRequired,
     graphWidth: PropTypes.number.isRequired,
     graphHeight: PropTypes.number.isRequired,
-    startDate: PropTypes.instanceOf(Date).isRequired,
+    startDate: PropTypes.instanceOf(Object).isRequired,
     endDate: PropTypes.instanceOf(Date).isRequired,
     margin: PropTypes.shape({
       top: PropTypes.number,
@@ -64,7 +64,7 @@ class LineGraph extends Component {
     const { startDate, endDate, sensorData } = this.props;
     const dates = [];
     const value = this.props.match.params.sensor_id;
-    dates.push(startDate);
+    dates.push(startDate._d);
     dates.push(endDate);
     // debugger;
     if(isEmpty(sensorData) === false) {
@@ -88,26 +88,32 @@ class LineGraph extends Component {
   }
 
   extractSingleSensorData = () => {
-    const { sensorData, sensor, chamberId } = this.props;
+    const { sensorData, sensor, startDate } = this.props;
     const tempData = [];
     let temp = {};
-    for(let idx in sensorData) {
-      temp['timestamp'] = sensorData[idx].timestamp;
-      temp['value'] = parseFloat(sensorData[idx][`${sensor}`]);
-      tempData.push(temp);
+    const tempStartDate = startDate._d.getTime();
+
+    for (let i= 0; i < sensorData.length; i++) {
+      if((sensorData[i].timestamp >= tempStartDate) === true) {
+      temp[i] = {
+        'time': sensorData[i].timestamp,
+        'value': parseFloat(sensorData[i][`${sensor}`])
+      }
     }
+      tempData.push(temp[i]);
+    };
+
     this.setState({ currentData: tempData });
   }
 
   render() {
     console.log('render lineGraph');
-    const { graphHeight, graphWidth, sensorData, match, margin, sensor, startDate, endDate } = this.props;
+    const { graphHeight, graphWidth, match, margin, sensor, startDate, endDate } = this.props;
     const { currentData } = this.state;
 
     return (
-      <div className={styles.areaChart}>
+      <div className={styles.areaChartContainer}>
       { currentData.length >= 1 &&
-        <a href={`${match.url}`} alt={`${sensor} details`}>
           <ChartArea
             graphWidth={graphWidth}
             graphHeight={graphHeight}
@@ -119,7 +125,6 @@ class LineGraph extends Component {
             maxY={this.state.maxY}
             minY={this.state.minY}
           />
-        </a>
       }
       </div>
     )
