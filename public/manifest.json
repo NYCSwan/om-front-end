@@ -18,7 +18,7 @@
     "https://ajax.googleapis.com/"
   ],
   "web_accessible_resources": [
-    "img/*",
-    "src/js/*/*.css"
+    "src/media/*",
+    "src/*/*.css"
   ]
 }
