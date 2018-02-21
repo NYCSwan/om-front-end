@@ -109,11 +109,12 @@ class Sensor extends Component {
     } else {
       sensorSymbol = waterlevel;
     }
+
     return (
       <div className={styles.currentSensorReading}>
         <h5 className={styles.texttop}>Chamber {chamberId}'s current {sensorName}</h5>
         <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
-        <img className={styles.icon}src={sensorSymbol} alt={`${sensorName} icon`} />
+        <img className={styles.icon} src={sensorSymbol} alt={`${sensorName} icon`} />
       </div>
     )
   }

@@ -22,7 +22,7 @@ const ListGroupContainer = props => (
 );
 
 ListGroupContainer.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleClick: PropTypes.func.isRequired
 };
 

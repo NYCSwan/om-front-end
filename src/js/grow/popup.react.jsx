@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import styles from '../../styling/popup.css';
 
 class PopUp extends Component {
   static propTypes = {
@@ -8,8 +9,8 @@ class PopUp extends Component {
     modalTitle: PropTypes.string.isRequired,
     modalBody: PropTypes.element.isRequired,
     buttonText1: PropTypes.string.isRequired,
-    buttonText2: PropTypes.string.isRequired
-    // handleClick: PropTypes.func.isRequired
+    buttonText2: PropTypes.string.isRequired,
+    handleClick: PropTypes.func.isRequired
   };
 
   state = {
@@ -35,13 +36,13 @@ class PopUp extends Component {
 
   close = () => {
     console.log('close popup');
-    // debugger
     this.setState({ showModal: false });
   };
 
   open = () => {
     console.log('open popup');
     this.setState({ showModal: true });
+    this.props.handleClick();
   };
 
   render() {
@@ -50,25 +51,28 @@ class PopUp extends Component {
     // console.log(!this.state.showModal);
     // debugger
     return (
-      <div className="modal-container">
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          className={`${buttonText1} center-block`}
+      <div className={styles.modalContainer}>
+        <button
+          className={styles.buttonSubmitChamber}
           onClick={this.open}
-          disabled={this.state.showModal}
+          disabled={this.props.displayModal}
         >
           {buttonText1}
-        </Button>
-        <Modal show={this.state.showModal} onHide={this.close}>
+        </button>
+        <Modal
+          show={this.state.showModal}
+          onHide={this.close}
+          className={styles.modal}>
           <Modal.Header closeButton>
-            <Modal.Title>{modalTitle}</Modal.Title>
+            <Modal.Title className={styles.title}>{modalTitle}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className={styles.modalBody}>
             {modalBody}
-            <Button className={`close ${buttonText2}`} onClick={this.close}>
+            <button
+              className={styles.buttonSubmitChange}
+              onClick={this.close}>
               {buttonText2}
-            </Button>
+            </button>
           </Modal.Body>
         </Modal>
       </div>

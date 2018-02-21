@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { PageHeader, ListGroup } from 'react-bootstrap';
-// import upperFirst from 'lodash/upperFirst';
+import upperFirst from 'lodash/upperFirst';
 import pickBy from 'lodash/pickBy';
 import findKey from 'lodash/findKey';
-// import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'lodash/isEmpty';
 
 import ListGroupContainer from '../components/ListGroup.react';
 // import ChamberFormGroup from './chamber_options_form.react';
 // import Directions from './directions.react';
-import PagerBack from '../layout/pagerBack.react';
-import PagerFwd from '../layout/pagerFwd.react';
 // import Pause from './pause.react';
 import PopUp from './popup.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -24,16 +21,12 @@ class ExistingGrow extends Component {
   state = {
     isloading: true,
     chambers: [],
-    selectedPlant: '',
-    selectedChamber: '',
-    selectedClimateId: '',
-    // plantTypes: [],
     climates: [],
-    growingPlant: [],
+    updatingThisPlant: [],
     growingPlants: [],
     // showBalance: false,
     // showPause: false,
-    // showInitialPopup: false,
+    showInitialPopup: false,
     // showChambers: true,
     // // showButton: false,
     // isBalanced: false
@@ -99,18 +92,7 @@ class ExistingGrow extends Component {
     return invokeApig({ path: '/climates' });
   };
 
-// V-DOM EVENTS
-  handleChamberRadioClick = e => {
-    console.log(`handleChamberRadio: ${e.target.innerText}`);
-    // debugger
-    this.setState({
-      selectedPlant: e.target.innerText
-    });
-    // console.log('handel form shoudl have chamber state');
-    this.updateExistingPlant(e);
-    this.updateGardenSelection();
-  };
-
+  // POST TO DB
   updateChamberDataToDb = () => {
     console.log('update db with chamber data');
     if (this.state.selectedChamber !== "" && this.state.selectedPlant === "") {
@@ -120,34 +102,47 @@ class ExistingGrow extends Component {
 
     }
   }
-
+// V-DOM EVENTS
 // UPDATE STATE
-
-  updateExistingPlant = e => {
-    console.log('update existing plant existing grow');
+  handleChamberRadioClick = e => {
+    console.log('handleChamberRadio: update existing plant existing grow');
     const target = e.target.innerText;
-
     const currentPlantType = pickBy(this.state.growingPlants, plant => plant.plantName === target);
-    this.setState({ growingPlant: currentPlantType });
-    debugger;
+    // const key = findKey(currentPlantType)
+    this.setState({
+      updatingThisPlant: currentPlantType,
+      showInitialPopup: true
+    });
   };
 
-  updateGardenSelection = () => {
-    console.log('update garden selection');
-    const tempFilledChambers = this.state.chambers;
-    const tempGrowingPlants = this.state.growingPlants;
-    const currentPlant = this.state.selectedPlant;
-    const selectedPlantData = pickBy(tempFilledChambers, (chamber) => chamber.plantName === this.state.selectedPlant );
-    debugger
-    const key = findKey(selectedPlantData);
-    this.setState({
-      selectedChamber: selectedPlantData[key].name,
-      selectedClimateId: selectedPlantData[key].climate_id
-    })
+  handlePopupClick = () => {
+    console.log('handle popup click');
+    this.setState({ showInitialPopup: false });
   }
+
+  handleBalanceClick = e => {
+    console.log('handle balance Click existingGrow');
+    console.log(e);
+    this.setState({
+      showBalance: true,
+      showButton: false,
+      showChambers: false
+    });
+  };
+
+  handlePauseClick = () => {
+    console.log('handle pause Click existingGrow');
+    this.setState({
+      showPause: true,
+      showButton: false,
+      showChambers: false
+    });
+  };
+
 
 // RENDER
   renderLanding() {
+    console.log('render lander');
     return (
       <div>
         <h1>Loading gardens...</h1>
@@ -156,6 +151,7 @@ class ExistingGrow extends Component {
   }
 
   renderGardens() {
+    console.log('renderGardens');
     const { chambers } = this.state;
     const items = []
     let temp = {};
@@ -186,36 +182,7 @@ class ExistingGrow extends Component {
   //   this.setState({ isBalanced: true });
   // };
 
-  //
-  // handleNewPlantSelection = e => {
-  //   console.log('handleNewPlantSelection new grow');
-  //   const tempPlant = e.target.labels[0].innerText;
-  //   const currentPlantType = pickBy(this.state.plantTypes, plant => plant.shortname === tempPlant);
-  //   this.setState({ newGrowPlant: currentPlantType });
-  // };
-  //
-  // handleBalanceClick = e => {
-  //   console.log('handle balance Click existingGrow');
-  //   console.log(e);
-  //   this.setState({
-  //     showBalance: true,
-  //     showInitialPopup: false,
-  //     showButton: false,
-  //     showChambers: false
-  //   });
-  // };
-  //
-  // handlePauseClick = () => {
-  //   console.log('handle pause Click existingGrow');
-  //   this.setState({
-  //     showPause: true,
-  //     showButton: false,
-  //     showInitialPopup: false,
-  //     showChambers: false
-  //   });
-  // };
-  //
-  // updateSettings = () => {
+  // renderSettings = () => {
   //   console.log('update settings existing grow');
   //   // update state.settings with plantTypes info
   //   const { plantTypes, climates } = this.props;
@@ -237,21 +204,21 @@ class ExistingGrow extends Component {
   //   this.setState({ settings: currentSettings });
   //
   // }
-  //
-  // updateDirections = () => {
-  //   console.log('update directions existing grow');
-  //   const { plantTypes } = this.props;
-  //   const currentPlantState = upperFirst(this.state.selectedPlant);
-  //   const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
-  //   const tempDirections = [];
-  //   const key = findKey(currentPlantType);
-  //
-  //   tempDirections.push(currentPlantType[key].grow_directions);
-  //   tempDirections.push("This may take about 5 minutes...");
-  //   tempDirections.push(currentPlantType[key].planting_directions);
-  //   this.setState({ directions: tempDirections });
-  // }
-  //
+
+  updateDirections = () => {
+    console.log('update directions existing grow');
+    const { plantTypes } = this.props;
+    const currentPlantState = upperFirst(this.state.selectedPlant);
+    const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
+    const tempDirections = [];
+    const key = findKey(currentPlantType);
+
+    tempDirections.push(currentPlantType[key].grow_directions);
+    tempDirections.push("This may take about 5 minutes...");
+    tempDirections.push(currentPlantType[key].planting_directions);
+    this.setState({ directions: tempDirections });
+  }
+
 
   //
   // showGrowDirections = () => {
@@ -291,30 +258,31 @@ class ExistingGrow extends Component {
   //   />
   // ) : null}
   renderPopUp() {
+    console.log('render popup');
     return (
-      <PopUp
-        modalTitle="Select Your Next Step"
-        modalBody={
-          <div>
-            <h4>Pause</h4>
-            <p>Pause your grow system to clean or change the water.</p>
-            <button
-              className={styles.pause} onClick={this.handlePauseClick}>
-              Pause
-            </button>
-            <h4>pH Balance</h4>
-            <p>Balance the pH in your system.</p>
-            <button
-              className={styles.balanced} onClick={this.handleBalanceClick}>
-              Balance
-            </button>
-          </div>
-        }
-        buttonText1="Submit Chamber"
-        buttonText2="Close"
-        displayModal={this.state.showInitialPopup}
-        handleClick={this.handlePopupClick}
-      />
+        <PopUp
+          modalTitle="Select Your Next Step"
+          modalBody={
+            <div>
+              <h4>Pause</h4>
+              <p>Pause your grow system to clean or change the water.</p>
+              <button
+                className={styles.pause} onClick={this.handlePauseClick}>
+                Pause
+              </button>
+              <h4>pH Balance</h4>
+              <p>Balance the pH in your system.</p>
+              <button
+                className={styles.balanced} onClick={this.handleBalanceClick}>
+                Balance
+              </button>
+            </div>
+          }
+          buttonText1="Submit Chamber"
+          buttonText2="Close"
+          displayModal={this.state.showInitialPopup}
+          handleClick={this.handlePopupClick}
+        />
     )
   }
 
@@ -336,12 +304,10 @@ class ExistingGrow extends Component {
           ? this.renderGardens()
           : this.renderLanding()
         }
-        {/* this.state.selectedPlant.length >= 1
+        { !isEmpty(this.state.updatingThisPlant)
           ? this.renderPopUp()
-          : this.renderError()
-        */}
-        <PagerBack className="grow" />
-        <PagerFwd className="grow" />
+          : null
+        }
       </div>
     );
   }
