@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { form, FormGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import pickBy from 'lodash/pickBy';
 import { invokeApig } from "../../libs/awsLibs";
@@ -13,7 +12,7 @@ import GreenBeans from '../../media/green_bean_button.png';
 import Kale from '../../media/kale_button.png';
 import Lettuce from '../../media/lettuce_button.png';
 import Tomatoes from '../../media/tomato_button.png';
-import Customize from '../../media/customize_button.png';
+import Customize from '../../media/customize_button.jpg';
 
 class NewGrow extends Component {
   static propTypes = {
@@ -26,8 +25,6 @@ class NewGrow extends Component {
   state = {
     plantTypes: [],
     chamberOptions: [],
-    selectedPlant: '',
-    selectedChamber: '',
     isBalanced: false,
     showDirections: false,
     isloading: false,
@@ -40,7 +37,6 @@ class NewGrow extends Component {
         const recipeResults = await this.getPlantRecipes();
         this.setState({plantTypes: recipeResults});
         const chamberResults = await this.getChamberOptions();
-        debugger
         this.setState({chamberOptions: chamberResults});
         // const climateResults = await this.getClimates();
         // this.setClimates(climateResults);
@@ -121,6 +117,53 @@ class NewGrow extends Component {
   //   console.log('show planting directions');
   //   this.setState({ showDirections: true });
   // };
+//   {this.state.selectedPlant === 'customize' &&
+//     this.state.selectedChamber === '' && <CustomizeSensors {...this.props} />}
+//   { this.state.selectedChamber === '' &&
+//     this.state.selectedPlant !== '' &&
+//     this.state.showDirections === false && (
+//       <div className="chamberOptions">
+//         <div className="chamberImage">
+//           <ChamberFormGroup
+//             options={this.state.chamberOptions} onClick={this.handleChamberRadioClick} />
+//         </div>
+//         <h3 id="chamber" className="directions Futura-Lig">
+//           Select A Chamber
+//         </h3>
+// }
+//
+// <LoaderButton
+// className='sumbit-garden'
+// disabled={!this.validateForm()}
+// type="submit"
+// isloading={this.state.isloading}
+// text="Create"
+// loadingText="Creating…"
+// />
+// </form>
+// }
+// { this.state.selectedChamber !== '' &&
+//   this.state.selectedPlant !== '' &&
+//   this.state.isBalanced === false && (
+//     <Directions
+//       newGrowPlant={this.state.newGrowPlant}
+//       climates={this.state.climates}
+//       handleClick={this.updatePhBalance}
+//       isBalanced={this.state.isBalanced}
+//       selectedChamber={this.state.selectedChamber}
+//       // onClick={this.showPlantingDirections}
+//     />
+//   )}
+//
+// {this.state.showDirections === true && (
+//   <PlantingDirections
+//     newGrowPlant={this.state.newGrowPlant}
+//     climates={this.state.climates}
+//     isBalanced={this.state.isBalanced}
+//     selectedChamber={this.state.selectedChamber}
+//     handleClick={this.submitGrowChange}
+//   />
+// ) }
 
   validateForm() {
     return this.state.selectedPlant.length > 0 && this.state.selectedPlant.length > 0;
@@ -178,60 +221,64 @@ class NewGrow extends Component {
 
   renderPlantGroup() {
     const { plantTypes } = this.state;
-    // debugger
     let plantImgSymbol;
+
+    return (
       plantTypes.map((plant) => {
-        if (plant.plantName === "Basil") {
+        if (plant.recipeName === "Basil") {
           plantImgSymbol = Basil;
-        } else if (plant.plantName === 'Kale') {
+        } else if (plant.recipeName === 'Kale') {
           plantImgSymbol = Kale;
-        } else if (plant.plantName === 'Green Beans') {
+        } else if (plant.recipeName === 'Green Beans') {
           plantImgSymbol = GreenBeans;
-        } else if (plant.plantName === 'Cilantro') {
+        } else if (plant.recipeName === 'Cilantro') {
           plantImgSymbol = Cilantro;
-        } else if (plant.plantName === 'Lettuce') {
+        } else if (plant.recipeName === 'Lettuce') {
           plantImgSymbol = Lettuce;
-        } else if (plant.plantName === 'Broccoli') {
+        } else if (plant.recipeName === 'Broccoli') {
           plantImgSymbol = Broccoli;
-        } else if (plant.plantName === 'Tomatoes') {
+        } else if (plant.recipeName === 'Tomatoes') {
           plantImgSymbol = Tomatoes;
-        } else if (plant.plantName === 'Cilantro') {
+        } else if (plant.recipeName === 'Cilantro') {
           plantImgSymbol = Cilantro;
-        } else if (plant.plantName === 'Bell Pepper') {
+        } else if (plant.recipeName === 'Bell Pepper') {
           plantImgSymbol = BellPepper;
         } else {
           plantImgSymbol = Customize;
         }
-debugger
-      return (
-        <div className={`styles.button${plant.plantName}`}>
-          <img src={plantImgSymbol} alt={plant.plantName} />
+        return (
+        <div
+          key={plant.recipeName}
+          className={`styles.button${plant.recipeName}`}>
+          <img
+            key={plant.recipeName}
+            src={plantImgSymbol}
+            alt={plant.recipeName} />
           <input
-            name={plant.plantName}
-            value={plant.plantName}
-            key={plant.plantName}
-            className={`styles.${plant.plantName}`}        onChange={this.handlePLantChange}
+            name={plant.recipeName}
+            value={plant.fullName}
+            key={plant.recipeName}
+            className={`styles.${plant.recipeName}`}        onChange={this.handlePLantChange}
           />
-          {plant.plantName}
         </div>
-      )
-    }
+      )})
+    )
   }
 
   renderChambers() {
     const { chamberOptions } = this.state;
-    chamberOptions.map((chamber) =>
+    chamberOptions.map((chamber) => {
       return (
         <input
           type='radio'
-          name={chamber}
-          key={chamber}
-          value={chamber}
-          className={chamber}
+          name={chamber.chamberId}
+          key={chamber.chamberId}
+          value={chamber.chamberName}
+          className={chamber.chamberName}
           onChange={this.handleChamberChange}
         />
-        {chamber}
-    ))
+      )
+    })
   }
 
   render() {
@@ -245,14 +292,17 @@ debugger
         <form
           className="new_grow_form"
           onSubmit={this.handleSubmit}>
-          {this.state.selectedPlant === '' && (
+          { this.state.newGrowPlant.length < 1
+            ?
             <div className="selectedPlant">
               <h3>Select A Plant</h3>
               <h3>OR</h3>
               <h3>Customize Your Own Settings</h3>
-              {this.renderPlantGroup()}
+              { this.renderPlantGroup() }
             </div>
-          )}
+            :
+            null
+          }
           </form>
         }
       </div>
