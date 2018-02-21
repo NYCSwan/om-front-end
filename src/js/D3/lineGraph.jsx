@@ -108,7 +108,7 @@ class LineGraph extends Component {
 
   render() {
     console.log('render lineGraph');
-    const { graphHeight, graphWidth, match, margin, sensor, startDate, endDate } = this.props;
+    const { graphHeight, graphWidth, margin, sensor, startDate, endDate } = this.props;
     const { currentData } = this.state;
 
     return (

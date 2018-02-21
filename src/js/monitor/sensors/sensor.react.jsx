@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { Row, Col } from 'react-bootstrap';
-// import findKey from 'lodash/findKey';
+import findKey from 'lodash/findKey';
 // import isEmpty from 'lodash/isEmpty';
 import pickBy from 'lodash/pickBy';
 import moment from 'moment';
@@ -76,15 +76,11 @@ class Sensor extends Component {
 
   handleChamberIdChange = newChamber => {
     console.log('handleChamberIdChange');
-    let tempChamber = 0;
-    if (newChamber == null) {
-      tempChamber = 1;
-    } else {
-      tempChamber = newChamber;
-    }
-    this.setState({
-      chamberId: tempChamber
-    });
+    const { chambers } = this.state;
+    const tempChamberPlant = newChamber.target.value;
+    const tempChamber = pickBy(chambers, chamber => chamber.plantName === tempChamberPlant);
+
+    this.setState({ chamberId: tempChamber.chamberId });
   };
 
   renderStartDate() {
@@ -92,7 +88,9 @@ class Sensor extends Component {
     const { growingPlants, chamberId } = this.state;
     const tempChamber = `Chamber ${chamberId}`;
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
-    return moment(plant[0].createdAt).format("dddd, MMM Do");
+    const key = findKey(plant);
+    debugger
+    return moment(plant[key].createdAt).format("dddd, MMM Do");
 
   }
   renderCurrentSensorReading() {
@@ -125,15 +123,6 @@ class Sensor extends Component {
     const today = new Date();
     const oneWeekAgo = moment(today).subtract(7, 'days');
     const oneMonthAgo = moment(today).subtract(1, 'months');
-    // let startedOnMonth = 0;
-    // const currentPlantInfo = pickBy(growingPlants, plant => plant.chamber_id === chamberId);
-    // const plantKey = findKey(currentPlantInfo);
-
-    // if (isEmpty(currentPlantInfo) === false) {
-    //   startedOn = new Date(Date.parse(currentPlantInfo[plantKey].started_datetime)).toLocaleString();
-    //   // startedOnMonth = Date.parse(currentPlantInfo[plantKey].started_datetime).getDate();
-    // }
-
     const sensorName = this.props.match.params.sensor_id;
 
     return (

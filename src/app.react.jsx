@@ -86,28 +86,52 @@ class App extends Component {
             <ul
               onSelect={this.handleSelect}
               className={styles.navbarCollapse}>
-              <input type='checkbox' id='collapse' className={styles.collapse} />
-                <label htmlFor='collapse' className={styles.label}></label>
-                  <IndexLinkContainer to='/monitor' key={'monitor'} className={styles.indexLinkContainer}>
-                    <li className={styles.navItem}>
+              <input
+                type='checkbox'
+                id='collapse'
+                className={styles.collapse} />
+                <label
+                  htmlFor='collapse' className={styles.label}></label>
+                  <IndexLinkContainer
+                    to='/monitor'
+                    key={'monitor'} className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
                       Monitor
                     </li>
                   </IndexLinkContainer>
-                  <IndexLinkContainer to='/controls' key={'controls'}
-                  className={styles.indexLinkContainer}>
-                    <li className={styles.navItem}>
+                  <IndexLinkContainer
+                    to='/monitor/progress'
+                    key={'progress'} className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
+                      Progress
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
+                    to='/controls' 
+                    key={'controls'}
+                    className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
                       Controls
                     </li>
                   </IndexLinkContainer>
-                  <IndexLinkContainer to='/' key={'userAccount'}
-                  className={styles.indexLinkContainer}>
-                    <li className={styles.navItem}>
+                  <IndexLinkContainer
+                    to='/'
+                    key={'userAccount'}
+                    className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
                       My Account
                     </li>
                   </IndexLinkContainer>
-                  <IndexLinkContainer to='/' key={'support'}
-                  className={styles.indexLinkContainer}>
-                    <li className={styles.navItem}>
+                  <IndexLinkContainer
+                    to='/'
+                    key={'support'}
+                    className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
                     Support</li>
                   </IndexLinkContainer>
               </ul>

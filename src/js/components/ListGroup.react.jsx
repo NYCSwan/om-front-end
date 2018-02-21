@@ -1,20 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../../styling/listGroup.css';
 
 const ListGroupContainer = props => (
-  <ul>
+  <ul className={styles.chamber_icon}>
     {props.items.map(item => { // eslint-disable-line
       return (
-        <li key={item} className="Futura-Lig">
-          {item}
+        <li
+          key={item.name}
+          className={styles.listItem}>
+          <button
+            disabled={!item.isFilled}
+            onClick={props.handleClick}
+            className={styles.button}>
+          { item.isFilled ? item.plantName : item.name }
+          </button>
         </li>
       );
-    })}
+    }).reverse()}
   </ul>
 );
 
 ListGroupContainer.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default ListGroupContainer;

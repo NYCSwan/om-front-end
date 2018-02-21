@@ -1,7 +1,8 @@
 /* Monitor */
 /************/
 .bubbles {
-  background-image: url(/media/Bubbles.png);
+  background-image: url('/Bubbles.png');
+
 }
 /* Tablet screens */
 /* ************ */
@@ -15,7 +16,7 @@
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .monitor {
     height: 100%;
-    background-image: url(/media/Bubbles.png);
+    /* background-image: url(/media/Bubbles.png); */
     width: 100%;
   }
   .lander {
