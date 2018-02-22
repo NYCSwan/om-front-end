@@ -249,7 +249,7 @@ class NewGrow extends Component {
         return (
         <div
           key={plant.recipeName}
-          className={`styles.button${plant.recipeName}`}>
+          className={`styles.button${(plant.recipeName).replace(/\s/, '')}`}>
           <img
             key={plant.recipeName}
             src={plantImgSymbol}
@@ -257,8 +257,9 @@ class NewGrow extends Component {
           <input
             name={plant.recipeName}
             value={plant.fullName}
-            key={plant.recipeName}
-            className={`styles.${plant.recipeName}`}        onChange={this.handlePLantChange}
+            key={plant.gardenId}
+            className={`styles.${(plant.recipeName).replace(/\s/, '')}Input`}
+            onChange={this.handlePLantChange}
           />
         </div>
       )})
@@ -287,16 +288,16 @@ class NewGrow extends Component {
     // console.log(`chambers: ${this.state.chamberOptions}`);
 // debugger
     return (
-      <div className="newGrow container">
+      <div className={styles.newGrowContainer}>
       { !this.state.isloading &&
         <form
-          className="new_grow_form"
+          className={styles.newGrowForm}
           onSubmit={this.handleSubmit}>
           { this.state.newGrowPlant.length < 1
             ?
-            <div className="selectedPlant">
-              <h3>Select A Plant</h3>
-              <h3>OR</h3>
+            <div className={(styles.selectPlant).replace(/\s/, '')}>
+              <h3>Select a Plant</h3>
+              <h4>OR</h4>
               <h3>Customize Your Own Settings</h3>
               { this.renderPlantGroup() }
             </div>

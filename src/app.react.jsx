@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
-// import image from './BG_1.jpg';
 
-// import RouteNavItem from './components/RouteNavItem.react';
-import PagerBack from './js/layout/pagerBack.react';
-import PagerFwd from './js/layout/pagerFwd.react';
+// import PagerBack from './js/layout/pagerBack.react';
+// import PagerFwd from './js/layout/pagerFwd.react';
+// <PagerBack className={styles.header} />
+// <PagerFwd className={styles.header} />
+
 import Routes from './js/routes';
 import { authUser, signOutUser } from "./libs/awsLibs";
 import styles from './styling/app.css';
-// import GlobalStyles from './styling/global-styles.css';
 import logo from './media/logo.png';
 import Footer from './js/layout/footer.react';
 
@@ -109,7 +108,7 @@ class App extends Component {
                     </li>
                   </IndexLinkContainer>
                   <IndexLinkContainer
-                    to='/controls' 
+                    to='/controls'
                     key={'controls'}
                     className={styles.indexLinkContainer}>
                     <li
@@ -156,8 +155,6 @@ class App extends Component {
             userHasAuthenticated={this.userHasAuthenticated} />
         </div>
       }
-        <PagerBack className={styles.header} />
-        <PagerFwd className={styles.header} />
         <Footer />
       </div>
     );

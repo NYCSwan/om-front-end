@@ -52,7 +52,7 @@ class Progress extends Component {
 
   getRecipe(plant) {
     console.log('GET plant recipe');
-    return invokeApig({ path: `/plants/${plant}` })
+    return invokeApig({ path: `/plants` })
   }
 
   getAllChamberData() {
@@ -71,10 +71,8 @@ class Progress extends Component {
     let tempChamber = '';
     if (newChamber != null) {
       tempChamber = newChamber.target.value;
-      this.setState(
-        {
-          chamberId: tempChamber
-        },
+      this.setState({
+          chamberId: tempChamber},
         () => console.log(`chamberId ${this.state.chamberId}`)
       );
     }

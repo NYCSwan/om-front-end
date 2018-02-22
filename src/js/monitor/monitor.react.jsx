@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-// import findKey from 'lodash/findKey';
+import findKey from 'lodash/findKey';
 // import findLastIndex from 'lodash/findLastIndex';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
@@ -11,7 +11,13 @@ import { ListGroup } from 'react-bootstrap';
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
-// {dayOfCycle}
+import Spinner from '../helpers/spinner.react';
+import pH from '../../media/pH_icon.png';
+import ppm from '../../media/ppm_icon.png';
+
+import humidity from '../../media/humidity_icon.png';
+import temperature from '../../media/temperature_icon.png';
+import waterlevel from '../../media/water_level_icon.png';
 
 class Monitor extends Component {
   static propTypes = {
@@ -107,7 +113,7 @@ class Monitor extends Component {
   renderLander = () => {
     return (
       <div className={styles.lander}>
-        <h3>Loading your garden's information...</h3>
+        <Spinner />
       </div>
     )
   }
@@ -123,19 +129,12 @@ class Monitor extends Component {
     const tempChamber = `Chamber ${chamberId}`;
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const now = moment(new Date());
-    const then = moment(plant[0].createdAt)
+    const key = findKey(plant);
+    const then = moment(plant[key].createdAt)
     const days = now.date() - then.date();
 
     return days;
   }
-
-  renderChambers() {
-   return (
-       <ListGroup className={styles.listGroup}>
-         {!this.state.isLoading && this.renderChambersList(this.state.chambers)}
-       </ListGroup>
-   );
- }
 
   render() {
     console.log('render monitor');
@@ -153,21 +152,56 @@ class Monitor extends Component {
         { this.state.chamberData.length >= 1
           ?
             <div className={styles.bubbles}>
-              <Link to='/monitor/pH'>
-                <h2 className={styles.xBigFont} key={latest.timestamp}>
+              <div className={styles.humidityContainer}>
+                <Link
+                className={styles.humiditylink}
+                to='/monitor/humidity'>
+                  <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
+                  <h4>RH</h4>
+                  <img src={humidity} alt="humidity icon" />
+                </Link>
+              </div>
+              <div className={styles.turbidityContainer}>
+                <Link
+                className={styles.turbiditylink}
+                to='/monitor/turbidity'>
+                  <h2 className={styles.xBigFont}>{latest.turbidity}%</h2>
+                  <h4>RH</h4>
+                  <img src={ppm} alt="turbidity ppm icon" />
+                </Link>
+              </div>
+              <div className={styles.temperatureContainer}>
+                <Link
+                  className={styles.temperaturelink} to='/monitor/temperature'>
+                  <h2 className={styles.xBigFont}>{latest.temperature}*</h2>
+                  <h4>F</h4>
+                  <img src={temperature} alt="temperature icon" />
+                </Link>
+              </div>
+              <div className={styles.phContainer}>
+                <Link
+                  className={styles.phlink}
+                  to='/monitor/pH'>
+                  <h2 className={styles.xBigFont} key={latest.timestamp}>
                   {latest.pH}
-                </h2>
-                <h4>pH</h4>
-              </Link>
-              <Link to='/monitor/temperature'>
-                <h2 className={styles.xBigFont}>{latest.temperature}*</h2>
-                <h4>F</h4>
-              </Link>
-              <Link to='/monitor/humidity'>
-                <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
-                <h4>RH</h4>
-              </Link>
-              <h4 className={styles.xBigFont}>Day {this.renderDayInCycle()}</h4>
+                  </h2>
+                  <h4>pH</h4>
+                  <img src={pH} alt="pH icon" />
+                </Link>
+              </div>
+              <div className={styles.waterlevelContainer}>
+                <Link
+                  className={styles.waterlevelink}
+                  to='/monitor/waterlevel'>
+                  <img src={waterlevel} alt="water level icon" />
+                </Link>
+              </div>
+                <h4 className={styles.lighting}>
+                  light on/off
+                </h4>
+                <h4 className={styles.dayOfCycle}>
+                  Day {this.renderDayInCycle()}
+                </h4>
             </div>
         :
           this.renderLander()

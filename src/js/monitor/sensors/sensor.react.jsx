@@ -89,7 +89,7 @@ class Sensor extends Component {
     const tempChamber = `Chamber ${chamberId}`;
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const key = findKey(plant);
-    debugger
+    // debugger
     return moment(plant[key].createdAt).format("dddd, MMM Do");
 
   }
