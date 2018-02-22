@@ -1,60 +1,57 @@
 /*New Grow*/
 /***********/
 
-div.selectedPlant {
-text-align: center;
-position: relative;
-}
-.selectedPlant h3 {
-font-family: Futura-Lig;
-font-size: 18px;
-}
-
-div.selectedPlant .form-group {
-display: flex;
-flex-flow: row wrap;
-margin-right: auto;
-margin-left: auto;
-margin-top: 20px;
-min-height: 300px;
-height: auto;
-width: 75%;
-align-items: baseline;
-justify-content: center;
-align-content: center;
-border-radius: 5%;
-background-color: rgba(0,0,0,0.4);
+.selectPlant {
+  display: flex;
+  flex-flow: row wrap;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  min-height: 300px;
+  height: auto;
+  width: 75%;
+  align-items: stretch;
+  justify-content: space-around;
+  align-content: center;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.2);
+  text-align: center;
 }
 
-.Basil, .Bell.Pepper, .Broccoli, .Cilantro, .Green.Beans, .Lettuce, .Tomato, .Kale, .Customize {
-font-family: Futura-Lig;
-background-repeat:no-repeat;
-background-size: 100% 100%;
-max-width: 35%;
-min-width: 200px;
-margin-top: 10px;
-font-size: 18px;
-margin-left: auto;
-margin-right: auto;
-text-align: center;
-flex: 1 100%;
-height: 70px;
-display: flex;
-align-items: center;
-justify-content: space-around;
+.selectPlant h3 {
+  font-size: 20px;
+}
+
+.selectPlant h4 {
+  font-size: 16px;
+}
+.buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+  font-family: Futura-Lig;
+  max-width: 35%;
+  min-width: 200px;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  flex: 1 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 
 }
 
-.newgrow.container {
-display: flex;
-flex-wrap: wrap;
-flex-direction: row;
-margin-left: 20px;
-margin-top: 20px;
-width: 80%;
-text-align: center;
+.newGrowContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 80%;
+  text-align: center;
 }
-
+/*
 .link.Basil {
 background-image: url(/public/img/basil_button.png);
 
@@ -95,14 +92,15 @@ background-image: url(/public/img/green_bean_button.png)
 }
 .text.Futura-Lig.center h3{
 font-size: 20px;
+} */
+
+.newGrowForm {
+  width: 90%;
+  min-height: 800px;
+  background: transparent;
 }
 
-/*.new_grow_form {
-width: 90%;
-min-height: 800px;
-}*/
-
-div.chamberOptions {
+.chamberOptions {
 min-height: 800px;
 min-width: 500px;
 }
@@ -122,7 +120,7 @@ margin-top: 30px;
 }
 
 /*Chamber*/
-div.chamberImage .form-group {
+.chamberImage .form-group {
 background: none;
 font-size: 18px;
 position: relative;
@@ -138,26 +136,6 @@ width: 180px;
 margin-top: 30px;
 margin-left: auto;
 margin-right: auto;
-}
-
-div.link.Chamber1.radio {
-position: absolute;
-/*margin-left: 145px;*/
-/*margin-top: 245px;*/
-margin-left: 355px;
-margin-top: 295px;
-}
-
-div.link.Chamber2.radio {
-position: absolute;
-margin-left: 130px;
-margin-top: 80px;
-}
-
-div.link.Chamber3.radio {
-position: absolute;
-margin-left: -90px;
-margin-top: 150px;
 }
 
 .directions.container {
@@ -177,7 +155,7 @@ display: inline-block;
 font-size: 18px;
 }
 
-.directions.right div.container {
+.directions.right .container {
 width: 100%;
 }
 
@@ -191,6 +169,67 @@ position: relative;
 width: 100%;
 padding-bottom: 10px;
 }
-div.Futura-Lig.col-md-6.col-xs-5 {
+.Futura-Lig.col-md-6.col-xs-5 {
 width: 100%;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBean, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+    font-family: Futura-Lig;
+    width: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1 1 center;
+    height: auto;
+  }
+
+  .BasilInput, .BellPepperInput, .BroccoliInput, .CilantroInput, .GreenBeanInput, .LettuceInput, .TomatoInput, .KaleInput, .CustomizeInput {
+    background: rgba(0,0,0,0.4);
+    color: white;
+    font-weight: bold;
+    max-width: 200;
+    width: 80px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  img {
+    width: 200px;
+  }
+
+  button.chamber-1.btn.btn-default, button.chamber-2.btn.btn-default, button.chamber-3.btn.btn-default {
+    padding: 0;
+    width: auto;
+    align-self: baseline;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  button.chamber-2.btn.btn-default {
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+  }
+  /*New Grow*/
+  /***********/
+  .selectedPlant h3 {
+    font-family: Futura-Lig;
+    font-size: 14px;
+  }
+
 }

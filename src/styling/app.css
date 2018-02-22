@@ -1,15 +1,27 @@
-.app {
+
+body {
+  width: auto;
+  font-family: @font-face from './global-styles.css';
+}
+
+  .app {
   composes: body from './global-styles.css';
-  /* BUSTED composes: fontFace from './MyFontsWebfontsKit.css'; */
-  margin: 0;
-  padding: 0;
+  /* composes: fontFace from './MyFontsWebfontsKit.css'; */
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center top;
+  background-color: #fff;
   /* columns: 12em; */
   width: 100%;
   text-align: center;
   position: relative;
   min-height: 100vh;
   scroll-behavior: smooth;
-  background-color: aqua;
+  /* background-color: aqua; */
+  background: url('../media/BG_1.jpg');
+  background-size: 100% 100%;
 }
 
 /* Tablet screens */

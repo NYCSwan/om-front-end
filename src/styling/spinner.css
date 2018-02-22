@@ -1,5 +1,7 @@
 .spinner {
-  width: 80%;
+  composes: spin from './animation.css';
+  width: 250px;
+  background-color: transparent;
 }
 
 .img {

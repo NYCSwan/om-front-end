@@ -82,3 +82,24 @@ button.close.Resume.btn.btn-default {
   text-shadow: 0 1px 0 #333;
   opacity: 1;
 }
+
+
+.link.Chamber1.radio {
+position: absolute;
+/*margin-left: 145px;*/
+/*margin-top: 245px;*/
+margin-left: 355px;
+margin-top: 295px;
+}
+
+.link.Chamber2.radio {
+position: absolute;
+margin-left: 130px;
+margin-top: 80px;
+}
+
+.link.Chamber3.radio {
+position: absolute;
+margin-left: -90px;
+margin-top: 150px;
+}

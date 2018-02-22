@@ -1,39 +1,57 @@
 /* eslint no-unused-expressions: 0 */
-:global {
-  @font-face {
+  @font-face :global {
     font-family: 'Futura-Lig';
     src: url(/public/webfonts/3541CB_0_0.ttf) format('truetype');
-
   }
-  .font {
+
+  .font :global {
     font-weight: normal;
     font-style: normal;
   }
 
-  html,
-  body {
+  .body :global {
     height: 100%;
     width: 100%;
   }
 
-  .body {
-    background-image: url(/src/media/Basil.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center top;
-  }
-
-  .link {
+  .link :global {
     list-style: none;
   }
 
-  .img {
+  .img :global {
     max-width:150px;
   }
 
-  .container {
-    margin: 0;
-    padding: 0;
+  .background :global {
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% 100%;
+    background-color: inherit;
   }
-}
+
+  /* Tablet screens */
+  /* ************ */
+  @media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+  }
+
+  /* Phone Screens */
+  /*****************/
+  @media only screen and (min-width: 375px) and (max-width: 807px) {
+    h1 :global {
+      font: 2em bold;
+    }
+    h2 :global {
+      font: 1.5em bold;
+    }
+    h3 :global {
+      font: 1.25em bold;
+    }
+    h4 :global {
+      font: 1em bold;
+    }
+    h5 :global {
+      font: .75em bold;
+    }
+  }

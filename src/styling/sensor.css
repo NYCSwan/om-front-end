@@ -1,7 +1,7 @@
 /* Sensor */
 /***********/
 .sensor {
-  composes: lightGray from './variables.css';
+  /* composes: lightGray from './variables.css'; */
   /* font: .fontFace from './global.css'; */
   /* height: auto; */
   min-height: 800px;

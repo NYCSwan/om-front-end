@@ -1,6 +1,6 @@
 /*  VARIABLES */
 
-/* text colors */
+/* text */
 .white {
   color: #ffffff;
 };
@@ -14,13 +14,18 @@
 }
 
 .accentLightGray {
-  color: #C0C0C0; 
+  color: #C0C0C0;
 }
 .accentLightGreen {
   color: #04a12b;
 }
 .gray {
   color: #aaaaaa;
+}
+
+.bigFont {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 /* background colors */
@@ -30,4 +35,20 @@
 
 .lightGray {
   background-color: #cccccc;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .bigFont {
+    font-size: 20px;
+  }
 }
