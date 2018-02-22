@@ -108,6 +108,7 @@ class Progress extends Component {
         match={this.props.match}
         isAuthenticated={this.props.isAuthenticated}
         images={images}
+        url='https://s3.amazonaws.com/livestreamdata.timelapse.images/'
       />
     )
   }
