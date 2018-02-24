@@ -21,8 +21,9 @@
   }
   .bubbles {
     width: 100%;
-    height: 400px;
+    height: 500px;
   }
+  
   .lander {
     composes: grayBackground from './variables.css';
   }

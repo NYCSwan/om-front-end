@@ -1,23 +1,32 @@
 import styles from '../../../styling/timelapse.css';
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import Carousel from 'nuka-carousel';
+// import Decorators from './decorators.react';
 
 const Timelapse = (props) => (
 
-      <div>
+      <div className={styles.timelapseContainer}>
         <h3>Timelapse Video</h3>
-        <Carousel>
-        { (isEmpty(props.images))
+        <Carousel
+          ref={(c) => this.slider = c} slidesToShow={1}
+          speed={50}
+          width={'100%'}
+          decorators={props.decorators}
+          autoplay={true}
+          className={styles.carousel}
+          slideIndex={props.slideIndex}
+          afterSlide={props.afterSlide}>
+          { (isEmpty(props.images))
           ?
           null
           :
           props.images.map( image =>
-          <Carousel.Item>
-            <img width={300} height={200} alt="900x500" src={`${props.url}${image.Key}`}
-            className={styles.carouselItem} />
-          </Carousel.Item>
+
+            <img
+              key={image.Etag}
+              alt="timelapse still 300x200" src={`${props.url}${image.Key}`} />
         )}
         </Carousel>
       </div>
@@ -31,7 +40,8 @@ Timelapse.propTypes = {
     path: PropTypes.string
   }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  images: PropTypes.arrayOf(PropTypes.object).isRequired
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  decorators: PropTypes.arrayOf(PropTypes.object).isRequired
 
 };
 export default Timelapse;

@@ -79,9 +79,7 @@ class App extends Component {
         <div>
         <nav className={styles.navbar}>
           <div className={styles.topNav}>
-            <Link to="/" href="/" className={styles.logo}>
-              <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
-            </Link>
+
             <ul
               onSelect={this.handleSelect}
               className={styles.navbarCollapse}>
@@ -134,6 +132,9 @@ class App extends Component {
                     Support</li>
                   </IndexLinkContainer>
               </ul>
+              <Link to="/" href="/" className={styles.logo}>
+                <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
+              </Link>
             </div>
             <div className={styles.logging}>
               {this.state.isAuthenticated

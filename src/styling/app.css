@@ -6,20 +6,16 @@ body {
 
   .app {
   composes: body from './global-styles.css';
-  /* composes: fontFace from './MyFontsWebfontsKit.css'; */
-
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center top;
   background-color: #fff;
-  /* columns: 12em; */
   width: 100%;
   text-align: center;
   position: relative;
   min-height: 100vh;
   scroll-behavior: smooth;
-  /* background-color: aqua; */
   background: url('../media/BG_1.jpg');
   background-size: 100% 100%;
 }
@@ -53,10 +49,10 @@ body {
 /* TOP NAV - LOGO & MENU */
   .topNav {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
     align-items: center;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .logo {
@@ -66,23 +62,28 @@ body {
     order: 1;
     width: 150px;
     border-radius: 5%;
-    flex: 3 3 flex-start;
   }
 
   /* MENU NAVIGATION */
   .navbarCollapse {
     list-style:none;
     margin-right:0;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     padding:0;
-    margin-top:40px;
+    margin-top:20px;
     order: 2;
-    width:200px;
-    flex: 4 4 flex-end;
+    width: 100%;
+    flex: 1 1 flex-end;
   }
 
   .navbarCollapse:before {
     height: auto;
+    width: 200px;
+  }
+
+  .navbarCollapse:active {
+    width: 100%;
+    
   }
 
   .indexLinkContainer:before {
@@ -250,13 +251,7 @@ font-size: 24px;
 border-radius: 30px;
 }
 
-.homepage:active, .temperate.link:active, .custom.link:active, .tropical.link:active  {
-/*border styles
-border-top: solid 2px rgba(115,115,115,0.5);
-border-bottom: solid 1px rgba(115,115,115,0.3);
-border-right: solid 1px rgba(115,115,115,0.5);
-border-left: solid 1px rgba(115,115,115,0.5);
-}
+
 .backImage {
 display: none;
 position: relative;

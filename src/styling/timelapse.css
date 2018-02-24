@@ -1,8 +1,14 @@
-.lander {
-  background-color: red;
+.timelapseContainer {
+  background-color: rbga(255,255,255,0.4);
+  width: 100%;
+  height: 100%;
 }
 
+.timelapseContainer ~ h3 {
+  color: white;
+}
 
-.plantInfoContainer {
-  
+.carousel {
+  height: auto;
+  margin-left: 10%;
 }

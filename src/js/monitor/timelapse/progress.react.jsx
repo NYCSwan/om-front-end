@@ -5,6 +5,14 @@ import Timelapse from './timelapse.react';
 import styles from '../../../styling/progress.css';
 import FilterButtonGroup from '../../components/filter_button.react';
 import Basil from '../../../media/basil.jpeg';
+import BellPepper from '../../../media/bell_pepper_button.png';
+import Broccoli from '../../../media/broccoli_button.png';
+import Cilantro from '../../../media/cilantro_button.png';
+import GreenBeans from '../../../media/green_bean_button.png';
+import Kale from '../../../media/kale_button.png';
+import Lettuce from '../../../media/lettuce_button.png';
+import Tomatoes from '../../../media/tomato_button.png';
+import Customize from '../../../media/customize_button.jpg';
 
 class Progress extends Component {
   static propTypes = {
@@ -20,7 +28,19 @@ class Progress extends Component {
     recipe: [],
     images: [],
     chambers: [],
-    chamberId: 1
+    chamberId: 1,
+    decorators: [{
+      component: function(p){
+        return <div />;
+      },
+      position: 'BottomLeft'
+    }, {
+      component: function(p){
+        return <div />;
+      },
+      position: 'BottomRight'
+    }],
+
   }
 
   async componentDidMount() {
@@ -77,16 +97,51 @@ class Progress extends Component {
       );
     }
   };
+  //
+  // handleAfterSlide = () => {
+  //   this.setState({ slideIndex: newSlideIndex })
+  // }
 
   renderPlantDetails() {
     const { recipe } = this.state;
+    let plantImgSymbol;
+
+    if (recipe.recipeName === "Basil") {
+      plantImgSymbol = Basil;
+    } else if (recipe.recipeName === 'Kale') {
+      plantImgSymbol = Kale;
+    } else if (recipe.recipeName === 'Green Beans') {
+      plantImgSymbol = GreenBeans;
+    } else if (recipe.recipeName === 'Cilantro') {
+      plantImgSymbol = Cilantro;
+    } else if (recipe.recipeName === 'Lettuce') {
+      plantImgSymbol = Lettuce;
+    } else if (recipe.recipeName === 'Broccoli') {
+      plantImgSymbol = Broccoli;
+    } else if (recipe.recipeName === 'Tomatoes') {
+      plantImgSymbol = Tomatoes;
+    } else if (recipe.recipeName === 'Cilantro') {
+      plantImgSymbol = Cilantro;
+    } else if (recipe.recipeName === 'Bell Pepper') {
+      plantImgSymbol = BellPepper;
+    } else {
+      plantImgSymbol = Customize;
+    }
     return (
-      <div className={styles.plantInfoContainer}>
-        <img src={Basil} alt={recipe.plantName} className={styles.plantImg}/>
+      <div
+        className={styles.plantInfoContainer}
+        key={recipe.recipeName}>
+        <img
+          src={plantImgSymbol} alt={recipe.recipeName} className={styles.plantImg}
+          key={recipe.Etag} />
         <h4>{recipe.fullName}</h4>
         <p>{recipe.suggestions}</p>
-        <h5>Avg Market Price: ${recipe.marketPrice}</h5>
-        <h5>Avg Yield: ${recipe.yield}</h5>
+        <h5>
+          Avg Market Price: ${recipe.marketPrice}
+        </h5>
+        <h5>
+          Avg Yield: ${recipe.yield}
+        </h5>
       </div>
     )
   }
@@ -101,7 +156,8 @@ class Progress extends Component {
   }
 
   renderTimelapse() {
-    const { images } = this.state;
+    const { images, slideIndex } = this.state;
+    // const slideIndex = ;
 
     return (
       <Timelapse
@@ -109,6 +165,9 @@ class Progress extends Component {
         isAuthenticated={this.props.isAuthenticated}
         images={images}
         url='https://s3.amazonaws.com/livestreamdata.timelapse.images/'
+        decorators={this.state.decorators}
+        slideIndex={slideIndex}
+        afterSlide={this.handleAfterSlide}
       />
     )
   }

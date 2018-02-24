@@ -151,7 +151,9 @@ class Monitor extends Component {
         />
         { this.state.chamberData.length >= 1
           ?
+
             <div className={styles.bubbles}>
+            
               <div className={styles.humidityContainer}>
                 <Link
                 className={styles.humiditylink}
@@ -161,6 +163,7 @@ class Monitor extends Component {
                   <img src={humidity} alt="humidity icon" />
                 </Link>
               </div>
+
               <div className={styles.turbidityContainer}>
                 <Link
                 className={styles.turbiditylink}
@@ -170,6 +173,7 @@ class Monitor extends Component {
                   <img src={ppm} alt="turbidity ppm icon" />
                 </Link>
               </div>
+
               <div className={styles.temperatureContainer}>
                 <Link
                   className={styles.temperaturelink} to='/monitor/temperature'>

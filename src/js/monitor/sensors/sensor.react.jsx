@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { Row, Col } from 'react-bootstrap';
 import findKey from 'lodash/findKey';
 // import isEmpty from 'lodash/isEmpty';
 import pickBy from 'lodash/pickBy';
