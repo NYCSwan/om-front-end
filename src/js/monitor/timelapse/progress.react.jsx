@@ -25,7 +25,7 @@ class Progress extends Component {
 
   state = {
     growingPlants: [],
-    isLoading: true,
+    isloading: true,
     recipes: [],
     images: [],
     chambers: [],
@@ -64,7 +64,7 @@ class Progress extends Component {
     } catch(e) {
       console.log(e);
     }
-    this.setState({ isLoading: false });
+    this.setState({ isloading: false });
   }
 
   getGrowingPlants() {
@@ -207,7 +207,7 @@ class Progress extends Component {
   }
 
   render(){
-    const { isLoading, chamberId, chambers } = this.state;
+    const { isloading, chamberId, chambers } = this.state;
 
     return (
       <div>
@@ -216,7 +216,7 @@ class Progress extends Component {
           chamberId={chamberId}
           options={chambers}
         />
-      { !isLoading
+      { !isloading
         ?
         [this.renderPlantDetails(), this.renderTimelapseVideo()]
         :

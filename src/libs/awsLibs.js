@@ -58,6 +58,7 @@ export async function invokeApig({
     });
 
     if (results.status !== 200) {
+      debugger
       alert(results.text());
       throw new Error(await results.text());
     }

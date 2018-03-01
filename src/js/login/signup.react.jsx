@@ -20,7 +20,7 @@ export default class Signup extends Component {
   }
 
   state = {
-    isLoading: false,
+    isloading: false,
     email: "",
     password: "",
     confirmPassword: "",
@@ -51,7 +51,7 @@ export default class Signup extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({ isloading: true });
 
       try {
         const newUser = await this.signup(this.state.email, this.state.password);
@@ -59,13 +59,13 @@ export default class Signup extends Component {
       } catch (e) {
         console.log(e);
       }
-      this.setState({ isLoading: false });
+      this.setState({ isloading: false });
   }
 
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({ isloading: true });
 
       try {
         await this.confirm(this.state.newUser, this.state.confirmationCode);
@@ -79,7 +79,7 @@ export default class Signup extends Component {
         this.props.history.push("/");
       } catch (e) {
         console.log(e);
-        this.setState({ isLoading: false });
+        this.setState({ isloading: false });
       }
     }
 
@@ -145,7 +145,7 @@ export default class Signup extends Component {
           className={button.large}
           disabled={!this.validateConfirmationForm()}
           type="submit"
-          isLoading={this.state.isLoading}
+          isloading={this.state.isloading}
           text="Verify"
           loadingText="Verifying…"
         />
@@ -195,7 +195,7 @@ export default class Signup extends Component {
           className={button.large}
           disabled={!this.validateForm()}
           type="submit"
-          isLoading={this.state.isLoading}
+          isloading={this.state.isloading}
           text="Signup"
           loadingText="Signing up…"
         />

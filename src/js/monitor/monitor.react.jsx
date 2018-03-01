@@ -32,7 +32,7 @@ class Monitor extends Component {
     chamberData: [],
     growingPlants: [],
     chambers: [],
-    isLoading: true
+    isloading: true
   };
 
   async componentDidMount() {
@@ -48,7 +48,7 @@ class Monitor extends Component {
     } catch(e) {
       console.log(e);
     }
-    this.setState({ isLoading: false });
+    this.setState({ isloading: false });
   }
 
   shouldComponentUpdate(newState) {

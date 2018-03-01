@@ -26,7 +26,7 @@ class SettingsList extends Component {
       this.state.displaySettings !== newState.displaySettings
     );
   }
-
+  
   updateSettings = () => {
     const plantType = this.props.newGrowPlant;
     const plantKey = findKey(plantType);
@@ -34,8 +34,8 @@ class SettingsList extends Component {
     const climateKey = findKey(tempClimate);
     const tempSettings = [];
 
-    tempSettings.push(plantType[plantKey].name);
-    tempSettings.push(`${tempClimate[climateKey].type},  ${plantType[plantKey].temperature_range} *F`);
+    tempSettings.push(plantType[plantKey].recipeName);
+    tempSettings.push(`${tempClimate[climateKey].climateId},  ${plantType[plantKey].temperatureRange} *F`);
     tempSettings.push(`pH ${plantType[plantKey].ph}`);
     tempSettings.push(this.props.selectedChamber);
     this.setState({ displaySettings: tempSettings });

@@ -31,6 +31,22 @@ class PlantingDirections extends Component {
     // send message to Plant page saying "Garden started!"
     // send new grow to db, fill chamber
   };
+  // <SettingsList chamber={selectedChamber} climates={climates} newGrowPlant={newGrowPlant} />
+  // <div className="directions right" pullRight>
+  //   <Grid>
+  //     <Row key="growingDirections">
+  //       <Col className="Futura-Lig" xs={5} md={6}>
+  //         {' '}
+  //         {growingDirections}
+  //       </Col>
+  //     </Row>
+  //   </Grid>
+  //   <a href={`/plants/${newGrowPlant[plantKey].r_id}`} alt="Start Growing!">
+  //     <Button className="balanced Futura-Lig" onClick={this.handleClick}>
+  //       Start Growing!
+  //     </Button>
+  //   </a>
+  // </div>
 
   render() {
     console.log('render directions');
@@ -40,22 +56,7 @@ class PlantingDirections extends Component {
     const growingDirections = newGrowPlant[plantKey].planting_directions;
     return (
       <div className="directions container">
-        <SettingsList chamber={selectedChamber} climates={climates} newGrowPlant={newGrowPlant} />
-        <div className="directions right" pullRight>
-          <Grid>
-            <Row key="growingDirections">
-              <Col className="Futura-Lig" xs={5} md={6}>
-                {' '}
-                {growingDirections}
-              </Col>
-            </Row>
-          </Grid>
-          <a href={`/plants/${newGrowPlant[plantKey].r_id}`} alt="Start Growing!">
-            <Button className="balanced Futura-Lig" onClick={this.handleClick}>
-              Start Growing!
-            </Button>
-          </a>
-        </div>
+
       </div>
     );
   }

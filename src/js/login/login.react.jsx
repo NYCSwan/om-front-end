@@ -15,7 +15,7 @@ class Login extends Component {
     }).isRequired
   }
   state = {
-    isLoading: false,
+    isloading: false,
     email: '',
     password: ''
   };
@@ -50,7 +50,7 @@ class Login extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({ isloading: true });
 
     try {
       await this.login(this.state.email, this.state.password);
@@ -59,7 +59,7 @@ class Login extends Component {
       this.props.history.push("/");
     } catch (e) {
       console.log(e);
-      this.setState({ isLoading: false });
+      this.setState({ isloading: false });
     }
   };
 
@@ -80,7 +80,7 @@ class Login extends Component {
             className={button.large}
             disabled={!this.validateForm()}
             type="submit"
-            isLoading={this.state.isLoading}
+            isloading={this.state.isloading}
             text="Login"
             loadingText="Logging in…"
           />

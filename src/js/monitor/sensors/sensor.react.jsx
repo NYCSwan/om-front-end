@@ -28,7 +28,7 @@ class Sensor extends Component {
     graphHeight: 200,
     chambers: [],
     sensorData: [],
-    isLoading: true,
+    isloading: true,
     growingPlants: []
   };
 
@@ -44,7 +44,7 @@ class Sensor extends Component {
       } catch(e) {
         console.log(e);
       }
-    this.setState({ isLoading: false });
+    this.setState({ isloading: false });
   }
 
   shouldComponentUpdate(newProps, newState) {
@@ -110,7 +110,7 @@ class Sensor extends Component {
     // }
 
     return (
-      <div className={`styles.${sensorName}`}>
+      <div className={styles[`${sensorName}`]}>
         <h5 className={styles.texttop}>Chamber {chamberId}'s current {sensorName}</h5>
         <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
       </div>

@@ -1,24 +1,24 @@
 import React from "react";
-import { Button, Glyphicon } from "react-bootstrap";
+import { Glyphicon } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import styles from '../../styling/LoaderButton.css';
 
 const LoaderButton = props => (
-  <Button
-    className={styles.LoaderButton}
-    disabled={props.disabled || props.isLoading}
-    {...props}>
-    {props.isLoading && <Glyphicon glyph="refresh" className="spinning" />}
-    {!props.isLoading ? props.text : props.loadingText}
-  </Button>
+  <button
+    className={styles[`${props.className}`]}
+    disabled={props.disabled}>
+    {props.isloading && <Glyphicon glyph="refresh" className="spinning" />}
+    {!props.isloading ? props.text : props.loadingtext}
+  </button>
 )
 
 LoaderButton.propTypes = {
   className: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isloading: PropTypes.bool.isRequired,
   disabled: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
-  loadingText: PropTypes.string.isRequired
+  loadingtext: PropTypes.string.isRequired,
+  // handleClick: PropTypes.func.isRequired
 }
 
 export default LoaderButton;
