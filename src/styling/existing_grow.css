@@ -1,47 +1,20 @@
-                      /* Existing Grow */
-                      /******************/
-.existing_grow {
-  background: none;
+              /* Existing Grow */
+              /******************/
+.existingGrow {
+  background-color: rgba(255,255,255,0.4);
   position: relative;
   font-size: 18px;
-  width: 400px;
+  width: 100%;
   height: 350px;
 }
 
-.chamber {
-  margin-top: 50px;
-}
-
-div.Chamber1.radio {
+.gardens {
   position: absolute;
-  margin-left: 355px;
-  margin-top: 295px;
+  margin: auto;
+  width: 100%;
+  color: white;
 }
 
-div.Chamber2.radio {
-  position: absolute;
-  margin-left: 180px;
-  margin-top: 110px;
-}
-
-div.Chamber3.radio {
-  position: absolute;
-  margin-left: 120px;
-  margin-top: 225px;
-}
-
-.chamber.Futura-Lig {
-  width: 200px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-div.list-group {
-  width: 45%;
-  display: inline-block;
-  position: relative;
-}
 
 .check_mark {
   width: 100%;
@@ -49,18 +22,18 @@ div.list-group {
 }
 
 /* modal*/
-.modal-container {
+.modalContainer {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   height: 400px;
   line-height: normal;
 }
-.modal-container button {
+.modalContainer button {
   vertical-align: middle;
   margin-top: 10px;
 }
-.modal-content {
+.modalContent {
   color: rgb(0,0,0);
   min-height: 250px;
 }
@@ -83,23 +56,94 @@ button.close.Resume.btn.btn-default {
   opacity: 1;
 }
 
-
-.link.Chamber1.radio {
+/*
+.link.Chamber1 {
 position: absolute;
 /*margin-left: 145px;*/
 /*margin-top: 245px;*/
-margin-left: 355px;
+/* margin-left: 355px;
 margin-top: 295px;
 }
 
-.link.Chamber2.radio {
+.link.Chamber2 {
 position: absolute;
 margin-left: 130px;
 margin-top: 80px;
 }
 
-.link.Chamber3.radio {
+.link.Chamber3 {
 position: absolute;
 margin-left: -90px;
 margin-top: 150px;
+} */
+
+.errorMessage {
+  border: 1px solid red;
+  width: 80%;
+  margin: 10%;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .gardens {
+    background-color: blue;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .chamber {
+    /* width: 200px; */
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .check_mark {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* modal*/
+  .modalContainer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    line-height: normal;
+  }
+  .modalContainer button {
+    vertical-align: middle;
+    margin-top: 10px;
+  }
+  .modalContent {
+    color: rgb(0,0,0);
+    min-height: 250px;
+  }
+
+  .pause {
+    background-color: grey;
+  }
+
+  .balanced {
+    background-color: grey;
+  }
+
+  buttonCloseResume {
+    text-align: center;
+    color: #333;
+    height: 60px;
+    background-color: grey;
+    width: 150px;
+    text-shadow: 0 1px 0 #333;
+    opacity: 1;
+  }
 }

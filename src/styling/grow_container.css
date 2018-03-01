@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.grow h4 {
+  width: 80%;
+  color: rgb(96,94,94);
+  margin-top: 10%;
+}
 .homepage {
   composes: default from './buttons.css';
   margin-top: 50px;

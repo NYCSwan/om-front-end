@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const GrowContainer = () => (
   <div className={styles.grow}>
+  <h4>Grow a new garden in an empty container or maintain a garden that is growing.</h4>
     <Link to="/controls/NewGrow">
       <button className={styles.homepage} href='/controls/NewGrow'>
         New Grow

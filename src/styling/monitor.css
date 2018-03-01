@@ -1,9 +1,14 @@
 /* Monitor */
 /************/
+.monitor {
+  /* background-color: darkgray; */
+}
+
 .bubbles {
   composes: background from './global-styles.css';
-  background-image: url('../media/Bubbles.png');
-
+  background-image: url('../media/dgBubbles.png');
+  background-size: cover;
+  opacity: 0.8;
 }
 /* Tablet screens */
 /* ************ */
@@ -23,7 +28,7 @@
     width: 100%;
     height: 500px;
   }
-  
+
   .lander {
     composes: grayBackground from './variables.css';
   }
@@ -65,55 +70,54 @@
     height: auto;
   }
 
+  .humidityContainer, .turbidityContainer, .temperatureContainer, .phContainer, .waterlevelContainer, .dayOfCycle {
+    position: absolute;
+  }
+
   .humidityContainer {
-    position: relative;
-    left: 220px;
-    top: 90px;
+    right: 5px;
+    top: 390px;
     width: 75px;
     height: auto;
   }
 
-  .humidityContainer img {
-    margin-top: -10px;
-    width: 50px;
-  }
-
   .turbidityContainer {
-    position: relative;
-    /* left: 120px;
-    top: 105px; */
+    left: 5px;
+    top: 505px;
     width: 75px;
     height: auto;
   }
 
   .temperatureContainer {
-    position: relative;
-    /* left: 30px;
-    top: 200px; */
+    left: 25px;
+    top: 290px;
     width: 75px;
     height: auto;
   }
 
   .phContainer {
-    position: relative;
-    /* left: 280px;
-    top: 290px; */
+    left: 90px;
+    top: 415px;
     width: 75px;
     height: auto;
   }
 
   .waterlevelContainer {
-    position: relative;
-    /* left: 300px;
-    top: 340px; */
     width: 75px;
     height: auto;
+    top: 505px;
+    right: 40px;
   }
 
-  .waterlevellink > img {
+  .dayOfCycle {
+    top: 590px;
+    left: 210px;
+  }
+
+  /* .waterlevellink > img {
     width: 50px;
     height: auto;
-  }
+  } */
 
   .temperaturelink, .phlink, .waterlevelink, .turbiditylink, .humiditylink {
     display: flex;
@@ -126,13 +130,6 @@
     padding: 0;
   }
 
-
-  .dayOfCycle {
-    position: absolute;
-    bottom: 0;
-    left: auto;
-    right: auto;
-  }
 
 }
 

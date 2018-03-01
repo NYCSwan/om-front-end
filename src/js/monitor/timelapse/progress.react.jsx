@@ -13,6 +13,7 @@ import Kale from '../../../media/kale_button.png';
 import Lettuce from '../../../media/lettuce_button.png';
 import Tomatoes from '../../../media/tomato_button.png';
 import Customize from '../../../media/customize_button.jpg';
+import TimelapseVideo from '../../../media/timelapse.mov';
 
 class Progress extends Component {
   static propTypes = {
@@ -25,10 +26,11 @@ class Progress extends Component {
   state = {
     growingPlants: [],
     isLoading: true,
-    recipe: [],
+    recipes: [],
     images: [],
     chambers: [],
     chamberId: 1,
+    currentPlant: [],
     decorators: [{
       component: function(p){
         return <div />;
@@ -51,7 +53,7 @@ class Progress extends Component {
       this.setState({ growingPlants: results });
 
       const recipeResults = await this.getRecipe(results[0].plantName);
-      this.setState({ recipe: recipeResults });
+      this.setState({ recipes: recipeResults });
 
       const chamberResults = await this.getAllChamberData();
       this.setState({ chambers: chamberResults });
@@ -103,26 +105,46 @@ class Progress extends Component {
   // }
 
   renderPlantDetails() {
-    const { recipe } = this.state;
+    const { recipes, chamberId, chambers } = this.state;
     let plantImgSymbol;
+    const recipe = [];
+    let key = 0;
+    // debugger
+    const currentChamber = [];
+    // let chamberKey = 0;
 
-    if (recipe.recipeName === "Basil") {
+    for(let cKey in chambers) {
+      if(parseInt(chambers[cKey].chamberId, 10) === chamberId){
+        // chamberKey = cKey;
+        currentChamber.push(chambers[cKey])
+      }
+    }
+
+    for(let rKey in recipes) {
+      // debugger
+      if(recipes[rKey].recipeName === currentChamber[key].plantName){
+        // recipeKey = rKey;
+        recipe.push(recipes[rKey])
+      }
+    }
+    debugger
+    if (recipe[key].recipeName === "Basil") {
       plantImgSymbol = Basil;
-    } else if (recipe.recipeName === 'Kale') {
+    } else if (recipe[key].recipeName === 'Kale') {
       plantImgSymbol = Kale;
-    } else if (recipe.recipeName === 'Green Beans') {
+    } else if (recipe[key].recipeName === 'Green Beans') {
       plantImgSymbol = GreenBeans;
-    } else if (recipe.recipeName === 'Cilantro') {
+    } else if (recipe[key].recipeName === 'Cilantro') {
       plantImgSymbol = Cilantro;
-    } else if (recipe.recipeName === 'Lettuce') {
+    } else if (recipe[key].recipeName === 'Lettuce') {
       plantImgSymbol = Lettuce;
-    } else if (recipe.recipeName === 'Broccoli') {
+    } else if (recipe[key].recipeName === 'Broccoli') {
       plantImgSymbol = Broccoli;
-    } else if (recipe.recipeName === 'Tomatoes') {
+    } else if (recipe[key].recipeName === 'Tomatoes') {
       plantImgSymbol = Tomatoes;
-    } else if (recipe.recipeName === 'Cilantro') {
+    } else if (recipe[key].recipeName === 'Cilantro') {
       plantImgSymbol = Cilantro;
-    } else if (recipe.recipeName === 'Bell Pepper') {
+    } else if (recipe[key].recipeName === 'Bell Pepper') {
       plantImgSymbol = BellPepper;
     } else {
       plantImgSymbol = Customize;
@@ -130,17 +152,20 @@ class Progress extends Component {
     return (
       <div
         className={styles.plantInfoContainer}
-        key={recipe.recipeName}>
+        key={recipe[key].recipeName}>
         <img
-          src={plantImgSymbol} alt={recipe.recipeName} className={styles.plantImg}
-          key={recipe.Etag} />
-        <h4>{recipe.fullName}</h4>
-        <p>{recipe.suggestions}</p>
+          src={plantImgSymbol}
+          alt={recipe[key].recipeName}
+          className={styles.plantImg}
+          key={recipe[key].Etag} />
+        <h4>{recipe[key].fullName}</h4>
+        
+        <p>{recipe[key].suggestions}</p>
         <h5>
-          Avg Market Price: ${recipe.marketPrice}
+          Avg Market Price: ${recipe[key].marketPrice}
         </h5>
         <h5>
-          Avg Yield: ${recipe.yield}
+          Avg Yield: ${recipe[key].yield}
         </h5>
       </div>
     )
@@ -172,6 +197,15 @@ class Progress extends Component {
     )
   }
 
+  renderTimelapseVideo() {
+    return (
+      <video width="320" height="240" key='video'>
+        <source src={TimelapseVideo} type="video/mov" />
+        Your browser does not support the video tag.
+      </video>
+    )
+  }
+
   render(){
     const { isLoading, chamberId, chambers } = this.state;
 
@@ -184,7 +218,7 @@ class Progress extends Component {
         />
       { !isLoading
         ?
-        [this.renderPlantDetails(), this.renderTimelapse()]
+        [this.renderPlantDetails(), this.renderTimelapseVideo()]
         :
         this.renderLander()
       }

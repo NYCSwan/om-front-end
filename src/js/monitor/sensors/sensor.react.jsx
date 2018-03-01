@@ -95,25 +95,24 @@ class Sensor extends Component {
   renderCurrentSensorReading() {
     const {chamberId, sensorData} = this.state;
     const sensorName = this.props.match.params.sensor_id;
-    let sensorSymbol;
-
-    if (sensorName === "pH") {
-      sensorSymbol = pH;
-    } else if (sensorName === 'temperature') {
-      sensorSymbol = temperature;
-    } else if (sensorName === 'humidity') {
-      sensorSymbol = humidity;
-    } else if (sensorName === 'waterlevel') {
-      sensorSymbol = waterlevel;
-    } else {
-      sensorSymbol = waterlevel;
-    }
+    // let sensorSymbol;
+    //
+    // if (sensorName === "pH") {
+    //   sensorSymbol = pH;
+    // } else if (sensorName === 'temperature') {
+    //   sensorSymbol = temperature;
+    // } else if (sensorName === 'humidity') {
+    //   sensorSymbol = humidity;
+    // } else if (sensorName === 'waterlevel') {
+    //   sensorSymbol = waterlevel;
+    // } else {
+    //   sensorSymbol = waterlevel;
+    // }
 
     return (
-      <div className={styles.currentSensorReading}>
+      <div className={`styles.${sensorName}`}>
         <h5 className={styles.texttop}>Chamber {chamberId}'s current {sensorName}</h5>
         <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
-        <img className={styles.icon} src={sensorSymbol} alt={`${sensorName} icon`} />
       </div>
     )
   }

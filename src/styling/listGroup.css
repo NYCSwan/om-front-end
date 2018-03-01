@@ -1,16 +1,132 @@
-.chamber_icon {
-  background-image: url(/oasis_mini_icon_raw.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 300px;
-  height: 350px;
+  .chamberIcon {
+    background-image: url('../media/icongrey.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    width: 300px;
+    height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+  }
+/*
+  .buttonChamber2 {
+    position: absolute;
+    margin-left: 180px;
+    margin-top: 110px;
+  }
+
+  .buttonChamber3 {
+    position: absolute;
+    margin-left: 120px;
+    margin-top: 225px;
+  }
+
+  .buttonchamber1 {
+    width: 200px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+*/
+
+  .listItemChamber1 {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+  .listItemChamber2 {
+    margin-left: 5px;
+    margin-top: 50px;
+  }
+
+  .listItemChamber3 {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+
+  .buttonChamber1 {
+    background: green;
+    border: none;
+    position: absolute;
+    /*margin-left: 145px;*/
+    /*margin-top: 245px;*/
+    margin-left: 355px;
+    margin-top: 295px;
+  }
+
+  .buttonChamber2 {
+  position: absolute;
+  margin-left: 130px;
+  margin-top: 80px;
+  }
+
+  .buttonChamber3 {
+    position: absolute;
+    margin-left: -90px;
+    margin-top: 150px;
+  }
+
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
 }
 
-.listItem {
-  list-style: none;
-}
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .chamberIcon {
+    margin-top: 50px;
+    width: 250px;
+    height: 250px;
+  }
 
-.button {
-  background: transparent;
-  border: none;
+  .listItemChamber1 {
+    margin-left: 80px;
+    margin-top: 40px;
+    max-width: 80px;
+    height: auto;
+  }
+
+  .listItemChamber2 {
+    margin-left: 5px;
+    margin-top: 50px;
+    width: 80px;
+    height: auto;
+  }
+
+  .listItemChamber3 {
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 80px;
+    height: auto;
+  }
+
+  .buttonChamber1 {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: auto;
+  }
+
+  .buttonChamber2 {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+  }
+
+  .buttonChamber3 {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 25px;
+    width: 100%;
+    height: auto;
+  }
 }

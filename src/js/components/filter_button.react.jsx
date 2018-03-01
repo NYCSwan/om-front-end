@@ -13,7 +13,7 @@ class FilterButtonGroup extends Component {
   };
 
   handleClick = e => {
-    console.log(`handle filter click: ${e.target}`);
+    console.log(`handle filter click: ${e}`);
     this.props.onChange(e);
   };
 
@@ -22,15 +22,15 @@ class FilterButtonGroup extends Component {
     return (
       <div
         className={styles.filterById}>
-        {this.props.options.map(option => { // eslint-disable-line
+        {this.props.options.reverse().map(option => { // eslint-disable-line
 
-          return (
-            // eslint-disable-line
+          return ( // eslint-disable-line
             <button
-              key={option.chamberId}
+              key={option.gardenId}
               value={option.plantName || option.chamberName}
               className={styles.chamber}
-              checked={this.props.chamberId === option.chamberId}
+              active={this.props.chamberId === parseInt(option.chamberId, 10)}
+              checked={this.props.chamberId === parseInt(option.chamberId, 10)}
               onClick={this.handleClick}
               disabled={!option.isFilled}
             >

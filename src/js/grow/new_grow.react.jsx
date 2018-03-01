@@ -28,7 +28,9 @@ class NewGrow extends Component {
     isBalanced: false,
     showDirections: false,
     isloading: false,
-    newGrowPlant: []
+    newGrowPlant: [],
+    selectedPlant: 'Basil',
+    selectedChamber: 0
   };
 
   async componentDidMount() {
@@ -132,14 +134,6 @@ class NewGrow extends Component {
 //         </h3>
 // }
 //
-// <LoaderButton
-// className='sumbit-garden'
-// disabled={!this.validateForm()}
-// type="submit"
-// isloading={this.state.isloading}
-// text="Create"
-// loadingText="Creating…"
-// />
 // </form>
 // }
 // { this.state.selectedChamber !== '' &&
@@ -166,7 +160,7 @@ class NewGrow extends Component {
 // ) }
 
   validateForm() {
-    return this.state.selectedPlant.length > 0 && this.state.selectedPlant.length > 0;
+    return this.state.selectedPlant.length > 0 && this.state.selectedChamber > 0;
   }
 
   handlePLantChange = event => {
@@ -197,7 +191,7 @@ class NewGrow extends Component {
   handleSubmit = async event => {
     console.log('submit new grow plant');
     event.preventDefault();
-    if (this.state.selectedPlant.length > 0 && this.state.selectedChamber > 0) {
+    if (!this.validateForm()) {
       alert("Please pick a plant and chamber.");
       return;
     }
@@ -207,10 +201,11 @@ class NewGrow extends Component {
     try {
       await this.createGarden({
         chamberId: this.state.selectedChamber,
-        plantName: this.state.selectedPlant.plantName,
-        climateId: this.state.selectedPlant.climateId,
-        plantRecipeId: this.state.selectedPlant.plantRecipeId,
-        createdAt: new Date()
+        plantName: this.state.selectedPlant,
+        climateId: this.state.newGrowPlant.climateId,
+        plantRecipeId: this.state.newGrowPlant.plantRecipeId,
+        createdAt: new Date(),
+        updatedAt: new Date()
       });
       this.props.history.push("/monitor");
     } catch(e) {
@@ -221,65 +216,68 @@ class NewGrow extends Component {
 
   renderPlantGroup() {
     const { plantTypes } = this.state;
-    let plantImgSymbol;
+    // let plantImgSymbol;
 
     return (
-      plantTypes.map((plant) => {
-        if (plant.recipeName === "Basil") {
-          plantImgSymbol = Basil;
-        } else if (plant.recipeName === 'Kale') {
-          plantImgSymbol = Kale;
-        } else if (plant.recipeName === 'Green Beans') {
-          plantImgSymbol = GreenBeans;
-        } else if (plant.recipeName === 'Cilantro') {
-          plantImgSymbol = Cilantro;
-        } else if (plant.recipeName === 'Lettuce') {
-          plantImgSymbol = Lettuce;
-        } else if (plant.recipeName === 'Broccoli') {
-          plantImgSymbol = Broccoli;
-        } else if (plant.recipeName === 'Tomatoes') {
-          plantImgSymbol = Tomatoes;
-        } else if (plant.recipeName === 'Cilantro') {
-          plantImgSymbol = Cilantro;
-        } else if (plant.recipeName === 'Bell Pepper') {
-          plantImgSymbol = BellPepper;
-        } else {
-          plantImgSymbol = Customize;
-        }
-        return (
-        <div
-          key={plant.recipeName}
-          className={`styles.button${(plant.recipeName).replace(/\s/, '')}`}>
-          <img
+      <div className={styles.plantsContainer} >
+        { plantTypes.map((plant) => {
+          // if (plant.recipeName === "Basil") {
+          //   plantImgSymbol = Basil;
+          // } else if (plant.recipeName === 'Kale') {
+          //   plantImgSymbol = Kale;
+          // } else if (plant.recipeName === 'Green Beans') {
+          //   plantImgSymbol = GreenBeans;
+          // } else if (plant.recipeName === 'Cilantro') {
+          //   plantImgSymbol = Cilantro;
+          // } else if (plant.recipeName === 'Lettuce') {
+          //   plantImgSymbol = Lettuce;
+          // } else if (plant.recipeName === 'Broccoli') {
+          //   plantImgSymbol = Broccoli;
+          // } else if (plant.recipeName === 'Tomatoes') {
+          //   plantImgSymbol = Tomatoes;
+          // } else if (plant.recipeName === 'Cilantro') {
+          //   plantImgSymbol = Cilantro;
+          // } else if (plant.recipeName === 'Bell Pepper') {
+          //   plantImgSymbol = BellPepper;
+          // } else {
+          //   plantImgSymbol = Customize;
+          // }
+          return (
+          <div
             key={plant.recipeName}
-            src={plantImgSymbol}
-            alt={plant.recipeName} />
-          <input
-            name={plant.recipeName}
-            value={plant.fullName}
-            key={plant.gardenId}
-            className={`styles.${(plant.recipeName).replace(/\s/, '')}Input`}
-            onChange={this.handlePLantChange}
-          />
-        </div>
-      )})
+            className={styles[`button${(plant.recipeName).replace(/\s/, '')}`]}>
+
+            <input
+              type='button'
+              name={plant.recipeName}
+              value={plant.fullName}
+              key={plant.gardenId}
+              className={styles[`${(plant.recipeName).replace(/\s/, '')}Input`]}
+              onChange={this.handlePLantChange}
+            />
+          </div>
+          )
+        })}
+      </div>
     )
   }
 
   renderChambers() {
     const { chamberOptions } = this.state;
-    chamberOptions.map((chamber) => {
-      return (
-        <input
-          type='radio'
-          name={chamber.chamberId}
-          key={chamber.chamberId}
-          value={chamber.chamberName}
-          className={chamber.chamberName}
-          onChange={this.handleChamberChange}
-        />
-      )
-    })
+    if (this.state.newGrowPlant.length > 0) {
+      chamberOptions.map((chamber) => {
+        return (
+          <input
+            type='radio'
+            name={chamber.chamberId}
+            key={chamber.chamberId}
+            value={chamber.chamberName}
+            className={chamber.chamberName}
+            onChange={this.handleChamberChange}
+          />
+        )
+      })
+    }
   }
 
   render() {
@@ -290,23 +288,36 @@ class NewGrow extends Component {
     return (
       <div className={styles.newGrowContainer}>
       { !this.state.isloading &&
+        <div>
+        { this.state.newGrowPlant.length < 1
+          ?
+          <div className={(styles.selectPlant).replace(/\s/, '')}>
+            <h3>Select a Plant</h3>
+            <h4>OR</h4>
+            <h3>Customize Your Own Settings</h3>
+          </div>
+          :
+          null
+        }
         <form
           className={styles.newGrowForm}
           onSubmit={this.handleSubmit}>
-          { this.state.newGrowPlant.length < 1
-            ?
-            <div className={(styles.selectPlant).replace(/\s/, '')}>
-              <h3>Select a Plant</h3>
-              <h4>OR</h4>
-              <h3>Customize Your Own Settings</h3>
-              { this.renderPlantGroup() }
-            </div>
-            :
-            null
-          }
+            { this.renderPlantGroup() }
+            { this.renderChambers() }
+
+            <LoaderButton
+              className='sumbit-garden'
+              disabled={!this.validateForm()}
+              type="submit"
+              isloading={this.state.isloading}
+              text="Create"
+              loadingText="Creating…"
+            />
           </form>
         }
       </div>
+    }
+    </div>
     );
   }
 }

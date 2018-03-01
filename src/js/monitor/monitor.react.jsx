@@ -13,10 +13,10 @@ import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
 import Spinner from '../helpers/spinner.react';
 import pH from '../../media/pH_icon.png';
-import ppm from '../../media/ppm_icon.png';
-
-import humidity from '../../media/humidity_icon.png';
-import temperature from '../../media/temperature_icon.png';
+// import ppm from '../../media/ppm_icon.png';
+//
+// import humidity from '../../media/humidity_icon.png';
+// import temperature from '../../media/temperature_icon.png';
 import waterlevel from '../../media/water_level_icon.png';
 
 class Monitor extends Component {
@@ -73,8 +73,6 @@ class Monitor extends Component {
 
   getSensorMeasurementData() {
     console.log('get sensor measurents by chamber id');
-    // const oneMonth = moment().subtract('months', 1).unix()
-    // debugger
       return invokeApig({ path: `/sensorData/all` })
   };
 
@@ -102,11 +100,14 @@ class Monitor extends Component {
 
   handleChamberIdChange = newChamber => {
     console.log('handleChamberIdChange');
-    console.log(newChamber);
-    let tempChamber = '';
-    if (newChamber != null) {
-      tempChamber = newChamber.target.value;
-      this.setState({chamberId: tempChamber});
+    const { growingPlants } =  this.state;
+    let tempChamber = newChamber.target.value;
+
+    for(var key in growingPlants) {
+      if(growingPlants[key].plantName === newChamber || growingPlants[key].chamberId === newChamber){
+
+        this.setState({chamberId: growingPlants[key].chamberId.slice(-1) });
+      }
     }
   };
 
@@ -127,10 +128,14 @@ class Monitor extends Component {
     console.log('render day of cycle');
     const { growingPlants, chamberId } = this.state;
     const tempChamber = `Chamber ${chamberId}`;
-    const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
+    let then;
+    // debugger;
+    for(var key in growingPlants) {
+      if (growingPlants[key].chamberId === tempChamber) {
+        then = moment(growingPlants[key].createdAt);
+      }
+    }
     const now = moment(new Date());
-    const key = findKey(plant);
-    const then = moment(plant[key].createdAt)
     const days = now.date() - then.date();
 
     return days;
@@ -148,19 +153,19 @@ class Monitor extends Component {
           onChange={this.handleChamberIdChange}
           chamberId={chamberId}
           options={chambers}
+          key={chamberId}
         />
         { this.state.chamberData.length >= 1
           ?
 
             <div className={styles.bubbles}>
-            
+
               <div className={styles.humidityContainer}>
                 <Link
                 className={styles.humiditylink}
                 to='/monitor/humidity'>
                   <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
                   <h4>RH</h4>
-                  <img src={humidity} alt="humidity icon" />
                 </Link>
               </div>
 
@@ -170,7 +175,6 @@ class Monitor extends Component {
                 to='/monitor/turbidity'>
                   <h2 className={styles.xBigFont}>{latest.turbidity}%</h2>
                   <h4>RH</h4>
-                  <img src={ppm} alt="turbidity ppm icon" />
                 </Link>
               </div>
 
@@ -179,7 +183,6 @@ class Monitor extends Component {
                   className={styles.temperaturelink} to='/monitor/temperature'>
                   <h2 className={styles.xBigFont}>{latest.temperature}*</h2>
                   <h4>F</h4>
-                  <img src={temperature} alt="temperature icon" />
                 </Link>
               </div>
               <div className={styles.phContainer}>
@@ -190,7 +193,6 @@ class Monitor extends Component {
                   {latest.pH}
                   </h2>
                   <h4>pH</h4>
-                  <img src={pH} alt="pH icon" />
                 </Link>
               </div>
               <div className={styles.waterlevelContainer}>

@@ -23,9 +23,9 @@
   vertical-align: center;
 }
 
-.currentSensorReading {
-  composes: white from './variables.css';
-  background: rgba(0,0,0,0.5);
+.pH, .temperature, .humidity, .waterlevel {
+  /* composes: white from './variables.css'; */
+  /* background: rgba(0,0,0,0.5); */
   height: 200px;
   border-radius: 100px;
   width: 200px;
@@ -38,6 +38,22 @@
   position: relative;
   padding: 10px;
   vertical-align: middle;
+}
+
+.pH {
+  background-image: url('../media/pH_icon.png');
+}
+
+.temperature {
+  background-image: url('../media/temperature_icon.png');
+}
+
+.humidity {
+  background-image: url('../media/humidity_icon.png');
+}
+
+.waterlevel {
+  background-image: url('../media/water_level_icon.png');
 }
 
 .textbottom {

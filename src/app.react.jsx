@@ -3,20 +3,11 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
 
-// import PagerBack from './js/layout/pagerBack.react';
-// import PagerFwd from './js/layout/pagerFwd.react';
-// <PagerBack className={styles.header} />
-// <PagerFwd className={styles.header} />
-
 import Routes from './js/routes';
 import { authUser, signOutUser } from "./libs/awsLibs";
 import styles from './styling/app.css';
 import logo from './media/logo.png';
 import Footer from './js/layout/footer.react';
-
-// const style = {
-//   backgroundImage: 'url('+image+')'
-// }
 
 class App extends Component {
   static propTypes = {
@@ -36,14 +27,12 @@ class App extends Component {
   async componentDidMount() {
     try {
       if (await authUser()) {
-        // debugger
         this.userHasAuthenticated(true);
       }
     } catch(e) {
       console.log(e);
     }
     this.authenticating();
-    // this.setState({ isAuthenticating: false, });
   }
 
   shouldComponentUpdate(newState, newProps) {
@@ -71,8 +60,6 @@ class App extends Component {
   }
 
   render() {
-    // const { match } = this.props;
-    // debugger
     return (
       <div className={styles.app}>
       { !this.state.isAuthenticating &&
@@ -131,25 +118,25 @@ class App extends Component {
                       className={styles.navItem}>
                     Support</li>
                   </IndexLinkContainer>
-              </ul>
-              <Link to="/" href="/" className={styles.logo}>
-                <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
-              </Link>
-            </div>
-            <div className={styles.logging}>
-              {this.state.isAuthenticated
-                ?
-                <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
-                : [
-                    <Link to='/signup' key={'signup'}>
-                      Signup
-                    </Link>,
-                    <Link to='/login' key={'login'}>
-                      Login
-                    </Link>
-                  ]
-              }
-            </div>
+            </ul>
+            <Link to="/" href="/" className={styles.logo}>
+              <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
+            </Link>
+          </div>
+          <div className={styles.logging}>
+            {this.state.isAuthenticated
+              ?
+              <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
+              : [
+                  <Link to='/signup' key={'signup'}>
+                    Signup
+                  </Link>,
+                  <Link to='/login' key={'login'}>
+                    Login
+                  </Link>
+                ]
+            }
+          </div>
           </nav>
           <Routes
             isAuthenticated={this.state.isAuthenticated}

@@ -1,9 +1,24 @@
 .plantInfoContainer {
-  width: 80%;
+  width: 100%;
+  display: inline-grid;
+  grid-template-rows: 40px 100px 40px;
+  grid-template-columns: 25% 100px 25%;
+
+}
+
+.plantInfoContainer h4 {
+  position: absolute;
+  left: 150px;
+  top: 250px;
+  font-weight: bolder;
+}
+
+.plantInfoContainer p {
+  grid-area: 1;
 }
 
 .plantImg {
-  width: 300px;
-  height: auto;
-  margin: 12%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }

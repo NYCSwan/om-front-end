@@ -1,7 +1,6 @@
 /*New Grow*/
 /***********/
-
-.selectPlant {
+.plantsContainer {
   display: flex;
   flex-flow: row wrap;
   margin-right: auto;
@@ -16,6 +15,7 @@
   border-radius: 5px;
   background-color: rgba(0,0,0,0.2);
   text-align: center;
+
 }
 
 .selectPlant h3 {
@@ -26,11 +26,12 @@
   font-size: 16px;
 }
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+  composes: background from './global-styles.css';
   font-family: Futura-Lig;
   max-width: 35%;
   min-width: 200px;
-  margin-top: 10px;
   font-size: 18px;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -41,58 +42,60 @@
   justify-content: space-around;
 
 }
+  .buttonBasil {
+    background-image: url('../media/basil_button.png');
+  }
 
-.newGrowContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  margin-left: 20px;
-  margin-top: 20px;
-  width: 80%;
-  text-align: center;
-}
-/*
-.link.Basil {
-background-image: url(/public/img/basil_button.png);
+  .buttonBellPepper{
+    background-image: url('../media/bell_pepper_button.png');
 
-}
+  }
 
-.link.Bell.Pepper {
-background-image: url(/public/img/bell_pepper_button.png);
+  .buttonBroccoli {
+    background-image: url('../media/broccoli_button.png');
 
-}
+  }
 
-.link.Broccoli {
-background-image: url(/public/img/broccoli_button.png);
+  .buttonCilantro {
+    background-image: url('../media/cilantro_button.png');
 
-}
+  }
 
-.link.Cilantro{
-background-image: url(/public/img/cilantro_button.png);
-}
+ .buttonGreenBeans {
+    background-image: url('../media/green_bean_button.png');
+  }
 
-.link.Kale{
-background-image: url(/public/img/kale_button.png);
-}
+  .buttonLettuce {
+    background-image: url('../media/lettuce_button.png');
 
-.link.Lettuce{
-background-image: url(/public/img/lettuce_button.png);
-}
+  }
+  .buttonTomato {
+    background-image: url('../media/tomato_button.png');
 
-.link.Tomato{
-background-image: url(/public/img/tomato_button.png);
-}
+  }
 
-.link.Customize {
-background-image: url(/public/img/customize_button.jpg);
-}
+  .buttonKale {
+    background-image: url('../media/kale_button.png');
+  }
 
-.link.Green.Beans {
-background-image: url(/public/img/green_bean_button.png)
-}
-.text.Futura-Lig.center h3{
-font-size: 20px;
-} */
+  .buttonCustomize {
+    background-image: url('../media/customize_button.jpg');
+
+  }
+
+  /* .Basil, .BellPepper, .Broccoli, .Cilantro, .GreenBeans, .Lettuce, .Tomato, .Kale, .Customize {
+    align-self: baseline;
+  } */
+
+  .newGrowContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 80%;
+    text-align: center;
+  }
 
 .newGrowForm {
   width: 90%;
@@ -185,36 +188,37 @@ width: 100%;
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBean, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
     font-family: Futura-Lig;
-    width: 200px;
+    width: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     flex-grow: 1 1 center;
-    height: auto;
+    height: 75px;
   }
 
   .BasilInput, .BellPepperInput, .BroccoliInput, .CilantroInput, .GreenBeanInput, .LettuceInput, .TomatoInput, .KaleInput, .CustomizeInput {
-    background: rgba(0,0,0,0.4);
+
+    /* background: rgba(0,0,0,0.4); */
     color: white;
     font-weight: bold;
-    max-width: 200;
-    width: 80px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* max-width: 200; */
+    width: 100%;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
     margin-top: 10px;
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 
-  img {
+  /* img {
     width: 200px;
-  }
+  } */
 
   button.chamber-1.btn.btn-default, button.chamber-2.btn.btn-default, button.chamber-3.btn.btn-default {
-    padding: 0;
-    width: auto;
+    /* padding: 0; */
+    /* width: auto; */
     align-self: baseline;
     padding-top: 10px;
     padding-bottom: 10px;

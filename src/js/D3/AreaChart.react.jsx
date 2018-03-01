@@ -52,7 +52,7 @@ class ChartArea extends Component {
   shouldComponentUpdate (newProps, newState) {
     console.log('shouldComponentUpdate areaChart');
     return (
-      this.props.currentData !== newProps.currentData ||  this.props.sensor !== newProps.sensor || this.state.dataSeries !== newState.dataSeries || this.state.dataForTimePeriod !== newState.dataForTimePeriod
+      this.props.currentData !== newProps.currentData ||  this.props.sensor !== newProps.sensor || this.state.dataForTimePeriod !== newState.dataForTimePeriod
     )
   }
 
@@ -63,16 +63,17 @@ class ChartArea extends Component {
     const tempData = currentData;
 
     if (endDate - startDate <= 604800000 ){
+
       dropWhile(tempData, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() <= startDate;
       })
-      this.setState({ dataSeries: tempData});
+      // this.setState({ dataSeries: tempData});
     } else if (endDate - startDate > 604800000){
       dropWhile(tempData, (datum) => { // eslint-disable-next-line
         new Date(datum.time).getTime() >= startDate;
       })
-      this.setState({ dataSeries: tempData});
     }
+    this.setState({ dataSeries: tempData});
   }
 
   dateFormatter = (tick) => { // eslint-disable-line
@@ -87,7 +88,7 @@ class ChartArea extends Component {
 
   render() {
     console.log('render areaChart');
-    const { graphHeight, graphWidth, margin, minY, maxY } = this.props;
+    const { currentData, graphHeight, graphWidth, margin, minY, maxY } = this.props;
     const { dataSeries } = this.state;
 
     const dataMinRound = (Math.round(minY / 10) * 10);
@@ -98,7 +99,7 @@ class ChartArea extends Component {
       <ComposedChart
         width={graphWidth}
         height={graphHeight}
-        data={dataSeries}
+        data={currentData}
         margin={{ top: margin.top, right: margin.right, bottom: margin.bottom, left: margin.left
        }}
        className={styles.chart}
@@ -120,7 +121,7 @@ class ChartArea extends Component {
         <YAxis
           domain={[dataMinRound, dataMaxRound]}
           tick={{ stroke:'#fff', strokeWidth: 1 }}
-          tickCount={3}
+          tickCount={5}
           tickLine={false}
           stroke='#fff' />
         <Tooltip />

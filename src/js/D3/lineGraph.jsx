@@ -66,7 +66,6 @@ class LineGraph extends Component {
     const value = this.props.match.params.sensor_id;
     dates.push(startDate._d);
     dates.push(endDate);
-    // debugger;
     if(isEmpty(sensorData) === false) {
       const tempMaxY = max(sensorData, (d) => parseFloat(d[`${value}`]));
       const tempMinY = min(sensorData, (d) => parseFloat(d[`${value}`]));
@@ -92,17 +91,18 @@ class LineGraph extends Component {
     const tempData = [];
     let temp = {};
     const tempStartDate = startDate._d.getTime();
+    // debugger;
 
     for (let i= 0; i < sensorData.length; i++) {
       if((sensorData[i].timestamp >= tempStartDate) === true) {
-      temp[i] = {
-        'time': sensorData[i].timestamp,
-        'value': parseFloat(sensorData[i][`${sensor}`])
+        temp[i] = {
+          'time': sensorData[i].timestamp,
+          'value': parseFloat(sensorData[i][`${sensor}`])
+        }
+        // debugger;
+        tempData.push(temp[i]);
       }
-    }
-      tempData.push(temp[i]);
     };
-
     this.setState({ currentData: tempData });
   }
 

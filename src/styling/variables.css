@@ -6,7 +6,7 @@
 };
 
 .mainGreen {
-  color: #009933;
+  color: rgb(104,176,77);
 }
 
 .accentDarkGreen {
@@ -30,13 +30,16 @@
 
 /* background colors */
 .grayBackground {
-  background-color: #aaaaaa;
+  background-color: rgb(96,94,94);
 }
 
 .lightGray {
   background-color: #cccccc;
 }
 
+.lightGreenBackground {
+  background-color: rgb(104, 176, 77);
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {

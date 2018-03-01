@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 import ListGroupContainer from '../components/ListGroup.react';
 // import ChamberFormGroup from './chamber_options_form.react';
 // import Directions from './directions.react';
-// import Pause from './pause.react';
+import Spinner from '../helpers/spinner.react';
 import PopUp from './popup.react';
 import { invokeApig } from '../../libs/awsLibs';
 import styles from '../../styling/existing_grow.css';
@@ -146,6 +146,7 @@ class ExistingGrow extends Component {
     return (
       <div>
         <h1>Loading gardens...</h1>
+        <Spinner />
       </div>
     )
   }
@@ -288,7 +289,7 @@ class ExistingGrow extends Component {
 
   renderError() {
     return (
-      <div>
+      <div className={styles.errorMessage}>
         <p>Something seems to have gone wrong. Please refresh or try again later.</p>
       </div>
     )

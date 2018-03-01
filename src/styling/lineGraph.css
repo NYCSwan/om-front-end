@@ -1,4 +1,5 @@
 .areaChartContainer {
   margin-top: 30px;
   margin-left: 40px;
+  composes: lightGreenBackground from './variables.css';
 }

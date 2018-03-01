@@ -1,7 +1,16 @@
 /* eslint no-unused-expressions: 0 */
-  @font-face :global {
+/* import FuturaLig from './MyFontsWebfontsKit.css'; */
+
+  /* @font-face :global {
     font-family: 'Futura-Lig';
     src: url(/public/webfonts/3541CB_0_0.ttf) format('truetype');
+  } */
+  @import url("//hello.myfonts.net/count/3541c8");
+
+
+  @font-face :global {
+    font-family: 'Futura-Lig';
+    src: url('../webfonts/3541C8_0_0.woff2') format('woff2');
   }
 
   .font :global {
