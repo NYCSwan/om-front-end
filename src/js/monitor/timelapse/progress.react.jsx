@@ -159,7 +159,7 @@ class Progress extends Component {
           className={styles.plantImg}
           key={recipe[key].Etag} />
         <h4>{recipe[key].fullName}</h4>
-        
+
         <p>{recipe[key].suggestions}</p>
         <h5>
           Avg Market Price: ${recipe[key].marketPrice}
@@ -199,7 +199,7 @@ class Progress extends Component {
 
   renderTimelapseVideo() {
     return (
-      <video width="320" height="240" key='video'>
+      <video width="320" height="240" key='video' autoplay preload>
         <source src={TimelapseVideo} type="video/mov" />
         Your browser does not support the video tag.
       </video>

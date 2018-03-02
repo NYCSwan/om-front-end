@@ -253,22 +253,32 @@ class NewGrow extends Component {
 
   renderChambers() {
     const { chamberOptions } = this.state;
-    return (
-      chamberOptions.sort().map((chamber) => {
+    if (this.state.selectedChamber === 0) {
       return (
-        <input
-          type='button'
-          name={chamber.chamberId}
-          key={chamber.chamberId}
-          value={chamber.chamberName}
-          className={styles[`${chamber.chamberName.replace(/\s/, '')}`]}
-          onClick={this.handleChamberRadioClick}
-          disabled={chamber.isFilled}
-        />
+        <div className={styles.chamberContainer}>
+        <h3
+          id="chamber"
+          className={styles.directions}>
+          Select A Chamber
+        </h3>
+      { chamberOptions.map((chamber) => {
+          return (
+            <input
+              type='button'
+              name={chamber.chamberId}
+              key={chamber.chamberId}
+              value={chamber.chamberName}
+              className={styles[`${chamber.chamberName.replace(/\s/, '')}`]}
+              onClick={this.handleChamberRadioClick}
+              disabled={chamber.isFilled}
+            />
+          )
+        })
+      }
+        </div>
       )
-    })
-  )
-}
+    }
+  }
 
   render() {
     console.log('render new grow');
@@ -293,17 +303,9 @@ class NewGrow extends Component {
           className={styles.newGrowForm}
           onSubmit={this.handleSubmit}>
           { isEmpty(this.state.selectedPlant) ?
-               this.renderPlantGroup() :
-               null
-          }
-          { isEmpty(this.state.selectedChamber) ?
-              <div className={styles.chamberContainer}>
-                <h3
-                  id="chamber"
-                  className={styles.directions}>
-                  Select A Chamber
-                </h3>
-                { this.renderChambers() }
+            <div>
+               {this.renderPlantGroup()}
+               {this.renderChambers()}
                 <LoaderButton
                   className='sumbitGarden'
                   disabled={!this.validateForm()}

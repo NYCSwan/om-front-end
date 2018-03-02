@@ -127,17 +127,17 @@ class Monitor extends Component {
   renderDayInCycle() {
     console.log('render day of cycle');
     const { growingPlants, chamberId } = this.state;
-    const tempChamber = `Chamber ${chamberId}`;
+    const now = moment(new Date());
     let then;
-    // debugger;
+
     for(var key in growingPlants) {
-      if (growingPlants[key].chamberId === tempChamber) {
+      if (growingPlants[key].chamberId === chamberId.toString()) {
         then = moment(growingPlants[key].createdAt);
       }
     }
-    const now = moment(new Date());
-    const days = now.date() - then.date();
+    const days = now.diff(then, 'days');
 
+    debugger
     return days;
   }
 
@@ -146,7 +146,6 @@ class Monitor extends Component {
     const { chamberData, chambers, chamberId } = this.state;
     const latest = chamberData[0];
     // const dayOfCycle = ();
-    // debugger
     return (
       <div className={styles.monitor}>
         <FilterButtonGroup
