@@ -1,5 +1,19 @@
-.areaChartContainer {
-  margin-top: 30px;
-  margin-left: 40px;
-  composes: lightGreenBackground from './variables.css';
+/* Tablet screens */
+/* ************ */
+
+
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .areaChartContainer {
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
 }

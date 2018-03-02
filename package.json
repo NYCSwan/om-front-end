@@ -29,7 +29,6 @@
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.4.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
@@ -107,6 +106,7 @@
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
     "bootstrap-css": "^4.0.0-alpha.5",
+    "file-loader": "^1.1.11",
     "react-css-modules": "^4.7.1"
   }
 }

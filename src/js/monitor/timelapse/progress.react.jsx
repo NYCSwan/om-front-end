@@ -2,6 +2,8 @@ import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { invokeApig } from '../../../libs/awsLibs'
 import Timelapse from './timelapse.react';
+import Spinner from '../../helpers/spinner.react';
+
 import styles from '../../../styling/progress.css';
 import FilterButtonGroup from '../../components/filter_button.react';
 import Basil from '../../../media/basil.jpeg';
@@ -127,7 +129,7 @@ class Progress extends Component {
         recipe.push(recipes[rKey])
       }
     }
-    debugger
+    // debugger
     if (recipe[key].recipeName === "Basil") {
       plantImgSymbol = Basil;
     } else if (recipe[key].recipeName === 'Kale') {
@@ -158,14 +160,14 @@ class Progress extends Component {
           alt={recipe[key].recipeName}
           className={styles.plantImg}
           key={recipe[key].Etag} />
-        <h4>{recipe[key].fullName}</h4>
+        <h1>{recipe[key].fullName}</h1>
 
         <p>{recipe[key].suggestions}</p>
         <h5>
-          Avg Market Price: ${recipe[key].marketPrice}
+          <b>Avg Market Price:</b> ${recipe[key].marketPrice}
         </h5>
         <h5>
-          Avg Yield: ${recipe[key].yield}
+          <b>Avg Yield:</b> ${recipe[key].yield}
         </h5>
       </div>
     )
@@ -176,6 +178,7 @@ class Progress extends Component {
       <div className={styles.lander}>
         <h2>Loading the images.</h2>
         <h3>This may take a minute to upload your feed live.</h3>
+        <Spinner />
       </div>
     )
   }
@@ -199,8 +202,15 @@ class Progress extends Component {
 
   renderTimelapseVideo() {
     return (
-      <video width="320" height="240" key='video' autoplay preload>
-        <source src={TimelapseVideo} type="video/mov" />
+      <video
+        width="320"
+        height="240"
+        key='video'
+        loop
+        autoplay>
+        <source
+          src={TimelapseVideo}
+          type="video/mov" />
         Your browser does not support the video tag.
       </video>
     )

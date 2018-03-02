@@ -1,43 +1,20 @@
 /* Sensor */
 /***********/
-.sensor {
-  /* composes: lightGray from './variables.css'; */
-  /* font: .fontFace from './global.css'; */
-  /* height: auto; */
-  min-height: 800px;
-}
-
-.startedOn {
-  vertical-align: middle;
-  background-color: rgba(255,255,255,0.3);
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-  border-bottom: 0;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.center {
-  vertical-align: center;
-}
-
 .pH, .temperature, .humidity, .waterlevel {
-  /* composes: white from './variables.css'; */
-  /* background: rgba(0,0,0,0.5); */
-  height: 200px;
-  border-radius: 100px;
-  width: 200px;
+  height: 350px;
+  border-radius: 250px;
+  width: 100%;
   font-size: 24px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   position: relative;
   padding: 10px;
   vertical-align: middle;
+  composes: background from './global-styles.css';
+  color: rgb(96,94,94);
 }
 
 .pH {
@@ -56,20 +33,75 @@
   background-image: url('../media/water_level_icon.png');
 }
 
-.textbottom {
-  text-align: center;
-  font-size: 20px;
-  margin-top: 10px;
+.pH > .texttop, .temperature > .texttop, .humidity > .texttop, .waterlevel > .texttop,{
+  border: 1px solid #605E5E;
+}
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
 }
 
-.texttop {
-  margin-top: 50px;
-  text-align: center;
-  font-size: 18px;
-}
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .sensor {
+    min-height: 800px;
+  }
 
+  .pH, .temperature, .humidity, .waterlevel {
+    height: 250px;
+    border-radius: 150px;
+    width: 100%;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: -60px;
+    padding: 10px;
+  }
 
-.icon {
-  width: 100px;
-  margin-top: -25px;
+  .texttop {
+    font-size: 20px;
+    margin-top: 10px;
+    /* margin-top: 50px; */
+    text-align: center;
+    font-size: 18px;
+    width: 150px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(96,94,94);
+  }
+
+  .textbottom {
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(96,94,94);
+    width: 100px;
+    height: auto;
+    text-align: center;
+  }
+
+  .startDate {
+    composes: lightGray from './variables.css';
+    background-color: #605E5E;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    color: #fff;
+    width: 150px;
+    height: 75px;
+    margin-top: 40px;
+    margin-left: auto;
+    vertical-align: center;
+    margin-right: auto;
+  }
+
+  .startDate h4 {
+    text-align: center;
+    margin-top: 5px;
+    margin-left: auto;
+    vertical-align: center;
+    margin-right: auto;
+  }
 }

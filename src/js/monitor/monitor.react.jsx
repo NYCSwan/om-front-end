@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import findKey from 'lodash/findKey';
+// import findKey from 'lodash/findKey';
 // import findLastIndex from 'lodash/findLastIndex';
 // import isEmpty from 'lodash/isEmpty';
 // import forIn from 'lodash/forIn';
-import pickBy from 'lodash/pickBy';
-import { ListGroup } from 'react-bootstrap';
+// import pickBy from 'lodash/pickBy';
+// import { ListGroup } from 'react-bootstrap';
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
 import Spinner from '../helpers/spinner.react';
-import pH from '../../media/pH_icon.png';
+// import pH from '../../media/pH_icon.png';
 // import ppm from '../../media/ppm_icon.png';
 //
 // import humidity from '../../media/humidity_icon.png';
@@ -101,7 +101,7 @@ class Monitor extends Component {
   handleChamberIdChange = newChamber => {
     console.log('handleChamberIdChange');
     const { growingPlants } =  this.state;
-    let tempChamber = newChamber.target.value;
+    // let tempChamber = newChamber.target.value;
 
     for(var key in growingPlants) {
       if(growingPlants[key].plantName === newChamber || growingPlants[key].chamberId === newChamber){
@@ -137,7 +137,6 @@ class Monitor extends Component {
     }
     const days = now.diff(then, 'days');
 
-    debugger
     return days;
   }
 

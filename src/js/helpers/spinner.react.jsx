@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import forEach from 'lodash/forEach';
+
 import plant1 from '../../media/Loading1.png';
 import plant2 from '../../media/Loading2.png';
 import plant3 from '../../media/Loading3.png';
@@ -14,18 +16,17 @@ class Spinner extends Component {
 
   growPlant() {
     const {spinner} = this.state;
-    let offset = 0;
-    spinner.each(function(img){
-
-      setTimeout(function() {
-        return (
-          <img src={img} alt="loading indicator" className={styles.img}/>
-        )
-      }, 1000);
-      offset += 1000;
-    })
-
-    offset = 0;
+    // let offset = 0;
+    // debugger
+      // return (
+        forEach(spinner, function(image) {
+          setTimeout(function() {
+            return (
+              <img src={image} alt="loading indicator" className={styles.img}/>
+            )
+          }, 100);
+      })
+    // )
   }
 
   render() {
@@ -33,7 +34,7 @@ class Spinner extends Component {
       <div>
         <h3>Loading your gardens... </h3>
         <div className={styles.spinner}>
-          {this.growPlant}
+          { this.growPlant() }
         </div>
       </div>
     )

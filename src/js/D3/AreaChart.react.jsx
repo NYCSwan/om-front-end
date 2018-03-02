@@ -27,12 +27,12 @@ class ChartArea extends Component {
 
   state = {
     dataForTimePeriod: [],
-    dataSeries: []
+    // dataSeries: []
   }
 
   componentDidMount() {
     console.log('componentDidMount areaChart');
-    this.getDataSeries();
+    // this.getDataSeries();
   }
 
   // componentWillReceiveProps({ margin, graphWidth, graphHeight, currentData, endDate, startDate, sensor, maxY, minY }) {
@@ -56,25 +56,25 @@ class ChartArea extends Component {
     )
   }
 
-  getDataSeries = () => {
-    console.log('get data series');
-    const {startDate, endDate, currentData } = this.props;
-    // const { dataForTimePeriod } = this.state;
-    const tempData = currentData;
-
-    if (endDate - startDate <= 604800000 ){
-
-      dropWhile(tempData, (datum) => { // eslint-disable-next-line
-        new Date(datum.time).getTime() <= startDate;
-      })
-      // this.setState({ dataSeries: tempData});
-    } else if (endDate - startDate > 604800000){
-      dropWhile(tempData, (datum) => { // eslint-disable-next-line
-        new Date(datum.time).getTime() >= startDate;
-      })
-    }
-    this.setState({ dataSeries: tempData});
-  }
+  // getDataSeries = () => {
+  //   console.log('get data series');
+  //   const {startDate, endDate, currentData } = this.props;
+  //   // const { dataForTimePeriod } = this.state;
+  //   const tempData = currentData;
+  //
+  //   if (endDate - startDate <= 604800000 ){
+  //
+  //     dropWhile(tempData, (datum) => { // eslint-disable-next-line
+  //       new Date(datum.time).getTime() <= startDate;
+  //     })
+  //     // this.setState({ dataSeries: tempData});
+  //   } else if (endDate - startDate > 604800000){
+  //     dropWhile(tempData, (datum) => { // eslint-disable-next-line
+  //       new Date(datum.time).getTime() >= startDate;
+  //     })
+  //   }
+  //   this.setState({ dataSeries: tempData});
+  // }
 
   dateFormatter = (tick) => { // eslint-disable-line
     // console.log(tick);
@@ -106,21 +106,21 @@ class ChartArea extends Component {
       >
         <defs>
           <linearGradient id="valueColor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#fff" stopOpacity={0.8}/>
-            <stop offset="95%" stopColor="#fff" stopOpacity={0}/>
+            <stop offset="5%" stopColor="#605E5E" stopOpacity={0.8}/>
+            <stop offset="95%" stopColor="#cccccc" stopOpacity={0.1}/>
           </linearGradient>
         </defs>
         <XAxis
           dataKey="time"
           label={{ value: this.timeLabel, position:'outside'}} tickCount={3}
-          tick={{ stroke:'#fff', strokeWidth: 1 }}
+          tick={{ stroke:'#ccccccc', strokeWidth: 1 }}
           tickLine={false}
           tickFormatter={this.dateFormatter}
-          stroke='#fff'
+          stroke='#cccccc'
         />
         <YAxis
           domain={[dataMinRound, dataMaxRound]}
-          tick={{ stroke:'#fff', strokeWidth: 1 }}
+          tick={{ stroke:'#cccccc', strokeWidth: 1 }}
           tickCount={5}
           tickLine={false}
           stroke='#fff' />
@@ -128,13 +128,14 @@ class ChartArea extends Component {
         <Area
           type='monotone'
           dataKey='value'
-          stroke='#fff'
+          stroke='#cccccc'
           fillOpacity={1}
           fill='url(#valueColor)' />
-        <Line
+      {/*  <Line
           type='monotone'
           dataKey='value'
-          stroke='#fff' />
+          stroke='#cccccc' />
+      */}
       </ComposedChart>
     )
   }

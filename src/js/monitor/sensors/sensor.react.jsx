@@ -85,37 +85,26 @@ class Sensor extends Component {
   renderStartDate() {
     console.log('render start date');
     const { growingPlants, chamberId } = this.state;
-    const tempChamber = `Chamber ${chamberId}`;
+    const tempChamber = chamberId.toString();
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const key = findKey(plant);
-    // debugger
     return moment(plant[key].createdAt).format("dddd, MMM Do");
 
   }
   renderCurrentSensorReading() {
     const {chamberId, sensorData} = this.state;
     const sensorName = this.props.match.params.sensor_id;
-    // let sensorSymbol;
-    //
-    // if (sensorName === "pH") {
-    //   sensorSymbol = pH;
-    // } else if (sensorName === 'temperature') {
-    //   sensorSymbol = temperature;
-    // } else if (sensorName === 'humidity') {
-    //   sensorSymbol = humidity;
-    // } else if (sensorName === 'waterlevel') {
-    //   sensorSymbol = waterlevel;
-    // } else {
-    //   sensorSymbol = waterlevel;
-    // }
 
     return (
-      <div className={styles[`${sensorName}`]}>
-        <h5 className={styles.texttop}>Chamber {chamberId}'s current {sensorName}</h5>
-        <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
-      </div>
+      <aside className={styles[`${sensorName}`]}>
+        <div className={styles.texttop}>
+          <h5>Chamber {chamberId}'s current {sensorName}</h5>
+          <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>
+        </div>
+      </aside>
     )
   }
+
   render() {
     console.log('render sensor');
     const { chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
@@ -155,8 +144,10 @@ class Sensor extends Component {
               startDate={oneMonthAgo}
               match={this.props.match}
             />
-              <h4> Started</h4>
-              {this.renderStartDate()}
+              <div className={styles.startDate}>
+                <h4>Started</h4>
+                {this.renderStartDate()}
+              </div>
           </div>
           :
           <Spinner />

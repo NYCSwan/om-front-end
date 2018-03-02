@@ -1,24 +1,41 @@
-.plantInfoContainer {
-  width: 100%;
-  display: inline-grid;
-  grid-template-rows: 40px 100px 40px;
-  grid-template-columns: 25% 100px 25%;
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
 
 }
 
-.plantInfoContainer h4 {
-  position: absolute;
-  left: 150px;
-  top: 250px;
-  font-weight: bolder;
-}
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .plantInfoContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 
-.plantInfoContainer p {
-  grid-area: 1;
-}
+  .plantInfoContainer h1 {
+    position: absolute;
+    left: 125px;
+    top: 250px;
+    font-weight: bolder;
+    color: #fff;
+  }
 
-.plantImg {
-  width: 100%;
-  height: 100%;
-  margin: 0;
+  .plantInfoContainer p {
+    /* grid-area: 1; */
+    margin: 10px auto;
+  }
+  .plantInfoContainer h5 {
+    margin-left: 10px;
+  }
+
+  .plantImg {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-bottom: 2px solid rgb(96,94,94);
+  }
 }
