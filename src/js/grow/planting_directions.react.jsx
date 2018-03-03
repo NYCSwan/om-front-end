@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import findKey from 'lodash/findKey';
+// import findKey from 'lodash/findKey';
 
-import SettingsList from './settings_list.react';
+import styles from '../../styling/planting_directions.css';
+// import SettingsList from './settings_list.react';
 
 class PlantingDirections extends Component {
   static propTypes = {
@@ -32,32 +32,34 @@ class PlantingDirections extends Component {
     // send new grow to db, fill chamber
   };
   // <SettingsList chamber={selectedChamber} climates={climates} newGrowPlant={newGrowPlant} />
-  // <div className="directions right" pullRight>
-  //   <Grid>
-  //     <Row key="growingDirections">
-  //       <Col className="Futura-Lig" xs={5} md={6}>
-  //         {' '}
-  //         {growingDirections}
-  //       </Col>
-  //     </Row>
-  //   </Grid>
-  //   <a href={`/plants/${newGrowPlant[plantKey].r_id}`} alt="Start Growing!">
-  //     <Button className="balanced Futura-Lig" onClick={this.handleClick}>
-  //       Start Growing!
-  //     </Button>
-  //   </a>
-  // </div>
 
   render() {
     console.log('render directions');
-    const { newGrowPlant, climates, selectedChamber } = this.props;
+    const { newGrowPlant, directions } = this.props;
     // debugger
-    const plantKey = findKey(newGrowPlant);
-    const growingDirections = newGrowPlant[plantKey].planting_directions;
+    // const plantKey = findKey(newGrowPlant);
+    // const growingDirections = newGrowPlant[plantKey].planting_directions;
     return (
-      <div className="directions container">
-
-      </div>
+      <div
+        className={styles.directionsright}>
+        <ul>
+          {directions.planting.map(line => {
+            return (
+              <li
+                key={line}>{line}</li>
+            )
+          })}
+          </ul>
+          <a
+            href={`/plants/${newGrowPlant.recipeId}`}
+            alt="Start Growing!">
+            <button
+              className={styles.balanced} onClick={this.handleClick}>
+              Start Growing!
+            </button>
+          </a>
+        })}
+        </div>
     );
   }
 }

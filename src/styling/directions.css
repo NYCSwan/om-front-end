@@ -1,0 +1,12 @@
+.checkmark {
+  width: 30px;
+  height: auto;
+}
+
+.balanced {
+  composes: default from './global-styles.css';
+}
+
+.directionsright {
+  width: 50%;
+}

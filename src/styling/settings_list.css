@@ -1,0 +1,9 @@
+.directionsleft {
+  background-color: rbga(96,94,94, 0.3);
+  width: 30%;
+}
+
+.settingsList {
+  list-style: none;
+  word-wrap: normal;
+}

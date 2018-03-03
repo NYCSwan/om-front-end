@@ -9,10 +9,10 @@ import LineGraph from '../../D3/lineGraph';
 import FilterButtonGroup from '../../components/filter_button.react';
 import styles from '../../../styling/sensor.css';
 import Spinner from '../../helpers/spinner.react';
-import pH from '../../../media/pH_icon.png';
-import humidity from '../../../media/humidity_icon.png';
-import temperature from '../../../media/temperature_icon.png';
-import waterlevel from '../../../media/water_level_icon.png';
+// import pH from '../../../media/pH_icon.png';
+// import humidity from '../../../media/humidity_icon.png';
+// import temperature from '../../../media/temperature_icon.png';
+// import waterlevel from '../../../media/water_level_icon.png';
 
 class Sensor extends Component {
   static propTypes = {

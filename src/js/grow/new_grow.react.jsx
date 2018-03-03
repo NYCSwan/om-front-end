@@ -24,11 +24,12 @@ class NewGrow extends Component {
     chamberOptions: [],
     isBalanced: false,
     showDirections: false,
-    showPlantingDirections: false,
+    showPlantsDirections: false,
     isloading: false,
     newGrowPlant: [],
     selectedPlant: '',
-    selectedChamber: 0
+    selectedChamber: 0,
+    showForm: true
   };
 
   async componentDidMount() {
@@ -53,7 +54,7 @@ class NewGrow extends Component {
       this.state.plantTypes !== newState.plantTypes ||
       this.state.newGrowPlant !== newState.newGrowPlant ||
       this.state.chamberOptions !== newState.chamberOptions ||
-      this.state.showDirections !== newState.showDirections ||
+
       this.state.isBalanced !== newState.isBalanced
     );
   }
@@ -88,17 +89,16 @@ class NewGrow extends Component {
     console.log(`handleChamberRadio: ${e.target.value}`);
     const tempChamberId = parseInt(e.target.value.slice(-1), 10);
     this.setState({
-      selectedChamber: tempChamberId,
-      showDirections: true
+      selectedChamber: tempChamberId
     });
-
   }
 
   handleNewPlantSelection = e => {
-    console.log('handleNewPlantSelection new grow');
+    console.log('handle Plant recipe Selection new grow');
     const tempPlant = e.target.value;
     const currentPlantType = pickBy(this.state.plantTypes, plant => plant.fullName === tempPlant);
     const key = findKey(currentPlantType);
+    // debugger
     this.setState({ newGrowPlant: currentPlantType[key] });
   }
 
@@ -113,7 +113,7 @@ class NewGrow extends Component {
 
   showPlantingDirections = () => {
     console.log('show planting directions');
-    this.setState({ showPlantingDirections: true });
+    this.setState({ showPlantsDirections: true });
   };
 //   {this.state.selectedPlant === 'customize' &&
 //     this.state.selectedChamber === '' && <CustomizeSensors {...this.props} />}
@@ -176,7 +176,7 @@ class NewGrow extends Component {
     const tempChamber = pickBy(this.state.chamberOptions, chamberOpt => chamberOpt.chamberId === this.state.selectedChamber.toString());
     const key = findKey(tempChamber);
     const createdAt = this.state.chamberOptions[key].createdAt;
-    debugger;
+    // debugger;
 
     return invokeApig({ // eslint-disable-line
       path: `/chambers/${createdAt}`,
@@ -212,48 +212,57 @@ class NewGrow extends Component {
       //   plantName: this.state.selectedPlant
       //
       // });
-      this.setState({showDirections: true});
+      // this.setState({showDirections: true});
     } catch(e) {
       console.log(e);
     }
-    this.setState({isloading:false})
+    this.setState({
+      isloading:false,
+      showForm: false
+    })
+    if (!isEmpty(this.state.newGrowPlant)) {
+      this.setState({ showDirections: true });
+    }
   }
 
   completeNewGrow = () => {
-    console.log('complete new grow');
+    console.log('complete new grow after setup ph, etc');
     this.props.history.pushState("You have successfully created a New Garden!", null, "/monitor");
   }
 
   renderPlantGroup() {
     const { plantTypes } = this.state;
+    if (isEmpty(this.state.selectedPlant)) {
+      return (
+        <div className={styles.plantsContainer} >
+          { plantTypes.map((plant) => {
 
-    return (
-      <div className={styles.plantsContainer} >
-        { plantTypes.map((plant) => {
+            return (
+            <div
+              key={plant.recipeName}
+              className={styles[`button${(plant.recipeName).replace(/\s/, '')}`]}>
 
-          return (
-          <div
-            key={plant.recipeName}
-            className={styles[`button${(plant.recipeName).replace(/\s/, '')}`]}>
-
-            <input
-              type='button'
-              name={plant.recipeName}
-              value={plant.fullName}
-              key={plant.gardenId}
-              className={styles[`${plant.recipeName.replace(/\s/, '')}Input`]}
-              onClick={this.handlePlantRadioClick}
-            />
-          </div>
-          )
-        })}
-      </div>
-    )
+              <input
+                type='button'
+                name={plant.recipeName}
+                value={plant.fullName}
+                key={plant.gardenId}
+                className={styles[`${plant.recipeName.replace(/\s/, '')}Input`]}
+                onClick={this.handlePlantRadioClick}
+              />
+            </div>
+            )
+          })}
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 
   renderChambers() {
     const { chamberOptions } = this.state;
-    if (this.state.selectedChamber === 0) {
+    if (!isEmpty(this.state.newGrowPlant)) {
       return (
         <div className={styles.chamberContainer}>
         <h3
@@ -277,13 +286,15 @@ class NewGrow extends Component {
       }
         </div>
       )
+    } else {
+      return null;
     }
   }
 
   render() {
     console.log('render new grow');
     // console.log(`plantTypes: ${this.state.plantTypes}`);
-    // console.log(`chambers: ${this.state.chamberOptions}`);
+    console.log(this.state.newGrowPlant);
 // debugger
     return (
       <div className={styles.newGrowContainer}>
@@ -299,40 +310,39 @@ class NewGrow extends Component {
           :
           null
         }
+        { this.state.showForm === true && (
         <form
           className={styles.newGrowForm}
           onSubmit={this.handleSubmit}>
-          { isEmpty(this.state.selectedPlant) ?
+          <div>
             <div>
-               {this.renderPlantGroup()}
-               {this.renderChambers()}
-                <LoaderButton
-                  className='sumbitGarden'
-                  disabled={!this.validateForm()}
-                  type="submit"
-                  isloading={this.state.isloading}
-                  text="Create"
-                  loadingtext="Creating…"
-                />
-              </div>
-              :
-              null
-            }
-        </form>
-      }
-          { (this.state.showDirections === true )
-            ?
-            <Directions
-              newGrowPlant={this.state.newGrowPlant}
-              handlePhClick={this.updatePhBalance}
-              handlePlantClick={this.completeNewGrow}
-              isBalanced={this.state.isBalanced}
-              selectedChamber={this.state.selectedChamber}
-              showPlantingDirections={this.state.showPlantingDirections}
+             { this.renderPlantGroup() }
+             { this.renderChambers() }
+             </div>
+            <LoaderButton
+              className='sumbitGarden'
+              disabled={!this.validateForm()}
+              type="submit"
+              isloading={this.state.isloading}
+              text="Create"
+              loadingtext="Creating…"
             />
-            :
-null
-          }
+          </div>
+        </form>
+        )}
+        { this.state.showDirections === true && (
+          <Directions
+            newGrowPlant={this.state.newGrowPlant}
+            handlePhClick={this.updatePhBalance}
+            handlePlantClick={this.completeNewGrow}
+            handleNextClick={this.showPlantingDirections}
+            isBalanced={this.state.isBalanced}
+            selectedPlant={this.state.selectedPlant}
+
+            selectedChamber={this.state.selectedChamber}
+            showPlantsDirections={this.state.showPlantsDirections}
+          />
+        )}
 
       </div>
     }

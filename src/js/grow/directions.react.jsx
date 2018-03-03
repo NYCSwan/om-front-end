@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import findKey from 'lodash/findKey';
+// import { Grid, Row, Col, Button } from 'react-bootstrap';
+import filter from 'lodash/filter';
+import map from 'lodash/map';
 
-import SettingsList from './settings_list.react';
+import checkmark from "../../media/check_mark_icon.png";
+import styles from '../../styling/directions.css';
 
 class Directions extends Component {
   static propTypes = {
-    newGrowPlant: PropTypes.objectOf(PropTypes.object).isRequired,
-    climates: PropTypes.arrayOf(PropTypes.object).isRequired,
+    newGrowPlant: PropTypes.object.isRequired,
+    handlePhClick: PropTypes.func.isRequired,
     handleClick: PropTypes.func.isRequired,
     isBalanced: PropTypes.bool.isRequired,
-    selectedChamber: PropTypes.string.isRequired
-    // onClick: PropTypes.func.isRequired
+    selectedChamber: PropTypes.number.isRequired,
+    showPlantsDirections: PropTypes.bool.isRequired,
+    directions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    plant: PropTypes.string.isRequired
   };
 
   state = {
@@ -27,7 +31,8 @@ class Directions extends Component {
   shouldComponentUpdate(newProps, newState) {
     return (
       this.props.newGrowPlant !== newProps.newGrowPlant ||
-      this.props.isBalanced !== newProps.isBalanced ||
+      this.props.isBalanced !== newProps.isBalanced ||       this.props.directions !== newProps.directions ||
+      this.props.selectedChamber !== newProps.selectedChamber ||
       this.state.balancing !== newState.balancing ||
       this.state.balanced !== newState.balanced
     );
@@ -40,45 +45,38 @@ class Directions extends Component {
       this.setState({ balanced: true });
       console.log('timeout 10000');
     }, 10000);
+    this.setState({ balancing: false });
+    this.props.handlePhClick();
   };
 
   handleNextClick = () => {
     this.props.handleClick();
   };
+
   render() {
     console.log('render directions');
     const { newGrowPlant, settings, directions, selectedChamber } = this.props;
+    const phdirections = filter(directions, function(direction) { return direction.phBalance})
 
     return (
-      <div className="directions container">
-      <SettingsList
-        chamber={selectedChamber}
-        settings={settings}
-        newGrowPlant={newGrowPlant} />
-      <div className="directions right" pullRight>
-      <Grid>
-      <Row key={1}>
-      <Col className="Futura-Lig" xs={5} md={6}>
-      {' '}
-      {directions}
-      </Col>
-      <Col className="Futura-Lig" xs={5} md={6}>
-      This may take about 5 minutes...
-      </Col>
-      </Row>
-      </Grid>
-      </div>
-      {this.state.balanced === true ? (
+      <main className={styles.directionsright}>
+        { map(phdirections[0].phBalance, function( line) { return <p>{line}</p> })}
+        <p>This may take up to 5 minutes...</p>
+      {this.state.balanced === true
+        ?
           <div>
-          <img className="check_mark" alt="check mark pH is balanced!" src="../public/img/check_mark_icon.png" />
-          <Button onClick={this.handleNextClick}>Next</Button>
+            <img
+              className={styles.checkmark} alt="check mark pH is balanced!" src={checkmark} />
+            <button
+              onClick={this.handleNextClick}>Next</button>
           </div>
-        ) : (
-          <Button className="balanced Futura-Lig" onClick={this.handleClickUpdate}>
+         :
+          <button
+            className={styles.balanced} onClick={this.handleClickUpdate}>
           {this.state.balancing === true ? 'Balancing...' : 'pH Balance Water'}
-          </Button>
-        )}
-      </div>
+          </button>
+        }
+        </main>
     );
   }
 }

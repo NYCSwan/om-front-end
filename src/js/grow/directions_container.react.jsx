@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Directions from './directions.react';
 import PlantingDirections from './planting_directions.react';
+import SettingsList from './settings_list.react';
 
 class DirectionsContainer extends Component {
   static propTypes = {
@@ -10,6 +11,8 @@ class DirectionsContainer extends Component {
     selectedChamber: PropTypes.number.isRequired,
     handlePhClick: PropTypes.func.isRequired,
     handlePlantClick: PropTypes.func.isRequired,
+    handleNextClick: PropTypes.func.isRequired,
+
     isBalanced: PropTypes.bool.isRequired,
     showPlantingDirections: PropTypes.bool.isRequired,
     match: PropTypes.shape({
@@ -19,46 +22,79 @@ class DirectionsContainer extends Component {
 
   state = {
     settings: [],
-    directions: ['Fill chamber water reservoir with clean water, then put the water reservoir back inside the chamber and initiate pH balancing.', 'Transplant seedlings in rockwool cubes from propagation chamber to net pots and put net pots in chamber lid holes.', 'Your plants are ready!']
+    directions: [
+      {
+        phBalance: [
+          'Now that we have correctly dosed our nutrients, we can initiate pH balancing.'
+        ]
+      },
+      {
+        planting: [
+          'Fill chamber water reservoir with clean water, then put the water reservoir back inside the chamber and initiate pH balancing.', 'Transplant seedlings in rockwool cubes from propagation chamber to net pots and put net pots in chamber lid holes.', 'Your plants are ready!'
+        ]
+      }
+
+    ]
   };
 
   componentDidMount() {
     this.createSettings();
   }
 
+  shouldComponentUpdate(newProps, newState) {
+    return (
+      this.props.newGrowPlant !== newProps.newGrowPlant ||
+      this.props.isBalanced !== newProps.isBalanced || this.state.settings !== newState.settings
+    );
+  }
+
   createSettings = () => {
       const { newGrowPlant } = this.props;
       const tempSettings = [];
-      tempSettings.push(newGrowPlant.plantName);
-      tempSettings.push(newGrowPlant.climateId);
-      tempSettings.push(newGrowPlant.chamberName);
-      tempSettings.push(newGrowPlant.pH);
-      tempSettings.push(newGrowPlant.temperature);
+      // debugger
+      tempSettings.push(newGrowPlant.recipeName);
+      tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}`);
+      tempSettings.push(`pH ${newGrowPlant.pH}`);
+      tempSettings.push(newGrowPlant.fullName);
 
       this.setState({
         settings: tempSettings
       })
   }
 
+  handleNextClick = () => {
+    this.props.showPlantingDirections();
+  }
   // climates={this.props.climates}
   render() {
+    console.log('render directions container');
+    const { settings, directions } = this.state;
+    const { selectedChamber, newGrowPlant, isBalanced, handlePlantClick, handlePhClick, selectedPlant, showPlantsDirections } = this.props;
+    // console.log(selectedPlant);
     return (
       <div className="directions container">
-      { this.props.showPlantingDirections
+        <SettingsList
+          chamber={selectedChamber}
+          settings={settings}
+          newGrowPlant={newGrowPlant} />
+      { (showPlantsDirections === true)
         ?
           <PlantingDirections
-            newGrowPlant={this.props.newGrowPlant}
-            isBalanced={this.props.isBalanced}
-            selectedChamber={this.props.selectedChamber}
-            handlePlantClick={this.props.handlePlantClick}
+            newGrowPlant={newGrowPlant}
+            isBalanced={isBalanced}
+            directions={directions}
+            selectedChamber={selectedChamber}
+            handlePlantClick={handlePlantClick}
           />
         :
           <Directions
-            settings={this.state.settings}
-            directions={this.state.directions}
-            plant={this.props.selectedPlant}
-            handlePhClick={this.props.handlePhClick}
-            isBalanced={this.props.isBalanced}
+            settings={settings}
+            directions={directions}
+            showPlantsDirections={showPlantsDirections}
+            plant={selectedPlant}
+            handlePhClick={handlePhClick}
+            handleClick={this.handleNextClick}
+            isBalanced={isBalanced}
           />
       }
       </div>

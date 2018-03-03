@@ -40,18 +40,3 @@
 .lightGreenBackground {
   background-color: rgb(104, 176, 77);
 }
-/* Tablet screens */
-/* ************ */
-@media only screen and (min-width: 808px) and (max-width: 1320px) {
-
-
-}
-
-/* Phone Screens */
-/*****************/
-@media only screen and (min-width: 375px) and (max-width: 807px) {
-
-  .bigFont {
-    font-size: 20px;
-  }
-}
