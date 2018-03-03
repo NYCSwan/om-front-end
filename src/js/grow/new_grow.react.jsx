@@ -265,25 +265,27 @@ class NewGrow extends Component {
     if (!isEmpty(this.state.newGrowPlant)) {
       return (
         <div className={styles.chamberContainer}>
-        <h3
-          id="chamber"
-          className={styles.directions}>
-          Select A Chamber
-        </h3>
-      { chamberOptions.map((chamber) => {
-          return (
-            <input
-              type='button'
-              name={chamber.chamberId}
-              key={chamber.chamberId}
-              value={chamber.chamberName}
-              className={styles[`${chamber.chamberName.replace(/\s/, '')}`]}
-              onClick={this.handleChamberRadioClick}
-              disabled={chamber.isFilled}
-            />
-          )
-        })
-      }
+          <h3
+            id="chamber"
+            className={styles.directions}>
+            Select A Chamber
+          </h3>
+          <main>
+          { chamberOptions.map((chamber) => {
+              return (
+                <input
+                  type='button'
+                  name={chamber.chamberId}
+                  key={chamber.chamberId}
+                  value={chamber.chamberName}
+                  className={styles[`${chamber.chamberName.replace(/\s/, '')}`]}
+                  onClick={this.handleChamberRadioClick}
+                  disabled={chamber.isFilled}
+                />
+              )
+            })
+          }
+          </main>
         </div>
       )
     } else {

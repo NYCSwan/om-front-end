@@ -1,9 +1,30 @@
 .directionsleft {
   background-color: rbga(96,94,94, 0.3);
   width: 30%;
+  display: inline-block;
 }
 
 .settingsList {
   list-style: none;
   word-wrap: normal;
+  width: 100%;
+  padding: 0;
+
+}
+
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .listItem {
+    width: 100%;
+    margin-left: 5px;
+  }
 }

@@ -55,7 +55,7 @@ class Directions extends Component {
 
   render() {
     console.log('render directions');
-    const { newGrowPlant, settings, directions, selectedChamber } = this.props;
+    const { directions } = this.props;
     const phdirections = filter(directions, function(direction) { return direction.phBalance})
 
     return (

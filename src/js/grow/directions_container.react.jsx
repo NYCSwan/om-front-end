@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Directions from './directions.react';
 import PlantingDirections from './planting_directions.react';
 import SettingsList from './settings_list.react';
+import styles from '../../styling/directions_container.css';
 
 class DirectionsContainer extends Component {
   static propTypes = {
@@ -49,13 +50,13 @@ class DirectionsContainer extends Component {
   }
 
   createSettings = () => {
-      const { newGrowPlant } = this.props;
+      const { newGrowPlant, selectedChamber } = this.props;
       const tempSettings = [];
       // debugger
-      tempSettings.push(newGrowPlant.recipeName);
+      tempSettings.push(newGrowPlant.fullName);
       tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}`);
       tempSettings.push(`pH ${newGrowPlant.pH}`);
-      tempSettings.push(newGrowPlant.fullName);
+      tempSettings.push(`Chamber ${selectedChamber}`);
 
       this.setState({
         settings: tempSettings
@@ -72,7 +73,8 @@ class DirectionsContainer extends Component {
     const { selectedChamber, newGrowPlant, isBalanced, handlePlantClick, handlePhClick, selectedPlant, showPlantsDirections } = this.props;
     // console.log(selectedPlant);
     return (
-      <div className="directions container">
+      <div className={styles.directions}>
+        <h2>New Garden Directions</h2>
         <SettingsList
           chamber={selectedChamber}
           settings={settings}

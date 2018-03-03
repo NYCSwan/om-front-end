@@ -9,11 +9,12 @@
   min-height: 300px;
   height: auto;
   width: 90%;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-around;
   align-content: center;
   border-radius: 5px;
   text-align: center;
+  background-color:  #C0C0C0;
 
 }
 
@@ -93,7 +94,7 @@
     width: 100%;
     text-align: center;
     color: #fff;
-    background-color: grey;
+    /* background-color: grey; */
   }
 
   .newGrowForm {
