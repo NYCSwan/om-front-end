@@ -1,8 +1,9 @@
 /* loader bttons */
-.LoaderButton .spinning.glyphicon {
-margin-right: 7px;
-top: 2px;
-animation: spin 1s infinite linear;
+.LoaderButton {
+  composes: default from './buttons.css';
+  margin-right: 7px;
+  top: 2px;
+  animation: spin 1s infinite linear;
 }
 @keyframes spin {
 from { transform: scale(1) rotate(0deg); }

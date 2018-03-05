@@ -74,7 +74,8 @@ class DirectionsContainer extends Component {
     // console.log(selectedPlant);
     return (
       <div className={styles.directions}>
-        <h2>New Garden Directions</h2>
+        <h2>New Garden</h2>
+        <h3>Grow Directions</h3>
         <SettingsList
           chamber={selectedChamber}
           settings={settings}

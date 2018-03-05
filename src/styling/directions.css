@@ -4,10 +4,14 @@
 }
 
 .balanced {
-  composes: default from './global-styles.css';
+  composes: default from './buttons.css';
 }
 
 .directionsright {
-  width: 50%;
-  display: inline-block;
+  width: 55%;
+  display: flex;
+  flex-flow: column wrap;
+  right:0;
+  margin-left: 5px;
+  font-size: 18px;
 }

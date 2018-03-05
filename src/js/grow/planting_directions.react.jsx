@@ -9,7 +9,7 @@ class PlantingDirections extends Component {
   static propTypes = {
     newGrowPlant: PropTypes.arrayOf(PropTypes.object).isRequired,
     climates: PropTypes.arrayOf(PropTypes.object).isRequired,
-    handleClick: PropTypes.func.isRequired,
+    handlePlantClick: PropTypes.func.isRequired,
     selectedChamber: PropTypes.string.isRequired,
     isBalanced: PropTypes.bool.isRequired
   };
@@ -27,7 +27,7 @@ class PlantingDirections extends Component {
 
   handleClick = () => {
     console.log('handle click planting directions');
-    this.props.handleClick();
+    this.props.handlePlantClick();
     // send message to Plant page saying "Garden started!"
     // send new grow to db, fill chamber
   };
@@ -43,22 +43,17 @@ class PlantingDirections extends Component {
       <div
         className={styles.directionsright}>
         <ul>
-          {directions.planting.map(line => {
+          {directions[1].planting.map(line => {
             return (
               <li
                 key={line}>{line}</li>
             )
           })}
           </ul>
-          <a
-            href={`/plants/${newGrowPlant.recipeId}`}
-            alt="Start Growing!">
-            <button
-              className={styles.balanced} onClick={this.handleClick}>
-              Start Growing!
-            </button>
-          </a>
-        })}
+          <button
+            className={styles.balanced} onClick={this.handleClick}>
+            Start Growing!
+          </button>
         </div>
     );
   }

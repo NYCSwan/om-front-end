@@ -1,7 +1,8 @@
 .directionsleft {
   background-color: rbga(96,94,94, 0.3);
-  width: 30%;
   display: inline-block;
+  width: 40%;
+  font-size: 24px;
 }
 
 .settingsList {
@@ -12,6 +13,9 @@
 
 }
 
+.listItem {
+  margin: 40px auto;
+}
 
 /* Tablet screens */
 /* ************ */
@@ -23,8 +27,15 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
+  .directionsleft {
+    font-size: 20px;
+  }
+
   .listItem {
     width: 100%;
     margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+
   }
 }

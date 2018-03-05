@@ -1,7 +1,11 @@
 .directions {
   color: rgb(96,94,94);
   text-align: left;
+  display: flex;
+  flex-flow: row wrap;
 }
-.directions h2 {
+
+.directions h2, .directions h3 {
   text-align: center;
+  width: 100%;
 }

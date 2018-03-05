@@ -1,8 +1,21 @@
 
 .directionsright {
-  width: 60%;
+  display: flex;
+  flex-flow: column;
+  width: 55%;
+  display: inline-block;
+  right:0;
+  font-size: 18px;
+}
+
+.directionsright > ul {
+  list-style: none;
+  width: 100%;
+  word-wrap: normal;
+  font-size: 14px;
 }
 
 .balanced {
-
+  composes: default from './buttons.css';
+  border-radius: 20px;
 }

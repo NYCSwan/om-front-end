@@ -4,8 +4,7 @@
   }
 
   .app {
-    /* composes: @font-face from './MyFontsWebfontsKit.css'; */
-    composes: @font-face from './global-styles.css';
+    font-family: 'Futura-Lig';
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
