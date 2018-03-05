@@ -1,4 +1,4 @@
-@import url("http://hello.myfonts.net/count/3541c8");
+@import url("//hello.myfonts.net/count/3541c8");
 /**
  * @license
  * MyFonts Webfont Build ID 3490248, 2017-11-28T13:37:13-0500
@@ -26,8 +26,8 @@
 
   @font-face {
     font-family: 'Futura-Lig';
-    src: url('/public/webfonts/3541C8_0_0.eot') format('embedded-opentype'),
-    url('/public/webfonts/3541C8_0_0.woff2') format('woff2'),
-    url('/public/webfonts/3541C8_0_0.woff') format('woff'),
-    url('/public/webfonts/3541C8_0_0.ttf') format('truetype');
+    src: url('/webfonts/3541C8_0_0.eot') format('embedded-opentype'),
+    url('/webfonts/3541C8_0_0.woff2') format('woff2'),
+    url('/webfonts/3541C8_0_0.woff') format('woff'),
+    url('/webfonts/3541C8_0_0.ttf') format('truetype');
   }

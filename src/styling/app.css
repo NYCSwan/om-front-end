@@ -4,20 +4,14 @@
   }
 
   .app {
-    font-family: 'Futura-Lig';
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center top;
+    font-family: Futura-Lig;
     background-color: #ffffff;
     width: 100%;
     text-align: center;
     position: relative;
     min-height: 100vh;
     scroll-behavior: smooth;
-    background-size: 100% 100%;
     color: grey;
-    font-family: 'Futura-Lig';
   }
 
   .logging {

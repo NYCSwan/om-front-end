@@ -12,7 +12,7 @@
   /*Step 3: Text Styles*/
   color: rgba(255, 255, 255, 1.0);
   text-align: center;
-  font: bold 2.7em/100px;
+  font: Futura-Lig bold 2.0em/50px;
 
   /*Step 4: Fancy CSS3 Styles*/
   background: -webkit-linear-gradient(to bottom, #000000, #000001);
@@ -35,12 +35,11 @@
 
 
 .large {
-  /* background-color: transparent; */
+  font: Futura-Lig bold 2.3em/75px;
   border:0;
   color: #fff;
   width: 175px;
   height: auto;
-  font-size: 24px;
   white-space: normal;
   border:1px solid black;
   border-radius: 50px;

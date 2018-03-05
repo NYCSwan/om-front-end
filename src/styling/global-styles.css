@@ -14,11 +14,12 @@
   } */
 
   .font :global {
-    font-weight: normal;
-    font-style: normal;
   }
 
   .body :global {
+    font-weight: normal;
+    font-style: normal;
+    font-family: Futura-Lig;
     height: 100%;
     width: 100%;
   }
@@ -49,18 +50,18 @@
   /*****************/
   @media only screen and (min-width: 375px) and (max-width: 807px) {
     h1 :global {
-      font: 2em bold;
+      font: Futura-Lig 2em bold;
     }
     h2 :global {
-      font: 1.5em bold;
+      font: Futura-Lig 1.5em bold;
     }
     h3 :global {
-      font: 1.25em bold;
+      font: Futura-Lig 1.25em bold;
     }
     h4 :global {
-      font: 1em bold;
+      font: Futura-Lig 1em;
     }
     h5 :global {
-      font: .75em bold;
+      font: Futura-Lig .75em;
     }
   }
