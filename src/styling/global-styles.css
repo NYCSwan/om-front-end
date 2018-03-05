@@ -1,20 +1,4 @@
 /* eslint no-unused-expressions: 0 */
-/* import FuturaLig from './MyFontsWebfontsKit.css'; */
-
-  /* @font-face :global {
-    font-family: 'Futura-Lig';
-    src: url(/public/webfonts/3541CB_0_0.ttf) format('truetype');
-  } */
-  /* @import url("//hello.myfonts.net/count/3541c8");
-
-
-  @font-face :global {
-    font-family: 'Futura-Lig';
-    src: url('../webfonts/3541C8_0_0.woff2') format('woff2');
-  } */
-
-  .font :global {
-  }
 
   .body :global {
     font-weight: normal;
@@ -59,9 +43,9 @@
       font: Futura-Lig 1.25em bold;
     }
     h4 :global {
-      font: Futura-Lig 1em;
+      font: Futura-Lig 1em normal;
     }
     h5 :global {
-      font: Futura-Lig .75em;
+      font: Futura-Lig .75em normal;
     }
   }

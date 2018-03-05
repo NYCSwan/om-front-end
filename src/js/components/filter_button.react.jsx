@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-// import { ButtonGroup, Button } from 'react-bootstrap';
+import sortBy from 'lodash/sortBy';
 
 import styles from '../../styling/filter_button.css';
 
@@ -19,18 +19,20 @@ class FilterButtonGroup extends Component {
 
   render() {
     console.log('render filter buttons');
+    const sortedChambers =  sortBy(this.props.options, ['chamberName']);
+
     return (
       <div
         className={styles.filterById}>
-        {this.props.options.reverse().map(option => { // eslint-disable-line
+        {sortedChambers.map(option => { // eslint-disable-line
 
           return ( // eslint-disable-line
             <button
               key={option.gardenId}
               value={option.plantName || option.chamberName}
               className={styles.chamber}
-              active={this.props.chamberId === parseInt(option.chamberId, 10)}
-              checked={this.props.chamberId === parseInt(option.chamberId, 10)}
+              active={this.props.chamberId === parseInt(option.chamberId, 10) ? true : false }
+              checked={this.props.chamberId === parseInt(option.chamberId, 10) ? true : false}
               onClick={this.handleClick}
               disabled={!option.isFilled}
             >

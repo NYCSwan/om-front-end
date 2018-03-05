@@ -15,7 +15,7 @@ import Kale from '../../../media/kale_button.png';
 import Lettuce from '../../../media/lettuce_button.png';
 import Tomatoes from '../../../media/tomato_button.png';
 import Customize from '../../../media/customize_button.jpg';
-import TimelapseVideo from '../../../media/timelapse.mov';
+import TimelapseVideo from '../../../media/timelapse.mp4';
 
 class Progress extends Component {
   static propTypes = {
@@ -207,10 +207,11 @@ class Progress extends Component {
         height="240"
         key='video'
         loop
-        autoplay>
+        autoPlay
+        preload='true'>
         <source
           src={TimelapseVideo}
-          type="video/mov" />
+          type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     )
