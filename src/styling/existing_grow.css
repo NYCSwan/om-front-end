@@ -1,7 +1,7 @@
               /* Existing Grow */
               /******************/
 .existingGrow {
-  background-color: rgba(255,255,255,0.4);
+  /* background-color: rgba(255,255,255,0.4); */
   position: relative;
   font-size: 18px;
   width: 100%;
@@ -12,9 +12,12 @@
   position: absolute;
   margin: auto;
   width: 100%;
-  color: white;
 }
 
+.chamber {
+  composes: accentDarkGreen from './variables.css';
+  margin-top: 40px;
+}
 
 .check_mark {
   width: 100%;
@@ -26,56 +29,21 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  height: 400px;
+  height: 100%;
   line-height: normal;
+  background-color: rgba(94, 96, 96, 0.5);
 }
-.modalContainer button {
+
+.buttonSubmitChange{
+  composes: default from './buttons.css';
   vertical-align: middle;
   margin-top: 10px;
 }
+
 .modalContent {
   color: rgb(0,0,0);
   min-height: 250px;
 }
-
-.pause {
-  background-color: grey;
-}
-
-.balanced {
-  background-color: grey;
-}
-
-button.close.Resume.btn.btn-default {
-  text-align: center;
-  color: #333;
-  height: 60px;
-  background-color: grey;
-  width: 150px;
-  text-shadow: 0 1px 0 #333;
-  opacity: 1;
-}
-
-/*
-.link.Chamber1 {
-position: absolute;
-/*margin-left: 145px;*/
-/*margin-top: 245px;*/
-/* margin-left: 355px;
-margin-top: 295px;
-}
-
-.link.Chamber2 {
-position: absolute;
-margin-left: 130px;
-margin-top: 80px;
-}
-
-.link.Chamber3 {
-position: absolute;
-margin-left: -90px;
-margin-top: 150px;
-} */
 
 .errorMessage {
   border: 1px solid red;
@@ -95,14 +63,14 @@ margin-top: 150px;
 @media only screen and (min-width: 375px) and (max-width: 807px) {
 
   .gardens {
-    background-color: blue;
+    /* background-color: blue; */
     margin-left: auto;
     margin-right: auto;
   }
 
   .chamber {
     /* width: 200px; */
-    margin-top: 3px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -112,14 +80,18 @@ margin-top: 150px;
     height: 10px;
   }
 
+  .chamberIcon {
+    margin-top: 0;
+  }
   /* modal*/
   .modalContainer {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    height: 300px;
+    height: 100%;
     line-height: normal;
   }
+
   .modalContainer button {
     vertical-align: middle;
     margin-top: 10px;
@@ -137,7 +109,7 @@ margin-top: 150px;
     background-color: grey;
   }
 
-  buttonCloseResume {
+  .buttonCloseResume {
     text-align: center;
     color: #333;
     height: 60px;

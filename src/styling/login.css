@@ -1,11 +1,43 @@
 /* Login */
-@media all and (min-width: 480px) {
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
   .Login {
     padding: 60px 0;
+    margin: 0px auto;
+    background-color: lightGreenBackground from './variables.css';
+    /* background-image: url('../media/BG_1.jpg');
+    composes: background from './variables.css'; */
+    width: 100%;
+    height: auto;
   }
 
   .Login form {
     margin: 0 auto;
     max-width: 320px;
+  }
+
+  .email, .password {
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 50px;
+    margin-top: 50px;
+    margin-left: 13%;
+    margin-right: auto;
+    width: 70%;
+  }
+
+  .email input, .password input {
+    line-height: 24px;
+    font-size: 20px;
+    width: 150px;
   }
 }

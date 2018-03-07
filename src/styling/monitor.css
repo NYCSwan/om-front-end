@@ -82,22 +82,22 @@
   }
 
   .turbidityContainer {
-    left: 5px;
+    left: 35px;
     top: 505px;
     width: 75px;
     height: auto;
   }
 
   .temperatureContainer {
-    left: 25px;
-    top: 290px;
+    left: 35px;
+    top: 280px;
     width: 75px;
     height: auto;
   }
 
   .phContainer {
-    left: 90px;
-    top: 415px;
+    left: 105px;
+    top: 405px;
     width: 75px;
     height: auto;
   }
@@ -105,12 +105,12 @@
   .waterlevelContainer {
     width: 75px;
     height: auto;
-    top: 505px;
+    top: 495px;
     right: 40px;
   }
 
   .dayOfCycle {
-    top: 590px;
+    top: 580px;
     left: 210px;
   }
 
@@ -128,6 +128,11 @@
     height: auto;
     margin: 0;
     padding: 0;
+    text-decoration: none;
+  }
+  .temperaturelink:hover, .phlink:hover, .waterlevelink:hover, .turbiditylink:hover, .humiditylink:hover {
+    color: darkgray from './variables.css';
+    cursor: grab;
   }
 
 

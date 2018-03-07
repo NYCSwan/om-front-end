@@ -14,9 +14,8 @@
     display: flex;
     align-items: center;
     flex-flow: column;
-    margin-top: 50px;
-    min-height: 300px;
-    margin: 25px 50px 25px 50px;
+    min-height: 350px;
+    margin: 125px 50px 125px 50px;
     border-radius: 50px;
     composes: lightGray from './variables.css';
     opacity: 0.6;
@@ -33,7 +32,7 @@
   .homepage:hover {
     background-color: rgba(104,176,77, 0.7);
   }
-  
+
   .homepage:active {
     border-top: solid 2px rgba(115,115,115,0.5);
     border-bottom: solid 1px rgba(115,115,115,0.3);

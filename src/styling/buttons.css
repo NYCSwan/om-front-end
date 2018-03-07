@@ -45,6 +45,7 @@
   border-radius: 50px;
   composes: white from './variables.css';
   word-wrap: break-word;
+  cursor: grabbing;
 }
 
 .default:active, .large:active {

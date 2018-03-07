@@ -1,3 +1,5 @@
+
+
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -18,18 +20,18 @@
 
   .plantInfoContainer h1 {
     position: absolute;
-    left: 125px;
-    top: 250px;
+    left: 110px;
+    top: 200px;
     font-weight: bolder;
     color: #fff;
   }
 
   .plantInfoContainer p {
     /* grid-area: 1; */
-    margin: 10px auto;
+    margin: 5px auto;
   }
   .plantInfoContainer h5 {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 
   .plantImg {
@@ -37,5 +39,14 @@
     height: 100%;
     margin: 0;
     border-bottom: 2px solid rgb(96,94,94);
+  }
+
+  .videoContainer {
+    width: 100%;
+    composes: lightGreenBackground from './variables.css';
+  }
+
+  .videoContainer h3 {
+    padding-top: 15px;
   }
 }

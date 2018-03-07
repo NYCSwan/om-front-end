@@ -9,26 +9,10 @@
     margin-right: auto;
     list-style: none;
   }
-/*
-  .buttonChamber2 {
+  .listItemChamber1, .listItemChamber2, .listItemChamber3 {
+    composes: white from './variables.css';
     position: absolute;
-    margin-left: 180px;
-    margin-top: 110px;
   }
-
-  .buttonChamber3 {
-    position: absolute;
-    margin-left: 120px;
-    margin-top: 225px;
-  }
-
-  .buttonchamber1 {
-    width: 200px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-*/
 
   .listItemChamber1 {
     margin-left: 5px;
@@ -47,25 +31,25 @@
 
 
   .buttonChamber1 {
-    background: green;
+    /* background: green; */
     border: none;
     position: absolute;
-    /*margin-left: 145px;*/
-    /*margin-top: 245px;*/
-    margin-left: 355px;
-    margin-top: 295px;
+    /* margin-left: 355px;
+    margin-top: 295px; */
+    color: gray from './variables.css';
   }
 
   .buttonChamber2 {
-  position: absolute;
-  margin-left: 130px;
-  margin-top: 80px;
+    color: gray from './variables.css';
+    position: absolute;
+    /* margin-left: 130px;
+    margin-top: 80px; */
   }
 
   .buttonChamber3 {
     position: absolute;
-    margin-left: -90px;
-    margin-top: 150px;
+    /* margin-left: -90px;
+    margin-top: 150px; */
   }
 
 
@@ -85,39 +69,49 @@
     height: 250px;
   }
 
+/* Existing Grow */
   .listItemChamber1 {
-    margin-left: 80px;
-    margin-top: 40px;
-    max-width: 80px;
+    top: 150px;
+    right: 145px;
+    margin: 0 0 0 0;
+    /* margin-left: 80px;
+    margin-top: 40px; */
+    width: 80px;
     height: auto;
   }
 
   .listItemChamber2 {
-    margin-left: 5px;
-    margin-top: 50px;
+    margin: 0 0 0 0;
+    top: 210px;
+    right: 145px;
+    /* margin-left: 5px;
+    margin-top: 50px; */
     width: 80px;
     height: auto;
   }
 
   .listItemChamber3 {
-    margin-left: 5px;
-    margin-top: 5px;
+    margin: 0 0 0 0;
+    top: 160px;
+    left: 75px;
+    /* margin-left: 5px;
+    margin-top: 5px; */
     width: 80px;
     height: auto;
   }
 
   .buttonChamber1 {
     position: absolute;
-    margin-left: 5px;
-    margin-top: 5px;
+    /* margin-left: 5px;
+    margin-top: 5px; */
     width: 100%;
     height: auto;
   }
 
   .buttonChamber2 {
     position: absolute;
-    margin-left: 10px;
-    margin-top: 10px;
+    /* margin-left: 10px;
+    margin-top: 10px; */
     width: 100%;
     height: auto;
   }

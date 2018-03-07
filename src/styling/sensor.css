@@ -13,7 +13,7 @@
   position: relative;
   padding: 10px;
   vertical-align: middle;
-  composes: background from './global-styles.css';
+  composes: background from './variables.css';
   color: rgb(96,94,94);
 }
 
@@ -23,6 +23,7 @@
 
 .temperature {
   background-image: url('../media/temperature_icon.png');
+
 }
 
 .humidity {

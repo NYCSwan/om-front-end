@@ -4,8 +4,9 @@
     font-weight: normal;
     font-style: normal;
     font-family: Futura-Lig;
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%; */
+    box-sizing: border-box;
   }
 
   .link :global {
@@ -16,12 +17,12 @@
     max-width:150px;
   }
 
-  .background :global {
+  /* .background :global {
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 100% 100%;
     background-color: inherit;
-  }
+  } */
 
   /* Tablet screens */
   /* ************ */
@@ -34,18 +35,18 @@
   /*****************/
   @media only screen and (min-width: 375px) and (max-width: 807px) {
     h1 :global {
-      font: Futura-Lig 2em bold;
+      font: bold 2em/32px Futura-Lig;
     }
     h2 :global {
-      font: Futura-Lig 1.5em bold;
+      font: bold 1.5em/26px Futura-Lig;
     }
     h3 :global {
-      font: Futura-Lig 1.25em bold;
+      font: bold 1.25em/20px Futura-Lig;
     }
     h4 :global {
-      font: Futura-Lig 1em normal;
+      font: normal 1em/16px Futura-Lig;
     }
     h5 :global {
-      font: Futura-Lig .75em normal;
+      font: normal .75em/14px Futura-Lig;
     }
   }
