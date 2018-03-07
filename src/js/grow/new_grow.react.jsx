@@ -227,7 +227,7 @@ class NewGrow extends Component {
 
   completeNewGrow = () => {
     console.log('complete new grow after setup ph, etc');
-    this.props.history.pushState("You have successfully created a New Garden!", null, "/monitor");
+    this.props.history.push("You have successfully created a New Garden!", null, "/monitor");
   }
 
   renderPlantGroup() {

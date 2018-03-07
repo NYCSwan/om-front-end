@@ -35,7 +35,7 @@ class PlantingDirections extends Component {
 
   render() {
     console.log('render directions');
-    const { newGrowPlant, directions } = this.props;
+    const { directions } = this.props;
     // debugger
     // const plantKey = findKey(newGrowPlant);
     // const growingDirections = newGrowPlant[plantKey].planting_directions;

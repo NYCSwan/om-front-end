@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+// import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
 import config from './../../config';
 import LoaderButton from "../components/LoaderButton.react";
 import styles from '../../styling/login.css';
-import button from '../../styling/buttons.css';
+// import button from '../../styling/buttons.css';
 
 class Login extends Component {
   static propTypes = {
@@ -42,8 +42,11 @@ class Login extends Component {
   }
 
   handleChange = event => {
+    // debugger
+    event.preventDefault();
+    
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.type]: event.target.value
     });
   };
 
@@ -67,22 +70,25 @@ class Login extends Component {
     return (
       <div className={styles.Login}>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" className={button.large}>
-            <ControlLabel>Email</ControlLabel>
-            <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
-          </FormGroup>
-          <FormGroup   controlId="password"     className={button.large}>
-            <ControlLabel>Password</ControlLabel>
-            <FormControl value={this.state.password} onChange={this.handleChange} type="password" />
-          </FormGroup>
+          <div className={styles.email}>
+            <input
+              autofocus
+              type="email"
+              value={this.state.email} onChange={this.handleChange} />
+          </div>
+          <div className={styles.password}>
+            <input
+              autofocus
+              value={this.state.password} onChange={this.handleChange} type="password" />
+          </div>
           <LoaderButton
             block
-            className={button.large}
+            className='login'
             disabled={!this.validateForm()}
             type="submit"
             isloading={this.state.isloading}
             text="Login"
-            loadingText="Logging in…"
+            loadingtext="Logging in…"
           />
         </form>
       </div>

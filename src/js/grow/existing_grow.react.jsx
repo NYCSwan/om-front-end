@@ -6,8 +6,8 @@ import findKey from 'lodash/findKey';
 import isEmpty from 'lodash/isEmpty';
 
 import ListGroupContainer from '../components/ListGroup.react';
-// import ChamberFormGroup from './chamber_options_form.react';
-// import Directions from './directions.react';
+import Pause from './pause.react';
+import Directions from './directions.react';
 import Spinner from '../helpers/spinner.react';
 import PopUp from './popup.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -15,7 +15,13 @@ import styles from '../../styling/existing_grow.css';
 
 class ExistingGrow extends Component {
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func
+    }).isRequired,
+    openModal: PropTypes.bool.isRequired,
+    handleModalClick: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired
   }
 
   state = {
@@ -24,8 +30,8 @@ class ExistingGrow extends Component {
     climates: [],
     updatingThisPlant: [],
     growingPlants: [],
-    // showBalance: false,
-    // showPause: false,
+    showBalance: false,
+    showPause: false,
     showInitialPopup: false,
     // showChambers: true,
     // // showButton: false,
@@ -35,17 +41,19 @@ class ExistingGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount existing grow');
-   try {
-     const chamberResults = await this.getChamberOptions();
-     this.setState({chambers: chamberResults});
-     const climateResults = await this.getClimates();
-     this.setState({climates: climateResults});
-     const gardenResults = await this.getGrowingPlants();
-     this.setState({growingPlants: gardenResults});
-   } catch (e) {
-     console.log(e);
-   }
-     this.setState({isloading: false });
+
+    try {
+      const chamberResults = await this.getChamberOptions();
+      this.setState({chambers: chamberResults});
+      const climateResults = await this.getClimates();
+      this.setState({climates: climateResults});
+      const gardenResults = await this.getGrowingPlants();
+      this.setState({growingPlants: gardenResults});
+    } catch (e) {
+      console.log(e);
+    }
+
+    this.setState({isloading: false });
   }
 
   shouldComponentUpdate(newState) {
@@ -61,19 +69,6 @@ class ExistingGrow extends Component {
     );
   }
 
-  // componentDidUpdate() {
-    // console.log('componentDidUpdate existing grow');
-    // if (this.state.selectedPlant !== "" && this.state.directions.length === 0) {
-    // this.updateSettings();
-    // this.updateDirections();
-    // }
-  // }
-  // renderGrowingPlantsList(plants) {
-  //   return [{}].concat(plants).map(
-  //   (plant, i) =>
-  //     <p key={plant.plantName}>{plant.plantName}</p>
-  // );
-  // }
 
 // API GET CALLS
   getGrowingPlants = () => {
@@ -109,15 +104,19 @@ class ExistingGrow extends Component {
     const target = e.target.innerText;
     const currentPlantType = pickBy(this.state.growingPlants, plant => plant.plantName === target);
     // const key = findKey(currentPlantType)
+    // this.props.handleModalClick();
     this.setState({
       updatingThisPlant: currentPlantType,
       showInitialPopup: true
     });
+    this.props.showModal();
+
   };
 
   handlePopupClick = () => {
     console.log('handle popup click');
     this.setState({ showInitialPopup: false });
+    // this.props.handleModalClick();
   }
 
   handleBalanceClick = e => {
@@ -125,21 +124,25 @@ class ExistingGrow extends Component {
     console.log(e);
     this.setState({
       showBalance: true,
-      showButton: false,
-      showChambers: false
+      showInitialPopup: false
     });
+    this.props.handleModalClick();
   };
 
   handlePauseClick = () => {
     console.log('handle pause Click existingGrow');
     this.setState({
       showPause: true,
-      showButton: false,
-      showChambers: false
+      showInitialPopup: false
     });
   };
 
-
+  handleResumeClick = () => {
+    console.log('handle resume click');
+    this.setState({ showPause: false });
+    this.props.handleModalClick();
+    this.props.history.push('/monitor');
+  }
 // RENDER
   renderLanding() {
     console.log('render lander');
@@ -153,7 +156,7 @@ class ExistingGrow extends Component {
 
   renderGardens() {
     console.log('renderGardens');
-    const { chambers } = this.state;
+    const { chambers, updatingThisPlant } = this.state;
     const items = []
     let temp = {};
     for(let i = 0; i< chambers.length; i++) {
@@ -164,24 +167,25 @@ class ExistingGrow extends Component {
       }
       items.push(temp[i])
     }
-    return (
-      <div className={styles.gardens}>
-        <h3 className={styles.chamber}>Your Choices</h3>
-        <ListGroupContainer
-          items={items}
-          handleClick={this.handleChamberRadioClick}>
-        </ListGroupContainer>
-      </div>
-    );
+    if (isEmpty(updatingThisPlant)) {
+      return (
+        <div className={styles.gardens}>
+          <h3 className={styles.chamber}>Your Choices</h3>
+          <ListGroupContainer
+            items={items}
+            handleClick={this.handleChamberRadioClick}>
+          </ListGroupContainer>
+        </div>
+      )
+    }
   }
 
-  // updatePhBalance = () => {
-  //   console.log('update ph balance existing plant');
-  //   //   setTimeout(200000);
-  //   //   console.log('timeout 20000');
-  //   //   console.log(e);
-  //   this.setState({ isBalanced: true });
-  // };
+  updatePhBalance = () => {
+    console.log('update ph balance existing plant');
+      setTimeout(200000);
+      console.log('timeout 20000');
+    this.setState({ isBalanced: true });
+  };
 
   // renderSettings = () => {
   //   console.log('update settings existing grow');
@@ -221,7 +225,6 @@ class ExistingGrow extends Component {
   }
 
 
-  //
   // showGrowDirections = () => {
   //   console.log('show grow directions existing grow');
   //   this.setState({ showGrowDirections: true, showBalance: false });
@@ -231,56 +234,46 @@ class ExistingGrow extends Component {
   //   console.log('submit grow changes');
   // }
 
-  // {/* chamber selection */}
-  // {isEmpty(this.state.growingPlant) && (
-  //   <div className="chambers">
-  //     <div className="chamberImage">
-  //       <ChamberFormGroup options={this.state.chambers} onClick={this.handleChamberRadioClick} />
-  //     </div>
-  //     <h3 id="chamber" className="directions Futura-Lig">
-  //       Select A Chamber
-  //     </h3>
-  //     <a href="/directions" className="btn btn-default">
-  //       Submit
-  //     </a>
-  //   </div>
-  // )}
-  // {!isEmpty(this.state.growingPlant) && (
 
-  // )}
-  // {this.state.showPause === true ? <Pause showPause={this.state.showPause} /> : null}
-  // {this.state.showBalance === true ? (
-  //   <Directions
-  //     newGrowPlant={this.state.newGrowPlant}
-  //     climates={this.state.climates}
-  //     handleClick={this.updatePhBalance}
-  //     isBalanced={this.state.isBalanced}
-  //     selectedChamber={this.state.selectedChamber}
-  //   />
-  // ) : null}
   renderPopUp() {
     console.log('render popup');
+
     return (
         <PopUp
           modalTitle="Select Your Next Step"
           modalBody={
-            <div>
-              <h4>Pause</h4>
-              <p>Pause your grow system to clean or change the water.</p>
-              <button
-                className={styles.pause} onClick={this.handlePauseClick}>
-                Pause
-              </button>
-              <h4>pH Balance</h4>
-              <p>Balance the pH in your system.</p>
-              <button
-                className={styles.balanced} onClick={this.handleBalanceClick}>
-                Balance
-              </button>
-            </div>
+          <tbody className={styles.modalBody}>
+            <tr>
+              <td>Pause</td>
+            </tr>
+            <tr>
+              <td>Pause your grow system to clean or change the water.</td>
+            </tr>
+            <tr>
+              <td>
+                <button
+                  className='pause'
+                  onClick={this.handlePauseClick}>
+                  Pause
+                </button>
+              </td>
+            </tr>
+
+            <tr><td>pH Balance</td></tr>
+            <tr><td>Balance the pH in your system.</td></tr>
+            <tr>
+              <td>
+                <button
+                  className='balanced'
+                  onClick={this.handleBalanceClick}>
+                  Balance
+                </button>
+              </td>
+            </tr>
+          </tbody>
           }
-          buttonText1="Submit Chamber"
-          buttonText2="Close"
+          openModal={this.props.openModal}
+          buttonText="Close"
           displayModal={this.state.showInitialPopup}
           handleClick={this.handlePopupClick}
         />
@@ -305,8 +298,27 @@ class ExistingGrow extends Component {
           ? this.renderGardens()
           : this.renderLanding()
         }
-        { !isEmpty(this.state.updatingThisPlant)
+        { ( !isEmpty(this.state.updatingThisPlant) && this.state.showInitialPopup )
           ? this.renderPopUp()
+          : null
+        }
+
+        { this.state.showPause === true
+          ? <Pause
+              showPause={this.state.showPause}
+              openModal={this.props.openModal}
+              handleClick={this.handleResumeClick}
+            />
+          : null
+        }
+        { this.state.showBalance === true
+          ? <Directions
+              newGrowPlant={this.state.updatingThisPlant}
+              climates={this.state.climates}
+              handleClick={this.updatePhBalance}
+              isBalanced={this.state.isBalanced}
+              selectedChamber={this.state.selectedChamber}
+            />
           : null
         }
       </div>

@@ -51,11 +51,17 @@ const Routes = (props) => (
     />
     <Route {...props} path='/controls/NewGrow' exact render={(routeProps) => { // eslint-disable-line
         return <NewGrow
+          openModal={props.openModal}
+          showModal={props.showModal}
+          handleModalClick={props.handleModalClick}
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps}  /> }}
     />
     <Route {...props} path='/controls/ExistingGrow' exact render={(routeProps) => { // eslint-disable-line
         return <ExistingGrow
+          openModal={props.openModal}
+          showModal={props.showModal}
+          handleModalClick={props.handleModalClick}
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
@@ -79,7 +85,10 @@ const Routes = (props) => (
 
 Routes.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    userHasAuthenticated: PropTypes.func.isRequired
+    userHasAuthenticated: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired,
+    openModal: PropTypes.bool.isRequired,
+    handleModalClick: PropTypes.func.isRequired
 };
 
 export default Routes;

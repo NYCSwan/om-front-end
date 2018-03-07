@@ -167,7 +167,7 @@ class Progress extends Component {
           <b>Avg Market Price:</b> ${recipe[key].marketPrice}
         </h5>
         <h5>
-          <b>Avg Yield:</b> ${recipe[key].yield}
+          <b>Avg Yield:</b> {recipe[key].yield}
         </h5>
       </div>
     )
@@ -202,18 +202,21 @@ class Progress extends Component {
 
   renderTimelapseVideo() {
     return (
-      <video
-        width="320"
-        height="240"
-        key='video'
-        loop
-        autoPlay
-        preload='true'>
-        <source
-          src={TimelapseVideo}
-          type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div
+        className={styles.videoContainer}>
+        <h3>My Timelapse</h3>
+        <video width="320"
+          height="240"
+          key='video'
+          loop
+          autoPlay
+          preload='true'>
+          <source
+            src={TimelapseVideo}
+            type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     )
   }
 

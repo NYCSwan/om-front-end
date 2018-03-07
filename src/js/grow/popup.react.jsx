@@ -1,81 +1,94 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faWindowClose } from '@fortawesome/fontawesome-free-solid';
+
 import styles from '../../styling/popup.css';
+
+fontawesome.library.add(faWindowClose);
 
 class PopUp extends Component {
   static propTypes = {
     displayModal: PropTypes.bool.isRequired,
     modalTitle: PropTypes.string.isRequired,
     modalBody: PropTypes.element.isRequired,
-    buttonText1: PropTypes.string.isRequired,
-    buttonText2: PropTypes.string.isRequired,
+    buttonText: PropTypes.string.isRequired,
+    // onClick: PropTypes.func.isRequired,
+    openModal: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired
+    // showModal: PropTypes.func.isRequired
   };
 
   state = {
-    showModal: this.props.displayModal
+    openModal: this.props.openModal
   };
+
+  // componentWillMount() {
+  //   this.props.openModal();
+  // }
 
   shouldComponentUpdate(newProps, newState) {
     console.log('shouldComponentUpdate existing grow');
-    return this.state.showModal !== newState.showModal || this.props.displayModal !== newProps.displayModal;
+    return this.props.openModal !== newProps.openModal || this.props.displayModal !== newProps.displayModal;
   }
-
-  componentDidUpdate() {
-    console.log('componentDidUpdate popup');
-    // this.updateModalDisplay(nextProps, nextState);
-  }
-
-  updateModalDisplay = (nextProps, nextState) => {
-    console.log('update modal display');
-    console.log(nextProps, nextState);
-    // debugger
-    this.setState({ showModal: !this.state.showModal });
-  };
 
   close = () => {
     console.log('close popup');
-    this.setState({ showModal: false });
+    this.props.handleClick();
+    this.setState({ openModal: false });
   };
 
-  open = () => {
-    console.log('open popup');
-    this.setState({ showModal: true });
-    this.props.handleClick();
-  };
+  // open = () => {
+  //   console.log('open popup');
+  //   this.props.handleModalClick();
+  //   this.setState({ openModal: true });
+  // };
 
   render() {
     console.log('render popup');
-    const { modalBody, modalTitle, buttonText1, buttonText2 } = this.props;
-    // console.log(!this.state.showModal);
-    // debugger
+    const { displayModal, modalBody, modalTitle, buttonText } = this.props;
+    // const { openModal } = this.state;
     return (
-      <div className={styles.modalContainer}>
-        <button
-          className={styles.buttonSubmitChamber}
-          onClick={this.open}
-          disabled={this.props.displayModal}
-        >
-          {buttonText1}
-        </button>
-        <Modal
-          show={this.state.showModal}
-          onHide={this.close}
+      <div>
+      { displayModal && (
+      <div
+        className={styles.modalContainer}
+        onClick={this.close}>
+        <div
           className={styles.modal}>
-          <Modal.Header closeButton>
-            <Modal.Title className={styles.title}>{modalTitle}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className={styles.modalBody}>
-            {modalBody}
-            <button
-              className={styles.buttonSubmitChange}
-              onClick={this.close}>
-              {buttonText2}
-            </button>
-          </Modal.Body>
-        </Modal>
+          <table>
+            <thead className={styles.header}>
+              <tr>
+                <th>
+                  <FontAwesomeIcon
+                    icon="window-close"
+                    pull="right"
+                    className={styles.close}
+                    onClick={this.close} />
+                </th>
+              </tr>
+              <tr>
+                <th className={styles.title}>{modalTitle}</th>
+              </tr>
+            </thead>
+              { modalBody }
+            <tfoot>
+              <tr>
+                <td>
+                  <button
+                    className={styles.buttonSubmitChange}
+                    onClick={this.close}>
+                  {buttonText}
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
+      )}
+    </div>
     );
   }
 }

@@ -7,17 +7,24 @@ const Pause = props => (
     displayModal={props.showPause}
     modalTitle="Your System Is Paused."
     modalBody={
-      <div>
-        <h4>Directions:</h4>
-        <p>Please clean your system or add water tanks now.</p>
-      </div>
+      <tbody>
+        <tr>
+          <td>Directions:</td>
+        </tr>
+        <tr>
+          <td>Please clean your system or add water to the tanks now.</td>
+        </tr>
+      </tbody>
     }
-    buttonText1="Pause"
-    buttonText2="Resume"
+    buttonText="Resume"
+    openModal={props.openModal}
+    handleClick={props.handleClick}
   />
 );
 
 Pause.propTypes = {
-  showPause: PropTypes.bool.isRequired
+  openModal: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired
 };
+
 export default Pause;
