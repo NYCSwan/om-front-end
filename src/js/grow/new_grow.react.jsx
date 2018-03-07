@@ -340,7 +340,6 @@ class NewGrow extends Component {
             handleNextClick={this.showPlantingDirections}
             isBalanced={this.state.isBalanced}
             selectedPlant={this.state.selectedPlant}
-
             selectedChamber={this.state.selectedChamber}
             showPlantsDirections={this.state.showPlantsDirections}
           />

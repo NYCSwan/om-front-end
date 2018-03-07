@@ -53,7 +53,7 @@ class DirectionsContainer extends Component {
       const { newGrowPlant, selectedChamber } = this.props;
       const tempSettings = [];
       // debugger
-      tempSettings.push(newGrowPlant.fullName);
+      tempSettings.push(newGrowPlant.plantName);
       tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}`);
       tempSettings.push(`pH ${newGrowPlant.pH}`);
       tempSettings.push(`Chamber ${selectedChamber}`);
@@ -74,7 +74,7 @@ class DirectionsContainer extends Component {
     // console.log(selectedPlant);
     return (
       <div className={styles.directions}>
-        <h2>New Garden</h2>
+        <h2>Garden</h2>
         <h3>Grow Directions</h3>
         <SettingsList
           chamber={selectedChamber}

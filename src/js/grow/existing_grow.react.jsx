@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import ListGroupContainer from '../components/ListGroup.react';
 import Pause from './pause.react';
-import Directions from './directions.react';
+import DirectionsContainer from './directions_container.react';
 import Spinner from '../helpers/spinner.react';
 import PopUp from './popup.react';
 import { invokeApig } from '../../libs/awsLibs';
@@ -33,6 +33,7 @@ class ExistingGrow extends Component {
     showBalance: false,
     showPause: false,
     showInitialPopup: false,
+    plantRecipe: {}
     // showChambers: true,
     // // showButton: false,
     // isBalanced: false
@@ -87,6 +88,11 @@ class ExistingGrow extends Component {
     return invokeApig({ path: '/climates' });
   };
 
+  getRecipe = (plant) => {
+    console.log('get recipe');
+    return invokeApig({ path: `/plants/${plant}` });
+  };
+
   // POST TO DB
   updateChamberDataToDb = () => {
     console.log('update db with chamber data');
@@ -99,20 +105,31 @@ class ExistingGrow extends Component {
   }
 // V-DOM EVENTS
 // UPDATE STATE
-  handleChamberRadioClick = e => {
+  handleChamberRadioClick = (e) => {
     console.log('handleChamberRadio: update existing plant existing grow');
     const target = e.target.innerText;
     const currentPlantType = pickBy(this.state.growingPlants, plant => plant.plantName === target);
-    // const key = findKey(currentPlantType)
+    const key = findKey(currentPlantType)
     // this.props.handleModalClick();
     this.setState({
-      updatingThisPlant: currentPlantType,
+      updatingThisPlant: currentPlantType[key],
       showInitialPopup: true
     });
+
     this.props.showModal();
+    this.updateRecipeState(target);
+  }
 
-  };
+  async updateRecipeState(plant) {
+    console.log('update recipe state');
 
+    try {
+      const recipeResults = await this.getRecipe(plant);
+      this.setState({ plantRecipe: recipeResults })
+    } catch(plant) {
+      console.error('error existingGrow: 128');
+    }
+  }
   handlePopupClick = () => {
     console.log('handle popup click');
     this.setState({ showInitialPopup: false });
@@ -210,21 +227,24 @@ class ExistingGrow extends Component {
   //
   // }
 
-  updateDirections = () => {
-    console.log('update directions existing grow');
-    const { plantTypes } = this.props;
-    const currentPlantState = upperFirst(this.state.selectedPlant);
-    const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
-    const tempDirections = [];
-    const key = findKey(currentPlantType);
+  // updateDirections = () => {
+  //   console.log('update directions existing grow');
+  //   const { plantTypes } = this.props;
+  //   const currentPlantState = upperFirst(this.state.selectedPlant);
+  //   const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
+  //   const tempDirections = [];
+  //   const key = findKey(currentPlantType);
+  //
+  //   tempDirections.push(currentPlantType[key].grow_directions);
+  //   tempDirections.push("This may take about 5 minutes...");
+  //   tempDirections.push(currentPlantType[key].planting_directions);
+  //   this.setState({ directions: tempDirections });
+  // }
 
-    tempDirections.push(currentPlantType[key].grow_directions);
-    tempDirections.push("This may take about 5 minutes...");
-    tempDirections.push(currentPlantType[key].planting_directions);
-    this.setState({ directions: tempDirections });
+  completeExisitingGrow = () => {
+    console.log('complete existing grow after setup ph, etc');
+    this.props.history.push("You have successfully managed Garden!", null, "/monitor");
   }
-
-
   // showGrowDirections = () => {
   //   console.log('show grow directions existing grow');
   //   this.setState({ showGrowDirections: true, showBalance: false });
@@ -312,12 +332,16 @@ class ExistingGrow extends Component {
           : null
         }
         { this.state.showBalance === true
-          ? <Directions
-              newGrowPlant={this.state.updatingThisPlant}
-              climates={this.state.climates}
-              handleClick={this.updatePhBalance}
+          ? <DirectionsContainer
+              newGrowPlant={this.state.plantRecipe}
+              handlePhClick={this.updatePhBalance}
               isBalanced={this.state.isBalanced}
-              selectedChamber={this.state.selectedChamber}
+              selectedChamber={this.state.updatingThisPlant.chamberId}
+              handleClick={this.completeExisitingGrow}
+              showPlantsDirections={false}
+              selectedPlant={this.state.updatingThisPlant.fullName}
+              handlePlantClick={this.completeExisitingGrow}
+              handleNextClick={this.completeExisitingGrow}
             />
           : null
         }
