@@ -5,6 +5,10 @@
   "author": "NYCSwan <megan.swanby@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.4",
+    "@fortawesome/fontawesome-free-regular": "^5.0.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.8",
+    "@fortawesome/react-fontawesome": "^0.0.17",
     "amazon-cognito-identity-js": "^1.31.0",
     "autoprefixer": "7.1.6",
     "aws-sdk": "^2.189.0",
@@ -41,6 +45,7 @@
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-router-bootstrap": "^0.24.4",

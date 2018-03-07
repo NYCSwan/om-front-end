@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faAlignJustify } from '@fortawesome/fontawesome-free-solid';
 
 import Routes from './js/routes';
 import { authUser, signOutUser } from "./libs/awsLibs";
 import styles from './styling/app.css';
 import logo from './media/logo.png';
 import Footer from './js/layout/footer.react';
+
+fontawesome.library.add(faAlignJustify);
 
 class App extends Component {
   static propTypes = {
@@ -21,7 +26,9 @@ class App extends Component {
 
   state = {
     isAuthenticated: false,
-    isAuthenticating: true
+    isAuthenticating: true,
+    openHamburger: false,
+    openModal: false
   }
 
   async componentDidMount() {
@@ -43,8 +50,9 @@ class App extends Component {
     this.setState({ isAuthenticated: authenticated });
   }
 
-  handleSelect = eventKey => {
-    console.log(`selected ${eventKey}`);
+  handleSelect = () => {
+    console.log(`handle hamburger toggle`);
+    this.setState({ openHamburger: !this.state.openHamburger });
   }
 
   handleLogout = ( event ) => {
@@ -52,7 +60,15 @@ class App extends Component {
     signOutUser();
     this.userHasAuthenticated(false);
     this.props.history.push("/login");
+  }
 
+  showModal = () => {
+    this.setState({ openModal: true });
+  }
+
+  handleModalClick = () => {
+    console.log('handle modal change');
+    this.setState({ openModal: !this.state.openModal });
   }
 
   authenticating = () => {
@@ -60,90 +76,154 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <div className={styles.app}>
-      { !this.state.isAuthenticating &&
-        <div>
+      { (!this.state.isAuthenticating && !this.state.openModal) &&
+        <div className={styles.navWithRoutes}>
         <nav className={styles.navbar}>
-          <div className={styles.topNav}>
-
-            <ul
-              onSelect={this.handleSelect}
-              className={styles.navbarCollapse}>
-              <input
-                type='checkbox'
-                id='collapse'
-                className={styles.collapse} />
-                <label
-                  htmlFor='collapse' className={styles.label}></label>
-                  <IndexLinkContainer
-                    to='/monitor'
-                    key={'monitor'} className={styles.indexLinkContainer}>
-                    <li
-                      className={styles.navItem}>
-                      Monitor
-                    </li>
-                  </IndexLinkContainer>
-                  <IndexLinkContainer
-                    to='/monitor/progress'
-                    key={'progress'} className={styles.indexLinkContainer}>
-                    <li
-                      className={styles.navItem}>
-                      Progress
-                    </li>
-                  </IndexLinkContainer>
-                  <IndexLinkContainer
-                    to='/controls'
-                    key={'controls'}
-                    className={styles.indexLinkContainer}>
-                    <li
-                      className={styles.navItem}>
-                      Controls
-                    </li>
-                  </IndexLinkContainer>
-                  <IndexLinkContainer
-                    to='/'
-                    key={'userAccount'}
-                    className={styles.indexLinkContainer}>
-                    <li
-                      className={styles.navItem}>
-                      My Account
-                    </li>
-                  </IndexLinkContainer>
-                  <IndexLinkContainer
-                    to='/'
-                    key={'support'}
-                    className={styles.indexLinkContainer}>
-                    <li
-                      className={styles.navItem}>
-                    Support</li>
-                  </IndexLinkContainer>
-            </ul>
+          <div className={styles.topNavWide}>
+            <IndexLinkContainer
+              to='/monitor'
+              key={'monitor'} className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+                Monitor
+              </li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/monitor/progress'
+              key={'progress'} className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+                Progress
+              </li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/controls'
+              key={'controls'}
+              className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+                Controls
+              </li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/'
+              key={'userAccount'}
+              className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+                My Account
+              </li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/'
+              key={'support'}
+              className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+              Support</li>
+            </IndexLinkContainer>
+          </div>
+          <div className={styles.topNavNarrow}>
+            <FontAwesomeIcon
+              icon="align-justify"
+              pull="right"
+              className={styles.hamburger}
+              onClick={this.handleSelect} />
+              { this.state.openHamburger === true
+                ?
+              <ul
+                onSelect={this.handleSelect}
+                className={styles.navbarCollapse}>
+                    <IndexLinkContainer
+                      to='/monitor'
+                      key={'monitor'}
+                      className={styles.indexLinkContainer}
+                      onClick={this.handleSelect}>
+                      <li
+                        className={styles.navItem}>
+                        Monitor
+                      </li>
+                    </IndexLinkContainer>
+                    <IndexLinkContainer
+                      to='/monitor/progress'
+                      key={'progress'}
+                      onClick={this.handleSelect}
+                      className={styles.indexLinkContainer}>
+                      <li
+                        className={styles.navItem}>
+                        Progress
+                      </li>
+                    </IndexLinkContainer>
+                    <IndexLinkContainer
+                      to='/controls'
+                      key={'controls'}
+                      className={styles.indexLinkContainer}
+                      onClick={this.handleSelect}>
+                      <li
+                        className={styles.navItem}>
+                        Controls
+                      </li>
+                    </IndexLinkContainer>
+                    <IndexLinkContainer
+                      to='/'
+                      key={'userAccount'}
+                      className={styles.indexLinkContainer}
+                      onClick={this.handleSelect}>
+                      <li
+                        className={styles.navItem}>
+                        My Account
+                      </li>
+                    </IndexLinkContainer>
+                    <IndexLinkContainer
+                      to='/'
+                      key={'support'}
+                      className={styles.indxLinkContSel}
+                      onClick={this.handleSelect}>
+                      <li
+                        className={styles.navItem}>
+                      Support</li>
+                    </IndexLinkContainer>
+              </ul>
+              :
+              null
+            }
+          </div>
+          { !this.state.openHamburger &&
             <Link to="/" href="/" className={styles.logo}>
               <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
             </Link>
+          }
+              <div className={styles.logging}>
+                {this.state.isAuthenticated
+                  ?
+                  <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
+                  : [
+                      <Link className={styles.signup} to='/signup' key={'signup'}>
+                        Signup
+                      </Link>,
+                      <Link className={styles.login} to='/login' key={'login'}>
+                        Login
+                      </Link>
+                    ]
+                }
+              </div>
+            </nav>
           </div>
-          <div className={styles.logging}>
-            {this.state.isAuthenticated
-              ?
-              <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
-              : [
-                  <Link to='/signup' key={'signup'}>
-                    Signup
-                  </Link>,
-                  <Link to='/login' key={'login'}>
-                    Login
-                  </Link>
-                ]
-            }
+        }
+        { (!this.state.isAuthenticating && !this.state.openHamburger) &&
+          <div>
+            <Routes
+              isAuthenticated={this.state.isAuthenticated}
+              userHasAuthenticated={this.userHasAuthenticated}
+              openModal={this.state.openModal}
+              handleModalClick={this.handleModalClick}
+              showModal={this.showModal} />
+            <Footer />
           </div>
-          </nav>
-          <Routes
-            isAuthenticated={this.state.isAuthenticated}
-            userHasAuthenticated={this.userHasAuthenticated} />
-        </div>
       }
-        <Footer />
       </div>
     );
   }
