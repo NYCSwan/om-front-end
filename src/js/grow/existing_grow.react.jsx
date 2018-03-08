@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import upperFirst from 'lodash/upperFirst';
+// import upperFirst from 'lodash/upperFirst';
 import pickBy from 'lodash/pickBy';
 import findKey from 'lodash/findKey';
 import isEmpty from 'lodash/isEmpty';
@@ -243,7 +243,7 @@ class ExistingGrow extends Component {
 
   completeExisitingGrow = () => {
     console.log('complete existing grow after setup ph, etc');
-    this.props.history.push("You have successfully managed Garden!", null, "/monitor");
+    this.props.history.push("/monitor");
   }
   // showGrowDirections = () => {
   //   console.log('show grow directions existing grow');
@@ -339,9 +339,11 @@ class ExistingGrow extends Component {
               selectedChamber={this.state.updatingThisPlant.chamberId}
               handleClick={this.completeExisitingGrow}
               showPlantsDirections={false}
-              selectedPlant={this.state.updatingThisPlant.fullName}
+              plant={this.state.updatingThisPlant.fullName}
               handlePlantClick={this.completeExisitingGrow}
               handleNextClick={this.completeExisitingGrow}
+              match={this.props.match}
+              history={this.props.history}
             />
           : null
         }

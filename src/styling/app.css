@@ -5,9 +5,9 @@
 
   .app {
     composes: body from './global-styles.css';
-    /* font-family: Futura-Lig; */
+    font-family: Futura-Lig;
     background-color: #ffffff;
-    /* width: 100%; */
+    width: 100%;
     text-align: center;
     position: relative;
     min-height: 100%;
@@ -148,15 +148,8 @@
 
   }
 
-  .navItem:last-child{
-    border-bottom-left-radius:4px;
-    border-bottom-right-radius:4px;
-  }
-
   .navItem::after {
     display: none;
-    /* background-color: white; */
-
   }
 
   .brandLogo {
@@ -191,118 +184,3 @@
   }
 
 }
-/*
-.homepage.link.Futura-Lig, .temperate.link, .custom.link, .tropical.link {
-background-color: rgba(115,115,115,0.4);
-min-width: 150px;
-height: auto;
-margin: 20px;
-padding-top: 5px;
-padding-bottom: 5px;
-font-size: 24px;
-/*border styles*/
-/*border: 0;
--moz-border-radius: 30px;
--webkit-border-radius: 30px;
-border-radius: 30px;
-}
-
-
-.backImage {
-display: none;
-position: relative;
-z-index: 1;
-width: 150px;
-height: auto;
-}
-
-
-h1.title.Futura-Lig {
-margin-top: 0;
-text-align: center;
-}
- */
-
-
-
-/* Filter Nav By Chamber */
-/*************************/
-/* .flex-row {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-content: center;
-}
-.flex-row > [class*='chamber-'] {
-align-self:stretch;
-padding: 0;
-margin: 0;
-}
-.flex-row.row:after,
-.flex-row.row:before {
-display: flex;
-}
-
-div.filter.row {
-background-color: transparent;
-vertical-align: middle;
-}
-
-.filterById {
-background-color: transparent;
-text-align: center;
-border-top: '#fff';
-}
-
-div.filterById.filter.flex-row.row.btn-group.btn-group-justified {
-width: 100%;
-align-content: stretch;
-align-items: stretch;
-}
-
-.chamber-1, .chamber-2, .chamber-3 {
-border: none;
-} */
-/*Forms General Settings */
-/**************************/
-/*
-label {
-text-shadow: 0px 1px 1px #000;
-text-align: center;
-}
-
-input[type=radio] {
-display: none;
-} */
-
-/*smaller screen responsive*/
-/****************************/
-/*@media only screen and (min-width: 808px) and (max-width: 1320px) {
-div.link.Chamber1.radio {
-position: absolute;
-margin-left: 100px;
-margin-top: 80px;
-background-color: red;
-}
-
-div.link.Chamber2.radio {
-position: absolute;
-margin-left: 100px;
-margin-top: 85px;
-background-color: blue;
-}
-
-div.link.Chamber3.radio {
-position: absolute;
-margin-left: -80px;
-margin-top: 20px;
-}
-
-.basil, .bell.Pepper, .broccoli, .cilantro, .green.Beans, .lettuce, .tomato, .kale, .link.temperate, .link.customize {
-height: 50px;
-}
-.directions.right {
-width: 50%;
-font-size: 18px;
-}
-}*/

@@ -26,7 +26,7 @@
   font-size: 16px;
 }
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
-  composes: background from './global-styles.css';
+  composes: background from './variables.css';
   font-family: Futura-Lig;
   width: 200px;
   /* min-width: 200px; */
@@ -129,13 +129,13 @@
 /* #chambers {
 background-color: blue;
 } */
-
+/*
 h3#chamber.directions.Futura-Lig {
 width: 180px;
 margin-top: 30px;
 margin-left: auto;
 margin-right: auto;
-}
+} */
 
 /* Tablet screens */
 /* ************ */
@@ -147,6 +147,10 @@ margin-right: auto;
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
+  .newGrowContainer {
+    min-height: 500px;
+  }
+
   .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
     font-family: Futura-Lig;
     max-width: 120px;
@@ -165,12 +169,9 @@ margin-right: auto;
     font-weight: bold;
     width: 100%;
     margin-top: 10px;
-    word-wrap: normal;
+    word-wrap: break-word;
   }
 
-  /* img {
-    width: 200px;
-  } */
 
   .Chamber1, .Chamber2, .Chamber3 {
     /* padding: 0; */
@@ -185,11 +186,14 @@ margin-right: auto;
     border-left: 2px solid #fff;
     border-right: 2px solid #fff;
   }
-  /*New Grow*/
-  /***********/
-  .selectedPlant h3 {
-    font-family: Futura-Lig;
+
+  .plantHeader {
     font-size: 14px;
+    coomposes: gray from './variables.css';
   }
 
+  .plantHeader h4 {
+    font-size: 12px;
+    /* coomposes: gray from './variables.css'; */
+  }
 }

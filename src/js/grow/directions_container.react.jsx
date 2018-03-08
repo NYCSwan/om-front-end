@@ -13,11 +13,12 @@ class DirectionsContainer extends Component {
     handlePhClick: PropTypes.func.isRequired,
     handlePlantClick: PropTypes.func.isRequired,
     handleNextClick: PropTypes.func.isRequired,
-
+    plant: PropTypes.string.isRequired,
     isBalanced: PropTypes.bool.isRequired,
     showPlantingDirections: PropTypes.bool.isRequired,
     match: PropTypes.shape({
-      params: PropTypes.object
+      params: PropTypes.object,
+      path: PropTypes.string
     }).isRequired
   };
 
@@ -53,7 +54,7 @@ class DirectionsContainer extends Component {
       const { newGrowPlant, selectedChamber } = this.props;
       const tempSettings = [];
       // debugger
-      tempSettings.push(newGrowPlant.plantName);
+      tempSettings.push(newGrowPlant.recipeName);
       tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}`);
       tempSettings.push(`pH ${newGrowPlant.pH}`);
       tempSettings.push(`Chamber ${selectedChamber}`);
@@ -64,7 +65,11 @@ class DirectionsContainer extends Component {
   }
 
   handleNextClick = () => {
-    this.props.showPlantingDirections();
+    if (this.props.match.path === '/controls/ExistingGrow') {
+      this.props.handleNextClick();
+    } else {
+      this.props.showPlantingDirections();
+    }
   }
   // climates={this.props.climates}
   render() {

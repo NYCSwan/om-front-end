@@ -234,7 +234,7 @@ class NewGrow extends Component {
     const { plantTypes } = this.state;
     if (isEmpty(this.state.selectedPlant)) {
       return (
-        <div className={styles.plantsContainer} >
+        <div className={styles.plantsContainer}>
           { plantTypes.map((plant) => {
 
             return (
@@ -304,7 +304,7 @@ class NewGrow extends Component {
         <div>
         { isEmpty(this.state.selectedPlant)
           ?
-          <div className={styles[`${this.state.selectedPlant.replace(/\s/, '')}`]}>
+          <div className={styles.plantHeader}>
             <h3>Select a Plant</h3>
             <h4>OR</h4>
             <h3>Customize Your Own Settings</h3>

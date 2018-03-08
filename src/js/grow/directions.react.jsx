@@ -39,15 +39,21 @@ class Directions extends Component {
   }
 
   handleClickUpdate = () => {
-    this.setState({ balancing: true });
     console.log('timeout 0');
+    this.setState({ balancing: true });
+    // console.log(this.state.balancing);
+    // debugger;
+    this.balancingDemo();
+    this.props.handlePhClick();
+  };
+
+  balancingDemo = () => {
     setTimeout(() => {
       this.setState({ balanced: true });
       console.log('timeout 10000');
     }, 10000);
     this.setState({ balancing: false });
-    this.props.handlePhClick();
-  };
+  }
 
   handleNextClick = () => {
     this.props.handleClick();
@@ -60,7 +66,7 @@ class Directions extends Component {
 
     return (
       <main className={styles.directionsright}>
-        { map(phdirections[0].phBalance, function( line) { return <p>{line}</p> })}
+        { map(phdirections[0].phBalance, function( line) { return <p key={line}>{line}</p> })}
         <p>This may take up to 5 minutes...</p>
       {this.state.balanced === true
         ?
