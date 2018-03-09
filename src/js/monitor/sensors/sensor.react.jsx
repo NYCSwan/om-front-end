@@ -24,8 +24,8 @@ class Sensor extends Component {
 
   state = {
     chamberId: 1,
-    graphWidth: 300,
-    graphHeight: 200,
+    graphWidth: 800,
+    graphHeight: 500,
     chambers: [],
     sensorData: [],
     isloading: true,
@@ -96,7 +96,7 @@ class Sensor extends Component {
     const sensorName = this.props.match.params.sensor_id;
 
     return (
-      <aside className={styles[`${sensorName}`]}>
+      <aside className={styles[sensorName]}>
         <div className={styles.texttop}>
           <h5>Chamber {chamberId}'s current {sensorName}</h5>
           <h4 className={styles.textbottom}>{ sensorData[0][`${sensorName}`] }</h4>

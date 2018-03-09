@@ -1,15 +1,17 @@
 /* Monitor */
 /************/
 .monitor {
-  /* background-color: darkgray; */
+  min-height: 800px;
 }
 
 .bubbles {
-  composes: background from './global-styles.css';
+  composes: background from './variables.css';
   background-image: url('../media/dgBubbles.png');
-  background-size: cover;
   opacity: 0.8;
+  width: 100%;
+  background-size: cover;
 }
+
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -25,6 +27,7 @@
     width: 100%;
   }
   .bubbles {
+    background-image: url('../media/dgBubblesFull.png');
     width: 100%;
     height: 500px;
   }

@@ -29,8 +29,7 @@
   composes: background from './variables.css';
   font-family: Futura-Lig;
   width: 200px;
-  /* min-width: 200px; */
-  font-size: 18px;
+  font-size: 24px;
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -109,33 +108,23 @@
   }
 
 
-.chamberContainer {
-  composes: background from './global-styles.css';
-  background-image: url('../media/iconLightGrey.png');
-  /* background-repeat:no-repeat;
-  background-size: 100% 100%; */
-  /* width: 45%; */
-  min-height: 400px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-top: 30px;
-/* margin-left: auto; */
-/* margin-right: auto; */
-  font-size: 18px;
-  /* position: relative; */
-  font-family: Futura-Lig;
-}
+  .chamberContainer {
+    composes: background from './variables.css';
+    background-image: url('../media/iconLightGrey.png');
+    /* background-repeat:no-repeat;
+    background-size: 100% 100%; */
+    /* width: 45%; */
+    min-height: 400px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    /* position: relative; */
+    font-family: Futura-Lig;
+  }
 
-/* #chambers {
-background-color: blue;
-} */
-/*
-h3#chamber.directions.Futura-Lig {
-width: 180px;
-margin-top: 30px;
-margin-left: auto;
-margin-right: auto;
-} */
 
 /* Tablet screens */
 /* ************ */

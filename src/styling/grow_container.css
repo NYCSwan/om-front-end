@@ -1,21 +1,48 @@
 .grow {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  height: 100vh;
 }
 
 .grow h4 {
-  width: 80%;
-  color: rgb(96,94,94);
-  margin-top: 10%;
+  font-size: 24px;
+  margin-bottom: 40px;
 }
+
 .homepage {
-  composes: default from './buttons.css';
   margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+}
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
 }
 
-.homepage:hover {
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .grow {
+    min-height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
+  .grow h4 {
+    width: 80%;
+    color: rgb(96,94,94);
+    margin-top: 10%;
+  }
+  .homepage {
+    composes: default from './buttons.css';
+    margin-top: 50px;
+  }
+
+  .homepage:hover {
+
+  }
 }

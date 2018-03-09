@@ -1,13 +1,48 @@
-/* Chamber Filter Headers */
-.chamber .chamber1, .chamber2, .chamber3, .Basil, .Kale, .Cilantro, .Lettuce, .Tomato {
-  background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.1));
-  width: 110px;
-  height: 50px;
+.chamber {
+  background: linear-gradient(rgba(170,170,170, 0.7), rgba(170,170,170, 0.1));
+  width: 33.3%;
+  height: 150px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 0;
+  color: rgb(96,94,94);
+  font-size: 24px;
 }
+
+.chamber:nth-child(2) {
+  border-right: 2px solid #fff;
+  border-left: 2px solid #fff;
+}
+
+.chamber:checked, .chamber:focus {
+  color: #fff;
+  font-weight: bolder;
+  text-shadow: 2px solid black;
+  background-color: rgba(104,176,77, 0.4);
+  border:0;
+}
+
+.chamber:checked, .chamber:active {
+  text-decoration: underline;
+}
+
+.chamber:disabled {
+  color: rgb(170,170,170);
+}
+
+.filterById {
+  width: 100%;
+  padding:0;
+  display: flex;
+  flex: row wrap;
+  background-color: transparent;
+  text-align: center;
+  border-top: '#fff';
+  height: 150px;
+}
+
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -17,23 +52,19 @@
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .chamber {
-    background: linear-gradient(rgba(170,170,170, 0.7), rgba(170,170,170, 0.1));
-    width: 33.3%;
     height: 60px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    border: 0;
-    color: rgb(96,94,94);
     font-size: 14px;
   }
-
   .chamber:nth-child(2) {
     border-right: 1px solid #fff;
     border-left: 1px solid #fff;
   }
 
+  /*
   .chamber:checked, .chamber:focus {
     color: #fff;
     font-weight: bolder;
@@ -48,17 +79,9 @@
 
   .chamber:disabled {
     color: rgb(170,170,170);
-  }
+  } */
 
   .filterById {
-    width: 100%;
-    padding:0;
-    display: flex;
-    flex: row wrap;
-    background-color: transparent;
-    text-align: center;
-    border-top: '#fff';
     height: 60px;
   }
-
 }

@@ -1,21 +1,5 @@
 /* Sensor */
 /***********/
-.pH, .temperature, .humidity, .waterlevel {
-  height: 350px;
-  border-radius: 250px;
-  width: 100%;
-  font-size: 24px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  position: relative;
-  padding: 10px;
-  vertical-align: middle;
-  composes: background from './variables.css';
-  color: rgb(96,94,94);
-}
 
 .pH {
   background-image: url('../media/pH_icon.png');
@@ -34,9 +18,27 @@
   background-image: url('../media/water_level_icon.png');
 }
 
+.pH, .temperature, .humidity, .waterlevel {
+  height: 250px;
+  border-radius: 250px;
+  width: 50%;
+  font-size: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  /* position: relative; */
+  /* padding: 10px; */
+  vertical-align: middle;
+  composes: background from './variables.css';
+  color: rgb(96,94,94);
+}
 .pH > .texttop, .temperature > .texttop, .humidity > .texttop, .waterlevel > .texttop,{
   border: 1px solid #605E5E;
 }
+
+.
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {

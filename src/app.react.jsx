@@ -82,6 +82,76 @@ class App extends Component {
       { (!this.state.isAuthenticating && !this.state.openModal) &&
         <div className={styles.navWithRoutes}>
         <nav className={styles.navbar}>
+        <div className={styles.topNavNarrow}>
+          <FontAwesomeIcon
+            icon="align-justify"
+            pull="right"
+            className={styles.hamburger}
+            onClick={this.handleSelect} />
+            { this.state.openHamburger === true
+              ?
+            <ul
+              onSelect={this.handleSelect}
+              className={styles.navbarCollapse}>
+                  <IndexLinkContainer
+                    to='/monitor'
+                    key={'monitor'}
+                    className={styles.indexLinkContainer}
+                    onClick={this.handleSelect}>
+                    <li
+                      className={styles.navItem}>
+                      Monitor
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
+                    to='/monitor/progress'
+                    key={'progress'}
+                    onClick={this.handleSelect}
+                    className={styles.indexLinkContainer}>
+                    <li
+                      className={styles.navItem}>
+                      Progress
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
+                    to='/controls'
+                    key={'controls'}
+                    className={styles.indexLinkContainer}
+                    onClick={this.handleSelect}>
+                    <li
+                      className={styles.navItem}>
+                      Controls
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
+                    to='/'
+                    key={'userAccount'}
+                    className={styles.indexLinkContainer}
+                    onClick={this.handleSelect}>
+                    <li
+                      className={styles.navItem}>
+                      My Account
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
+                    to='/'
+                    key={'support'}
+                    className={styles.indexLinkContSel}
+                    onClick={this.handleSelect}>
+                    <li
+                      className={styles.navItem}>
+                    Support</li>
+                  </IndexLinkContainer>
+            </ul>
+            :
+            null
+          }
+        </div>
+        { !this.state.openHamburger &&
+          <Link to="/" href="/" className={styles.logo}>
+            <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
+          </Link>
+        }
           <div className={styles.topNavWide}>
             <IndexLinkContainer
               to='/monitor'
@@ -126,76 +196,7 @@ class App extends Component {
               Support</li>
             </IndexLinkContainer>
           </div>
-          <div className={styles.topNavNarrow}>
-            <FontAwesomeIcon
-              icon="align-justify"
-              pull="right"
-              className={styles.hamburger}
-              onClick={this.handleSelect} />
-              { this.state.openHamburger === true
-                ?
-              <ul
-                onSelect={this.handleSelect}
-                className={styles.navbarCollapse}>
-                    <IndexLinkContainer
-                      to='/monitor'
-                      key={'monitor'}
-                      className={styles.indexLinkContainer}
-                      onClick={this.handleSelect}>
-                      <li
-                        className={styles.navItem}>
-                        Monitor
-                      </li>
-                    </IndexLinkContainer>
-                    <IndexLinkContainer
-                      to='/monitor/progress'
-                      key={'progress'}
-                      onClick={this.handleSelect}
-                      className={styles.indexLinkContainer}>
-                      <li
-                        className={styles.navItem}>
-                        Progress
-                      </li>
-                    </IndexLinkContainer>
-                    <IndexLinkContainer
-                      to='/controls'
-                      key={'controls'}
-                      className={styles.indexLinkContainer}
-                      onClick={this.handleSelect}>
-                      <li
-                        className={styles.navItem}>
-                        Controls
-                      </li>
-                    </IndexLinkContainer>
-                    <IndexLinkContainer
-                      to='/'
-                      key={'userAccount'}
-                      className={styles.indexLinkContainer}
-                      onClick={this.handleSelect}>
-                      <li
-                        className={styles.navItem}>
-                        My Account
-                      </li>
-                    </IndexLinkContainer>
-                    <IndexLinkContainer
-                      to='/'
-                      key={'support'}
-                      className={styles.indxLinkContSel}
-                      onClick={this.handleSelect}>
-                      <li
-                        className={styles.navItem}>
-                      Support</li>
-                    </IndexLinkContainer>
-              </ul>
-              :
-              null
-            }
-          </div>
-          { !this.state.openHamburger &&
-            <Link to="/" href="/" className={styles.logo}>
-              <img src={logo} className={styles.brandLogo} alt='Aeroasis Logo' />
-            </Link>
-          }
+
               <div className={styles.logging}>
                 {this.state.isAuthenticated
                   ?
