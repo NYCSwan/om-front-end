@@ -1,12 +1,16 @@
 /*Homepage*/                      /************/
 .monitorOrGrow {
-  height: 500px;
+  height: 900px;
+  background: transparent;
 }
 
 .homepage {
-  margin: auto 40px auto 40px;
+  margin: 150px auto 0 auto;
 }
 
+.homepage:first {
+  margin-top:200px;
+}
 
 /* Tablet screens */
 /* ************ */
