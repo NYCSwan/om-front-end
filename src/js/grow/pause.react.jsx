@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PopUp from './popup.react';
+import styles from '../../styling/pause.css';
 
 const Pause = props => (
   <PopUp
@@ -9,10 +10,10 @@ const Pause = props => (
     modalBody={
       <tbody>
         <tr>
-          <td>Directions:</td>
+          <td className={styles.title}>Directions:</td>
         </tr>
         <tr>
-          <td>Please clean your system or add water to the tanks now.</td>
+          <td className={styles.text}>Please clean your system or add water to the tanks now.</td>
         </tr>
       </tbody>
     }

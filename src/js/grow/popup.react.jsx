@@ -24,10 +24,6 @@ class PopUp extends Component {
     openModal: this.props.openModal
   };
 
-  // componentWillMount() {
-  //   this.props.openModal();
-  // }
-
   shouldComponentUpdate(newProps, newState) {
     console.log('shouldComponentUpdate existing grow');
     return this.props.openModal !== newProps.openModal || this.props.displayModal !== newProps.displayModal;
@@ -57,7 +53,7 @@ class PopUp extends Component {
         onClick={this.close}>
         <div
           className={styles.modal}>
-          <table>
+          <table className={styles.table}>
             <thead className={styles.header}>
               <tr>
                 <th>

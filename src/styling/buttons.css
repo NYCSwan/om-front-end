@@ -8,7 +8,7 @@
   display: block;
   background: #34696f;
   border: 2px solid rgba(33, 68, 72, 0.5);
-
+  cursor: pointer;
   /*Step 3: Text Styles*/
   color: rgba(255, 255, 255, 1.0);
   text-align: center;
@@ -43,17 +43,34 @@
   white-space: normal;
   border:1px solid black;
   border-radius: 50px;
-  composes: white from './variables.css';
   word-wrap: break-word;
-  cursor: grabbing;
+  cursor: pointer;
 }
 
 .default:active, .large:active {
-  /* composes: grayBackground from './variables.css'; */
-  /* color:  from './variables.css'; */
+  text-decoration: underline;
+  background-color: #3b9626;
+  color: white;
 }
 
 .default:hover, .large:hover {
-  /* composes: lightGray from './variables.css'; */
+  color: #3b9626;
+  text-decoration: underline;
   border: 1px white solid;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .default {
+    width: 75px;
+    height: auto;
+  }
 }

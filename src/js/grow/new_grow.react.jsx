@@ -277,7 +277,7 @@ class NewGrow extends Component {
                   type='button'
                   name={chamber.chamberId}
                   key={chamber.chamberId}
-                  value={chamber.chamberName}
+                  value={chamber.isFilled ? chamber.plantName : chamber.chamberName}
                   className={styles[`${chamber.chamberName.replace(/\s/, '')}`]}
                   onClick={this.handleChamberRadioClick}
                   disabled={chamber.isFilled}

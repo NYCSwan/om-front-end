@@ -2,24 +2,27 @@
     background-image: url('../media/icongrey.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
-    width: 300px;
-    height: 350px;
+    background-size: 200% 200%;
+    width: 600px;
+    height: 600px;
     margin-left: auto;
     margin-right: auto;
     list-style: none;
   }
   .listItemChamber1, .listItemChamber2, .listItemChamber3 {
-    composes: white from './variables.css';
     position: absolute;
   }
 
   .listItemChamber1 {
+    top:300px;
+    left: 1115px;
     margin-left: 5px;
     margin-top: 5px;
   }
 
   .listItemChamber2 {
+    left:1100px;
+    top: 440px;
     margin-left: 5px;
     margin-top: 50px;
   }
@@ -27,29 +30,27 @@
   .listItemChamber3 {
     margin-left: 5px;
     margin-top: 5px;
+    left:780px;
+    top: 370px;
   }
 
 
   .buttonChamber1 {
-    /* background: green; */
-    border: none;
-    position: absolute;
-    /* margin-left: 355px;
-    margin-top: 295px; */
-    color: gray from './variables.css';
+    border-style: hidden;
+    color: accentLightGreen from './variables.css';
+    font-size: 12px;
   }
 
   .buttonChamber2 {
-    color: gray from './variables.css';
-    position: absolute;
-    /* margin-left: 130px;
-    margin-top: 80px; */
+    color: accentLightGreen from './variables.css';
+    font-size: 12px;
+    border-style: hidden;
   }
 
   .buttonChamber3 {
-    position: absolute;
-    /* margin-left: -90px;
-    margin-top: 150px; */
+    color: accentLightGreen from './variables.css';
+    font-size: 12px;
+    border-style: hidden;
   }
 
 
@@ -65,62 +66,45 @@
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .chamberIcon {
     margin-top: 50px;
-    width: 250px;
-    height: 250px;
+    width: 370px;
+    height: 370px;
+    background-size: 150% 150%;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 /* Existing Grow */
   .listItemChamber1 {
-    top: 150px;
-    right: 145px;
+    top: 230px;
+    left: 235px;
     margin: 0 0 0 0;
-    /* margin-left: 80px;
-    margin-top: 40px; */
-    width: 80px;
+    font-size: 12px;
+    width: 60px;
     height: auto;
   }
 
   .listItemChamber2 {
     margin: 0 0 0 0;
-    top: 210px;
-    right: 145px;
-    /* margin-left: 5px;
-    margin-top: 50px; */
-    width: 80px;
+    top: 315px;
+    left: 235px;
+    font-size: 14px;
+    width: 60px;
     height: auto;
   }
 
   .listItemChamber3 {
     margin: 0 0 0 0;
-    top: 160px;
-    left: 75px;
-    /* margin-left: 5px;
-    margin-top: 5px; */
+    top: 265px;
+    left: 100px;
     width: 80px;
     height: auto;
   }
 
-  .buttonChamber1 {
-    position: absolute;
-    /* margin-left: 5px;
-    margin-top: 5px; */
+  .buttonChamber1, .buttonChamber2, .buttonChamber3 {
     width: 100%;
     height: auto;
+    color: #aaaaaa;
   }
 
-  .buttonChamber2 {
-    position: absolute;
-    /* margin-left: 10px;
-    margin-top: 10px; */
-    width: 100%;
-    height: auto;
-  }
-
-  .buttonChamber3 {
-    position: absolute;
-    margin-left: 10px;
-    margin-top: 25px;
-    width: 100%;
-    height: auto;
-  }
 }

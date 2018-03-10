@@ -60,13 +60,7 @@ class ExistingGrow extends Component {
   shouldComponentUpdate(newState) {
     console.log('shouldComponentUpdate existing grow');
     return (
-      this.state.chambers !== newState.chambers ||
-      // this.state.selectedChamber !== newState.selectedChamber ||
-      // this.state.showPause !== newState.showPause ||
-      // this.state.showBalance !== newState.showBalance ||
-      // this.state.showInitialPopup !== newState.showInitialPopup ||
-      this.state.growingPlants !== newState.growingPlants
-      // || this.state.isBalanced !== newState.isBalanced
+      this.state.chambers !== newState.chambers || this.state.growingPlants !== newState.growingPlants
     );
   }
 
@@ -74,7 +68,6 @@ class ExistingGrow extends Component {
 // API GET CALLS
   getGrowingPlants = () => {
     console.log('get plant recipe');
-    // debugger
     return invokeApig({ path: `/gardens`});
   };
 
@@ -264,27 +257,29 @@ class ExistingGrow extends Component {
           modalBody={
           <tbody className={styles.modalBody}>
             <tr>
-              <td>Pause</td>
+              <td className={styles.title}>Pause</td>
             </tr>
-            <tr>
-              <td>Pause your grow system to clean or change the water.</td>
+            <tr className={styles.textContainer}>
+              <td className={styles.text}>Pause your grow system to clean or change the water.</td>
             </tr>
-            <tr>
+            <tr className={styles.buttonContainer}>
               <td>
                 <button
-                  className='pause'
+                  className={styles.pause}
                   onClick={this.handlePauseClick}>
                   Pause
                 </button>
               </td>
             </tr>
 
-            <tr><td>pH Balance</td></tr>
-            <tr><td>Balance the pH in your system.</td></tr>
-            <tr>
+            <tr><td className={styles.title}>pH Balance</td></tr>
+            <tr className={styles.balancedButtonContainer}>
+              <td className={styles.text}>Balance the pH in your system.</td>
+            </tr>
+            <tr className={styles.buttonContainer}>
               <td>
                 <button
-                  className='balanced'
+                  className={styles.balanced}
                   onClick={this.handleBalanceClick}>
                   Balance
                 </button>
@@ -303,7 +298,7 @@ class ExistingGrow extends Component {
   renderError() {
     return (
       <div className={styles.errorMessage}>
-        <p>Something seems to have gone wrong. Please refresh or try again later.</p>
+        <p className={styles.text}>Something seems to have gone wrong. Please refresh or try again later.</p>
       </div>
     )
   }
@@ -318,7 +313,7 @@ class ExistingGrow extends Component {
           ? this.renderGardens()
           : this.renderLanding()
         }
-        { ( !isEmpty(this.state.updatingThisPlant) && this.state.showInitialPopup )
+        { ( !isEmpty(this.state.plantRecipe) && this.state.showInitialPopup )
           ? this.renderPopUp()
           : null
         }

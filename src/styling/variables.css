@@ -16,9 +16,11 @@
 .accentLightGray {
   color: #C0C0C0;
 }
+
 .accentLightGreen {
   color: #04a12b;
 }
+
 .gray {
   color: #aaaaaa;
 }
@@ -40,7 +42,9 @@
 .lightGreenBackground {
   background-color: rgb(104, 176, 77);
 }
-
+.darkGreenBackground {
+  color: #3b9626;
+}
 .background {
   background-repeat: no-repeat;
   background-position: center top;

@@ -1,10 +1,10 @@
   body {
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   .app {
-    composes: body from './global-styles.css';
     font-family: Futura-Lig;
     background-color: #ffffff;
     width: 100%;

@@ -4,25 +4,32 @@
     font-weight: normal;
     font-style: normal;
     font-family: Futura-Lig;
-    /* height: 100%;
-    width: 100%; */
     box-sizing: border-box;
   }
 
-  .link :global {
+  a :global {
     list-style: none;
   }
 
-  .img :global {
+  img :global {
     max-width:150px;
   }
 
-  /* .background :global {
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 100% 100%;
-    background-color: inherit;
-  } */
+  h1 :global {
+    font: bold 2em/32px Futura-Lig;
+  }
+  h2 :global {
+    font: bold 1.5em/26px Futura-Lig;
+  }
+  h3 :global {
+    font: bold 1.25em/20px Futura-Lig;
+  }
+  h4 :global {
+    font: normal 1em/16px Futura-Lig;
+  }
+  h5 :global {
+    font: normal .75em/14px Futura-Lig;
+  }
 
   /* Tablet screens */
   /* ************ */
@@ -34,19 +41,23 @@
   /* Phone Screens */
   /*****************/
   @media only screen and (min-width: 375px) and (max-width: 807px) {
-    h1 :global {
-      font: bold 2em/32px Futura-Lig;
+    img :global {
+      max-width:75px;
     }
-    h2 :global {
+
+    h1 :global {
       font: bold 1.5em/26px Futura-Lig;
     }
-    h3 :global {
+    h2 :global {
       font: bold 1.25em/20px Futura-Lig;
     }
+    h3 :global {
+      font: bold 1em/16px Futura-Lig;
+    }
     h4 :global {
-      font: normal 1em/16px Futura-Lig;
+      font: normal .75em/14px Futura-Lig;
     }
     h5 :global {
-      font: normal .75em/14px Futura-Lig;
+      font: normal .5em/12px Futura-Lig;
     }
   }
