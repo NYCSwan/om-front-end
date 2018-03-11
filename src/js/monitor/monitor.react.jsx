@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-// import findKey from 'lodash/findKey';
-// import findLastIndex from 'lodash/findLastIndex';
-// import isEmpty from 'lodash/isEmpty';
-// import forIn from 'lodash/forIn';
-// import pickBy from 'lodash/pickBy';
-// import { ListGroup } from 'react-bootstrap';
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/fontawesome-free-regular';
+
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
 import Spinner from '../helpers/spinner.react';
-// import pH from '../../media/pH_icon.png';
-// import ppm from '../../media/ppm_icon.png';
-//
-// import humidity from '../../media/humidity_icon.png';
-// import temperature from '../../media/temperature_icon.png';
 import waterlevel from '../../media/water_level_icon.png';
 import lightsOn from '../../media/light_icon_white.png';
 import lightsOff from '../../media/light_icon_grey.png';
+
+fontawesome.library.add(faCircle);
 
 class Monitor extends Component {
   static propTypes = {
@@ -199,7 +194,10 @@ class Monitor extends Component {
               <div className={styles.temperatureContainer}>
                 <Link
                   className={styles.temperaturelink} to='/monitor/temperature'>
-                  <h2 className={styles.xBigFont}>{latest.temperature}*</h2>
+                  <h2 className={styles.xBigFont}>
+                    {latest.temperature}
+                    <FontAwesomeIcon icon='circle' />
+                  </h2>
                   <h4>F</h4>
                 </Link>
               </div>

@@ -25,29 +25,29 @@
 }
 
 .humidityContainer {
-  right: 500px;
-  top: 630px;
+  right: 700px;
+  top: 675px;
   width: 75px;
   height: auto;
 }
 
 .turbidityContainer {
-  left: 335px;
-  bottom: 50px;
+  left: 435px;
+  bottom: 150px;
   width: 75px;
   height: auto;
 }
 
 .temperatureContainer {
   left: 900px;
-  top: 400px;
+  top: 430px;
   width: 100px;
   height: auto;
 }
 
 .phContainer {
-  left: 405px;
-  top: 605px;
+  left: 8505px;
+  bottom: 300px;
   width: 75px;
   height: auto;
 }
@@ -55,13 +55,13 @@
 .waterlevelContainer {
   width: 75px;
   height: auto;
-  top: 895px;
-  right: 140px;
+  top: 595px;
+  left: 175px;
 }
 
 .dayOfCycle {
-  top: 580px;
-  left: 210px;
+  bottom: 80px;
+  right: 210px;
 }
 
 /* .waterlevellink > img {
@@ -94,6 +94,12 @@
   width: 150px;
   right: 100px;
   top: 450px;
+}
+
+.xBigFont {
+  font-size: 36px;
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 /* Tablet screens */
 /* ************ */

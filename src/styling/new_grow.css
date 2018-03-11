@@ -125,7 +125,7 @@
   }
 
   .buttonCustomize {
-    background-image: url('../media/customize_button.jpg');
+    background-image: url('../media/customize_button.png');
     order: 10;
     /* padding: 5px 2px 5px 2px; */
   }
