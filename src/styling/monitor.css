@@ -1,7 +1,7 @@
 /* Monitor */
 /************/
 .monitor {
-  min-height: 800px;
+  min-height: 1000px;
 }
 
 .bubbles {
@@ -9,9 +9,92 @@
   background-image: url('../media/dgBubbles.png');
   opacity: 0.8;
   width: 100%;
-  background-size: cover;
+  height: 1000px;
+  margin-top: -15px;
+  background-size: 100% 100%;
 }
 
+.humidityContainer, .turbidityContainer, .temperatureContainer, .phContainer, .waterlevelContainer, .dayOfCycle, .light {
+  position: absolute;
+  color: white;
+}
+
+.humidityContainer, .turbidityContainer, .temperatureContainer, .phContainer, .waterlevelContainer, .dayOfCycle {
+  font-size: 24px;
+
+}
+
+.humidityContainer {
+  right: 500px;
+  top: 630px;
+  width: 75px;
+  height: auto;
+}
+
+.turbidityContainer {
+  left: 335px;
+  bottom: 50px;
+  width: 75px;
+  height: auto;
+}
+
+.temperatureContainer {
+  left: 900px;
+  top: 400px;
+  width: 100px;
+  height: auto;
+}
+
+.phContainer {
+  left: 405px;
+  top: 605px;
+  width: 75px;
+  height: auto;
+}
+
+.waterlevelContainer {
+  width: 75px;
+  height: auto;
+  top: 895px;
+  right: 140px;
+}
+
+.dayOfCycle {
+  top: 580px;
+  left: 210px;
+}
+
+/* .waterlevellink > img {
+  width: 50px;
+  height: auto;
+} */
+
+.temperaturelink, .phlink, .waterlevelink, .turbiditylink, .humiditylink {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  width: 105px;
+  color: white;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.temperaturelink:hover, .phlink:hover, .waterlevelink:hover, .turbiditylink:hover, .humiditylink:hover {
+  color: darkgray from './variables.css';
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.light {
+  background-color: green;
+  border-radius: 35px;
+  width: 150px;
+  right: 100px;
+  top: 450px;
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -23,21 +106,26 @@
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .monitor {
-    height: 100%;
+    height: 500px;
     width: 100%;
   }
+
   .bubbles {
     background-image: url('../media/dgBubblesFull.png');
     width: 100%;
     height: 500px;
+    margin-top: 0;
+    background-size: 100% 100%;
   }
 
   .lander {
     composes: grayBackground from './variables.css';
   }
+
   .newGrow {
     composes: large from './buttons.css';
   }
+
   .listGroup {
     composes: grayBackground from './variables.css';
     display: flex;
@@ -75,6 +163,7 @@
 
   .humidityContainer, .turbidityContainer, .temperatureContainer, .phContainer, .waterlevelContainer, .dayOfCycle {
     position: absolute;
+    line-height:
   }
 
   .humidityContainer {
@@ -117,6 +206,12 @@
     left: 210px;
   }
 
+  .light {
+    width: 80px;
+    right: 50px;
+    top: 180px;
+  }
+
   /* .waterlevellink > img {
     width: 50px;
     height: auto;
@@ -133,47 +228,11 @@
     padding: 0;
     text-decoration: none;
   }
-  .temperaturelink:hover, .phlink:hover, .waterlevelink:hover, .turbiditylink:hover, .humiditylink:hover {
+  /* .temperaturelink:hover, .phlink:hover, .waterlevelink:hover, .turbiditylink:hover, .humiditylink:hover {
     color: darkgray from './variables.css';
-    cursor: grab;
-  }
+    cursor: pointer;
+    text-decoration: underline;
+  } */
 
 
 }
-
-/* div.bottom.container.readings.row {
-position: relative;
-margin: 0;
-padding: 0;
-width: 100%;
-}
-
-.dayOfCycle.col-md-4.col-sm-4.col-xs-4 {
-bottom: 0;
-position: absolute;
-}
-
-.bubble {
-border-radius: 50%;
-width: 200px;
-height: 200px;
-background-color: rgba(0,0,0, 0.8);
-text-align: center;
-}
-
-.bubble.humidity, .bubble.temperature, .bubble.ppm, .bubble.ph {
-margin-top: 5%;
-color: white;
-}
-
-.buble a {
-color: rgb(0, 0, 0);
-}
-
-.bubble a h4 {
-position: absolute;
-margin-left: 30%;
-margin-right: auto;
-width: 40px;
-text-align: center;
-} */

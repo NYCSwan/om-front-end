@@ -18,6 +18,8 @@ import Spinner from '../helpers/spinner.react';
 // import humidity from '../../media/humidity_icon.png';
 // import temperature from '../../media/temperature_icon.png';
 import waterlevel from '../../media/water_level_icon.png';
+import lightsOn from '../../media/light_icon_white.png';
+import lightsOff from '../../media/light_icon_grey.png';
 
 class Monitor extends Component {
   static propTypes = {
@@ -32,7 +34,8 @@ class Monitor extends Component {
     chamberData: [],
     growingPlants: [],
     chambers: [],
-    isloading: true
+    isloading: true,
+    lightOn: true
   };
 
   async componentDidMount() {
@@ -124,6 +127,11 @@ class Monitor extends Component {
     this.props.history.push(event.currentTarget.getAttribute("href"));
   }
 
+  handleLight = () => {
+    console.log('turn lights on or off');
+    this.setState({ lightOn: !this.state.lightOn });
+  }
+
   renderDayInCycle() {
     console.log('render day of cycle');
     const { growingPlants, chamberId } = this.state;
@@ -157,7 +165,19 @@ class Monitor extends Component {
           ?
 
             <div className={styles.bubbles}>
-
+            { this.state.lightOn ?
+              <div
+                className={styles.light}
+                onClick={this.handleLight}>
+                <img src={lightsOn} alt='light on/off' />
+              </div>
+              :
+              <div
+                className={styles.light}
+                onClick={this.handleLight}>
+                <img src={lightsOff} alt='light on/off' />
+              </div>
+            }
               <div className={styles.humidityContainer}>
                 <Link
                 className={styles.humiditylink}
