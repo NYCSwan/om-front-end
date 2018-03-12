@@ -1,14 +1,14 @@
 .chamber {
   background: linear-gradient(rgba(170,170,170, 0.7), rgba(170,170,170, 0.1));
   width: 33.3%;
-  height: 150px;
+  height: 100px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border: 0;
   color: rgb(96,94,94);
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .chamber:nth-child(2) {
@@ -40,7 +40,7 @@
   background-color: transparent;
   text-align: center;
   border-top: '#fff';
-  height: 150px;
+  height: 100px;
 }
 
 /* Tablet screens */

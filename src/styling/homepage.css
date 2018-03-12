@@ -1,11 +1,19 @@
 /*Homepage*/                      /************/
 .monitorOrGrow {
-  height: 900px;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  height: 400px;
   background: transparent;
+  margin: 125px auto 0 auto;
+  border-radius: 50px;
+  composes: lightGray from './variables.css';
+  opacity: 0.6;
 }
 
 .homepage {
-  margin: 150px auto 0 auto;
+  margin: 50px auto 50px auto;
+  width: auto;
 }
 
 .homepage:first {
@@ -23,14 +31,7 @@
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .monitorOrGrow {
-    display: flex;
-    align-items: center;
-    flex-flow: column;
     min-height: 350px;
-    margin: 125px 50px 125px 50px;
-    border-radius: 50px;
-    composes: lightGray from './variables.css';
-    opacity: 0.6;
   }
 
   .homepage {
@@ -39,6 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(255,255,255,0.8);
+    width: 100px;
   }
 
   .homepage:hover {

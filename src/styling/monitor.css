@@ -1,7 +1,7 @@
 /* Monitor */
 /************/
 .monitor {
-  min-height: 1000px;
+  min-height: 600px;
 }
 
 .bubbles {
@@ -9,7 +9,7 @@
   background-image: url('../media/dgBubbles.png');
   opacity: 0.8;
   width: 100%;
-  height: 1000px;
+  height: 500px;
   margin-top: -15px;
   background-size: 100% 100%;
 }
@@ -41,7 +41,7 @@
 .temperatureContainer {
   left: 900px;
   top: 430px;
-  width: 100px;
+  width: 75px;
   height: auto;
 }
 
@@ -74,7 +74,7 @@
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  width: 105px;
+  width: 75px;
   color: white;
   height: auto;
   margin: 0;

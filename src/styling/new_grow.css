@@ -1,10 +1,10 @@
 /*New Grow*/
 /***********/
 .newGrowContainer {
-  min-height: 600px;
+  height: 900px;
   /* display: flex;
   flex: column wrap; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
   width: 100%;
   text-align: center;
   color: #fff;
@@ -21,7 +21,7 @@
 
 /* PLANTS FORM */
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
-  max-width: 250px;
+  max-width: 200px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 20px;
@@ -63,14 +63,6 @@
 
 .plantHeader {
   color: gray from './variables.css';
-}
-
-.plantHeader h3 {
-  font-size: 20px;
-}
-
-.plantHeader h4 {
-  font-size: 16px;
 }
 
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
@@ -138,10 +130,10 @@
 
   .Chamber1, .Chamber2, .Chamber3 {
     align-self: baseline;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .chamberContainer {
@@ -168,8 +160,8 @@
   }
 
   .Chamber2 {
-    border-left: 3px solid #fff;
-    border-right: 3px solid #fff;
+    /* border-left: 3px solid #fff; */
+    /* border-right: 3px solid #fff; */
   }
 
   .chamber3 {

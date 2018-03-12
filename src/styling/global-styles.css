@@ -16,21 +16,23 @@
   }
 
   h1 :global {
-    font: bold 2em/32px Futura-Lig;
+    font: bold 2em/30px Futura-Lig;
   }
   h2 :global {
-    font: bold 1.5em/26px Futura-Lig;
+    font: bold 1.5em/24px Futura-Lig;
   }
   h3 :global {
     font: bold 1.25em/20px Futura-Lig;
   }
   h4 :global {
-    font: normal 1em/16px Futura-Lig;
+    font: normal 1em/18px Futura-Lig;
   }
   h5 :global {
-    font: normal .75em/14px Futura-Lig;
+    font: normal .75em/16px Futura-Lig;
   }
-
+  p :global {
+    font: normal .5em/14px Futura-Lig;
+  }
   /* Tablet screens */
   /* ************ */
   @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -64,5 +66,8 @@
     h5 :global {
       font: normal .5em/12px Futura-Lig;
       line-height: 16px;
+    }
+    p :global {
+      font: normal .4em/10px Futura-Lig;
     }
   }

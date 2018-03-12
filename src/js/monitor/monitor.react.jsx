@@ -218,9 +218,6 @@ class Monitor extends Component {
                   <img src={waterlevel} alt="water level icon" />
                 </Link>
               </div>
-                <h4 className={styles.lighting}>
-                  light on/off
-                </h4>
                 <h4 className={styles.dayOfCycle}>
                   Day {this.renderDayInCycle()}
                 </h4>
