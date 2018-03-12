@@ -181,7 +181,6 @@ class Monitor extends Component {
                   <h4>RH</h4>
                 </Link>
               </div>
-
               <div className={styles.turbidityContainer}>
                 <Link
                 className={styles.turbiditylink}
@@ -190,7 +189,6 @@ class Monitor extends Component {
                   <h4>RH</h4>
                 </Link>
               </div>
-
               <div className={styles.temperatureContainer}>
                 <Link
                   className={styles.temperaturelink} to='/monitor/temperature'>

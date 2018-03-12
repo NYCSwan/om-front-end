@@ -210,7 +210,6 @@
 
   .plantHeader h4 {
     font-size: 12px;
-    /* coomposes: gray from './variables.css'; */
   }
 
   .plantsContainer {
@@ -219,14 +218,10 @@
     margin-right: 5px;
     margin-left: 5px;
     margin-top: 20px;
-    /* min-height: 300px; */
     height: 500px;
     width: 70%;
-    /* align-items: center; */
     justify-content: center;
-    /* align-content: center; */
     border-radius: 5px;
-    /* text-align: center; */
     background-color:  #C0C0C0;
   }
 }
