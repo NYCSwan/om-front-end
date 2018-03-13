@@ -18,7 +18,7 @@
   top: 400px;
   left: 300px;
   width: 60%;
-  composes: lightGrayBackground from './variables.css';
+  background-color: rgba(96,94,94,0.6);
   text-align: left;
 }
 
@@ -38,8 +38,9 @@
   width: 60%;
   position: absolute;
   left: 300px;
-  top: 595px;
-  composes: lightGrayBackground from './variables.css';
+  top: 598px;
+  background-color: rgba(96,94,94,0.6);
+  color: #fff;
 }
 
 .videoContainer h3 {

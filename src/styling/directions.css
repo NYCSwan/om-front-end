@@ -5,13 +5,34 @@
 
 .balanced {
   composes: default from './buttons.css';
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .directionsright {
   width: 55%;
   display: flex;
   flex-flow: column wrap;
-  right:0;
-  margin-left: 5px;
+  /* right:0; */
+  /* margin-left: 5px; */
   font-size: 18px;
+}
+
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+.balanced {
+  margin-top: 20px;
+  width: 100px;
+}
+
 }

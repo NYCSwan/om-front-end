@@ -3,9 +3,31 @@
   text-align: left;
   display: flex;
   flex-flow: row wrap;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: flex-end;
 }
 
 .directions h2, .directions h3 {
   text-align: center;
   width: 100%;
+}
+
+
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .directions {
+    width: 80%;
+  }
 }
