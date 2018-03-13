@@ -178,15 +178,15 @@ class Monitor extends Component {
                 className={styles.humiditylink}
                 to='/monitor/humidity'>
                   <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
-                  <h4>RH</h4>
+                  <h4>RH (Humidity)</h4>
                 </Link>
               </div>
               <div className={styles.turbidityContainer}>
                 <Link
                 className={styles.turbiditylink}
                 to='/monitor/turbidity'>
-                  <h2 className={styles.xBigFont}>{latest.turbidity}%</h2>
-                  <h4>RH</h4>
+                  <h2 className={styles.xBigFont}>{latest.turbidity}</h2>
+                  <h4>PPM</h4>
                 </Link>
               </div>
               <div className={styles.temperatureContainer}>

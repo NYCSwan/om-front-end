@@ -160,15 +160,16 @@ class Progress extends Component {
           alt={recipe[key].recipeName}
           className={styles.plantImg}
           key={recipe[key].Etag} />
-        <h1>{recipe[key].fullName}</h1>
-
-        <p>{recipe[key].suggestions}</p>
-        <h5>
-          <b>Avg Market Price:</b> ${recipe[key].marketPrice}
-        </h5>
-        <h5>
-          <b>Avg Yield:</b> {recipe[key].yield}
-        </h5>
+        <aside className={styles.plantDetails}>
+          <h1>{recipe[key].fullName}</h1>
+          <h4>{recipe[key].suggestions}</h4>
+          <h4>
+            <b>Avg Market Price:</b> ${recipe[key].marketPrice}
+          </h4>
+          <h4>
+            <b>Avg Yield:</b> {recipe[key].yield}
+          </h4>
+        </aside>
       </div>
     )
   }
@@ -209,8 +210,7 @@ class Progress extends Component {
           height="240"
           key='video'
           loop
-          autoPlay
-          preload='true'>
+          autoPlay>
           <source
             src={TimelapseVideo}
             type="video/mp4" />

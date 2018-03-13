@@ -1,5 +1,52 @@
+.plantInfoContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 
+.plantImg {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-bottom: 2px solid rgb(96,94,94);
+}
 
+.plantDetails {
+  position: absolute;
+  top: 400px;
+  left: 300px;
+  width: 60%;
+  composes: lightGrayBackground from './variables.css';
+  text-align: left;
+}
+
+.plantDetails h1 {
+  font-weight: bolder;
+  text-align: center;
+  color: #fff;
+  background: transparent;
+}
+
+.plantDetails h4 {
+  margin-left: 20px;
+  color: #ffffff;
+}
+
+.videoContainer {
+  width: 60%;
+  position: absolute;
+  left: 300px;
+  top: 595px;
+  composes: lightGrayBackground from './variables.css';
+}
+
+.videoContainer h3 {
+  padding-top: 15px;
+  margin: 0;
+
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -10,43 +57,22 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
-  .plantInfoContainer {
-    width: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
 
   .plantInfoContainer h1 {
-    position: absolute;
     left: 110px;
     top: 200px;
-    font-weight: bolder;
-    color: #fff;
   }
 
   .plantInfoContainer p {
     /* grid-area: 1; */
-    margin: 5px auto;
+    /* margin: 5px auto; */
   }
   .plantInfoContainer h5 {
-    margin-left: 5px;
-  }
-
-  .plantImg {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border-bottom: 2px solid rgb(96,94,94);
-  }
-
-  .videoContainer {
-    width: 100%;
-    composes: lightGreenBackground from './variables.css';
+    /* margin-left: 5px; */
   }
 
   .videoContainer h3 {
     padding-top: 15px;
+    margin: 0;
   }
 }

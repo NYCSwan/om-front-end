@@ -1,3 +1,23 @@
 .chart {
-  /* border: 1px solid #605E5E; */
+  margin-right: auto;
+  margin-left: auto;
+ }
+
+/* Tablet screens */
+/* ************ */
+
+
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .chart {
+    width: 300px;
+    height: auto;
+  }
 }

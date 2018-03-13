@@ -145,7 +145,7 @@ class Sensor extends Component {
               match={this.props.match}
             />
               <div className={styles.startDate}>
-                <h4>Started</h4>
+                <h3>Started</h3>
                 {this.renderStartDate()}
               </div>
           </div>

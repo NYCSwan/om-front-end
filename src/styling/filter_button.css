@@ -16,7 +16,7 @@
   border-left: 2px solid #fff;
 }
 
-.chamber:checked, .chamber:focus {
+.chamber:checked, .chamber:focus, .chamber:hover {
   color: #fff;
   font-weight: bolder;
   text-shadow: 2px solid black;

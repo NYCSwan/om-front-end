@@ -1,3 +1,8 @@
+.areaChartContainer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Tablet screens */
 /* ************ */
 
@@ -13,7 +18,9 @@
 
   .areaChartContainer {
     margin-top: 30px;
-    margin-left: 40px;
-    margin-right: 40px;
+    width: 300px;
+    height: 300px;
+    /* margin-left: 40px; */
+    /* margin-right: 40px; */
   }
 }

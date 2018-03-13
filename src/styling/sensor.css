@@ -18,27 +18,56 @@
   background-image: url('../media/water_level_icon.png');
 }
 
-.pH, .temperature, .humidity, .waterlevel {
+.turbidity {
+  background-image: url('../media/ppm_icon.png');
+}
+
+.pH, .temperature, .humidity, .waterlevel, .turbidity {
   height: 250px;
-  border-radius: 250px;
-  width: 50%;
+  border-radius: 150px;
+  width: 40%;
   font-size: 24px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  /* position: relative; */
-  /* padding: 10px; */
+  margin-top: 50px;
+  margin-bottom: 50px;
   vertical-align: middle;
   composes: background from './variables.css';
+  background-size: 100% 100%;
   color: rgb(96,94,94);
 }
-.pH > .texttop, .temperature > .texttop, .humidity > .texttop, .waterlevel > .texttop,{
-  border: 1px solid #605E5E;
+.pH .texttop, .temperature .texttop, .humidity .texttop, .waterlevel .texttop, .turbidity .texttop {
+  /* border: 1px solid #605E5E; */
 }
 
-.
+.pH h4, .temperature h4, .humidity h4, .waterlevel h4, .turbidity h4 {
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.startDate {
+  background-color: #605E5E;
+  border-top-right-radius: 125px;
+  border-top-left-radius: 125px;
+  color: #fff;
+  width: 250px;
+  height: 125px;
+  margin-left: auto;
+  vertical-align: center;
+  margin-right: auto;
+}
+
+.startDate h3 {
+  text-align: center;
+  /* margin-top: 25px; */
+  padding-top: 40px;
+  margin-left: auto;
+  vertical-align: center;
+  margin-right: auto;
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -53,7 +82,7 @@
     min-height: 800px;
   }
 
-  .pH, .temperature, .humidity, .waterlevel {
+  .pH, .temperature, .humidity, .waterlevel, .turbidity {
     height: 250px;
     border-radius: 150px;
     width: 100%;
@@ -87,24 +116,14 @@
   }
 
   .startDate {
-    composes: lightGray from './variables.css';
-    background-color: #605E5E;
-    border-top-right-radius: 50px;
-    border-top-left-radius: 50px;
-    color: #fff;
-    width: 150px;
+    border-top-right-radius: 75px;
+    border-top-left-radius: 75px;
+    width: 125px;
     height: 75px;
-    margin-top: 40px;
-    margin-left: auto;
-    vertical-align: center;
-    margin-right: auto;
+    padding-top: 20px;
   }
 
-  .startDate h4 {
-    text-align: center;
-    margin-top: 5px;
-    margin-left: auto;
-    vertical-align: center;
-    margin-right: auto;
+  .startDate h3 {
+    padding-top: 0;
   }
 }

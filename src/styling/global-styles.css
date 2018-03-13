@@ -12,7 +12,7 @@
   }
 
   img :global {
-    max-width:150px;
+    width: 150px;
   }
 
   h1 :global {
@@ -28,10 +28,10 @@
     font: normal 1em/18px Futura-Lig;
   }
   h5 :global {
-    font: normal .75em/16px Futura-Lig;
+    font: normal .8em/16px Futura-Lig;
   }
   p :global {
-    font: normal .5em/14px Futura-Lig;
+    font: normal .75em/14px Futura-Lig;
   }
   /* Tablet screens */
   /* ************ */
