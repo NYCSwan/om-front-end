@@ -14,24 +14,20 @@
   }
 
   .listItemChamber1 {
-    top:300px;
-    left: 1115px;
+    top:280px;
+    left: 890px;
     margin-left: 5px;
     margin-top: 5px;
   }
 
   .listItemChamber2 {
-    left:1100px;
-    top: 440px;
-    margin-left: 5px;
-    margin-top: 50px;
+    left:880px;
+    top: 500px;
   }
 
   .listItemChamber3 {
-    margin-left: 5px;
-    margin-top: 5px;
-    left:780px;
-    top: 370px;
+    left:570px;
+    top: 390px;
   }
 
 
