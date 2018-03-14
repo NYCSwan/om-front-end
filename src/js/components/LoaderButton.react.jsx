@@ -13,12 +13,10 @@ const LoaderButton = props => (
 )
 
 LoaderButton.propTypes = {
-  className: PropTypes.string.isRequired,
   isloading: PropTypes.bool.isRequired,
   disabled: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
-  loadingtext: PropTypes.string.isRequired,
-  // handleClick: PropTypes.func.isRequired
+  loadingtext: PropTypes.string.isRequired
 }
 
 export default LoaderButton;

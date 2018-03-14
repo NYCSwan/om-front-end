@@ -44,7 +44,7 @@ class Login extends Component {
   handleChange = event => {
     // debugger
     event.preventDefault();
-    
+
     this.setState({
       [event.target.type]: event.target.value
     });
@@ -69,21 +69,23 @@ class Login extends Component {
   render() {
     return (
       <div className={styles.Login}>
+        <h2>Login</h2>
         <form onSubmit={this.handleSubmit}>
           <div className={styles.email}>
+            <label>Email:  </label>
             <input
               autofocus
               type="email"
               value={this.state.email} onChange={this.handleChange} />
           </div>
           <div className={styles.password}>
+            <label>Password:  </label>
             <input
               autofocus
               value={this.state.password} onChange={this.handleChange} type="password" />
           </div>
           <LoaderButton
             block
-            className='login'
             disabled={!this.validateForm()}
             type="submit"
             isloading={this.state.isloading}

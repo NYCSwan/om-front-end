@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import {
-  HelpBlock,
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from "react-bootstrap";
+
 import { AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import config from "./../../config";
 import LoaderButton from "../components/LoaderButton.react";
 import styles from '../../styling/signup.css';
-import button from '../../styling/buttons.css';
+
 export default class Signup extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -43,16 +38,19 @@ export default class Signup extends Component {
   }
 
   handleChange = (event) => {
+    event.preventDefault();
+
     this.setState({
       [event.target.id]: event.target.value
     });
+    // debugger
   }
 
   handleSubmit = async event => {
     event.preventDefault();
-
     this.setState({ isloading: true });
 
+    debugger
       try {
         const newUser = await this.signup(this.state.email, this.state.password);
         this.setState({ newUser });
@@ -128,26 +126,26 @@ export default class Signup extends Component {
   }
 
   renderConfirmationForm = () => { // eslint-disable-line
+    // debugger
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" className={button.large}>
-          <ControlLabel>Confirmation Code</ControlLabel>
-          <FormControl
+        <fieldset id="confirmationCode" className={styles.field}>
+          <label>Confirmation Code</label>
+          <input
             autoFocus
             type="tel"
             value={this.state.confirmationCode}
             onChange={this.handleChange}
           />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
-        </FormGroup>
+          <h2 className={styles.helpblock}>Please check your email for the code.</h2>
+        </fieldset>
         <LoaderButton
           block
-          className={button.large}
           disabled={!this.validateConfirmationForm()}
           type="submit"
           isloading={this.state.isloading}
           text="Verify"
-          loadingText="Verifying…"
+          loadingtext="Verifying…"
         />
       </form>
     );
@@ -157,47 +155,50 @@ export default class Signup extends Component {
   renderForm = () => { // eslint-disable-line
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" className={button.large}>
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
+        <fieldset className={styles.field}>
+          <label>Email:</label>
+          <input
             autoFocus
             type="email"
+            id="email"
             value={this.state.email}
             onChange={this.handleChange}
           />
-        </FormGroup>
-        <FormGroup controlId="deviceId" className={button.large}>
-        <ControlLabel>Oasis Mini Serial Number</ControlLabel>
-        <FormControl
+        </fieldset>
+        <fieldset className={styles.field}>
+        <label>Oasis Mini Serial Number:</label>
+        <input
           value={this.state.deviceId}
           onChange={this.handleChange}
           type="text"
+          id="deviceId"
         />
-        </FormGroup>
-        <FormGroup controlId="password" className={button.large}>
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
+        </fieldset>
+        <fieldset className={styles.field}>
+          <label>Password:</label>
+          <input
             value={this.state.password}
             onChange={this.handleChange}
             type="password"
+            id="password"
           />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" className={button.large}>
-          <ControlLabel>Confirm Password</ControlLabel>
-          <FormControl
+        </fieldset>
+        <fieldset className={styles.field}>
+          <label>Confirm Password:</label>
+          <input
             value={this.state.confirmPassword}
             onChange={this.handleChange}
             type="password"
+            id="confirmPassword"
           />
-        </FormGroup>
+        </fieldset>
         <LoaderButton
           block
-          className={button.large}
           disabled={!this.validateForm()}
           type="submit"
           isloading={this.state.isloading}
           text="Signup"
-          loadingText="Signing up…"
+          loadingtext="Signing up…"
         />
       </form>
     )
@@ -206,7 +207,9 @@ export default class Signup extends Component {
   render() {
     return (
       <div className={styles.Signup}>
+        <h2>Sign Up</h2>
         {this.state.newUser === null
+
           ? this.renderForm()
           : this.renderConfirmationForm()
         }

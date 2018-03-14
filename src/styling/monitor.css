@@ -43,6 +43,12 @@
   height: auto;
 }
 
+.fontawesome {
+  width: 16px;
+  height: 16px;
+  padding-bottom: 10px;
+}
+
 .phContainer {
   right: 100px;
   bottom: 300px;

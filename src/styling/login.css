@@ -1,4 +1,52 @@
 /* Login */
+.Login {
+  height: 550px;
+}
+
+.Login form {
+  width: 400px;
+  height: 300px;
+  background-color: rgba(104, 176, 77, 0.9);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  border-radius: 50px;
+}
+
+.email, .password {
+  padding-bottom: 0;
+  border-radius: 50px;
+  width: 350px;
+  line-height: 24px;
+  padding-left: 20px;
+}
+
+.email {
+  margin-top: 50px;
+  padding-top: 50px;
+  margin-left: 0;
+}
+
+.password {
+  display: inline-block;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  margin-left: 0;
+}
+
+.email:active label, .password:active label {
+  color: #ffffff;
+}
+
+.email input, .password input {
+  float: right;
+  line-height: 24px;
+  font-size: 16px;
+}
+
+.Login button {
+  width: 100px;
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {
@@ -11,21 +59,15 @@
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .Login {
     padding: 60px 0;
-    margin: 0px auto;
-    background-color: lightGreenBackground from './variables.css';
-    /* background-image: url('../media/BG_1.jpg');
-    composes: background from './variables.css'; */
     width: 100%;
-    height: auto;
   }
 
   .Login form {
     margin: 0 auto;
-    max-width: 320px;
+    width: 300px;
   }
 
   .email, .password {
-    background-color: rgba(0,0,0,0.4);
     padding-top: 40px;
     padding-bottom: 40px;
     border-radius: 50px;

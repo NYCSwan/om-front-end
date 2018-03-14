@@ -194,7 +194,7 @@ class Monitor extends Component {
                   className={styles.temperaturelink} to='/monitor/temperature'>
                   <h2 className={styles.xBigFont}>
                     {latest.temperature}
-                    <FontAwesomeIcon icon='circle' />
+                    <FontAwesomeIcon icon={faCircle} className={styles.fontawesome}/>
                   </h2>
                   <h4>F</h4>
                 </Link>

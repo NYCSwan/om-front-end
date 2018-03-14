@@ -14,17 +14,20 @@ class Spinner extends Component {
     ]
   }
 
+  componentDidMount() {
+    setInterval(() => this.growPlant(),
+      100)
+  }
+
   growPlant() {
     const {spinner} = this.state;
     // let offset = 0;
     // debugger
       // return (
         forEach(spinner, function(image) {
-          setTimeout(function() {
-            return (
-              <img src={image} alt="loading indicator" className={styles.img}/>
-            )
-          }, 100);
+          return (
+            <img src={image} alt="loading indicator" className={styles.img}/>
+          )
       })
     // )
   }

@@ -87,14 +87,14 @@
   .listItemChamber1 {
     top: 230px;
     left: 235px;
-    margin: 0 0 0 0;
+    margin: 0;
     font-size: 12px;
     width: 60px;
     height: auto;
   }
 
   .listItemChamber2 {
-    margin: 0 0 0 0;
+    margin: 0;
     top: 315px;
     left: 235px;
     font-size: 14px;
@@ -103,7 +103,7 @@
   }
 
   .listItemChamber3 {
-    margin: 0 0 0 0;
+    margin: 0;
     top: 265px;
     left: 100px;
     width: 80px;
