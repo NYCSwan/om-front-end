@@ -1,10 +1,9 @@
 
 .directionsright {
   display: flex;
-  flex-flow: column;
+  flex-flow: column wrap;
   width: 55%;
   display: inline-block;
-  right:0;
   font-size: 18px;
 }
 
@@ -13,9 +12,37 @@
   width: 100%;
   word-wrap: normal;
   font-size: 14px;
+  padding-left: 40px;
 }
 
 .balanced {
   composes: default from './buttons.css';
   border-radius: 20px;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .directionsright {
+    display: flex;
+    flex-flow: column wrap;
+    width: 55%;
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  .directionsright > ul {
+    list-style: none;
+    width: 100%;
+    word-wrap: normal;
+    font-size: 14px;
+    padding-left: 20px;
+  }
 }

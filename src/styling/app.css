@@ -31,18 +31,24 @@
   }
 
   .indexLinkContainer {
-    margin: 10px 10px 10px 0;
-    width: 125px;
+    margin: 0 10px 0 10px;
+    width: 100px;
+    text-align: center;
+    height: 50px;
+  }
+
+  .indexLinkContainer:nth-child(4) {
+    /* margin: 0 10px 0 0; */
+    width: 100px;
     text-align: center;
     height: 50px;
   }
 
   .navItem {
-    margin: 10px 10px 10px 0;
-    padding: 10px;
-    font-size: 20px;
-    line-height: 24px;
-    width: 125px;
+    margin: 0 10px 0 10px;
+    font-size: 18px;
+    line-height: 20px;
+    width: 80px;
   }
 
   .indexLinkContainer:hover {
@@ -61,7 +67,7 @@
   }
 
   .brandLogo {
-    height: 100px;
+    height: 70px;
     width: 200px;
     margin-top: 20px;
   }
@@ -187,13 +193,14 @@
     z-index: 1;
   }
 
-  .indexLinkContainer:before {
+  .narrowIndexLinkContainer:before {
     /* visibility: hidden; */
     display: none;
   }
 
-  .indexLinkContainer {
+  .narrowIndexLinkContainer {
     background-color: rgb(104,176,77);
+    width: 100%;
   }
 
 /* li nav item */
@@ -207,7 +214,7 @@
     text-align: center;
   }
 
-  .navItem:hover {
+  .navItem:hover, .narrowIndexLinkContainer:hover {
     background-color:#ccc;
     display: inline-block;
     font-size: 18px;

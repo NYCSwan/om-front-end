@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import findKey from 'lodash/findKey';
 
 import styles from '../../styling/planting_directions.css';
-// import SettingsList from './settings_list.react';
+
 
 class PlantingDirections extends Component {
   static propTypes = {
@@ -13,9 +12,6 @@ class PlantingDirections extends Component {
     selectedChamber: PropTypes.string.isRequired,
     isBalanced: PropTypes.bool.isRequired
   };
-  // state = {
-  //   displaySettings: []
-  // }
 
   shouldComponentUpdate(newProps) {
     return (
@@ -31,14 +27,11 @@ class PlantingDirections extends Component {
     // send message to Plant page saying "Garden started!"
     // send new grow to db, fill chamber
   };
-  // <SettingsList chamber={selectedChamber} climates={climates} newGrowPlant={newGrowPlant} />
+
 
   render() {
     console.log('render directions');
     const { directions } = this.props;
-    // debugger
-    // const plantKey = findKey(newGrowPlant);
-    // const growingDirections = newGrowPlant[plantKey].planting_directions;
     return (
       <div
         className={styles.directionsright}>

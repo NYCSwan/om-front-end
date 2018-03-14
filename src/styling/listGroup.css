@@ -30,21 +30,34 @@
     top: 390px;
   }
 
+  .listItemChamber1:hover, .listItemChamber2:hover, .listItemChamber3:hover, .buttonChamber1:hover, .buttonChamber2:hover, .buttonChamber3:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #3b9626;
+    background-color: #cccccc;
+  }
+
+  .listItemChamber1:disabled, .listItemChamber2:disabled, .listItemChamber3:disabled, .buttonChamber1:disabled, .buttonChamber2:disabled, .buttonChamber3:disabled {
+    text-decoration: none;
+    cursor: default;
+    color: #C0C0C0;
+    background-color: none;
+  }
 
   .buttonChamber1 {
     border-style: hidden;
-    color: accentLightGreen from './variables.css';
+    composes: accentLightGreen from './variables.css';
     font-size: 12px;
   }
 
   .buttonChamber2 {
-    color: accentLightGreen from './variables.css';
+    composes: accentLightGreen from './variables.css';
     font-size: 12px;
     border-style: hidden;
   }
 
   .buttonChamber3 {
-    color: accentLightGreen from './variables.css';
+    composes: accentLightGreen from './variables.css';
     font-size: 12px;
     border-style: hidden;
   }

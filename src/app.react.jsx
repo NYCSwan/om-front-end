@@ -96,7 +96,7 @@ class App extends Component {
                   <IndexLinkContainer
                     to='/monitor'
                     key={'monitor'}
-                    className={styles.indexLinkContainer}
+                    className={styles.narrowIndexLinkContainer}
                     onClick={this.handleSelect}>
                     <li
                       className={styles.navItem}>
@@ -107,7 +107,7 @@ class App extends Component {
                     to='/monitor/progress'
                     key={'progress'}
                     onClick={this.handleSelect}
-                    className={styles.indexLinkContainer}>
+                    className={styles.narrowIndexLinkContainer}>
                     <li
                       className={styles.navItem}>
                       Progress
@@ -116,7 +116,7 @@ class App extends Component {
                   <IndexLinkContainer
                     to='/controls'
                     key={'controls'}
-                    className={styles.indexLinkContainer}
+                    className={styles.narrowIndexLinkContainer}
                     onClick={this.handleSelect}>
                     <li
                       className={styles.navItem}>
@@ -126,7 +126,7 @@ class App extends Component {
                   <IndexLinkContainer
                     to='/'
                     key={'userAccount'}
-                    className={styles.indexLinkContainer}
+                    className={styles.narrowIndexLinkContainer}
                     onClick={this.handleSelect}>
                     <li
                       className={styles.navItem}>
@@ -136,7 +136,7 @@ class App extends Component {
                   <IndexLinkContainer
                     to='/'
                     key={'support'}
-                    className={styles.indexLinkContSel}
+                    className={styles.narrowIndexLinkContainer}
                     onClick={this.handleSelect}>
                     <li
                       className={styles.navItem}>

@@ -5,7 +5,7 @@ import styles from '../../styling/LoaderButton.css';
 
 const LoaderButton = props => (
   <button
-    className={styles[`${props.className}`]}
+    className={styles.LoaderButton}
     disabled={props.disabled}>
     {props.isloading && <Glyphicon glyph="refresh" className="spinning" />}
     {!props.isloading ? props.text : props.loadingtext}

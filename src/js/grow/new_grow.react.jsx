@@ -227,7 +227,7 @@ class NewGrow extends Component {
 
   completeNewGrow = () => {
     console.log('complete new grow after setup ph, etc');
-    this.props.history.push("You have successfully created a New Garden!", null, "/monitor");
+    this.props.history.push("/monitor");
   }
 
   renderPlantGroup() {
@@ -322,7 +322,6 @@ class NewGrow extends Component {
              { this.renderChambers() }
              </div>
             <LoaderButton
-              className='sumbitGarden'
               disabled={!this.validateForm()}
               type="submit"
               isloading={this.state.isloading}

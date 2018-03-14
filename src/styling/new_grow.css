@@ -1,10 +1,7 @@
 /*New Grow*/
 /***********/
 .newGrowContainer {
-  height: 900px;
-  /* display: flex;
-  flex: column wrap; */
-  /* margin-top: 20px; */
+  height: 600px;
   width: 100%;
   text-align: center;
   color: #fff;
@@ -12,7 +9,7 @@
 
 .newGrowForm {
   width: 90%;
-  min-height: 800px;
+  min-height: 550px;
   background: transparent;
   margin-left: auto;
   margin-right: auto;
@@ -20,7 +17,7 @@
 }
 
 /* PLANTS FORM */
-.buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+.buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
   max-width: 200px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -32,7 +29,7 @@
   max-height: 100px;
 }
 
-.BasilInput, .BellPepperInput, .BroccoliInput, .CilantroInput, .GreenBeansInput, .LettuceInput, .TomatoInput, .KaleInput, .CustomizeInput {
+.BasilInput, .BellPepperInput, .BroccoliInput, .CilantroInput, .GreenBeansInput, .LettuceInput, .TomatoesInput, .KaleInput, .CustomizeInput {
   color: white;
   font-weight: bold;
   width: 100%;
@@ -42,14 +39,15 @@
   border-style: none;
 }
 
-
+.CustomizeInput {
+  margin-top: -10px;
+}
 .plantsContainer {
   display: flex;
   flex-flow: row wrap;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
-  /* min-height: 300px; */
   height: 400px;
   width: 70%;
   align-items: stretch;
@@ -62,10 +60,10 @@
 }
 
 .plantHeader {
-  color: gray from './variables.css';
+  composes: gray from './variables.css';
 }
 
-.buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+.buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
   composes: background from './variables.css';
   font-family: Futura-Lig;
   width: 200px;
@@ -77,7 +75,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: rgba(255,255,255,0.4); */
 }
 
   .buttonBasil {
@@ -107,7 +104,7 @@
     background-image: url('../media/lettuce_button.png');
 
   }
-  .buttonTomato {
+  .buttonTomatoes {
     background-image: url('../media/tomato_button.png');
 
   }
@@ -117,23 +114,15 @@
   }
 
   .buttonCustomize {
-    background-image: url('../media/customize_button.png');
+    background-image: url('../media/customize_button.jpg');
+    background-size: 100% 75%;
+    margin-top: 25px;
     order: 10;
-    /* padding: 5px 2px 5px 2px; */
   }
 
 /* CHAMBERS */
-  .chamberOptions {
-    min-height: 800px;
-    min-width: 500px;
-  }
-
   .Chamber1, .Chamber2, .Chamber3 {
-    align-self: baseline;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+    position: absolute;
   }
 
   .chamberContainer {
@@ -141,31 +130,51 @@
     background-image: url('../media/iconLightGrey.png');
     background-repeat:no-repeat;
     background-size: 100% 100%;
-    /* width: 45%; */
-    min-height: 400px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top: 30px;
+    width: 70%;
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
     font-size: 18px;
-    /* position: relative; */
     font-family: Futura-Lig;
   }
 
-  .chamber1 {
-    position: absolute;
-    top: 100px;
+  .Chamber1, .Chamber2, .Chamber3 {
+    border-style: hidden;
+    composes: accentLightGreen from './variables.css';
+    font-size: 14px;
+  }
 
+  .Chamber1 {
+    top: 400px;
+    right: 450px;
   }
 
   .Chamber2 {
-    /* border-left: 3px solid #fff; */
-    /* border-right: 3px solid #fff; */
+    top: 485px;
+    right: 430px;
   }
 
-  .chamber3 {
+  .Chamber3 {
+    top: 445px;
+    left: 475px;
+  }
 
+  .Chamber1:hover, .Chamber2:hover, .Chamber3:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #3b9626;
+    background-color: #cccccc;
+  }
+
+  .Chamber1:disabled, .Chamber2:disabled, .Chamber3:disabled {
+    text-decoration: none;
+    cursor: default;
+    color: #C0C0C0;
+    background-color: none;
+  }
+
+  .directions {
+    composes: gray from './variables.css';
   }
 /* Tablet screens */
 /* ************ */
@@ -181,7 +190,7 @@
     min-height: 500px;
   }
 
-  .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomato, .buttonKale, .buttonCustomize {
+  .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
     max-width: 80px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -190,17 +199,24 @@
   }
 
   .Chamber1, .Chamber2, .Chamber3 {
-    /* padding: 0; */
-    /* width: auto; */
+    width: auto;
     align-self: baseline;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 12px;
   }
+
+  .Chamber1 {
+    top: 230px;
+    right: 115px;
+  }
+
   .Chamber2 {
-    border-left: 2px solid #fff;
-    border-right: 2px solid #fff;
+    top: 300px;
+    right: 100px;
+  }
+
+  .Chamber3 {
+    top: 260px;
+    left: 122px;
   }
 
   .plantHeader {
@@ -215,13 +231,17 @@
   .plantsContainer {
     display: flex;
     flex-flow: row wrap;
-    margin-right: 5px;
-    margin-left: 5px;
     margin-top: 20px;
     height: 500px;
-    width: 70%;
+    width: 80%;
     justify-content: center;
     border-radius: 5px;
     background-color:  #C0C0C0;
+  }
+
+  .chamberContainer {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 0;
   }
 }

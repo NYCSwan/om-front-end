@@ -3,6 +3,7 @@
   display: inline-block;
   width: 40%;
   font-size: 24px;
+  margin-top: 0;
 }
 
 .settingsList {
@@ -10,11 +11,11 @@
   word-wrap: normal;
   width: 100%;
   padding: 0;
-
+  margin-top: 0;
 }
 
 .listItem {
-  margin: 40px auto;
+  margin: 15px auto;
 }
 
 /* Tablet screens */
