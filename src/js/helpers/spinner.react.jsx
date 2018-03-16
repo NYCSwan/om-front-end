@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import forEach from 'lodash/forEach';
 
 import plant1 from '../../media/Loading1.png';
 import plant2 from '../../media/Loading2.png';
@@ -9,35 +8,41 @@ import styles from '../../styling/spinner.css';
 
 class Spinner extends Component {
   state = {
-    spinner: [
-      plant1, plant2, plant3
-    ]
+    timer: 0,
+    plantImage: plant3
   }
 
   componentDidMount() {
-    setInterval(() => this.growPlant(),
-      100)
+    this.timerId = setInterval(() => this.growPlant(),
+      1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerId)
+    this.setState({ timer: 0 });
   }
 
   growPlant() {
-    const {spinner} = this.state;
-    // let offset = 0;
-    // debugger
-      // return (
-        forEach(spinner, function(image) {
-          return (
-            <img src={image} alt="loading indicator" className={styles.img}/>
-          )
-      })
-    // )
+    const {plantImage} = this.state;
+    let interval = this.state.timer;
+
+      if (plantImage === plant1) {
+        this.setState({plantImage: plant2})
+      } else if (plantImage === plant3) {
+        this.setState({plantImage: plant1})
+      } else {
+        this.setState({plantImage: plant3});
+      }
+    this.setState({ timer: interval += 1});
   }
 
   render() {
+    // debugger
     return (
-      <div>
+      <div className={styles.spinnerContainer}>
         <h3>Loading your gardens... </h3>
         <div className={styles.spinner}>
-          { this.growPlant() }
+          <img src={ this.state.plantImage } alt="loading indicator" className={styles.img}/>
         </div>
       </div>
     )

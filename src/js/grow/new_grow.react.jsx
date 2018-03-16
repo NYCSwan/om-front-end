@@ -69,15 +69,9 @@ class NewGrow extends Component {
     return invokeApig({ path: '/chambers' });
   };
 
-  // getClimates = () => {
-  //   console.log('get climates');
-  //   return invokeApig({ path: 'climates' });
-  // };
+  handleBackClick = () => {
 
-  //
-  // setClimates = (climateResults) => {
-  //   this.setState({ climates: climateResults});
-  // }
+  }
 
   handlePlantRadioClick = e => {
     console.log(`handlePlantRadioClick: ${e.target}`);
@@ -145,21 +139,6 @@ class NewGrow extends Component {
     // debugger
     return this.state.selectedPlant.length > 0 && this.state.selectedChamber > 0;
   }
-
-  // handlePLantChange = event => {
-  //   console.log('handle change');
-  //   this.setState({
-  //     selectedPlant: event.target.name
-  //   });
-  // }
-  //
-  // handleChamberChange = event => {
-  //   console.log('handle change');
-  //   // debugger
-  //   this.setState({
-  //     selectedChamber: event.target.name
-  //   });
-  // }
 
   createGarden = (garden) => { // eslint-disable-line
     console.log('create garden');

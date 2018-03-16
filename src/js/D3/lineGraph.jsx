@@ -8,8 +8,6 @@ import styles from '../../styling/lineGraph.css';
 class LineGraph extends Component {
   static propTypes = {
     sensorData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    graphWidth: PropTypes.number.isRequired,
-    graphHeight: PropTypes.number.isRequired,
     startDate: PropTypes.instanceOf(Object).isRequired,
     endDate: PropTypes.instanceOf(Date).isRequired,
     margin: PropTypes.shape({
@@ -32,6 +30,9 @@ class LineGraph extends Component {
     minY: 0,
     minX: 0,
     maxX: 0,
+    graphWidth: window.window.outerWidth - 50,
+    graphHeight: 400,
+    outerWidth: window.window.outerWidth,
     currentData: []
   }
 
@@ -39,25 +40,14 @@ class LineGraph extends Component {
     console.log('comonpent mounted linegraph');
       this.extractMaxMin();
       this.extractSingleSensorData();
+      this.setChartWidth();
+      this.setChartHeight();
   }
-
-  // componentWillReceiveProps({ sensorData, chamberId, sensor }) {
-  //   console.log('componentWillReceiveProps linegraph');
-  //   // eslint-disable-next-line
-  //   if ((sensorData !== this.props.sensorData) && (this.props.sensorData.length >0 ) || (sensor !== this.props.sensor) || (chamberId !== this.props.chamberId)) {
-  //     console.log('change data, data, sensor or chamber changed');
-  //     this.extractMaxMin()
-  //   }
-  // }
 
   shouldComponentUpdate (newProps, newState) {
     console.log('shouldComponentUpdate lineGraph');
-    return this.props.endDate !== newProps.endDate || this.props.sensorData !== newProps.sensorData || this.state.maxY !== newState.maxY || this.state.minY !== newState.minY || this.props.sensor !== newProps.sensor || this.props.chamberId !== newProps.chamberId
+    return this.props.endDate !== newProps.endDate || this.props.sensorData !== newProps.sensorData || this.state.maxY !== newState.maxY || this.state.minY !== newState.minY || this.props.sensor !== newProps.sensor || this.props.chamberId !== newProps.chamberId || this.state.outerWidth !== newState.outerWidth
   }
-  //
-  // componentDidUpdate() {
-  //   this.extractMaxMin();
-  // }
 
   extractMaxMin = () => {
     console.log('extractMaxMin');
@@ -91,7 +81,6 @@ class LineGraph extends Component {
     const tempData = [];
     let temp = {};
     const tempStartDate = startDate._d.getTime();
-    // debugger;
 
     for (let i= 0; i < sensorData.length; i++) {
       if((sensorData[i].timestamp >= tempStartDate) === true) {
@@ -106,10 +95,37 @@ class LineGraph extends Component {
     this.setState({ currentData: tempData });
   }
 
+  setChartWidth = () => {
+
+    if (this.state.outerWidth > 807 && this.state.outerWidth < 1320) {
+      this.setState({graphWidth: 400})
+      // tablet
+    } else if (this.state.outerWidth < 807 ) {
+      this.setState({graphWidth: 275})
+      // mobile
+    } else {
+      this.setState({graphWidth: 600})
+      // browser
+    }
+  }
+
+  setChartHeight = () => {
+    if (this.state.outerWidth < 807 && this.state.outerWidth < 1320) {
+      this.setState({graphHeight: 350})
+      // tablet
+    } else if (this.state.outerWidth > 807) {
+      this.setState({graphHeight: 250})
+      // mobile
+    } else {
+      this.setState({graphHeight: 500})
+      // browser
+    }
+  }
+
   render() {
     console.log('render lineGraph');
-    const { graphHeight, graphWidth, margin, sensor, startDate, endDate } = this.props;
-    const { currentData } = this.state;
+    const { margin, sensor, startDate, endDate } = this.props;
+    const { graphHeight, graphWidth, currentData } = this.state;
 
     return (
       <div className={styles.areaChartContainer}>
@@ -126,6 +142,7 @@ class LineGraph extends Component {
             minY={this.state.minY}
           />
       }
+      
       </div>
     )
   }

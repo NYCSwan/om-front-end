@@ -24,8 +24,6 @@ class Sensor extends Component {
 
   state = {
     chamberId: 1,
-    graphWidth: 800,
-    graphHeight: 500,
     chambers: [],
     sensorData: [],
     isloading: true,
@@ -34,16 +32,17 @@ class Sensor extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount sensor');
-      try {
-        const results = await this.growingPlantsData();
-        this.setState({growingPlants: results});
-        const chamberResults = await this.getAllChamberData();
-        this.setState({chambers: chamberResults});
-        const sensorResults = await this.getSensorMeasurementData();
-        this.setState({sensorData: sensorResults});
-      } catch(e) {
-        console.log(e);
-      }
+
+    try {
+      const results = await this.growingPlantsData();
+      this.setState({growingPlants: results});
+      const chamberResults = await this.getAllChamberData();
+      this.setState({chambers: chamberResults});
+      const sensorResults = await this.getSensorMeasurementData();
+      this.setState({sensorData: sensorResults});
+    } catch(e) {
+      console.log(e);
+    }
     this.setState({ isloading: false });
   }
 
@@ -52,8 +51,6 @@ class Sensor extends Component {
     return (
       this.state.sensorData !== newState.sensorData ||
       this.state.chamberId !== newState.chamberId ||
-      this.state.graphWidth !== newState.graphWidth ||
-      this.state.graphHeight !== newState.graphHeight ||
       this.state.growingPlants !== newState.growingPlants
     );
   }
@@ -71,7 +68,7 @@ class Sensor extends Component {
   getSensorMeasurementData() {
     console.log('get sensor measurents');
       return invokeApig({  path: `/sensorData` })
-  };
+  }
 
   handleChamberIdChange = newChamber => {
     console.log('handleChamberIdChange');
@@ -88,7 +85,7 @@ class Sensor extends Component {
     const tempChamber = chamberId.toString();
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const key = findKey(plant);
-    return moment(plant[key].createdAt).format("dddd, MMM Do");
+    return moment(plant[key].createdAt).format("dddd,  MMM Do");
 
   }
   renderCurrentSensorReading() {
@@ -107,7 +104,7 @@ class Sensor extends Component {
 
   render() {
     console.log('render sensor');
-    const { chambers, chamberId, graphHeight, graphWidth, sensorData } = this.state;
+    const { chambers, chamberId, sensorData } = this.state;
     const today = new Date();
     const oneWeekAgo = moment(today).subtract(7, 'days');
     const oneMonthAgo = moment(today).subtract(1, 'months');
@@ -128,8 +125,6 @@ class Sensor extends Component {
               chamberId={chamberId}
               sensorData={sensorData}
               sensor={sensorName}
-              graphHeight={graphHeight}
-              graphWidth={graphWidth}
               endDate={today}
               startDate={oneWeekAgo}
               match={this.props.match}
@@ -138,8 +133,6 @@ class Sensor extends Component {
               chamberId={chamberId}
               sensorData={sensorData}
               sensor={sensorName}
-              graphHeight={graphHeight}
-              graphWidth={graphWidth}
               endDate={today}
               startDate={oneMonthAgo}
               match={this.props.match}
