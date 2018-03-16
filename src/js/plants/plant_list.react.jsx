@@ -22,7 +22,7 @@ class PlantList extends Component {
     }
     try {
       const plantRecipeResults = await this.getPlantRecipes();
-      debugger
+      
       this.setRecipes(plantRecipeResults);
     } catch(e) {
       console.log(e);
@@ -36,11 +36,10 @@ class PlantList extends Component {
   getPlantRecipes = () => {
     console.log('get plant recipes, plant List');
 
-    return invokeApig({ path: '/plantRecipes'})
+    return invokeApig({ path: '/plants'})
   };
 
   setRecipes = (plantRecipes) => {
-    debugger
     this.setState({ plantTypes: plantRecipes });
   }
 

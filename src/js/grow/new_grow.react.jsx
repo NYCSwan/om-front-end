@@ -16,6 +16,7 @@ class NewGrow extends Component {
     history: PropTypes.shape({
       push: PropTypes.func
     }).isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
     userHasAuthenticated: PropTypes.func.isRequired
   }
 
@@ -34,16 +35,43 @@ class NewGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount new grow');
-    try {
-        const recipeResults = await this.getPlantRecipes();
-        this.setState({plantTypes: recipeResults});
-        const chamberResults = await this.getChamberOptions();
-        this.setState({chamberOptions: chamberResults});
-        // const climateResults = await this.getClimates();
-        // this.setClimates(climateResults);
-    } catch(e) {
-      console.error(e);
+    // debugger
+    if (!this.props.location.state) {
+      try {
+          const recipeResults = await this.getPlantRecipes();
+          this.setState({plantTypes: recipeResults});
+          const chamberResults = await this.getChamberOptions();
+          this.setState({chamberOptions: chamberResults});
+
+          if(this.props.isAuthenticated) {
+            this.props.history.push({
+              pathname: this.props.location.pathname,
+              state: {
+                plantTypes: this.state.plantTypes,
+                chamberOptions: this.state.chamberOptions,
+                selectedPlant: this.state.selectedPlant,
+                isBalanced: this.state.isBalanced,
+                showDirections: this.state.showDirections,
+                showPlantsDirections: this.state.showPlantsDirections,
+                newGrowPlant: this.state.newGrowPlant,
+                selectedChamber: this.state.selectedChamber,
+                showForm: this.state.showForm
+              }
+            });
+          }
+      } catch(e) {
+        console.error(e);
+      }
+    } else {
+      console.log('set state to location state');
+      this.setStateFromHistory();
     }
+
+      // debugger
+      window.onpopstate = (e) => {
+          e.preventDefault();
+          this.props.history.go(0);
+      }
   }
 
   shouldComponentUpdate(newState) {
@@ -59,6 +87,17 @@ class NewGrow extends Component {
     );
   }
 
+  componentWillUnmount() {
+    this.unlisten();
+  }
+
+  unlisten = () => {
+    this.props.history.listen((location, action) => {
+      // location is an object like window.location
+      console.log(action, location.pathname, location.state)
+    })
+  }
+
   getPlantRecipes = () => {
     console.log(`get plant recipes`);
     return invokeApig({ path: '/plants' });
@@ -68,10 +107,6 @@ class NewGrow extends Component {
     console.log('get chamber options');
     return invokeApig({ path: '/chambers' });
   };
-
-  handleBackClick = () => {
-
-  }
 
   handlePlantRadioClick = e => {
     console.log(`handlePlantRadioClick: ${e.target}`);
@@ -83,7 +118,15 @@ class NewGrow extends Component {
     console.log(`handleChamberRadio: ${e.target.value}`);
     const tempChamberId = parseInt(e.target.value.slice(-1), 10);
     this.setState({
-      selectedChamber: tempChamberId
+      selectedChamber: tempChamberId,
+      plantTypes: this.state.plantTypes,
+      chamberOptions: this.state.chamberOptions,
+      selectedPlant: this.state.selectedPlant,
+      isBalanced: this.state.isBalanced,
+      showDirections: this.state.showDirections,
+      showPlantsDirections: this.state.showPlantsDirections,
+      newGrowPlant: this.state.newGrowPlant,
+      showForm: this.state.showForm
     });
   }
 
@@ -92,8 +135,22 @@ class NewGrow extends Component {
     const tempPlant = e.target.value;
     const currentPlantType = pickBy(this.state.plantTypes, plant => plant.fullName === tempPlant);
     const key = findKey(currentPlantType);
-    // debugger
-    this.setState({ newGrowPlant: currentPlantType[key] });
+    this.setState({ newGrowPlant: currentPlantType[key] })
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        selectedPlant: tempPlant,
+        newGrowPlant: currentPlantType[key],
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        isBalanced: this.state.isBalanced,
+        showDirections: this.state.showDirections,
+        showPlantsDirections: this.state.showPlantsDirections,
+        selectedChamber: this.state.selectedChamber,
+        showForm: this.state.showForm
+      }
+    });
+    debugger
   }
 
   updatePhBalance = () => {
@@ -101,14 +158,42 @@ class NewGrow extends Component {
     setTimeout(() => {
       console.log('timeout 10000')
     }, 10000);
-    this.setState({ isBalanced: true });
+    this.setState({ isBalanced: true })
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        isBalanced: true,
+        newGrowPlant: this.state.newGrowPlant,
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        selectedPlant: this.state.selectedPlant,
+        showDirections: this.state.showDirections,
+        showPlantsDirections: this.state.showPlantsDirections,
+        selectedChamber: this.state.selectedChamber,
+        showForm: this.state.showForm
+      }
+    });
     this.showPlantingDirections();
   };
 
   showPlantingDirections = () => {
     console.log('show planting directions');
-    this.setState({ showPlantsDirections: true });
-  };
+    this.setState({ showPlantsDirections: true })
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        showPlantsDirections: true,
+        newGrowPlant: this.state.newGrowPlant,
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        selectedPlant: this.state.selectedPlant,
+        isBalanced: this.state.isBalanced,
+        showDirections: this.state.showDirections,
+        selectedChamber: this.state.selectedChamber,
+        showForm: this.state.showForm
+      }
+    });
+  }
 //   {this.state.selectedPlant === 'customize' &&
 //     this.state.selectedChamber === '' && <CustomizeSensors {...this.props} />}
 //   { this.state.selectedChamber === '' &&
@@ -195,18 +280,61 @@ class NewGrow extends Component {
     } catch(e) {
       console.log(e);
     }
+
     this.setState({
       isloading:false,
       showForm: false
     })
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        isloading:false,
+        showForm: false
+      }
+    });
     if (!isEmpty(this.state.newGrowPlant)) {
-      this.setState({ showDirections: true });
+      this.setState({ showDirections: true })
+      this.props.history.push({
+        pathname: this.props.location.pathname,
+        state: {
+          showDirections: true,
+          newGrowPlant: this.state.newGrowPlant,
+          plantTypes: this.state.plantTypes,
+          chamberOptions: this.state.chamberOptions,
+          selectedPlant: this.state.selectedPlant,
+          isBalanced: this.state.isBalanced,
+          showPlantsDirections: this.state.showPlantsDirections,
+          selectedChamber: this.state.selectedChamber,
+          showForm: this.state.showForm
+        }
+      });
     }
   }
 
   completeNewGrow = () => {
     console.log('complete new grow after setup ph, etc');
-    this.props.history.push("/monitor");
+    this.props.history.push({pathname: `/plants/${this.state.selectedPlant}`, state: {
+      newGrowPlant: this.state.newGrowPlant,
+      selectedChamber: this.state.selectedChamber,
+      notifications: ["You have successfully started growing your garden! Check out how it's doing below."]
+    }});
+  }
+
+  setStateFromHistory = () => {
+    const { chamberOptions, isBalanced, newGrowPlant, plantTypes, selectedPlant, selectedChamber, showDirections, showForm, showPlantsDirections } = this.props.history.location.state;
+
+    this.setState({
+      chamberOptions,
+      isBalanced,
+      newGrowPlant,
+      plantTypes,
+      selectedPlant,
+      selectedChamber,
+      showDirections,
+      showForm,
+      showPlantsDirections
+    })
+
   }
 
   renderPlantGroup() {

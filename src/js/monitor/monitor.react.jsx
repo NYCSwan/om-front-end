@@ -30,22 +30,29 @@ class Monitor extends Component {
     growingPlants: [],
     chambers: [],
     isloading: true,
-    lightOn: true
+    lightOn: true,
+    notifications: []
   };
 
   async componentDidMount() {
     console.log('componentDidMount monitor');
-    try {
-      const results = await this.growingPlants();
-      this.setState({growingPlants: results});
-      const chamberResults = await this.getAllChamberData();
-      this.setChambers(chamberResults);
-      // debugger
-      const sensorResults = await this.getSensorMeasurementData();
-      this.setSensorData(sensorResults);
-    } catch(e) {
-      console.log(e);
+    if (!this.props.location.state) {
+      try {
+
+        const results = await this.growingPlants();
+        this.setState({growingPlants: results});
+        const chamberResults = await this.getAllChamberData();
+        this.setChambers(chamberResults);
+        // debugger
+        const sensorResults = await this.getSensorMeasurementData();
+        this.setSensorData(sensorResults);
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      console.log('set state to location state');
     }
+
     this.setState({ isloading: false });
   }
 
@@ -156,6 +163,14 @@ class Monitor extends Component {
           options={chambers}
           key={chamberId}
         />
+
+        { this.props.location.state.notifications.map(notification => {
+          return (
+            <h3>{notification}</h3>
+          )
+          }
+        )}
+
         { this.state.chamberData.length >= 1
           ?
 
