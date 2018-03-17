@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import pickBy from 'lodash/pickBy';
 import findKey from 'lodash/findKey';
 import isEmpty from 'lodash/isEmpty';
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 
 import { invokeApig } from "../../libs/awsLibs";
 import LoaderButton from './../components/LoaderButton.react';
-import Directions from './directions_container.react';
-// import PlantingDirections from './planting_directions.react';
+import DirectionsContainer from './directions_container.react';
 import styles from '../../styling/new_grow.css';
 
 
@@ -82,8 +83,7 @@ class NewGrow extends Component {
       this.state.plantTypes !== newState.plantTypes ||
       this.state.newGrowPlant !== newState.newGrowPlant ||
       this.state.chamberOptions !== newState.chamberOptions ||
-
-      this.state.isBalanced !== newState.isBalanced
+      this.state.isBalanced !== newState.isBalanced || this.state.showForm !== newState.showForm
     );
   }
 
@@ -110,6 +110,7 @@ class NewGrow extends Component {
 
   handlePlantRadioClick = e => {
     console.log(`handlePlantRadioClick: ${e.target}`);
+    // debugger
     this.setState({ selectedPlant: e.target.value });
     this.handleNewPlantSelection(e);
   };
@@ -150,7 +151,7 @@ class NewGrow extends Component {
         showForm: this.state.showForm
       }
     });
-    debugger
+    // debugger
   }
 
   updatePhBalance = () => {
@@ -285,19 +286,20 @@ class NewGrow extends Component {
       isloading:false,
       showForm: false
     })
-    this.props.history.push({
-      pathname: this.props.location.pathname,
-      state: {
-        isloading:false,
-        showForm: false
-      }
-    });
+    // this.props.history.push({
+    //   pathname: this.props.location.pathname,
+    //   state: {
+    //     isloading:false,
+    //     showForm: false
+    //   }
+    // });
     if (!isEmpty(this.state.newGrowPlant)) {
       this.setState({ showDirections: true })
       this.props.history.push({
         pathname: this.props.location.pathname,
         state: {
           showDirections: true,
+          isloading: false,
           newGrowPlant: this.state.newGrowPlant,
           plantTypes: this.state.plantTypes,
           chamberOptions: this.state.chamberOptions,
@@ -305,7 +307,7 @@ class NewGrow extends Component {
           isBalanced: this.state.isBalanced,
           showPlantsDirections: this.state.showPlantsDirections,
           selectedChamber: this.state.selectedChamber,
-          showForm: this.state.showForm
+          showForm: true
         }
       });
     }
@@ -313,10 +315,11 @@ class NewGrow extends Component {
 
   completeNewGrow = () => {
     console.log('complete new grow after setup ph, etc');
-    this.props.history.push({pathname: `/plants/${this.state.selectedPlant}`, state: {
-      newGrowPlant: this.state.newGrowPlant,
-      selectedChamber: this.state.selectedChamber,
-      notifications: ["You have successfully started growing your garden! Check out how it's doing below."]
+    const plant_name = upperFirst(camelCase(this.state.newGrowPlant.recipeName));
+    this.props.history.push({pathname: `/plants/${plant_name}`, state: {
+      details: this.state.newGrowPlant,
+      notifications: ["You have successfully started growing your garden! Check out how it's doing below."],
+      plantTypes: this.state.plantTypes
     }});
   }
 
@@ -439,7 +442,7 @@ class NewGrow extends Component {
         </form>
         )}
         { this.state.showDirections === true && (
-          <Directions
+          <DirectionsContainer
             newGrowPlant={this.state.newGrowPlant}
             handlePhClick={this.updatePhBalance}
             handlePlantClick={this.completeNewGrow}

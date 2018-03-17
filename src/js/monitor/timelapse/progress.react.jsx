@@ -1,20 +1,23 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
+import pickBy from 'lodash/pickBy';
+import findKey from 'lodash/findKey';
+
 import { invokeApig } from '../../../libs/awsLibs'
 import Timelapse from './timelapse.react';
 import Spinner from '../../helpers/spinner.react';
-
+import PlantDetails from '../../plants/plant_details.react';
 import styles from '../../../styling/progress.css';
 import FilterButtonGroup from '../../components/filter_button.react';
-import Basil from '../../../media/basil.jpeg';
-import BellPepper from '../../../media/bell_pepper_button.png';
-import Broccoli from '../../../media/broccoli_button.png';
-import Cilantro from '../../../media/cilantro_button.png';
-import GreenBeans from '../../../media/green_bean_button.png';
-import Kale from '../../../media/kale_button.png';
-import Lettuce from '../../../media/lettuce_button.png';
-import Tomatoes from '../../../media/tomato_button.png';
-import Customize from '../../../media/customize_button.jpg';
+// import Basil from '../../../media/basil.jpeg';
+// import BellPepper from '../../../media/bell_pepper_button.png';
+// import Broccoli from '../../../media/broccoli_button.png';
+// import Cilantro from '../../../media/cilantro_button.png';
+// import GreenBeans from '../../../media/green_bean_button.png';
+// import Kale from '../../../media/kale_button.png';
+// import Lettuce from '../../../media/lettuce_button.png';
+// import Tomatoes from '../../../media/tomato_button.png';
+// import Customize from '../../../media/customize_button.jpg';
 import TimelapseVideo from '../../../media/timelapse.mp4';
 
 class Progress extends Component {
@@ -32,7 +35,8 @@ class Progress extends Component {
     images: [],
     chambers: [],
     chamberId: 1,
-    currentPlant: [],
+    plantDetails: [],
+    selectedPlant: '',
     decorators: [{
       component: function(p){
         return <div />;
@@ -50,33 +54,52 @@ class Progress extends Component {
   async componentDidMount() {
     console.log('componentDidMount progress page');
 
-    try {
-      const results = await this.getGrowingPlants();
-      this.setState({ growingPlants: results });
+    if (!this.props.history.location.state) {
+      try {
+        const results = await this.getGrowingPlants();
+        this.setState({ growingPlants: results });
 
-      const recipeResults = await this.getRecipe(results[0].plantName);
-      this.setState({ recipes: recipeResults });
+        const recipeResults = await this.getRecipes();
+        this.setState({ recipes: recipeResults });
+        this.setPlantRecipe();
+        const chamberResults = await this.getAllChamberData();
+        this.setState({ chambers: chamberResults });
 
-      const chamberResults = await this.getAllChamberData();
-      this.setState({ chambers: chamberResults });
+        // const imageResults = await this.getImages();
+        // this.setState({ images: imageResults.Contents });
 
-      const imageResults = await this.getImages();
-      this.setState({ images: imageResults.Contents });
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      console.log('set state to location state');
+      try {
+        const results = await this.getGrowingPlants();
+        this.setState({ growingPlants: results });
+        //
+        // const imageResults = await this.getImages();
+        // this.setState({ images: imageResults.Contents });
 
-    } catch(e) {
-      console.log(e);
+        this.setStateFromHistory();
+      } catch(e) {
+        console.log(e);
+      }
     }
+
     this.setState({ isloading: false });
   }
 
+  shouldComponentUpdate(newState) {
+    return this.state.plantDetails !== newState.plantDetails
+  }
   getGrowingPlants() {
     console.log('GET chamber plants');
     return invokeApig({ path: '/gardens' });
   }
 
-  getRecipe(plant) {
-    console.log('GET plant recipe');
-    return invokeApig({ path: `/plants` })
+  getRecipes() {
+    console.log('GET plant recipes');
+    return invokeApig({ path: `/plants` });
   }
 
   getAllChamberData() {
@@ -101,83 +124,103 @@ class Progress extends Component {
       );
     }
   };
-  //
+
+  setStateFromHistory = () => {
+    console.log('set state from history');
+    const { chamberOptions, newGrowPlant, plantTypes, selectedChamber, selectedPlant } = this.props.history.location.state;
+
+    this.setState({
+      chambers: chamberOptions,
+      plantDetails: newGrowPlant,
+      recipes: plantTypes,
+      chamberId: selectedChamber,
+
+    })
+
+  }
+
+  setPlantRecipe = () => {
+    console.log('set plant recipe');
+    // debugger;
+    const currentPlant =  pickBy(this.state.growingPlants, plant => parseInt(plant.chamberId) === this.state.chamberId);
+    const key = findKey(currentPlant)
+    this.setState({ plantDetails: currentPlant[key]})
+  }
   // handleAfterSlide = () => {
   //   this.setState({ slideIndex: newSlideIndex })
   // }
 
-  renderPlantDetails() {
-    const { recipes, chamberId, chambers } = this.state;
-    let plantImgSymbol;
-    const recipe = [];
-    let key = 0;
-    // debugger
-    const currentChamber = [];
-    // let chamberKey = 0;
-
-    for(let cKey in chambers) {
-      if(parseInt(chambers[cKey].chamberId, 10) === chamberId){
-        // chamberKey = cKey;
-        currentChamber.push(chambers[cKey])
-      }
-    }
-
-    for(let rKey in recipes) {
-      // debugger
-      if(recipes[rKey].recipeName === currentChamber[key].plantName){
-        // recipeKey = rKey;
-        recipe.push(recipes[rKey])
-      }
-    }
-    // debugger
-    if (recipe[key].recipeName === "Basil") {
-      plantImgSymbol = Basil;
-    } else if (recipe[key].recipeName === 'Kale') {
-      plantImgSymbol = Kale;
-    } else if (recipe[key].recipeName === 'Green Beans') {
-      plantImgSymbol = GreenBeans;
-    } else if (recipe[key].recipeName === 'Cilantro') {
-      plantImgSymbol = Cilantro;
-    } else if (recipe[key].recipeName === 'Lettuce') {
-      plantImgSymbol = Lettuce;
-    } else if (recipe[key].recipeName === 'Broccoli') {
-      plantImgSymbol = Broccoli;
-    } else if (recipe[key].recipeName === 'Tomatoes') {
-      plantImgSymbol = Tomatoes;
-    } else if (recipe[key].recipeName === 'Cilantro') {
-      plantImgSymbol = Cilantro;
-    } else if (recipe[key].recipeName === 'Bell Pepper') {
-      plantImgSymbol = BellPepper;
-    } else {
-      plantImgSymbol = Customize;
-    }
-    return (
-      <div
-        className={styles.plantInfoContainer}
-        key={recipe[key].recipeName}>
-        <img
-          src={plantImgSymbol}
-          alt={recipe[key].recipeName}
-          className={styles.plantImg}
-          key={recipe[key].Etag} />
-        <aside className={styles.plantDetails}>
-          <h1>{recipe[key].fullName}</h1>
-          <h4>{recipe[key].suggestions}</h4>
-          <h4>
-            <b>Avg Market Price:</b> ${recipe[key].marketPrice}
-          </h4>
-          <h4>
-            <b>Avg Yield:</b> {recipe[key].yield}
-          </h4>
-        </aside>
-      </div>
-    )
-  }
+  // renderPlantDetails() {
+  //   const { recipes, chamberId, chambers } = this.state;
+  //   let plantImgSymbol;
+  //   const recipe = [];
+  //   let key = 0;
+  //   // debugger
+  //   const currentChamber = [];
+  //   // let chamberKey = 0;
+  //
+  //   for(let cKey in chambers) {
+  //     if(parseInt(chambers[cKey].chamberId, 10) === chamberId){
+  //       // chamberKey = cKey;
+  //       currentChamber.push(chambers[cKey])
+  //     }
+  //   }
+  //
+  //   for(let rKey in recipes) {
+  //     // debugger
+  //     if(recipes[rKey].recipeName === currentChamber[key].plantName){
+  //       // recipeKey = rKey;
+  //       recipe.push(recipes[rKey])
+  //     }
+  //   }
+  //   // debugger
+  //   if (recipe[key].recipeName === "Basil") {
+  //     plantImgSymbol = Basil;
+  //   } else if (recipe[key].recipeName === 'Kale') {
+  //     plantImgSymbol = Kale;
+  //   } else if (recipe[key].recipeName === 'Green Beans') {
+  //     plantImgSymbol = GreenBeans;
+  //   } else if (recipe[key].recipeName === 'Cilantro') {
+  //     plantImgSymbol = Cilantro;
+  //   } else if (recipe[key].recipeName === 'Lettuce') {
+  //     plantImgSymbol = Lettuce;
+  //   } else if (recipe[key].recipeName === 'Broccoli') {
+  //     plantImgSymbol = Broccoli;
+  //   } else if (recipe[key].recipeName === 'Tomatoes') {
+  //     plantImgSymbol = Tomatoes;
+  //   } else if (recipe[key].recipeName === 'Cilantro') {
+  //     plantImgSymbol = Cilantro;
+  //   } else if (recipe[key].recipeName === 'Bell Pepper') {
+  //     plantImgSymbol = BellPepper;
+  //   } else {
+  //     plantImgSymbol = Customize;
+  //   }
+  //   return (
+  //     <div
+  //       className={styles.plantInfoContainer}
+  //       key={recipe[key].recipeName}>
+  //       <img
+  //         src={plantImgSymbol}
+  //         alt={recipe[key].recipeName}
+  //         className={styles.plantImg}
+  //         key={recipe[key].Etag} />
+  //       <aside className={styles.plantDetails}>
+  //         <h1>{recipe[key].fullName}</h1>
+  //         <h4>{recipe[key].suggestions}</h4>
+  //         <h4>
+  //           <b>Avg Market Price:</b> ${recipe[key].marketPrice}
+  //         </h4>
+  //         <h4>
+  //           <b>Avg Yield:</b> {recipe[key].yield}
+  //         </h4>
+  //       </aside>
+  //     </div>
+  //   )
+  // }
 
   renderLander() {
     return (
       <div className={styles.lander}>
-        <h2>Loading the images.</h2>
         <h3>This may take a minute to upload your feed live.</h3>
         <Spinner />
       </div>
@@ -221,7 +264,7 @@ class Progress extends Component {
   }
 
   render(){
-    const { isloading, chamberId, chambers } = this.state;
+    const { isloading, chamberId, chambers, plantDetails } = this.state;
 
     return (
       <div>
@@ -229,10 +272,12 @@ class Progress extends Component {
           onChange={this.handleChamberIdChange}
           chamberId={chamberId}
           options={chambers}
+          key={chamberId}
         />
       { !isloading
         ?
-        [this.renderPlantDetails(), this.renderTimelapseVideo()]
+        [<PlantDetails
+          details={plantDetails} />, this.renderTimelapseVideo()]
         :
         this.renderLander()
       }

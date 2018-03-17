@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import includes from 'lodash/includes';
 import Directions from './directions.react';
 import PlantingDirections from './planting_directions.react';
 import SettingsList from './settings_list.react';
@@ -15,11 +16,11 @@ class DirectionsContainer extends Component {
     handleNextClick: PropTypes.func.isRequired,
     plant: PropTypes.string.isRequired,
     isBalanced: PropTypes.bool.isRequired,
-    showPlantingDirections: PropTypes.bool.isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.object,
-      path: PropTypes.string
-    }).isRequired
+    showPlantsDirections: PropTypes.bool.isRequired,
+    // match: PropTypes.shape({
+    //   params: PropTypes.object,
+    //   path: PropTypes.string
+    // }).isRequired
   };
 
   state = {
@@ -64,12 +65,13 @@ class DirectionsContainer extends Component {
       })
   }
 
-  handleNextClick = () => {
-    if (this.props.match.path === '/controls/ExistingGrow') {
-      this.props.handleNextClick();
-    } else {
-      this.props.showPlantingDirections();
-    }
+  handleNextClick = (event) => {
+    // debugger
+    // if (event.target.baseURI.includes('/controls/ExistingGrow')) {
+    //   this.props.handleNextClick();
+    // } else {
+      this.props.handleNextClick() ;
+    // }
   }
   // climates={this.props.climates}
   render() {

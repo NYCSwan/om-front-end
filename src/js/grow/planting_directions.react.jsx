@@ -7,16 +7,16 @@ import styles from '../../styling/planting_directions.css';
 class PlantingDirections extends Component {
   static propTypes = {
     newGrowPlant: PropTypes.arrayOf(PropTypes.object).isRequired,
-    climates: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // climates: PropTypes.arrayOf(PropTypes.object).isRequired,
     handlePlantClick: PropTypes.func.isRequired,
-    selectedChamber: PropTypes.string.isRequired,
+    selectedChamber: PropTypes.number.isRequired,
     isBalanced: PropTypes.bool.isRequired
   };
 
   shouldComponentUpdate(newProps) {
     return (
       this.props.newGrowPlant !== newProps.newGrowPlant ||
-      this.props.climates !== newProps.climates ||
+      this.props.selectedChamber !== newProps.selectedChamber ||
       this.props.isBalanced !== newProps.isBalanced
     )
   }

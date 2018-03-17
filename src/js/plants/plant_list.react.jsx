@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 import { invokeApig } from '../../libs/awsLibs';
+import PlantDetails from './plant_details.react';
+import styles from '../../styling/plant_list.css';
 
 class PlantList extends Component {
   static propTypes = {
@@ -20,12 +24,17 @@ class PlantList extends Component {
     if(!this.props.isAuthenticated) {
       return;
     }
-    try {
-      const plantRecipeResults = await this.getPlantRecipes();
-      
-      this.setRecipes(plantRecipeResults);
-    } catch(e) {
-      console.log(e);
+    if (!this.props.history.location.state) {
+      try {
+        const plantRecipeResults = await this.getPlantRecipes();
+
+        this.setRecipes(plantRecipeResults);
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      console.log('set state to location state');
+      this.setStateFromHistory();
     }
   }
 
@@ -43,27 +52,37 @@ class PlantList extends Component {
     this.setState({ plantTypes: plantRecipes });
   }
 
+  setStateFromHistory = () => {
+    this.setState({ plantTypes: this.props.history.location.details})
+  }
+
   render() {
     console.log('render plant list');
     const { plantTypes } = this.state;
+    // const plantUrl = ;
     return (
-      <div>
+      <main>
         <div className="plantList">
-          <Grid>
-            {plantTypes.map(plant => { // eslint-disable-line
-              return (
-                <Row key={plant.r_id}>
-                  <Col>
-                    <a href={`plants/${plant.r_id}`}>{plant.name}</a>
-                  </Col>
-                  <Col>{plant.days_to_maturity}</Col>
-                  <Col>{plant.yield}</Col>
-                </Row>
-              );
-            })}
-          </Grid>
+          <h2>Plant Index</h2>
+          {plantTypes.map(plant => { // eslint-disable-line
+            return (
+              <Link
+                to={{
+                  pathname: `/plants/${upperFirst(camelCase(plant.recipeName))}`,
+                  state: {details: plant}
+                }}>
+                <div className={styles[`${camelCase(plant.recipeName)}DetailsContainer`]}>
+                  <PlantDetails
+                    notifications={null}
+                    details={plant}
+                    key={plant.fullName}
+                  />
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      </main>
     );
   }
 }
