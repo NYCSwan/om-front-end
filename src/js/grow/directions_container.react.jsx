@@ -55,8 +55,9 @@ class DirectionsContainer extends Component {
       const { newGrowPlant, selectedChamber } = this.props;
       const tempSettings = [];
       // debugger
+      const degree = String.fromCharCode(186)
       tempSettings.push(newGrowPlant.recipeName);
-      tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}`);
+      tempSettings.push(`${newGrowPlant.climateId}, ${newGrowPlant.temperatureRange}${degree}`);
       tempSettings.push(`pH ${newGrowPlant.pH}`);
       tempSettings.push(`Chamber ${selectedChamber}`);
 
@@ -84,9 +85,8 @@ class DirectionsContainer extends Component {
         <h2>Garden</h2>
         <h3>Grow Directions</h3>
         <SettingsList
-          chamber={selectedChamber}
           settings={settings}
-          newGrowPlant={newGrowPlant} />
+          selectedChamber={selectedChamber} />
       { (showPlantsDirections === true)
         ?
           <PlantingDirections
@@ -98,7 +98,7 @@ class DirectionsContainer extends Component {
           />
         :
           <Directions
-            settings={settings}
+            newGrowPlant={newGrowPlant}
             directions={directions}
             showPlantsDirections={showPlantsDirections}
             plant={selectedPlant}

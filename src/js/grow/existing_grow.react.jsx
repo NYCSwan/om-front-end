@@ -26,14 +26,16 @@ class ExistingGrow extends Component {
 
   state = {
     isloading: true,
-    chambers: [],
+    chamberOptions: [],
     climates: [],
     updatingThisPlant: [],
     growingPlants: [],
     showBalance: false,
     showPause: false,
     showInitialPopup: false,
-    plantRecipe: {}
+    plantRecipe: {},
+    isAuthenticated: PropTypes.bool.isRequired,
+    userHasAuthenticated: PropTypes.func.isRequired
     // showChambers: true,
     // // showButton: false,
     // isBalanced: false
@@ -42,16 +44,43 @@ class ExistingGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount existing grow');
-
+    if (!this.props.location.state) {
     try {
       const chamberResults = await this.getChamberOptions();
-      this.setState({chambers: chamberResults});
+      this.setState({chamberOptions: chamberResults});
       const climateResults = await this.getClimates();
       this.setState({climates: climateResults});
       const gardenResults = await this.getGrowingPlants();
       this.setState({growingPlants: gardenResults});
+
+      if(this.props.isAuthenticated) {
+        this.props.history.push({
+          pathname: this.props.location.pathname,
+          state: {
+            plantTypes: this.state.plantTypes,
+            chamberOptions: this.state.chamberOptions,
+            selectedPlant: this.state.selectedPlant,
+            isBalanced: this.state.isBalanced,
+            showDirections: this.state.showDirections,
+            showPlantsDirections: this.state.showPlantsDirections,
+            newGrowPlant: this.state.newGrowPlant,
+            selectedChamber: this.state.selectedChamber,
+            showForm: this.state.showForm
+          }
+        });
+      }
     } catch (e) {
       console.log(e);
+    }
+  } else {
+    console.log('set state to location state');
+    this.setStateFromHistory();
+  }
+
+    // debugger
+    window.onpopstate = (e) => {
+        e.preventDefault();
+        this.props.history.go(0);
     }
 
     this.setState({isloading: false });
@@ -60,7 +89,7 @@ class ExistingGrow extends Component {
   shouldComponentUpdate(newState) {
     console.log('shouldComponentUpdate existing grow');
     return (
-      this.state.chambers !== newState.chambers || this.state.growingPlants !== newState.growingPlants
+      this.state.chamberOptions !== newState.chamberOptions || this.state.growingPlants !== newState.growingPlants
     );
   }
 
@@ -68,12 +97,12 @@ class ExistingGrow extends Component {
 // API GET CALLS
   getGrowingPlants = () => {
     console.log('get plant recipe');
-    return invokeApig({ path: `/gardens`});
+    return invokeApig({ path: `/plants`});
   };
 
   getChamberOptions = () => {
     console.log('get chamber options');
-    return invokeApig({ path: '/chambers' });
+    return invokeApig({ path: '/chamberOptions' });
   };
 
   getClimates = () => {
@@ -166,14 +195,14 @@ class ExistingGrow extends Component {
 
   renderGardens() {
     console.log('renderGardens');
-    const { chambers, updatingThisPlant } = this.state;
+    const { chamberOptions, updatingThisPlant } = this.state;
     const items = []
     let temp = {};
-    for(let i = 0; i< chambers.length; i++) {
+    for(let i = 0; i< chamberOptions.length; i++) {
       temp[i] = {
-        'name': chambers[i].chamberName,
-        'isFilled': chambers[i].isFilled,
-        'plantName': chambers[i].plantName || null
+        'name': chamberOptions[i].chamberName,
+        'isFilled': chamberOptions[i].isFilled,
+        'plantName': chamberOptions[i].plantName || null
       }
       items.push(temp[i])
     }

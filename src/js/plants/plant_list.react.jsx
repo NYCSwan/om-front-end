@@ -61,8 +61,7 @@ class PlantList extends Component {
     const { plantTypes } = this.state;
     // const plantUrl = ;
     return (
-      <main>
-        <div className="plantList">
+      <main className={styles.plantList}>
           <h2>Plant Index</h2>
           {plantTypes.map(plant => { // eslint-disable-line
             return (
@@ -81,7 +80,6 @@ class PlantList extends Component {
               </Link>
             );
           })}
-        </div>
       </main>
     );
   }

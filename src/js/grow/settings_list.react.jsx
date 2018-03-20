@@ -9,9 +9,8 @@ import styles from '../../styling/settings_list.css';
 
 class SettingsList extends Component {
   static propTypes = {
-    newGrowPlant: PropTypes.arrayOf(PropTypes.object).isRequired,
-    climates: PropTypes.arrayOf(PropTypes.object).isRequired,
-    selectedChamber: PropTypes.string.isRequired
+    settings: PropTypes.arrayOf(PropTypes.string).isRequired,
+    selectedChamber: PropTypes.number.isRequired
   };
   // state = {
   //   displaySettings: []
@@ -23,14 +22,14 @@ class SettingsList extends Component {
 
   // shouldComponentUpdate(newProps, newState) {
   //   return (
-  //     this.props.newGrowPlant !== newProps.newGrowPlant ||
+  //     this.props.settings !== newProps.settings ||
   //     this.props.climates !== newProps.climates ||
   //     this.state.displaySettings !== newState.displaySettings
   //   );
   // }
 
   // updateSettings = () => {
-  //   const plantType = this.props.newGrowPlant;
+  //   const plantType = this.props.settings;
   //   const plantKey = findKey(plantType);
   //   const tempClimate = pickBy(this.props.climates, climate => climate.cl_id === plantType[plantKey].climate_id);
   //   const climateKey = findKey(tempClimate);

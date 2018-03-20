@@ -1,39 +1,3 @@
-.plantInfoContainer {
-  width: 100%;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.plantImg {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border-bottom: 2px solid rgb(96,94,94);
-}
-
-.plantDetails {
-  position: absolute;
-  top: 400px;
-  left: 300px;
-  width: 60%;
-  background-color: rgba(96,94,94,0.6);
-  text-align: left;
-}
-
-.plantDetails h1 {
-  font-weight: bolder;
-  text-align: center;
-  color: #fff;
-  background: transparent;
-}
-
-.plantDetails h4 {
-  margin-left: 20px;
-  color: #ffffff;
-}
-
 .videoContainer {
   width: 60%;
   position: absolute;
@@ -58,51 +22,6 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
-
-  .plantInfoContainer {
-    width: 100%;
-    height: 550px;
-  }
-  .plantInfoContainer h1 {
-    left: 110px;
-    top: 200px;
-  }
-
-  .plantInfoContainer p {
-    /* grid-area: 1; */
-    /* margin: 5px auto; */
-  }
-  .plantInfoContainer h5 {
-    /* margin-left: 5px; */
-  }
-
-  .plantImg {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border-bottom: 2px solid rgb(96,94,94);
-  }
-
-  .plantDetails {
-    position: absolute;
-    top: 150px;
-    left: 56px;
-    width: 70%;
-    background-color: rgba(96,94,94,0.6);
-    text-align: left;
-  }
-
-  .plantDetails h1 {
-    font-weight: bolder;
-    text-align: center;
-    color: #fff;
-    background: transparent;
-  }
-
-  .plantDetails h4 {
-    margin-left: 10px;
-    color: #ffffff;
-  }
 
   .videoContainer {
     width: 70%;

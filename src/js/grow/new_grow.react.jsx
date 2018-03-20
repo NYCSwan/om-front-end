@@ -78,11 +78,11 @@ class NewGrow extends Component {
   shouldComponentUpdate(newState) {
     console.log('shouldComponentUpdate new grow');
     return (
-      this.state.selectedChamber !== newState.selectedChamber ||
-      this.state.selectedPlant !== newState.selectedPlant ||
-      this.state.plantTypes !== newState.plantTypes ||
-      this.state.newGrowPlant !== newState.newGrowPlant ||
-      this.state.chamberOptions !== newState.chamberOptions ||
+      // this.state.selectedChamber !== newState.selectedChamber ||
+      // this.state.selectedPlant !== newState.selectedPlant ||
+      // this.state.plantTypes !== newState.plantTypes ||
+      // this.state.newGrowPlant !== newState.newGrowPlant ||
+      // this.state.chamberOptions !== newState.chamberOptions ||
       this.state.isBalanced !== newState.isBalanced || this.state.showForm !== newState.showForm
     );
   }
@@ -448,7 +448,7 @@ class NewGrow extends Component {
             handlePlantClick={this.completeNewGrow}
             handleNextClick={this.showPlantingDirections}
             isBalanced={this.state.isBalanced}
-            selectedPlant={this.state.selectedPlant}
+            plant={this.state.selectedPlant}
             selectedChamber={this.state.selectedChamber}
             showPlantsDirections={this.state.showPlantsDirections}
           />

@@ -1,23 +1,30 @@
-.basilDetailsContainer {
-  background-color: blue;
-}
-.greenBeansDetailsContainer {
-  background-color: red;
-}
-.cilantroDetailsContainer {
-  background-color: green;
-}
-.lettuceDetailsContainer {
-  background-color: yellow;
-}
-.kaleDetailsContainer {
-  background-color: pink;
+.plantList {
+  min-height: 550px;
+  width: 100%;
 }
 
-.bellPepperDetailsContainer {
-
+.basilDetailsContainer,
+.greenBeansDetailsContainer,
+.cilantroDetailsContainer,
+.lettuceDetailsContainer,
+.kaleDetailsContainer,
+.bellPepperDetailsContainer,
+.customizeDetailsContainer,
+.broccoliDetailsContainer,
+.tomatesDetailsContainer,
+ {
+  background-color: rgb(104, 176, 77);
+  display: flex;
+  flex-flow: column wrap;
 }
 
-/* img {
-  display: none;
-} */
+.basilDetailsContainer aside,
+.greenBeansDetailsContainer aside,
+.cilantroDetailsContainer aside,
+.lettuceDetailsContainer aside,
+.kaleDetailsContainer aside,
+.bellPepperDetailsContainer aside,
+.customizeDetailsContainer aside,
+.broccoliDetailsContainer aside {
+  position: fixed;
+}

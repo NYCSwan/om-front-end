@@ -7,7 +7,6 @@ import styles from '../../styling/planting_directions.css';
 class PlantingDirections extends Component {
   static propTypes = {
     newGrowPlant: PropTypes.arrayOf(PropTypes.object).isRequired,
-    // climates: PropTypes.arrayOf(PropTypes.object).isRequired,
     handlePlantClick: PropTypes.func.isRequired,
     selectedChamber: PropTypes.number.isRequired,
     isBalanced: PropTypes.bool.isRequired

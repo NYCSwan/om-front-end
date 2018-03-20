@@ -9,15 +9,6 @@ import Spinner from '../../helpers/spinner.react';
 import PlantDetails from '../../plants/plant_details.react';
 import styles from '../../../styling/progress.css';
 import FilterButtonGroup from '../../components/filter_button.react';
-// import Basil from '../../../media/basil.jpeg';
-// import BellPepper from '../../../media/bell_pepper_button.png';
-// import Broccoli from '../../../media/broccoli_button.png';
-// import Cilantro from '../../../media/cilantro_button.png';
-// import GreenBeans from '../../../media/green_bean_button.png';
-// import Kale from '../../../media/kale_button.png';
-// import Lettuce from '../../../media/lettuce_button.png';
-// import Tomatoes from '../../../media/tomato_button.png';
-// import Customize from '../../../media/customize_button.jpg';
 import TimelapseVideo from '../../../media/timelapse.mp4';
 
 class Progress extends Component {
@@ -61,6 +52,7 @@ class Progress extends Component {
 
         const recipeResults = await this.getRecipes();
         this.setState({ recipes: recipeResults });
+        this.setPlant();
         this.setPlantRecipe();
         const chamberResults = await this.getAllChamberData();
         this.setState({ chambers: chamberResults });
@@ -92,6 +84,7 @@ class Progress extends Component {
   shouldComponentUpdate(newState) {
     return this.state.plantDetails !== newState.plantDetails
   }
+
   getGrowingPlants() {
     console.log('GET chamber plants');
     return invokeApig({ path: '/gardens' });
@@ -134,15 +127,23 @@ class Progress extends Component {
       plantDetails: newGrowPlant,
       recipes: plantTypes,
       chamberId: selectedChamber,
-
+      selectedPlant: selectedPlant
     })
 
+  }
+
+  setPlant = () => {
+    console.log('set plant name');
+    const currentPlant =  pickBy(this.state.growingPlants, plant => parseInt(plant.chamberId) === this.state.chamberId);
+    const key = findKey(currentPlant)
+    debugger
+    this.setState({ selectedPlant: currentPlant[key].plantName})
   }
 
   setPlantRecipe = () => {
     console.log('set plant recipe');
     // debugger;
-    const currentPlant =  pickBy(this.state.growingPlants, plant => parseInt(plant.chamberId) === this.state.chamberId);
+    const currentPlant =  pickBy(this.state.recipes, plant => plant.recipeName === this.state.selectedPlant);
     const key = findKey(currentPlant)
     this.setState({ plantDetails: currentPlant[key]})
   }
