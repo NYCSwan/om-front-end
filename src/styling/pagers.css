@@ -5,7 +5,7 @@
   display: inline;
 }
 
-.previous {
+.previous, .next {
   height: 50px;
   margin-left: 5px;
   color: rgb(168,168,168);

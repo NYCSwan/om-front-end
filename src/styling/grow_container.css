@@ -2,9 +2,9 @@
   height: 550px;
 }
 
-.grow h4 {
-  font-size: 24px;
+.grow h2 {
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .homepage {
@@ -32,10 +32,11 @@
     flex-direction: column;
   }
 
-  .grow h4 {
+  .grow h2 {
     width: 80%;
     color: rgb(96,94,94);
-    margin-top: 10%;
+    margin-bottom: 20px;
+    margin-top: 0;
   }
   .homepage {
     composes: default from './buttons.css';

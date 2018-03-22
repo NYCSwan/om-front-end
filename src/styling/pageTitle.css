@@ -11,3 +11,23 @@
 .pageTitle h1 {
   margin: 0;
 }
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .pageTitle {
+    text-align: center;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 85%;
+  }
+
+}

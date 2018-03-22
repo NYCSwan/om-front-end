@@ -8,12 +8,17 @@ class ControlSettings extends Component {
     match: PropTypes.shape({
       params: PropTypes.object,
       path: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    setTitle: PropTypes.func.isRequired
   };
 
   state = {
     showGrowOptions: true
   };
+
+  componentDidMount() {
+    this.props.setTitle('Controls Dash');
+  }
 
   shouldComponentUpdate(newState) {
     return this.state.showGrowOptions !== newState.showGrowOptions || this.state.showMonitor !== newState.showMonitor;

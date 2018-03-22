@@ -18,7 +18,8 @@ class NewGrow extends Component {
       push: PropTypes.func
     }).isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    userHasAuthenticated: PropTypes.func.isRequired
+    userHasAuthenticated: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired
   }
 
   state = {

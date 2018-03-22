@@ -1,17 +1,25 @@
 import React from 'react';
-import { Pager, Glyphicon } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/fontawesome-free-solid';
+import PropTypes from 'prop-types';
 import styles from '../../styling/pagers.css';
 
+fontawesome.library.add(faChevronRight);
+
 const PagerFwd = props => (
-  <Pager className={styles.pagers}>
-    <Pager.Item next href="#">
-      <Glyphicon glyph="glyphicon glyphicon-chevron-right" />
-    </Pager.Item>
-  </Pager>
+  <aside
+    className={styles.pagers}
+    onClick={props.handleClick}>
+      <FontAwesomeIcon
+        icon="chevron-right"
+        pull="left"
+        className={styles.previous} />
+  </aside>
 );
 
-// PagerFwd.propTypes = {
-//  className: PropTypes.string.isRequired
-// };
+PagerFwd.propTypes = {
+ handleClick: PropTypes.func.isRequired
+};
+
 export default PagerFwd;

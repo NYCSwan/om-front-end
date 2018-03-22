@@ -22,7 +22,7 @@
 }
 
 .gray {
-  color: #aaaaaa;
+  color: rgb(168,168,168);
 }
 
 .bigFont {
@@ -36,7 +36,7 @@
 }
 
 .lightGrayBackground {
-  background-color: #cccccc;
+  background-color: rgb(168,168,168);
 }
 
 .lightGreenBackground {

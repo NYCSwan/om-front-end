@@ -179,6 +179,9 @@
     width: 30px;
     height: 25px;
     margin-right: 20px;
+    position: absolute;
+    right: 10px;
+    top: 0;
   }
 
 

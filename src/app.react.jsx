@@ -76,6 +76,12 @@ class App extends Component {
     this.setState({ openModal: !this.state.openModal });
   }
 
+  handleBackClick = (e) => {
+    window.onpopstate = (e) => {
+        this.props.history.go(0);
+    }
+  }
+
   authenticating = () => {
     this.setState({ isAuthenticating: false });
   }
@@ -89,7 +95,8 @@ class App extends Component {
         <div className={styles.navWithRoutes}>
         <nav className={styles.navbar}>
         <div className={styles.topNavNarrow}>
-          <PagerBack />
+          <PagerBack
+            handleClick={this.handleBackClick} />
           <PageTitle pageTitle={pageTitle} />
           <FontAwesomeIcon
             icon="align-justify"

@@ -19,7 +19,8 @@ class Sensor extends Component {
     match: PropTypes.shape({
       params: PropTypes.object,
       url: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    setTitle: PropTypes.func.isRequired
   };
 
   state = {
@@ -43,6 +44,7 @@ class Sensor extends Component {
     } catch(e) {
       console.log(e);
     }
+    this.props.setTitle(this.props.location.pathname);
     this.setState({ isloading: false });
   }
 
