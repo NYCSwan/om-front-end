@@ -43,6 +43,7 @@
 .CustomizeInput {
   margin-top: -10px;
 }
+
 .plantsContainer {
   display: flex;
   flex-flow: row wrap;
@@ -76,8 +77,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }
 
+.buttonBasil:hover, .buttonBellPepper:hover, .buttonBroccoli:hover, .buttonCilantro:hover, .buttonGreenBeans:hover, .buttonLettuce:hover, .buttonTomatoes:hover, .buttonKale:hover, .buttonCustomize:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
   .buttonBasil {
     background-image: url('../media/basil_button.png');
   }
@@ -192,8 +198,9 @@
   }
 
   .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
-    max-width: 80px;
+    max-width: 100px;
     margin-top: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
     font-size: 12px;
     height: 50px;

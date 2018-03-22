@@ -65,7 +65,8 @@ class ExistingGrow extends Component {
             showInitialPopup: this.state.showInitialPopup,
             newGrowPlant: this.state.newGrowPlant,
             growingPlants: this.state.growingPlants,
-            climates: this.state.climates
+            climates: this.state.climates,
+            chamberId: this.state.newGrowPlant.chamberId
           }
         });
       }

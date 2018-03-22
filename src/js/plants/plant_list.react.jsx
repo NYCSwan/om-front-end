@@ -12,7 +12,8 @@ class PlantList extends Component {
     match: PropTypes.shape({
       params: PropTypes.object
     }).isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    setTitle: PropTypes.func.isRequired
   };
 
   state = {
@@ -24,18 +25,30 @@ class PlantList extends Component {
     if(!this.props.isAuthenticated) {
       return;
     }
+
     if (!this.props.history.location.state) {
       try {
         const plantRecipeResults = await this.getPlantRecipes();
 
-        this.setRecipes(plantRecipeResults);
+        this.setState({plantTypes: plantRecipeResults});
+
+        if(this.props.isAuthenticated) {
+          this.props.history.push({
+            pathname: this.props.location.pathname,
+            state: {
+              plantTypes: this.state.plantTypes
+            }
+          })
+        }
       } catch(e) {
         console.log(e);
       }
     } else {
       console.log('set state to location state');
+
       this.setStateFromHistory();
     }
+    this.props.setTitle('Plant Recipes')
   }
 
   shouldComponentUpdate(newState, newProps) {
@@ -44,16 +57,12 @@ class PlantList extends Component {
 
   getPlantRecipes = () => {
     console.log('get plant recipes, plant List');
-
     return invokeApig({ path: '/plants'})
   };
 
-  setRecipes = (plantRecipes) => {
-    this.setState({ plantTypes: plantRecipes });
-  }
-
   setStateFromHistory = () => {
-    this.setState({ plantTypes: this.props.history.location.details})
+    console.log('set state from history');
+    this.setState({ plantTypes: this.props.history.location.state.plantTypes})
   }
 
   render() {
@@ -62,22 +71,24 @@ class PlantList extends Component {
     // const plantUrl = ;
     return (
       <main className={styles.plantList}>
-          <h2>Plant Index</h2>
           {plantTypes.map(plant => { // eslint-disable-line
             return (
-              <Link
+              <div
+                className={styles[`${camelCase(plant.recipeName)}DetailsContainer`]}
+                key={plant.recipeName}>
+                <Link
                 to={{
                   pathname: `/plants/${upperFirst(camelCase(plant.recipeName))}`,
                   state: {details: plant}
                 }}>
-                <div className={styles[`${camelCase(plant.recipeName)}DetailsContainer`]}>
                   <PlantDetails
                     notifications={null}
                     details={plant}
                     key={plant.fullName}
+                    match={this.props.match}
                   />
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
       </main>

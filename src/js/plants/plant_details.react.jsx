@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isUndefined from 'lodash/isUndefined';
-// import findKey from 'lodash/findKey';
+import camelCase from 'lodash/camelCase';
 // import isEmpty from 'lodash/isEmpty';
 
 import Basil from '../../media/basil.jpeg';
@@ -161,12 +161,12 @@ class PlantDetails extends Component {
     console.log('render plant container');
 
     return (
-      <main>
+      <div className={styles[`${camelCase(this.props.match.params.plant_name)}`]}>
         {isUndefined(this.props.details) ?
           this.renderPlantDetailsFromHistory() :
           this.renderPlantDetailsFromProps()
         }
-      </main>
+      </div>
 
     )
   }

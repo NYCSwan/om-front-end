@@ -37,7 +37,7 @@ class NewGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount new grow');
-    debugger
+    // debugger
     if (!this.props.location.state) {
       try {
           const recipeResults = await this.getPlantRecipes();
