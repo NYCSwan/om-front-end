@@ -2,17 +2,18 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
   }
 
   .app {
-    font-family: Futura-Lig;
+    /* font-family: 'Nunito', sans-serif; */
     background-color: #ffffff;
     width: 100%;
     text-align: center;
     position: relative;
     height: 100%;
     scroll-behavior: smooth;
-    color: grey;
+    color: rgb(96,96,94);
   }
 
 /* NAVIGATION */
@@ -21,40 +22,52 @@
     display: flex;
     flex: wrap row;
     width: 100%;
-    height: 50px;
+    height: 75px;
     margin-top: 30px;
     justify-content: flex-end;
     align-items: stretch;
     align-content: flex-end;
     list-style: none;
-    border-bottom: 1px solid green;
   }
 
   .indexLinkContainer {
     margin: 0 10px 0 10px;
     width: 100px;
     text-align: center;
-    height: 50px;
+    height: 40px;
+    font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    order: 5;
   }
 
   .indexLinkContainer:nth-child(4) {
-    /* margin: 0 10px 0 0; */
     width: 100px;
     text-align: center;
     height: 50px;
   }
 
+  .indexLinkContainer:nth-child(2), .indexLinkContainer:nth-child(3),
+  .indexLinkContainer:nth-child(4),
+  .indexLinkContainer:nth-child(5) {
+    margin: 50px 10px 0 10px;
+  }
+
+  .indexLinkContainer:last-child {
+    margin: 30px 20px 0 10px;
+  }
+
   .navItem {
-    margin: 0 10px 0 10px;
+    margin: 30px 10px 0 10px;
     font-size: 18px;
     line-height: 20px;
     width: 80px;
   }
-
-  .indexLinkContainer:hover {
+  .navItem:active {
+    text-decoration: underline;
+  }
+  .navItem:hover {
     background-color: rgba(94,96,96,0.5);
     text-decoration: underline;
-    color: rgb(255,255,255);
+    color: #ffffff;
     font-weight: bold;
   }
 
@@ -64,6 +77,7 @@
     margin-left: 0;
     margin-top: 5px;
     display: inherit;
+    order: 1;
   }
 
   .brandLogo {
@@ -87,6 +101,7 @@
     display: -webkit-flex;
     -webkit-flex-direction: row;
     -webkit-justify-content: flex-end;
+    border-bottom: 2px solid rgb(96,94,94);
   }
 
   .signup, .login {
@@ -96,6 +111,7 @@
     margin-top: 20px;
     margin-right: 10px;
     font-size: 16px;
+    background-color: inherit;
   }
 
   .logout {
@@ -104,6 +120,7 @@
     margin-top: 0;
     margin-right: 40px;
     font-size: 16px;
+    background-color: transparent;
   }
 
   .signup:hover, .login:hover, .logout:hover {
@@ -126,10 +143,12 @@
   /***********/
   .navWithRoutes {
     min-height: 100%;
+    color: rgb(96,94,94);
   }
 
   .navbar {
     background-color: transparent;
+    font-family: 'Futura Light Regular';
     border-top:0;
     border-left: 0;
     border-right: 0;
@@ -138,16 +157,21 @@
     padding: 0;
     width: 100%;
     max-height: 200px;
-    border-bottom: 1px solid green;
+    border-bottom: 2px solid green;
 
   }
+
   .topNavWide {
     display: none;
     margin: 0;
   }
 
+  .brandLogo {
+    display: none;
+  }
   .topNavNarrow {
     display: inline;
+    font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
   }
 
   .hamburger {
@@ -168,17 +192,9 @@
   }
 
   .logo {
-    composes: link from './global-styles.css';
-    margin-right: 80px;
-    /* margin-top: -40px; */
-    height: auto;
-    order: 1;
-    width: 150px;
-    border-radius: 5%;
+    display: none;
   }
-  .logo img {
-    margin-right: 50px;
-  }
+
 
   /* MENU NAVIGATION */
   .navbarCollapse {
@@ -209,7 +225,7 @@
     height:80px;
     width: 100%;
     padding-top:40px;
-    border-top: 1px solid rgba(255,255,255,.5);=
+    border-top: 2px solid rgba(255,255,255,.5);=
     color: lightGray from './variables.css';
     text-align: center;
   }
@@ -244,7 +260,6 @@
     background: transparent;
     width: 75px;
     align-items: flex-end;
-    order: 1;
     /* flex: 0 1 auto; */
     font-size: 10px;
     /* border: solid 2px #4675AA; */

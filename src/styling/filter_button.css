@@ -1,19 +1,17 @@
 .chamber {
-  background: linear-gradient(rgba(170,170,170, 0.7), rgba(170,170,170, 0.1));
   width: 33.3%;
-  height: 100px;
-  padding-top: 10px;
+  height: 60px;
+  padding-top: 50px;
   padding-bottom: 10px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
   border: 0;
-  color: rgb(96,94,94);
+  color: rgb(170,170,170);
   font-size: 18px;
+  border-top: rbg(170,170,170)
 }
 
 .chamber:nth-child(2) {
-  border-right: 2px solid #fff;
-  border-left: 2px solid #fff;
+  border-right: 2px solid rgb(170,170,170);
+  border-left: 2px solid rgb(170,170,170);
 }
 
 .chamber:checked, .chamber:focus, .chamber:hover {
@@ -29,6 +27,7 @@
 }
 
 .chamber:disabled {
+  background: linear-gradient(rgba(170,170,170, 0.7), rgba(170,170,170, 0.1));
   color: rgb(170,170,170);
 }
 
@@ -40,7 +39,7 @@
   background-color: transparent;
   text-align: center;
   border-top: '#fff';
-  height: 100px;
+  height: 70px;
 }
 
 /* Tablet screens */
@@ -53,15 +52,13 @@
 @media only screen and (min-width: 375px) and (max-width: 807px) {
   .chamber {
     height: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    padding-top: 40px;
     font-size: 14px;
+    border-top: 1px solid rgb(170,170,170);
   }
   .chamber:nth-child(2) {
-    border-right: 1px solid #fff;
-    border-left: 1px solid #fff;
+    border-right: 1px solid rgb(170,170,170);
+    border-left: 1px solid rgb(170,170,170);
   }
 
   /*

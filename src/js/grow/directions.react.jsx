@@ -55,7 +55,7 @@ class Directions extends Component {
     const { directions } = this.props;
     const phdirections = filter(directions, function(direction) { return direction.phBalance});
     const key = findKey(phdirections);
-debugger
+// debugger
     return (
       <main className={styles.directionsright}>
         { map(phdirections[key].phBalance, function( line) { return <p key={line}>{line}</p> })}
@@ -72,7 +72,6 @@ debugger
           </div>
          :
           <LoaderButton
-            className={styles.balanced}
             isloading={this.state.balancing}
             onClick={this.handleClickUpdate}
             text={'pH Balance Water'}

@@ -36,7 +36,7 @@ class NewGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount new grow');
-    // debugger
+    debugger
     if (!this.props.location.state) {
       try {
           const recipeResults = await this.getPlantRecipes();
@@ -67,7 +67,7 @@ class NewGrow extends Component {
       console.log('set state to location state');
       this.setStateFromHistory();
     }
-
+    this.props.setTitle('New Garden');
       // debugger
       window.onpopstate = (e) => {
           e.preventDefault();
@@ -195,30 +195,6 @@ class NewGrow extends Component {
       }
     });
   }
-//   {this.state.selectedPlant === 'customize' &&
-//     this.state.selectedChamber === '' && <CustomizeSensors {...this.props} />}
-//   { this.state.selectedChamber === '' &&
-//     this.state.selectedPlant !== '' &&
-//     this.state.showDirections === false && (
-//       <div className="chamberOptions">
-//         <div className="chamberImage">
-//           <ChamberFormGroup
-//             options={this.state.chamberOptions} onClick={this.handleChamberRadioClick} />
-//         </div>
-//
-// }
-// //
-// // </form>
-// // }
-// // { this.state.selectedChamber !== '' &&
-//   this.state.selectedPlant !== '' &&
-//   this.state.isBalanced === false && (
-//
-//   )}
-//
-// {this.state.showDirections === true && (
-//
-// ) }
 
   validateForm() {
     console.log('validateForm');
@@ -316,11 +292,14 @@ class NewGrow extends Component {
   completeNewGrow = () => {
     console.log('complete new grow after setup ph, etc');
     const plant_name = upperFirst(camelCase(this.state.newGrowPlant.recipeName));
-    this.props.history.push({pathname: `/plants/${plant_name}`, state: {
-      details: this.state.newGrowPlant,
-      notifications: ["You have successfully started growing your garden! Check out how it's doing below."],
-      plantTypes: this.state.plantTypes
-    }});
+    this.props.history.push({
+      pathname: `/plants/${plant_name}`,
+      state: {
+        details: this.state.newGrowPlant,
+        notifications: ["You have successfully started growing your garden! Check out how it's doing below."],
+        plantTypes: this.state.plantTypes
+      }
+    });
   }
 
   setStateFromHistory = () => {
@@ -337,7 +316,7 @@ class NewGrow extends Component {
       showForm,
       showPlantsDirections
     })
-
+    this.setState({ isloading: false });
   }
 
   renderPlantGroup() {
@@ -405,9 +384,6 @@ class NewGrow extends Component {
 
   render() {
     console.log('render new grow');
-    // console.log(`plantTypes: ${this.state.plantTypes}`);
-    console.log(this.state.newGrowPlant);
-// debugger
     return (
       <div className={styles.newGrowContainer}>
       { !this.state.isloading &&

@@ -39,7 +39,7 @@
 .temperatureContainer {
   left: 600px;
   top: 300px;
-  width: 75px;
+  width: 90px;
   height: auto;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .light {
-  background-color: green;
+  background-color: #800080;
   border-radius: 50px;
   width: 100px;
   height: 100px;
@@ -98,7 +98,7 @@
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  width: 75px;
+  width: 90px;
   color: white;
   height: auto;
   margin: 0;

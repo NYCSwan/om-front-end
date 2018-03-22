@@ -11,6 +11,8 @@ import { authUser, signOutUser } from "./libs/awsLibs";
 import styles from './styling/app.css';
 import logo from './media/logo.png';
 import Footer from './js/layout/footer.react';
+import PagerBack from './js/layout/pagerBack.react';
+import PageTitle from './js/components/pageTitle.react';
 
 fontawesome.library.add(faAlignJustify);
 
@@ -19,16 +21,14 @@ class App extends Component {
     history: PropTypes.shape({
       push: PropTypes.func
     }).isRequired
-    // match: PropTypes.shape({
-    //   path: PropTypes.string
-    // }).isRequired
   };
 
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
     openHamburger: false,
-    openModal: false
+    openModal: false,
+    pageTitle: 'Homepage'
   }
 
   async componentDidMount() {
@@ -66,6 +66,11 @@ class App extends Component {
     this.setState({ openModal: true });
   }
 
+  handlePageTitleChange = (newTitle) => {
+    console.log('handle pageTitle change');
+    this.setState({ pageTitle: newTitle });
+  }
+
   handleModalClick = () => {
     console.log('handle modal change');
     this.setState({ openModal: !this.state.openModal });
@@ -76,6 +81,7 @@ class App extends Component {
   }
 
   render() {
+    const { pageTitle } = this.state;
 
     return (
       <div className={styles.app}>
@@ -83,6 +89,8 @@ class App extends Component {
         <div className={styles.navWithRoutes}>
         <nav className={styles.navbar}>
         <div className={styles.topNavNarrow}>
+          <PagerBack />
+          <PageTitle pageTitle={pageTitle} />
           <FontAwesomeIcon
             icon="align-justify"
             pull="right"
@@ -100,7 +108,7 @@ class App extends Component {
                     onClick={this.handleSelect}>
                     <li
                       className={styles.navItem}>
-                      Monitor
+                      Dashboard
                     </li>
                   </IndexLinkContainer>
                   <IndexLinkContainer
@@ -124,6 +132,16 @@ class App extends Component {
                     </li>
                   </IndexLinkContainer>
                   <IndexLinkContainer
+                    to='/plants'
+                    key={'plants'}
+                    className={styles.narrowIndexLinkContainer}
+                    onClick={this.handleSelect}>
+                    <li
+                      className={styles.navItem}>
+                      Plant Reference
+                    </li>
+                  </IndexLinkContainer>
+                  <IndexLinkContainer
                     to='/'
                     key={'userAccount'}
                     className={styles.narrowIndexLinkContainer}
@@ -142,6 +160,28 @@ class App extends Component {
                       className={styles.navItem}>
                     Support</li>
                   </IndexLinkContainer>
+                  {this.state.isAuthenticated
+                    ?
+                    <li
+                      className={styles.logout} onClick={this.handleLogout}
+                      >Logout</li>
+                    : [
+                        <IndexLinkContainer
+                          className={styles.signup}
+                          to='/signup'
+                          key={'signup'}>
+                          <li
+                            className={styles.navItem}>
+                            Signup</li>
+                        </IndexLinkContainer> ,
+                        <IndexLinkContainer
+                          className={styles.login} to='/login' key={'login'}>
+                          <li
+                            className={styles.navItem}>
+                            Login</li>
+                        </IndexLinkContainer>
+                      ]
+                  }
             </ul>
             :
             null
@@ -153,12 +193,13 @@ class App extends Component {
           </Link>
         }
           <div className={styles.topNavWide}>
+            <PageTitle pageTitle={pageTitle} />
             <IndexLinkContainer
               to='/monitor'
               key={'monitor'} className={styles.indexLinkContainer}>
               <li
                 className={styles.navItem}>
-                Monitor
+                Dashboard
               </li>
             </IndexLinkContainer>
             <IndexLinkContainer
@@ -180,6 +221,24 @@ class App extends Component {
             </IndexLinkContainer>
             <IndexLinkContainer
               to='/'
+              key={'support'}
+              className={styles.indexLinkContainer}>
+              <li
+                className={styles.navItem}>
+                Support</li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/plants'
+              key={'plants'}
+              className={styles.indexLinkContainer}
+              onClick={this.handleSelect}>
+              <li
+                className={styles.navItem}>
+                Plant Reference
+              </li>
+            </IndexLinkContainer>
+            <IndexLinkContainer
+              to='/'
               key={'userAccount'}
               className={styles.indexLinkContainer}>
               <li
@@ -187,30 +246,22 @@ class App extends Component {
                 My Account
               </li>
             </IndexLinkContainer>
-            <IndexLinkContainer
-              to='/'
-              key={'support'}
-              className={styles.indexLinkContainer}>
-              <li
-                className={styles.navItem}>
-              Support</li>
-            </IndexLinkContainer>
           </div>
 
-              <div className={styles.logging}>
-                {this.state.isAuthenticated
-                  ?
-                  <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
-                  : [
-                      <Link className={styles.signup} to='/signup' key={'signup'}>
-                        Signup
-                      </Link>,
-                      <Link className={styles.login} to='/login' key={'login'}>
-                        Login
-                      </Link>
-                    ]
-                }
-              </div>
+            <div className={styles.logging}>
+              {this.state.isAuthenticated
+                ?
+                <button className={styles.logout} onClick={this.handleLogout}>Logout</button>
+                : [
+                    <Link className={styles.signup} to='/signup' key={'signup'}>
+                      Signup
+                    </Link>,
+                    <Link className={styles.login} to='/login' key={'login'}>
+                      Login
+                    </Link>
+                  ]
+              }
+            </div>
             </nav>
           </div>
         }
@@ -221,7 +272,8 @@ class App extends Component {
               userHasAuthenticated={this.userHasAuthenticated}
               openModal={this.state.openModal}
               handleModalClick={this.handleModalClick}
-              showModal={this.showModal} />
+              showModal={this.showModal}
+              setTitle={this.handlePageTitleChange} />
             <Footer />
           </div>
       }

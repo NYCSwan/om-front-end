@@ -22,31 +22,37 @@ const Routes = (props) => (
     <Route {...props} path='/login' exact render={(routeProps) => { // eslint-disable-line
         return <Login
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path="/signup" exact render={(routeProps) => { // eslint-disable-line
         return <Signup
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path='/monitor' exact render={(routeProps) => { // eslint-disable-line
         return <Monitor
+          setTitle={props.setTitle}
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           {...routeProps} /> }}
     />
     <Route {...props} path='/monitor/progress' exact render={(routeProps) => { // eslint-disable-line
         return <Progress
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path='/monitor/:sensor_id' exact render={(routeProps) => { // eslint-disable-line
         return <Sensor
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path="/controls" exact render={(routeProps) => { // eslint-disable-line
        return <ControlSettings
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path='/controls/NewGrow' exact render={(routeProps) => { // eslint-disable-line
@@ -55,6 +61,7 @@ const Routes = (props) => (
           showModal={props.showModal}
           handleModalClick={props.handleModalClick}
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps}  /> }}
     />
     <Route {...props} path='/controls/ExistingGrow' exact render={(routeProps) => { // eslint-disable-line
@@ -63,21 +70,25 @@ const Routes = (props) => (
           showModal={props.showModal}
           handleModalClick={props.handleModalClick}
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path='/tutorials' exact render={(routeProps) => { // eslint-disable-line
         return <Tutorials
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route {...props} path='/plants' exact render={(routeProps) => { // eslint-disable-line
         return <PlantList
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }}
     />
     <Route path='/plants/:plant_name' exact render={(routeProps) => { // eslint-disable-line
         return <PlantDetails
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
           {...routeProps} /> }} />
     <Route component={NotFound} />
   </Switch>

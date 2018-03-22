@@ -18,6 +18,7 @@
 
 /* PLANTS FORM */
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
+  font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
   max-width: 200px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -65,7 +66,7 @@
 
 .buttonBasil, .buttonBellPepper, .buttonBroccoli, .buttonCilantro, .buttonGreenBeans, .buttonLettuce, .buttonTomatoes, .buttonKale, .buttonCustomize {
   composes: background from './variables.css';
-  font-family: Futura-Lig;
+  font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
   width: 200px;
   font-size: 24px;
   margin: 15px;
@@ -135,7 +136,7 @@
     margin-left: auto;
     margin-right: auto;
     font-size: 18px;
-    font-family: Futura-Lig;
+    font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
   }
 
   .Chamber1, .Chamber2, .Chamber3 {
@@ -146,17 +147,17 @@
 
   .Chamber1 {
     top: 400px;
-    right: 450px;
+    right: 492px;
   }
 
   .Chamber2 {
     top: 485px;
-    right: 430px;
+    right: 468px;
   }
 
   .Chamber3 {
     top: 445px;
-    left: 475px;
+    left: 522px;
   }
 
   .Chamber1:hover, .Chamber2:hover, .Chamber3:hover {

@@ -3,12 +3,6 @@
   height: auto;
 }
 
-.balanced {
-  composes: default from './buttons.css';
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .directionsright {
   width: 55%;
@@ -19,6 +13,10 @@
   font-size: 18px;
 }
 
+.directionsright button {
+  margin-top: 75px;
+  margin-left: 0;
+}
 
 /* Tablet screens */
 /* ************ */
@@ -30,9 +28,9 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
-.balanced {
+.directionsright button {
   margin-top: 20px;
-  width: 100px;
+  width: 40px;
 }
 
 }

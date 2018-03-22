@@ -37,7 +37,7 @@ class PopUp extends Component {
 
   // open = () => {
   //   console.log('open popup');
-  //   this.props.handleModalClick();
+  // this.props.handleModalClick();
   //   this.setState({ openModal: true });
   // };
 
@@ -49,8 +49,7 @@ class PopUp extends Component {
       <div>
       { displayModal && (
       <div
-        className={styles.modalContainer}
-        onClick={this.close}>
+        className={styles.modalContainer}>
         <div
           className={styles.modal}>
           <table className={styles.table}>

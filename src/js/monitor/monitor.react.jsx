@@ -5,6 +5,7 @@ import moment from 'moment';
 import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/fontawesome-free-regular';
+import isUndefined from 'lodash/isUndefined';
 
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
@@ -13,6 +14,7 @@ import Spinner from '../helpers/spinner.react';
 import waterlevel from '../../media/water_level_icon.png';
 import lightsOn from '../../media/light_icon_white.png';
 import lightsOff from '../../media/light_icon_grey.png';
+import Notifications from '../components/notifications.react';
 
 fontawesome.library.add(faCircle);
 
@@ -36,23 +38,41 @@ class Monitor extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount monitor');
+    debugger
     if (!this.props.location.state) {
       try {
-
         const results = await this.growingPlants();
         this.setState({growingPlants: results});
         const chamberResults = await this.getAllChamberData();
         this.setChambers(chamberResults);
-        // debugger
         const sensorResults = await this.getSensorMeasurementData();
         this.setSensorData(sensorResults);
+
+        if(this.props.isAuthenticated) {
+          this.props.history.push({
+            pathname: this.props.location.pathname,
+            state: {
+              chamberId: this.state.chamberId,
+              chamberData: this.state.chamberData,
+              growingPlants: this.state.growingPlants,
+              chambers: this.state.chambers,
+              lightOn: this.state.lightOn,
+              notifications: this.state.notifications
+            }
+          })
+        }
       } catch(e) {
         console.log(e);
       }
     } else {
       console.log('set state to location state');
-    }
+      this.setStateFromHistory()
 
+      const sensorResults = await this.getSensorMeasurementData();
+      this.setSensorData(sensorResults);
+    }
+    this.props.setTitle('Dashboard');
+    
     this.setState({ isloading: false });
   }
 
@@ -85,6 +105,17 @@ class Monitor extends Component {
   setGrowingPlants = (growingResults) => {
     console.log('set growing plants in state');
     this.setState({ growingPlants: growingResults });
+  }
+
+  setStateFromHistory = () => {
+    const { chambers, chamberId, growingPlants, notifications } = this.props.history.location.state;
+
+    this.setState({
+      chamberId,
+      growingPlants,
+      chambers,
+      notifications
+    })
   }
 
   setChambers = (chamberResults) => {
@@ -124,10 +155,6 @@ class Monitor extends Component {
     )
   }
 
-  handleGardenClick = event => {
-    event.preventDefault();
-    this.props.history.push(event.currentTarget.getAttribute("href"));
-  }
 
   handleLight = () => {
     console.log('turn lights on or off');
@@ -150,6 +177,18 @@ class Monitor extends Component {
     return days;
   }
 
+  renderNotifications(){
+    // if (!isUndefined(this.props.location.state.notifications) ) {
+    //   this.props.location.state.notifications.map(notification => {
+    //     return (
+    //       <h3>{notification}</h3>
+    //     )
+    //   });
+    // } else {
+    //   return;
+    // }
+  }
+
   render() {
     console.log('render monitor');
     const { chamberData, chambers, chamberId } = this.state;
@@ -164,12 +203,13 @@ class Monitor extends Component {
           key={chamberId}
         />
 
-        { this.props.location.state.notifications.map(notification => {
-          return (
-            <h3>{notification}</h3>
-          )
+        { !isUndefined(this.props.location.state)
+          ?
+          <Notifications
+            notifications={this.state.notifications} />
+          :
+          null
           }
-        )}
 
         { this.state.chamberData.length >= 1
           ?

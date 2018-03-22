@@ -33,7 +33,7 @@ class ExistingGrow extends Component {
     showBalance: false,
     showPause: false,
     showInitialPopup: false,
-    plantRecipe: {},
+    newGrowPlant: {},
     isAuthenticated: PropTypes.bool.isRequired,
     userHasAuthenticated: PropTypes.func.isRequired
     // showChambers: true,
@@ -44,6 +44,7 @@ class ExistingGrow extends Component {
 
   async componentDidMount() {
     console.log('component did mount existing grow');
+
     if (!this.props.location.state) {
     try {
       const chamberResults = await this.getChamberOptions();
@@ -52,20 +53,19 @@ class ExistingGrow extends Component {
       this.setState({climates: climateResults});
       const gardenResults = await this.getGrowingPlants();
       this.setState({growingPlants: gardenResults});
-
       if(this.props.isAuthenticated) {
         this.props.history.push({
           pathname: this.props.location.pathname,
           state: {
             plantTypes: this.state.plantTypes,
             chamberOptions: this.state.chamberOptions,
-            selectedPlant: this.state.selectedPlant,
-            isBalanced: this.state.isBalanced,
-            showDirections: this.state.showDirections,
-            showPlantsDirections: this.state.showPlantsDirections,
+            updatingThisPlant: this.state.updatingThisPlant,
+            showBalance: this.state.showBalance,
+            showPause: this.state.showPause,
+            showInitialPopup: this.state.showInitialPopup,
             newGrowPlant: this.state.newGrowPlant,
-            selectedChamber: this.state.selectedChamber,
-            showForm: this.state.showForm
+            growingPlants: this.state.growingPlants,
+            climates: this.state.climates
           }
         });
       }
@@ -97,12 +97,12 @@ class ExistingGrow extends Component {
 // API GET CALLS
   getGrowingPlants = () => {
     console.log('get plant recipe');
-    return invokeApig({ path: `/plants`});
+    return invokeApig({ path: `/gardens`});
   };
 
   getChamberOptions = () => {
     console.log('get chamber options');
-    return invokeApig({ path: '/chamberOptions' });
+    return invokeApig({ path: '/chambers' });
   };
 
   getClimates = () => {
@@ -125,13 +125,31 @@ class ExistingGrow extends Component {
 
     }
   }
+
 // V-DOM EVENTS
 // UPDATE STATE
+  setStateFromHistory = () => {
+    const { chamberOptions, showBalance, newGrowPlant, plantTypes, growingPlants, updatingThisPlant, climates, showPause, showInitialPopup } = this.props.history.location.state;
+
+    this.setState({
+      plantTypes,
+      chamberOptions,
+      updatingThisPlant,
+      showBalance,
+      showPause,
+      showInitialPopup,
+      newGrowPlant,
+      growingPlants,
+      climates
+    })
+
+  }
+
   handleChamberRadioClick = (e) => {
     console.log('handleChamberRadio: update existing plant existing grow');
     const target = e.target.innerText;
     const currentPlantType = pickBy(this.state.growingPlants, plant => plant.plantName === target);
-    const key = findKey(currentPlantType)
+    const key = findKey(currentPlantType);
     // this.props.handleModalClick();
     this.setState({
       updatingThisPlant: currentPlantType[key],
@@ -140,6 +158,20 @@ class ExistingGrow extends Component {
 
     this.props.showModal();
     this.updateRecipeState(target);
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        updatingThisPlant: this.state.updatingThisPlant,
+        showBalance: this.state.showBalance,
+        showPause: this.state.showPause,
+        showInitialPopup: this.state.showInitialPopup,
+        newGrowPlant: this.state.newGrowPlant,
+        growingPlants: this.state.growingPlants,
+        climates: this.state.climates
+      }
+    })
   }
 
   async updateRecipeState(plant) {
@@ -147,14 +179,16 @@ class ExistingGrow extends Component {
 
     try {
       const recipeResults = await this.getRecipe(plant);
-      this.setState({ plantRecipe: recipeResults })
+      this.setState({ newGrowPlant: recipeResults });
     } catch(plant) {
       console.error('error existingGrow: 128');
     }
   }
+
   handlePopupClick = () => {
     console.log('handle popup click');
-    this.setState({ showInitialPopup: false });
+    this.setState({
+      showInitialPopup: false });
     // this.props.handleModalClick();
   }
 
@@ -165,6 +199,20 @@ class ExistingGrow extends Component {
       showBalance: true,
       showInitialPopup: false
     });
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        updatingThisPlant: this.state.updatingThisPlant,
+        showBalance: false,
+        showPause: this.state.showPause,
+        showInitialPopup: true,
+        newGrowPlant: this.state.newGrowPlant,
+        growingPlants: this.state.growingPlants,
+        climates: this.state.climates
+      }
+    })
     this.props.handleModalClick();
   };
 
@@ -174,14 +222,40 @@ class ExistingGrow extends Component {
       showPause: true,
       showInitialPopup: false
     });
+
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      state: {
+        plantTypes: this.state.plantTypes,
+        chamberOptions: this.state.chamberOptions,
+        updatingThisPlant: this.state.updatingThisPlant,
+        showBalance: false,
+        showPause: false,
+        showInitialPopup: true,
+        newGrowPlant: this.state.newGrowPlant,
+        growingPlants: this.state.growingPlants,
+        climates: this.state.climates
+      }
+    })
   };
 
   handleResumeClick = () => {
     console.log('handle resume click');
     this.setState({ showPause: false });
     this.props.handleModalClick();
-    this.props.history.push('/monitor');
+    this.props.history.push({
+      pathname: '/monitor',
+      state: {
+        plantTypes: this.state.plantTypes,
+        chambers: this.state.chamberOptions,
+        updatingThisPlant: this.state.updatingThisPlant,
+        growingPlants: this.state.growingPlants,
+        chamberId: this.state.newGrowPlant.chamberId,
+        notifications: ["You have successfully updated your garden."]
+        }
+      });
   }
+
 // RENDER
   renderLanding() {
     console.log('render lander');
@@ -226,56 +300,18 @@ class ExistingGrow extends Component {
     this.setState({ isBalanced: true });
   };
 
-  // renderSettings = () => {
-  //   console.log('update settings existing grow');
-  //   // update state.settings with plantTypes info
-  //   const { plantTypes, climates } = this.props;
-  //
-  //   const chamber = this.state.selectedChamber;
-  //   const currentPlantState = upperFirst(this.state.selectedPlant);
-  //   const currentClimateId = this.state.selectedClimateId;
-  //   const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
-  //   const currentClimate = pickBy(climates, (climate) => climate.id === currentClimateId )
-  //   const key = findKey(currentClimate);
-  //   const climateName = currentClimate[key].type;
-  //   const currentSettings = [];
-  //   const plantKey = findKey(currentPlantType);
-  //
-  //   currentSettings.push(currentPlantType[plantKey].name);
-  //   currentSettings.push(`${upperFirst(climateName)}, ${currentPlantType[plantKey].temperature}`);
-  //   currentSettings.push(`pH ${currentPlantType[plantKey].pH}`);
-  //   currentSettings.push(`Chamber ${chamber}`);
-  //   this.setState({ settings: currentSettings });
-  //
-  // }
-
-  // updateDirections = () => {
-  //   console.log('update directions existing grow');
-  //   const { plantTypes } = this.props;
-  //   const currentPlantState = upperFirst(this.state.selectedPlant);
-  //   const currentPlantType = pickBy(plantTypes, (plant) => plant.name === currentPlantState );
-  //   const tempDirections = [];
-  //   const key = findKey(currentPlantType);
-  //
-  //   tempDirections.push(currentPlantType[key].grow_directions);
-  //   tempDirections.push("This may take about 5 minutes...");
-  //   tempDirections.push(currentPlantType[key].planting_directions);
-  //   this.setState({ directions: tempDirections });
-  // }
-
   completeExisitingGrow = () => {
     console.log('complete existing grow after setup ph, etc');
-    this.props.history.push("/monitor");
+    this.props.history.push({
+      pathname: "/monitor",
+      state: {
+        chamberId: this.state.chamberId,
+        growingPlants: this.state.growingPlants,
+        chambers: this.state.chamberOptions,
+        notifications: ["You have successfully updated your garden!"]
+      }
+    });
   }
-  // showGrowDirections = () => {
-  //   console.log('show grow directions existing grow');
-  //   this.setState({ showGrowDirections: true, showBalance: false });
-  // }
-  //
-  // submitGrowChange = () => {
-  //   console.log('submit grow changes');
-  // }
-
 
   renderPopUp() {
     console.log('render popup');
@@ -342,7 +378,7 @@ class ExistingGrow extends Component {
           ? this.renderGardens()
           : this.renderLanding()
         }
-        { ( !isEmpty(this.state.plantRecipe) && this.state.showInitialPopup )
+        { ( !isEmpty(this.state.newGrowPlant) && this.state.showInitialPopup )
           ? this.renderPopUp()
           : null
         }
@@ -357,17 +393,14 @@ class ExistingGrow extends Component {
         }
         { this.state.showBalance === true
           ? <DirectionsContainer
-              newGrowPlant={this.state.plantRecipe}
+              newGrowPlant={this.state.newGrowPlant}
               handlePhClick={this.updatePhBalance}
               isBalanced={this.state.isBalanced}
               selectedChamber={this.state.updatingThisPlant.chamberId}
-              handleClick={this.completeExisitingGrow}
               showPlantsDirections={false}
               plant={this.state.updatingThisPlant.fullName}
               handlePlantClick={this.completeExisitingGrow}
               handleNextClick={this.completeExisitingGrow}
-              match={this.props.match}
-              history={this.props.history}
             />
           : null
         }

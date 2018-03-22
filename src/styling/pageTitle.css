@@ -1,0 +1,13 @@
+.pageTitle {
+  composes: accentLightGreen from './variables.css';
+  order: 2;
+  width: 100%;
+  text-align: right;
+  margin-top: 0;
+  padding-bottom: 10px;
+  padding-top: 0;
+}
+
+.pageTitle h1 {
+  margin: 0;
+}

@@ -134,9 +134,9 @@ class Progress extends Component {
 
   setPlant = () => {
     console.log('set plant name');
-    const currentPlant =  pickBy(this.state.growingPlants, plant => parseInt(plant.chamberId) === this.state.chamberId);
+    const currentPlant =  pickBy(this.state.growingPlants, plant => parseInt(plant.chamberId, 10) === this.state.chamberId);
     const key = findKey(currentPlant)
-    debugger
+    // debugger
     this.setState({ selectedPlant: currentPlant[key].plantName})
   }
 
