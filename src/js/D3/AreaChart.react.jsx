@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis } from 'recharts';
 import moment from 'moment';
 
 import styles from '../../styling/areaChart.css';
@@ -43,7 +43,7 @@ class ChartArea extends Component {
     if (endDate - startDate === 604800000 ){
       return moment(tick).format('ddd, Do');
     } else if (endDate - startDate > 604800000){
-      return moment(tick).format('ddd, M/D');
+      return moment(tick).format('dd');
     }
   }
 
@@ -66,8 +66,7 @@ class ChartArea extends Component {
           bottom: margin.bottom,
           left: margin.left
        }}
-       className={styles.chart}
-      >
+       className={styles.chart}>
         <defs>
           <linearGradient
             id="valueColor"
@@ -77,7 +76,7 @@ class ChartArea extends Component {
             y2="1">
             <stop
               offset="20%"
-              stopColor="#cccccc"
+              stopColor="rgba(168,168,168, 0.1)"
               stopOpacity={0.0}/>
             <stop
               offset="100%"
@@ -89,7 +88,7 @@ class ChartArea extends Component {
           dataKey="time"
           tick={{ stroke:'#ccccccc', strokeWidth: 1 }}
           tickLine={false}
-          stroke='#cccccc'
+          stroke='rgb(168,168,168)'
           tickFormatter={this.dateFormatter}
           interval={1000}
         />
@@ -98,17 +97,15 @@ class ChartArea extends Component {
           tick={{ stroke:'#cccccc', strokeWidth: 1 }}
           tickCount={5}
           tickLine={false}
-          stroke='#ccccccc'
+          stroke='rgb(168,168,168)'
           label={label}>
-
         </YAxis>
-        <Tooltip />
         <Area
           dataKey='value'
           dot={false}
           connectNulls={true}
           type='monotone'
-          stroke='#cccccc'
+          stroke='rgb(168,168,168)'
           fillOpacity={1}
           fill='url(#valueColor)' />
       </AreaChart>

@@ -33,18 +33,35 @@ class Sensor extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount sensor');
+    if (!this.props.location.state) {
+      try {
+        const results = await this.growingPlantsData();
+        this.setState({growingPlants: results});
+        const chamberResults = await this.getAllChamberData();
+        this.setState({chambers: chamberResults});
+        const sensorResults = await this.getSensorMeasurementData();
+        this.setState({sensorData: sensorResults});
 
-    try {
-      const results = await this.growingPlantsData();
-      this.setState({growingPlants: results});
-      const chamberResults = await this.getAllChamberData();
-      this.setState({chambers: chamberResults});
-      const sensorResults = await this.getSensorMeasurementData();
-      this.setState({sensorData: sensorResults});
-    } catch(e) {
-      console.log(e);
+        if(this.props.isAuthenticated) {
+          this.props.history.push({
+            pathname: this.props.location.pathname,
+            state: {
+              chamberId: this.state.chamberId,
+              sensorData: this.state.sensorData,
+              growingPlants: this.state.growingPlants,
+              chambers: this.state.chambers
+            }
+          })
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      console.log('set state from location ');
+      this.setStateFromHistory();
     }
-    this.props.setTitle(this.props.location.pathname);
+    
+    this.props.setTitle(this.props.sensor);
     this.setState({ isloading: false });
   }
 
@@ -70,6 +87,17 @@ class Sensor extends Component {
   getSensorMeasurementData() {
     console.log('get sensor measurents');
       return invokeApig({  path: `/sensorData` })
+  }
+
+  setStateFromHistory = () => {
+    const { chambers, chamberId, sensorData, growingPlants } = this.props.history.location.state;
+
+    this.setState({
+      chambers,
+      chamberId,
+      sensorData,
+      growingPlants
+    })
   }
 
   handleChamberIdChange = newChamber => {
@@ -131,6 +159,7 @@ class Sensor extends Component {
               startDate={oneWeekAgo}
               match={this.props.match}
             />
+            <h3 className={styles.title}>One Week</h3>
             <LineGraph
               chamberId={chamberId}
               sensorData={sensorData}
@@ -139,6 +168,8 @@ class Sensor extends Component {
               startDate={oneMonthAgo}
               match={this.props.match}
             />
+            <h3 className={styles.title}>One Month</h3>
+
               <div className={styles.startDate}>
                 <h3>Started</h3>
                 {this.renderStartDate()}

@@ -30,8 +30,8 @@ class LineGraph extends Component {
     minY: 0,
     minX: 0,
     maxX: 0,
-    graphWidth: window.window.outerWidth - 50,
-    graphHeight: 400,
+    graphWidth: window.window.outerWidth - 75,
+    graphHeight: 300,
     outerWidth: window.window.outerWidth,
     currentData: []
   }
@@ -44,10 +44,10 @@ class LineGraph extends Component {
       this.setChartHeight();
   }
 
-  shouldComponentUpdate (newProps, newState) {
-    console.log('shouldComponentUpdate lineGraph');
-    return this.props.endDate !== newProps.endDate || this.props.sensorData !== newProps.sensorData || this.state.maxY !== newState.maxY || this.state.minY !== newState.minY || this.props.sensor !== newProps.sensor || this.props.chamberId !== newProps.chamberId || this.state.outerWidth !== newState.outerWidth
-  }
+  // shouldComponentUpdate (newProps, newState) {
+  //   console.log('shouldComponentUpdate lineGraph');
+  //   return this.props.endDate !== newProps.endDate || this.props.sensorData !== newProps.sensorData || this.state.maxY !== newState.maxY || this.state.minY !== newState.minY || this.props.sensor !== newProps.sensor || this.props.chamberId !== newProps.chamberId || this.state.outerWidth !== newState.outerWidth
+  // }
 
   extractMaxMin = () => {
     console.log('extractMaxMin');
@@ -77,6 +77,7 @@ class LineGraph extends Component {
   }
 
   extractSingleSensorData = () => {
+    console.log('extractSingleSensorData');
     const { sensorData, sensor, startDate } = this.props;
     const tempData = [];
     let temp = {};
@@ -96,29 +97,30 @@ class LineGraph extends Component {
   }
 
   setChartWidth = () => {
-
+    console.log('setChartWidth');
     if (this.state.outerWidth > 807 && this.state.outerWidth < 1320) {
       this.setState({graphWidth: 400})
       // tablet
-    } else if (this.state.outerWidth < 807 ) {
-      this.setState({graphWidth: 275})
+    } else if (this.state.outerWidth <= 807 ) {
+      this.setState({graphWidth: 300})
       // mobile
     } else {
-      this.setState({graphWidth: 600})
+      this.setState({graphWidth: 800})
       // browser
     }
   }
 
   setChartHeight = () => {
+    console.log('setChartHeight');
     if (this.state.outerWidth < 807 && this.state.outerWidth < 1320) {
-      this.setState({graphHeight: 350})
+      this.setState({graphHeight: 300})
       // tablet
-    } else if (this.state.outerWidth > 807) {
-      this.setState({graphHeight: 250})
-      // mobile
-    } else {
+    } else if (this.state.outerWidth >= 1320) {
       this.setState({graphHeight: 500})
       // browser
+    } else {
+      this.setState({graphHeight: 200})
+      // mobile
     }
   }
 
@@ -142,7 +144,7 @@ class LineGraph extends Component {
             minY={this.state.minY}
           />
       }
-      
+
       </div>
     )
   }
@@ -150,10 +152,10 @@ class LineGraph extends Component {
 
 LineGraph.defaultProps = {
     margin: {
-      top: 20,
-      right: 20,
-      bottom: 20,
-      left: 10
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
     }
 }
 

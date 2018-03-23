@@ -66,7 +66,7 @@ class Monitor extends Component {
       }
     } else {
       console.log('set state to location state');
-      this.setStateFromHistory()
+      this.setStateFromHistory();
 
       const sensorResults = await this.getSensorMeasurementData();
       this.setSensorData(sensorResults);
@@ -231,8 +231,16 @@ class Monitor extends Component {
             }
               <div className={styles.humidityContainer}>
                 <Link
-                className={styles.humiditylink}
-                to='/monitor/humidity'>
+                  className={styles.humiditylink}
+                  to={{
+                    pathname: '/monitor/humidity',
+                    state: {
+                      chamberId: this.state.chamberId,
+                      sensorData: this.state.chamberData,
+                      growingPlants: this.state.growingPlants,
+                      chambers: this.state.chambers,
+                    }
+                  }}>
                   <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
                   <h4>RH</h4>
                 </Link>
@@ -240,14 +248,31 @@ class Monitor extends Component {
               <div className={styles.turbidityContainer}>
                 <Link
                 className={styles.turbiditylink}
-                to='/monitor/turbidity'>
+                to={{
+                  pathname: '/monitor/turbidity',
+                  state: {
+                    chamberId: this.state.chamberId,
+                    sensorData: this.state.chamberData,
+                    growingPlants: this.state.growingPlants,
+                    chambers: this.state.chambers,
+                  }
+                }}>
                   <h2 className={styles.turbidity}>{latest.turbidity}</h2>
                   <h4>PPM</h4>
                 </Link>
               </div>
               <div className={styles.temperatureContainer}>
                 <Link
-                  className={styles.temperaturelink} to='/monitor/temperature'>
+                  className={styles.temperaturelink}
+                  to={{
+                    pathname: '/monitor/temperature',
+                    state: {
+                      chamberId: this.state.chamberId,
+                      sensorData: this.state.chamberData,
+                      growingPlants: this.state.growingPlants,
+                      chambers: this.state.chambers,
+                    }
+                  }}>
                   <h2 className={styles.xBigFont}>
                     {latest.temperature}
                     <FontAwesomeIcon icon={faCircle} className={styles.fontawesome}/>
@@ -258,7 +283,15 @@ class Monitor extends Component {
               <div className={styles.phContainer}>
                 <Link
                   className={styles.phlink}
-                  to='/monitor/pH'>
+                  to={{
+                    pathname: '/monitor/pH',
+                    state: {
+                      chamberId: this.state.chamberId,
+                      sensorData: this.state.chamberData,
+                      growingPlants: this.state.growingPlants,
+                      chambers: this.state.chambers,
+                    }
+                  }}>
                   <h2 className={styles.pH} key={latest.timestamp}>
                   {latest.pH}
                   </h2>

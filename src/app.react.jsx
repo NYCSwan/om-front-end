@@ -28,7 +28,7 @@ class App extends Component {
     isAuthenticating: true,
     openHamburger: false,
     openModal: false,
-    pageTitle: 'Homepage'
+    pageTitle: ''
   }
 
   async componentDidMount() {
@@ -169,25 +169,30 @@ class App extends Component {
                   </IndexLinkContainer>
                   {this.state.isAuthenticated
                     ?
-                    <li
-                      className={styles.logout} onClick={this.handleLogout}
+                    <div
+                      className={styles.narrowIndexLinkContainer}>
+                      <li
+                        className={styles.navItem}
+                        onClick={this.handleLogout}
                       >Logout</li>
-                    : [
-                        <IndexLinkContainer
-                          className={styles.signup}
-                          to='/signup'
-                          key={'signup'}>
-                          <li
-                            className={styles.navItem}>
-                            Signup</li>
-                        </IndexLinkContainer> ,
-                        <IndexLinkContainer
-                          className={styles.login} to='/login' key={'login'}>
-                          <li
-                            className={styles.navItem}>
-                            Login</li>
-                        </IndexLinkContainer>
-                      ]
+                    </div>
+                    :
+                    [
+                      <IndexLinkContainer
+                        className={styles.narrowIndexLinkContainer}
+                        to='/signup'
+                        key={'signup'}>
+                        <li
+                          className={styles.navItem}>
+                          Signup</li>
+                      </IndexLinkContainer> ,
+                      <IndexLinkContainer
+                        className={styles.narrowIndexLinkContainer} to='/login' key={'login'}>
+                        <li
+                          className={styles.navItem}>
+                          Login</li>
+                      </IndexLinkContainer>
+                    ]
                   }
             </ul>
             :

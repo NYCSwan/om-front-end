@@ -169,6 +169,7 @@
   .brandLogo {
     display: none;
   }
+
   .topNavNarrow {
     display: inline;
     font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
@@ -220,6 +221,7 @@
   .narrowIndexLinkContainer {
     background-color: rgb(104,176,77);
     width: 100%;
+    color: #fff;
   }
 
 /* li nav item */
@@ -227,9 +229,10 @@
     display: inline-block;
     height:80px;
     width: 100%;
-    padding-top:40px;
+    padding-top:0;
+    margin: 0 0 0 0;
     border-top: 2px solid rgba(255,255,255,.5);=
-    color: lightGray from './variables.css';
+    color: white from './variables.css';
     text-align: center;
   }
 
