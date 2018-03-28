@@ -116,14 +116,15 @@
   }
 
   .startDate {
-    border-top-right-radius: 75px;
-    border-top-left-radius: 75px;
+    border-top-right-radius: 70px;
+    border-top-left-radius: 70px;
     width: 125px;
     height: 75px;
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
   .startDate h3 {
     padding-top: 0;
+    word-wrap: break-word;
   }
 }

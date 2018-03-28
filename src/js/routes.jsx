@@ -18,7 +18,12 @@ import Progress from './monitor/timelapse/progress.react';
 
 const Routes = (props) => (
   <Switch>
-    <Route path="/" exact component={Homepage} {...props} />
+    <Route path="/" exact render={(routeProps) => { // eslint-disable-line
+        return <Homepage
+          isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
+          setTitle={props.setTitle}
+          {...routeProps} /> }}
+          />
     <Route {...props} path='/login' exact render={(routeProps) => { // eslint-disable-line
         return <Login
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}

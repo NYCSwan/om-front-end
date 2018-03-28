@@ -6,12 +6,14 @@ import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/fontawesome-free-regular';
 import isUndefined from 'lodash/isUndefined';
+import pickBy from 'lodash/pickBy';
+import findKey from 'lodash/findKey';
 
 import styles from '../../styling/monitor.css';
 import FilterButtonGroup from '../components/filter_button.react';
 import { invokeApig } from '../../libs/awsLibs';
 import Spinner from '../helpers/spinner.react';
-import waterlevel from '../../media/water_level_icon.png';
+import waterlevel from '../../media/waterlevel_icon.png';
 import lightsOn from '../../media/light_icon_white.png';
 import lightsOff from '../../media/light_icon_grey.png';
 import Notifications from '../components/notifications.react';
@@ -33,7 +35,8 @@ class Monitor extends Component {
     chambers: [],
     isloading: true,
     lightOn: true,
-    notifications: []
+    notifications: [],
+    currentPlantName: ''
   };
 
   async componentDidMount() {
@@ -55,6 +58,7 @@ class Monitor extends Component {
               chamberId: this.state.chamberId,
               chamberData: this.state.chamberData,
               growingPlants: this.state.growingPlants,
+              currentPlantName: this.state.currentPlantRecipe,
               chambers: this.state.chambers,
               lightOn: this.state.lightOn,
               notifications: this.state.notifications
@@ -68,11 +72,15 @@ class Monitor extends Component {
       console.log('set state to location state');
       this.setStateFromHistory();
 
-      const sensorResults = await this.getSensorMeasurementData();
-      this.setSensorData(sensorResults);
+      if (!this.props.history.location.chamberData) {
+        const sensorResults = await this.getSensorMeasurementData();
+        this.setSensorData(sensorResults);
+      }
     }
+
     this.props.setTitle('Dashboard');
 
+    this.setCurrentPlantName();
     this.setState({ isloading: false });
   }
 
@@ -98,23 +106,28 @@ class Monitor extends Component {
 
   getSensorMeasurementData() {
     console.log('get sensor measurents by chamber id');
-      return invokeApig({ path: `/sensorData/all` })
+      return invokeApig({ path: `/sensorData` })
   };
 
 
-  setGrowingPlants = (growingResults) => {
-    console.log('set growing plants in state');
-    this.setState({ growingPlants: growingResults });
+  setCurrentPlantName = () => {
+    console.log('set current plant in state');
+    const currentPlant = pickBy(this.state.growingPlants, recipe => this.state.chamberId === parseInt(recipe.chamberId, 10));
+    const key = findKey(currentPlant);
+    // debugger
+    this.setState({ currentPlantName: currentPlant[key].plantName });
   }
 
   setStateFromHistory = () => {
-    const { chambers, chamberId, growingPlants, notifications } = this.props.history.location.state;
+    const { chambers, chamberId, currentPlantName, growingPlants, chamberData, notifications } = this.props.history.location.state;
 
     this.setState({
       chamberId,
       growingPlants,
       chambers,
-      notifications
+      notifications,
+      chamberData,
+      currentPlantName
     })
   }
 
@@ -178,18 +191,6 @@ class Monitor extends Component {
     return days;
   }
 
-  renderNotifications(){
-    // if (!isUndefined(this.props.location.state.notifications) ) {
-    //   this.props.location.state.notifications.map(notification => {
-    //     return (
-    //       <h3>{notification}</h3>
-    //     )
-    //   });
-    // } else {
-    //   return;
-    // }
-  }
-
   render() {
     console.log('render monitor');
     const { chamberData, chambers, chamberId } = this.state;
@@ -239,6 +240,7 @@ class Monitor extends Component {
                       sensorData: this.state.chamberData,
                       growingPlants: this.state.growingPlants,
                       chambers: this.state.chambers,
+                      plantName: this.state.currentPlantName
                     }
                   }}>
                   <h2 className={styles.xBigFont}>{latest.humidity}%</h2>
@@ -255,6 +257,8 @@ class Monitor extends Component {
                     sensorData: this.state.chamberData,
                     growingPlants: this.state.growingPlants,
                     chambers: this.state.chambers,
+                    plantName: this.state.currentPlantName
+
                   }
                 }}>
                   <h2 className={styles.turbidity}>{latest.turbidity}</h2>
@@ -271,6 +275,8 @@ class Monitor extends Component {
                       sensorData: this.state.chamberData,
                       growingPlants: this.state.growingPlants,
                       chambers: this.state.chambers,
+                      plantName: this.state.currentPlantName
+
                     }
                   }}>
                   <h2 className={styles.xBigFont}>
@@ -290,6 +296,8 @@ class Monitor extends Component {
                       sensorData: this.state.chamberData,
                       growingPlants: this.state.growingPlants,
                       chambers: this.state.chambers,
+                      plantName: this.state.currentPlantName
+
                     }
                   }}>
                   <h2 className={styles.pH} key={latest.timestamp}>
@@ -302,7 +310,9 @@ class Monitor extends Component {
                 <Link
                   className={styles.waterlevelink}
                   to='/monitor/waterlevel'>
-                  <img src={waterlevel} alt="water level icon" />
+                  <div>
+                    <img src={waterlevel} alt="water level icon" />
+                  </div>
                 </Link>
               </div>
                 <h3 className={styles.dayOfCycle}>

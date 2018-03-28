@@ -9,7 +9,8 @@
 }
 
 .pageTitle h1 {
-  margin: 0;
+  margin: 0 40px 0 0;
+  font-size: 45px;
 }
 
 /* Tablet screens */
@@ -30,4 +31,8 @@
     width: 85%;
   }
 
+  .pageTitle h1 {
+    font-size: 35px;
+    margin: 5px 15px 0 0;
+  }
 }

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import findKey from 'lodash/findKey';
-// import isEmpty from 'lodash/isEmpty';
+import upperFirst from 'lodash/upperFirst';
+import replace from 'lodash/replace';
 import pickBy from 'lodash/pickBy';
 import moment from 'moment';
+
 import { invokeApig } from '../../../libs/awsLibs';
 import LineGraph from '../../D3/lineGraph';
 import FilterButtonGroup from '../../components/filter_button.react';
 import styles from '../../../styling/sensor.css';
 import Spinner from '../../helpers/spinner.react';
-// import pH from '../../../media/pH_icon.png';
-// import humidity from '../../../media/humidity_icon.png';
-// import temperature from '../../../media/temperature_icon.png';
-// import waterlevel from '../../../media/water_level_icon.png';
 
 class Sensor extends Component {
   static propTypes = {
@@ -33,6 +31,8 @@ class Sensor extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount sensor');
+    const { plantName } = this.props.history.location.state;
+
     if (!this.props.location.state) {
       try {
         const results = await this.growingPlantsData();
@@ -60,8 +60,11 @@ class Sensor extends Component {
       console.log('set state from location ');
       this.setStateFromHistory();
     }
-    
-    this.props.setTitle(this.props.sensor);
+
+    const recipeResult = await this.getRecipeData(plantName);
+    this.setState({currentPlantRecipe: recipeResult});
+
+    this.props.setTitle(upperFirst(replace(this.props.match.url, '/monitor/', '')));
     this.setState({ isloading: false });
   }
 
@@ -87,6 +90,11 @@ class Sensor extends Component {
   getSensorMeasurementData() {
     console.log('get sensor measurents');
       return invokeApig({  path: `/sensorData` })
+  }
+
+  getRecipeData(plantName) {
+    console.log('get recipe data');
+    return invokeApig({ path: `/plants`, id: plantName});
   }
 
   setStateFromHistory = () => {
@@ -115,7 +123,7 @@ class Sensor extends Component {
     const tempChamber = chamberId.toString();
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const key = findKey(plant);
-    return moment(plant[key].createdAt).format("dddd,  MMM Do");
+    return <h4>{moment(plant[key].createdAt).format("dddd, MMM Do")}</h4>;
 
   }
   renderCurrentSensorReading() {
@@ -139,7 +147,16 @@ class Sensor extends Component {
     const oneWeekAgo = moment(today).subtract(7, 'days');
     const oneMonthAgo = moment(today).subtract(1, 'months');
     const sensorName = this.props.match.params.sensor_id;
+    let measurement = '';
+    if (this.props.match.params.sensor_id === 'temperature') {
+      measurement = '( F )';
+    } else if (this.props.match.params.sensor_id === 'humidity' || this.props.match.params.sensor_id === 'waterlevel') {
+      measurement = '( % )';
+    } else {
+      measurement = '';
+    }
 
+    // debugger
     return (
       <div className={styles.sensor}>
           <FilterButtonGroup
@@ -159,7 +176,7 @@ class Sensor extends Component {
               startDate={oneWeekAgo}
               match={this.props.match}
             />
-            <h3 className={styles.title}>One Week</h3>
+            <h3 className={styles.title}>One Week {measurement}</h3>
             <LineGraph
               chamberId={chamberId}
               sensorData={sensorData}
@@ -168,7 +185,7 @@ class Sensor extends Component {
               startDate={oneMonthAgo}
               match={this.props.match}
             />
-            <h3 className={styles.title}>One Month</h3>
+            <h3 className={styles.title}>One Month {measurement}</h3>
 
               <div className={styles.startDate}>
                 <h3>Started</h3>

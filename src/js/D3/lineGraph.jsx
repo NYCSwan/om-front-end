@@ -98,7 +98,7 @@ class LineGraph extends Component {
 
   setChartWidth = () => {
     console.log('setChartWidth');
-    if (this.state.outerWidth > 807 && this.state.outerWidth < 1320) {
+    if (this.state.outerWidth > 807 && this.state.outerWidth < 1024) {
       this.setState({graphWidth: 400})
       // tablet
     } else if (this.state.outerWidth <= 807 ) {
@@ -112,10 +112,10 @@ class LineGraph extends Component {
 
   setChartHeight = () => {
     console.log('setChartHeight');
-    if (this.state.outerWidth < 807 && this.state.outerWidth < 1320) {
+    if (this.state.outerWidth < 807 && this.state.outerWidth < 1024) {
       this.setState({graphHeight: 300})
       // tablet
-    } else if (this.state.outerWidth >= 1320) {
+    } else if (this.state.outerWidth >= 1024) {
       this.setState({graphHeight: 500})
       // browser
     } else {
