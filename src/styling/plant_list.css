@@ -50,11 +50,6 @@
   padding-bottom: 25px;
 }
 
-/* .basilDetailsContainer div {
-  height: 600px;
-
-} */
-
 .basilDetailsContainer img, .customizeDetailsContainer img {
   height: 230px;
   width: 1180px;
@@ -114,15 +109,22 @@ height: 300 px;
   .broccoliDetailsContainer aside {
     /* display: flex; */
     position: relative;
-    top: 70px;
+    top: 50px;
     left: -320px;
   }
-  .basilDetailsContainer div {
-    height: 200px;
+  /* .basilDetailsContainer div {
+    width: 200px;
 
+  } */
+  .basilDetailsContainer img, .customizeDetailsContainer img {
+    /* height: 100px; */
+    width: 350px;
+    margin-left: 10px;
   }
-  .basilDetailsContainer img {
-    height: 100px;
-    width: 375px;
+  .basilDetailsContainer aside, .customizeDetailsContainer aside {
+    /* height: 200px; */
+    top: 25px;
+    width: 300px;
+    left: -320px;
   }
 }
