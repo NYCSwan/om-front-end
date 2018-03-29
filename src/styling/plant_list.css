@@ -88,6 +88,17 @@ height: 300 px;
   left: -1000px;
 }
 
+.tomatoesDetailsContainer a,
+.greenBeansDetailsContainer a,
+.cilantroDetailsContainer a,
+.lettuceDetailsContainer a,
+.kaleDetailsContainer a,
+.bellPepperDetailsContainer a,
+.broccoliDetailsContainer a,
+.basilDetailsContainer a, .customizeDetailsContainer a  {
+  text-decoration: none;
+  cursor: pointer;
+}
 /* Tablet screens */
 /* ************ */
 @media only screen and (min-width: 808px) and (max-width: 1320px) {

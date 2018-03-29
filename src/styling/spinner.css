@@ -2,16 +2,11 @@
   width: 100%;
   height: 550px;
 }
-.spinner {
-  width: 250px;
-  background-color: rgba(104, 176, 77, 0.8);
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 .img {
   /* composes: spin from './animation.css'; */
+  /* width: 250px; */
   margin-left: auto;
   margin-right: auto;
   transition: all .2s ease-in-out;

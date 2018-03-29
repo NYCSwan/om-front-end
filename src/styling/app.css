@@ -37,6 +37,7 @@
     height: 40px;
     font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
     order: 5;
+    cursor: pointer;
   }
 
   .indexLinkContainer:nth-child(4) {

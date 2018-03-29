@@ -1,8 +1,20 @@
+.progressContainer {
+  height: 550px;
+}
+
+.progressContainer aside {
+  top: 360px;
+  left: 255px;
+}
+.progressContainer .plantImg {
+  height: 550px;
+}
+
 .videoContainer {
   width: 60%;
   position: absolute;
-  left: 300px;
-  top: 601px;
+  left: 255px;
+  top: 561px;
   background-color: rgba(96,94,94,0.6);
   color: #fff;
 }
@@ -22,12 +34,20 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
+  .progressContainer aside {
+    top: 135px;
+    left: 56px;
+  }
+
+  .progressContainer > div img {
+    height: 500px;
+  }
 
   .videoContainer {
     width: 70%;
     position: absolute;
     left: 56px;
-    top: 356px;
+    top: 341px;
     background-color: rgba(96,94,94,0.6);
     color: #fff;
     padding-top: 10px;

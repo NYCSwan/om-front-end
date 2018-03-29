@@ -309,7 +309,17 @@ class Monitor extends Component {
               <div className={styles.waterlevelContainer}>
                 <Link
                   className={styles.waterlevelink}
-                  to='/monitor/waterlevel'>
+                  to={{
+                    pathname: '/monitor/waterlevel',
+                    state: {
+                      chamberId: this.state.chamberId,
+                      sensorData: this.state.chamberData,
+                      growingPlants: this.state.growingPlants,
+                      chambers: this.state.chambers,
+                      plantName: this.state.currentPlantName
+
+                    }
+                  }}>
                   <div>
                     <img src={waterlevel} alt="water level icon" />
                   </div>

@@ -39,12 +39,10 @@ class Spinner extends Component {
   render() {
     // debugger
     return (
-      <div className={styles.spinnerContainer}>
+      <main className={styles.spinnerContainer}>
         <h3>Loading your gardens... </h3>
-        <div className={styles.spinner}>
-          <img src={ this.state.plantImage } alt="loading indicator" className={styles.img}/>
-        </div>
-      </div>
+        <img src={ this.state.plantImage } alt="loading indicator" className={styles.img}/>
+      </main>
     )
   }
 }

@@ -77,7 +77,7 @@ class Progress extends Component {
         console.log(e);
       }
     }
-    
+
     this.props.setTitle('Progress');
     this.setState({ isloading: false });
   }
@@ -148,77 +148,6 @@ class Progress extends Component {
     const key = findKey(currentPlant)
     this.setState({ plantDetails: currentPlant[key]})
   }
-  // handleAfterSlide = () => {
-  //   this.setState({ slideIndex: newSlideIndex })
-  // }
-
-  // renderPlantDetails() {
-  //   const { recipes, chamberId, chambers } = this.state;
-  //   let plantImgSymbol;
-  //   const recipe = [];
-  //   let key = 0;
-  //   // debugger
-  //   const currentChamber = [];
-  //   // let chamberKey = 0;
-  //
-  //   for(let cKey in chambers) {
-  //     if(parseInt(chambers[cKey].chamberId, 10) === chamberId){
-  //       // chamberKey = cKey;
-  //       currentChamber.push(chambers[cKey])
-  //     }
-  //   }
-  //
-  //   for(let rKey in recipes) {
-  //     // debugger
-  //     if(recipes[rKey].recipeName === currentChamber[key].plantName){
-  //       // recipeKey = rKey;
-  //       recipe.push(recipes[rKey])
-  //     }
-  //   }
-  //   // debugger
-  //   if (recipe[key].recipeName === "Basil") {
-  //     plantImgSymbol = Basil;
-  //   } else if (recipe[key].recipeName === 'Kale') {
-  //     plantImgSymbol = Kale;
-  //   } else if (recipe[key].recipeName === 'Green Beans') {
-  //     plantImgSymbol = GreenBeans;
-  //   } else if (recipe[key].recipeName === 'Cilantro') {
-  //     plantImgSymbol = Cilantro;
-  //   } else if (recipe[key].recipeName === 'Lettuce') {
-  //     plantImgSymbol = Lettuce;
-  //   } else if (recipe[key].recipeName === 'Broccoli') {
-  //     plantImgSymbol = Broccoli;
-  //   } else if (recipe[key].recipeName === 'Tomatoes') {
-  //     plantImgSymbol = Tomatoes;
-  //   } else if (recipe[key].recipeName === 'Cilantro') {
-  //     plantImgSymbol = Cilantro;
-  //   } else if (recipe[key].recipeName === 'Bell Pepper') {
-  //     plantImgSymbol = BellPepper;
-  //   } else {
-  //     plantImgSymbol = Customize;
-  //   }
-  //   return (
-  //     <div
-  //       className={styles.plantInfoContainer}
-  //       key={recipe[key].recipeName}>
-  //       <img
-  //         src={plantImgSymbol}
-  //         alt={recipe[key].recipeName}
-  //         className={styles.plantImg}
-  //         key={recipe[key].Etag} />
-  //       <aside className={styles.plantDetails}>
-  //         <h1>{recipe[key].fullName}</h1>
-  //         <h4>{recipe[key].suggestions}</h4>
-  //         <h4>
-  //           <b>Avg Market Price:</b> ${recipe[key].marketPrice}
-  //         </h4>
-  //         <h4>
-  //           <b>Avg Yield:</b> {recipe[key].yield}
-  //         </h4>
-  //       </aside>
-  //     </div>
-  //   )
-  // }
 
   renderLander() {
     return (
@@ -269,7 +198,7 @@ class Progress extends Component {
     const { isloading, chamberId, chambers, plantDetails } = this.state;
 
     return (
-      <div>
+      <div className={styles.progressContainer}>
         <FilterButtonGroup
           onChange={this.handleChamberIdChange}
           chamberId={chamberId}
