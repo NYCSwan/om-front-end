@@ -76,10 +76,9 @@ class App extends Component {
     this.setState({ openModal: !this.state.openModal });
   }
 
-  handleBackClick = (e) => {
-    window.onpopstate = (e) => {
-        this.props.history.go(0);
-    }
+  handleBackClick = () => {
+    console.log('handle back click');
+    this.props.history.goBack();
   }
 
   authenticating = () => {

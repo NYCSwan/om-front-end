@@ -3,6 +3,7 @@
 .pagers {
   width: 100%;
   display: inline;
+  cursor: pointer;
 }
 
 .previous, .next {

@@ -81,7 +81,7 @@ const Routes = (props) => (
     <Route {...props} path='/tutorials' exact render={(routeProps) => { // eslint-disable-line
         return <Tutorials
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
-          setTitle={props.setTitle}
+          setTitle={'Tutorials'}
           {...routeProps} /> }}
     />
     <Route {...props} path='/plants' exact render={(routeProps) => { // eslint-disable-line

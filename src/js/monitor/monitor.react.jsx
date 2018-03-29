@@ -319,7 +319,8 @@ class Monitor extends Component {
                       plantName: this.state.currentPlantName
 
                     }
-                  }}>
+                  }}
+                >
                   <div>
                     <img src={waterlevel} alt="water level icon" />
                   </div>
