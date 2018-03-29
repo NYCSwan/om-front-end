@@ -123,9 +123,11 @@ class Sensor extends Component {
     const tempChamber = chamberId.toString();
     const plant = pickBy(growingPlants, plant => plant.chamberId === tempChamber)
     const key = findKey(plant);
+    
     return <h4>{moment(plant[key].createdAt).format("dddd, MMM Do")}</h4>;
 
   }
+
   renderCurrentSensorReading() {
     const {chamberId, sensorData} = this.state;
     const sensorName = this.props.match.params.sensor_id;

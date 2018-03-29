@@ -77,7 +77,8 @@ class Progress extends Component {
         console.log(e);
       }
     }
-
+    
+    this.props.setTitle('Progress');
     this.setState({ isloading: false });
   }
 
@@ -278,7 +279,10 @@ class Progress extends Component {
       { !isloading
         ?
         [<PlantDetails
-          details={plantDetails} />, this.renderTimelapseVideo()]
+          details={plantDetails}
+          match={this.props.match} />,
+          this.renderTimelapseVideo()
+        ]
         :
         this.renderLander()
       }

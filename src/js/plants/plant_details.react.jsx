@@ -39,19 +39,6 @@ class PlantDetails extends Component {
 
   }
 
-  // shouldComponentUpdate(newState) {
-  //   return this.state.plant !== newState.plant || this.state.plantTypes !== newState.plantTypes;
-  // }
-
-  // getPlantRecipes = () => {
-  //   console.log('get plant recipes, plant container');
-  //
-  // };
-  //
-  // setPlant = () => {
-  //   const plantId = parseInt(this.props.match.params.plant_id, 10);
-  //   this.setState({ plant: plantId });
-  // };
 
   renderNotifications() {
     const { notifications } = this.props.location.state;

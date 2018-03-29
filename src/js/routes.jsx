@@ -93,7 +93,7 @@ const Routes = (props) => (
     <Route path='/plants/:plant_name' exact render={(routeProps) => { // eslint-disable-line
         return <PlantDetails
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
-          setTitle={props.setTitle}
+          setTitle='Recipe'
           {...routeProps} /> }} />
     <Route component={NotFound} />
   </Switch>
