@@ -34,9 +34,7 @@ class ExistingGrow extends Component {
     showPause: false,
     showInitialPopup: false,
     newGrowPlant: {},
-    isAuthenticated: PropTypes.bool.isRequired,
-    userHasAuthenticated: PropTypes.func.isRequired
-    // showChambers: true,
+    showForm: true
     // // showButton: false,
     // isBalanced: false
   };
@@ -90,7 +88,7 @@ class ExistingGrow extends Component {
   shouldComponentUpdate(newState) {
     console.log('shouldComponentUpdate existing grow');
     return (
-      this.state.chamberOptions !== newState.chamberOptions || this.state.growingPlants !== newState.growingPlants
+      this.state.chamberOptions !== newState.chamberOptions || this.state.growingPlants !== newState.growingPlants || this.state.showForm !== newState.showForm
     );
   }
 
@@ -154,7 +152,8 @@ class ExistingGrow extends Component {
     // this.props.handleModalClick();
     this.setState({
       updatingThisPlant: currentPlantType[key],
-      showInitialPopup: true
+      showInitialPopup: true,
+      showForm: false
     });
 
     this.props.showModal();
@@ -163,11 +162,12 @@ class ExistingGrow extends Component {
       pathname: this.props.location.pathname,
       state: {
         plantTypes: this.state.plantTypes,
+        showForm: false,
         chamberOptions: this.state.chamberOptions,
         updatingThisPlant: this.state.updatingThisPlant,
         showBalance: this.state.showBalance,
         showPause: this.state.showPause,
-        showInitialPopup: this.state.showInitialPopup,
+        showInitialPopup: true,
         newGrowPlant: this.state.newGrowPlant,
         growingPlants: this.state.growingPlants,
         climates: this.state.climates
@@ -189,13 +189,15 @@ class ExistingGrow extends Component {
   handlePopupClick = () => {
     console.log('handle popup click');
     this.setState({
-      showInitialPopup: false });
-    // this.props.handleModalClick();
+      showInitialPopup: false,
+      showForm: true
+    });
+
+    this.props.handleModalClick();
   }
 
-  handleBalanceClick = e => {
+  handleBalanceClick = () => {
     console.log('handle balance Click existingGrow');
-    console.log(e);
     this.setState({
       showBalance: true,
       showInitialPopup: false
@@ -249,7 +251,6 @@ class ExistingGrow extends Component {
       state: {
         plantTypes: this.state.plantTypes,
         chambers: this.state.chamberOptions,
-        updatingThisPlant: this.state.updatingThisPlant,
         growingPlants: this.state.growingPlants,
         chamberId: this.state.newGrowPlant.chamberId,
         notifications: ["You have successfully updated your garden."]
@@ -270,7 +271,7 @@ class ExistingGrow extends Component {
 
   renderGardens() {
     console.log('renderGardens');
-    const { chamberOptions, updatingThisPlant } = this.state;
+    const { chamberOptions, showForm } = this.state;
     const items = []
     let temp = {};
     for(let i = 0; i< chamberOptions.length; i++) {
@@ -281,7 +282,7 @@ class ExistingGrow extends Component {
       }
       items.push(temp[i])
     }
-    if (isEmpty(updatingThisPlant)) {
+    if (showForm) {
       return (
         <div className={styles.gardens}>
           <h3 className={styles.chamber}>Your Choices</h3>
@@ -296,8 +297,9 @@ class ExistingGrow extends Component {
 
   updatePhBalance = () => {
     console.log('update ph balance existing plant');
-      setTimeout(200000);
-      console.log('timeout 20000');
+    setTimeout(() => {
+      console.log('timeout 10000')
+    }, 10000);
     this.setState({ isBalanced: true });
   };
 

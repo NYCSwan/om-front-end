@@ -161,20 +161,20 @@ class NewGrow extends Component {
       console.log('timeout 10000')
     }, 10000);
     this.setState({ isBalanced: true })
-    this.props.history.push({
-      pathname: this.props.location.pathname,
-      state: {
-        isBalanced: true,
-        newGrowPlant: this.state.newGrowPlant,
-        plantTypes: this.state.plantTypes,
-        chamberOptions: this.state.chamberOptions,
-        selectedPlant: this.state.selectedPlant,
-        showDirections: this.state.showDirections,
-        showPlantsDirections: this.state.showPlantsDirections,
-        selectedChamber: this.state.selectedChamber,
-        showForm: this.state.showForm
-      }
-    });
+    // this.props.history.push({
+    //   pathname: this.props.location.pathname,
+    //   state: {
+    //     isBalanced: false,
+    //     newGrowPlant: this.state.newGrowPlant,
+    //     plantTypes: this.state.plantTypes,
+    //     chamberOptions: this.state.chamberOptions,
+    //     selectedPlant: this.state.selectedPlant,
+    //     showDirections: this.state.showDirections,
+    //     showPlantsDirections: this.state.showPlantsDirections,
+    //     selectedChamber: this.state.selectedChamber,
+    //     showForm: this.state.showForm
+    //   }
+    // });
     this.showPlantingDirections();
   };
 
@@ -184,12 +184,12 @@ class NewGrow extends Component {
     this.props.history.push({
       pathname: this.props.location.pathname,
       state: {
-        showPlantsDirections: true,
+        showPlantsDirections: false,
         newGrowPlant: this.state.newGrowPlant,
         plantTypes: this.state.plantTypes,
         chamberOptions: this.state.chamberOptions,
         selectedPlant: this.state.selectedPlant,
-        isBalanced: this.state.isBalanced,
+        isBalanced: false,
         showDirections: this.state.showDirections,
         selectedChamber: this.state.selectedChamber,
         showForm: this.state.showForm
@@ -238,14 +238,14 @@ class NewGrow extends Component {
     this.setState({ isloading: true });
 
     try {
-      await this.createGarden({
-        chamberId: (this.state.selectedChamber).toString(),
-        plantName: this.state.selectedPlant,
-        climateId: this.state.newGrowPlant.climateId,
-        plantRecipeId: this.state.newGrowPlant.recipeId,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      });
+      // await this.createGarden({
+      //   chamberId: this.state.selectedChamber.toString(),
+      //   plantName: this.state.selectedPlant,
+      //   climateId: this.state.newGrowPlant.climateId,
+      //   plantRecipeId: this.state.newGrowPlant.recipeId,
+      //   createdAt: new Date(),
+      //   updatedAt: new Date()
+      // });
 
       // await this.updateChamber({
       //   chamberId: (this.state.selectedChamber).toString(),
@@ -275,7 +275,7 @@ class NewGrow extends Component {
       this.props.history.push({
         pathname: this.props.location.pathname,
         state: {
-          showDirections: true,
+          showDirections: false,
           isloading: false,
           newGrowPlant: this.state.newGrowPlant,
           plantTypes: this.state.plantTypes,
@@ -297,13 +297,14 @@ class NewGrow extends Component {
       pathname: `/plants/${plant_name}`,
       state: {
         details: this.state.newGrowPlant,
-        notifications: ["You have successfully started growing your garden! Check out how it's doing below."],
+        notifications: ["You have successfully started growing your garden! Check out more about the plant below."],
         plantTypes: this.state.plantTypes
       }
     });
   }
 
   setStateFromHistory = () => {
+    console.log('setState from history new grow');
     const { chamberOptions, isBalanced, newGrowPlant, plantTypes, selectedPlant, selectedChamber, showDirections, showForm, showPlantsDirections } = this.props.history.location.state;
 
     this.setState({

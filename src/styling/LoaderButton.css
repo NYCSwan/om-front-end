@@ -5,6 +5,7 @@
   margin-left: auto;
   margin-top: 20px;
   height: 40px;
+  width: 100px;
 }
 
 .LoaderButton:active {
@@ -21,4 +22,19 @@
 @keyframes spin {
 from { transform: scale(1) rotate(0deg); }
 to { transform: scale(1) rotate(360deg); }
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .LoaderButton {
+    width: 60px;
+  }
 }

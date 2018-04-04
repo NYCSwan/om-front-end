@@ -10,7 +10,7 @@ import Tutorials from './tutorials.react';
 import Login from './login/login.react';
 import NotFound from './helpers/not_found.react';
 import Signup from './login/signup.react';
-import PlantDetails from './plants/plant_details.react';
+import PlantContainer from './plants/plant_container.react';
 import PlantList from './plants/plant_list.react';
 import Monitor from './monitor/monitor.react';
 import Sensor from './monitor/sensors/sensor.react';
@@ -91,10 +91,11 @@ const Routes = (props) => (
           {...routeProps} /> }}
     />
     <Route path='/plants/:plant_name' exact render={(routeProps) => { // eslint-disable-line
-        return <PlantDetails
+        return <PlantContainer
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
-          setTitle='Recipe'
-          {...routeProps} /> }} />
+          setTitle={props.setTitle}
+          {...routeProps} /> }}
+    />
     <Route component={NotFound} />
   </Switch>
 );

@@ -26,14 +26,13 @@ class Directions extends Component {
 
   shouldComponentUpdate(newProps, newState) {
     return (
-      this.props.isBalanced !== newProps.isBalanced ||       this.props.directions !== newProps.directions
+      this.props.isBalanced !== newProps.isBalanced || this.props.balancing !== newProps.balancing ||       this.props.directions !== newProps.directions
     );
   }
 
   handleClickUpdate = () => {
-    console.log('timeout 0');
+    console.log('handle click update: timeout 0');
     this.setState({ balancing: true });
-    debugger
     this.balancingDemo();
     this.props.handlePhClick();
   };
@@ -47,6 +46,7 @@ class Directions extends Component {
   }
 
   handleNextClick = () => {
+    console.log('handle next click');
     this.props.handleClick();
   };
 

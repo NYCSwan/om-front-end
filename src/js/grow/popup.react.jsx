@@ -35,11 +35,6 @@ class PopUp extends Component {
     this.setState({ openModal: false });
   };
 
-  // open = () => {
-  //   console.log('open popup');
-  // this.props.handleModalClick();
-  //   this.setState({ openModal: true });
-  // };
 
   render() {
     console.log('render popup');

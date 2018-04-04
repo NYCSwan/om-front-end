@@ -1,5 +1,5 @@
 .progressContainer {
-  height: 550px;
+  height: 700px;
 }
 
 .progressContainer aside {
@@ -7,7 +7,7 @@
   left: 255px;
 }
 .progressContainer .plantImg {
-  height: 550px;
+  height: 500px;
 }
 
 .videoContainer {
@@ -34,6 +34,10 @@
 /* Phone Screens */
 /*****************/
 @media only screen and (min-width: 375px) and (max-width: 807px) {
+  .progressContainer {
+    height: 550px;
+  }
+
   .progressContainer aside {
     top: 135px;
     left: 56px;

@@ -20,34 +20,13 @@ import styles from '../../styling/plant_details.css';
 class PlantDetails extends Component {
   static propTypes = {
     match: PropTypes.shape({
-      params: PropTypes.object
+      params: PropTypes.object 
     }).isRequired,
     details: PropTypes.object
   };
-  //
-  // state = {
-  //   plant: ''
-  // };
 
   componentDidMount() {
-    console.log('componentDidMount plant container');
-    // this.getPlantRecipes();
-    // this.setPlant();
-    // this.props.history.push({
-    //   pathname: this.props.location.pathname,
-    //   state: {
-
-  }
-
-
-  renderNotifications() {
-    const { notifications } = this.props.location.state;
-
-    notifications.map(notice => {
-      return (
-        <h2> {notice} </h2>
-      )
-    })
+    console.log('componentDidMount plant detail');
   }
 
   renderPlantDetailsFromProps() {
