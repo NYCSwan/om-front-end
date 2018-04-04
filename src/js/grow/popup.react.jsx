@@ -16,6 +16,7 @@ class PopUp extends Component {
     buttonText: PropTypes.string.isRequired,
     // onClick: PropTypes.func.isRequired,
     openModal: PropTypes.bool.isRequired,
+    handleCloseClick: PropTypes.func.isRequired,
     handleClick: PropTypes.func.isRequired
     // showModal: PropTypes.func.isRequired
   };
@@ -31,10 +32,15 @@ class PopUp extends Component {
 
   close = () => {
     console.log('close popup');
-    this.props.handleClick();
+    this.props.handleCloseClick();
     this.setState({ openModal: false });
   };
 
+  handleClick = () => {
+    console.log('handle click popup');
+    this.props.handleClick();
+    this.setState({openModal: false});
+  }
 
   render() {
     console.log('render popup');
@@ -68,7 +74,7 @@ class PopUp extends Component {
                 <td>
                   <button
                     className={styles.buttonSubmitChange}
-                    onClick={this.close}>
+                    onClick={this.handleClick}>
                   {buttonText}
                   </button>
                 </td>

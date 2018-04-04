@@ -34,9 +34,9 @@ class ExistingGrow extends Component {
     showPause: false,
     showInitialPopup: false,
     newGrowPlant: {},
-    showForm: true
+    showForm: true,
     // // showButton: false,
-    // isBalanced: false
+    isBalanced: false
   };
 
 
@@ -186,11 +186,13 @@ class ExistingGrow extends Component {
     }
   }
 
+// DOM EVENTS
   handlePopupClick = () => {
-    console.log('handle popup click');
+    console.log('handle popup click existing grow');
     this.setState({
       showInitialPopup: false,
-      showForm: true
+      showForm: true,
+      showPause: false
     });
 
     this.props.handleModalClick();
@@ -358,6 +360,7 @@ class ExistingGrow extends Component {
           openModal={this.props.openModal}
           buttonText="Close"
           displayModal={this.state.showInitialPopup}
+          handleCloseClick={this.handlePopupClick}
           handleClick={this.handlePopupClick}
         />
     )
@@ -390,6 +393,7 @@ class ExistingGrow extends Component {
           ? <Pause
               showPause={this.state.showPause}
               openModal={this.props.openModal}
+              handleCloseClick={this.handlePopupClick}
               handleClick={this.handleResumeClick}
             />
           : null

@@ -20,12 +20,15 @@ const Pause = props => (
     buttonText="Resume"
     openModal={props.openModal}
     handleClick={props.handleClick}
+    handleCloseClick={props.handleCloseClick}
   />
 );
 
 Pause.propTypes = {
   openModal: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  handleCloseClick: PropTypes.func.isRequired,
+  showPause: PropTypes.bool.isRequired
 };
 
 export default Pause;
