@@ -1,3 +1,35 @@
 .plantContainer {
-  height: 550px;
+  height: 600px;
+}
+
+.plantContainer div {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.plantContainer div:first-child {
+  margin-top: 20px;
+}
+
+/* Tablet screens */
+/* ************ */
+@media only screen and (min-width: 808px) and (max-width: 1320px) {
+
+
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+  .plantContainer {
+    height: 500px;
+  }
+
+  .plantContainer div {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .plantContainer aside {
+    top: 270px;
+  }
 }

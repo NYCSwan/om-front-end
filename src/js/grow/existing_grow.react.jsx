@@ -28,7 +28,7 @@ class ExistingGrow extends Component {
     isloading: true,
     chamberOptions: [],
     climates: [],
-    updatingThisPlant: [],
+    updatingThisChamber: [],
     growingPlants: [],
     showBalance: false,
     showPause: false,
@@ -57,7 +57,7 @@ class ExistingGrow extends Component {
           state: {
             plantTypes: this.state.plantTypes,
             chamberOptions: this.state.chamberOptions,
-            updatingThisPlant: this.state.updatingThisPlant,
+            updatingThisChamber: this.state.updatingThisChamber,
             showBalance: this.state.showBalance,
             showPause: this.state.showPause,
             showInitialPopup: this.state.showInitialPopup,
@@ -83,6 +83,7 @@ class ExistingGrow extends Component {
     }
 
     this.setState({isloading: false });
+    this.props.setTitle(`Garden`);
   }
 
   shouldComponentUpdate(newState) {
@@ -125,15 +126,23 @@ class ExistingGrow extends Component {
     }
   }
 
+  updateGardenSelection = () => {
+    // return invokeApig({ // eslint-disable-line
+    //   path: `/chambers/${createdAt}`,
+    //   method: "put",
+    //   body: chamber
+    // })
+  }
+
 // V-DOM EVENTS
 // UPDATE STATE
   setStateFromHistory = () => {
-    const { chamberOptions, showBalance, newGrowPlant, plantTypes, growingPlants, updatingThisPlant, climates, showPause, showInitialPopup } = this.props.history.location.state;
+    const { chamberOptions, showBalance, newGrowPlant, plantTypes, growingPlants, updatingThisChamber, climates, showPause, showInitialPopup } = this.props.history.location.state;
 
     this.setState({
       plantTypes,
       chamberOptions,
-      updatingThisPlant,
+      updatingThisChamber,
       showBalance,
       showPause,
       showInitialPopup,
@@ -149,14 +158,14 @@ class ExistingGrow extends Component {
     const target = e.target.innerText;
     const currentPlantType = pickBy(this.state.growingPlants, plant => plant.plantName === target);
     const key = findKey(currentPlantType);
-    // this.props.handleModalClick();
     this.setState({
-      updatingThisPlant: currentPlantType[key],
+      updatingThisChamber: currentPlantType[key],
       showInitialPopup: true,
       showForm: false
     });
 
-    this.props.showModal();
+    this.props.handleModalClick();
+    // this.props.showModal();
     this.updateRecipeState(target);
     this.props.history.push({
       pathname: this.props.location.pathname,
@@ -164,7 +173,7 @@ class ExistingGrow extends Component {
         plantTypes: this.state.plantTypes,
         showForm: false,
         chamberOptions: this.state.chamberOptions,
-        updatingThisPlant: this.state.updatingThisPlant,
+        updatingThisChamber: currentPlantType[key],
         showBalance: this.state.showBalance,
         showPause: this.state.showPause,
         showInitialPopup: true,
@@ -176,8 +185,7 @@ class ExistingGrow extends Component {
   }
 
   async updateRecipeState(plant) {
-    console.log('update recipe state');
-
+    console.log('get recipe based on form input');
     try {
       const recipeResults = await this.getRecipe(plant);
       this.setState({ newGrowPlant: recipeResults });
@@ -202,14 +210,15 @@ class ExistingGrow extends Component {
     console.log('handle balance Click existingGrow');
     this.setState({
       showBalance: true,
-      showInitialPopup: false
+      showInitialPopup: false,
+      showForm: false
     });
     this.props.history.push({
       pathname: this.props.location.pathname,
       state: {
         plantTypes: this.state.plantTypes,
         chamberOptions: this.state.chamberOptions,
-        updatingThisPlant: this.state.updatingThisPlant,
+        updatingThisChamber: this.state.updatingThisChamber,
         showBalance: false,
         showPause: this.state.showPause,
         showInitialPopup: true,
@@ -218,7 +227,7 @@ class ExistingGrow extends Component {
         climates: this.state.climates
       }
     })
-    this.props.handleModalClick();
+    // this.props.handleModalClick();
   };
 
   handlePauseClick = () => {
@@ -233,7 +242,7 @@ class ExistingGrow extends Component {
       state: {
         plantTypes: this.state.plantTypes,
         chamberOptions: this.state.chamberOptions,
-        updatingThisPlant: this.state.updatingThisPlant,
+        updatingThisChamber: this.state.updatingThisChamber,
         showBalance: false,
         showPause: false,
         showInitialPopup: true,
@@ -248,14 +257,17 @@ class ExistingGrow extends Component {
     console.log('handle resume click');
     this.setState({ showPause: false });
     this.props.handleModalClick();
+    // update Chamber Info in DB
+    this.updateChamberDataToDb();
+    // Redirect to monitor page
     this.props.history.push({
       pathname: '/monitor',
       state: {
-        plantTypes: this.state.plantTypes,
-        chambers: this.state.chamberOptions,
-        growingPlants: this.state.growingPlants,
         chamberId: this.state.newGrowPlant.chamberId,
-        notifications: ["You have successfully updated your garden."]
+        growingPlants: this.state.growingPlants,
+        chambers: this.state.chamberOptions,
+        currentPlantName: this.state.newGrowPlant.recipeName,
+        notifications: ["You have successfully updated your garden. Check out how it's doing!"]
         }
       });
   }
@@ -402,12 +414,12 @@ class ExistingGrow extends Component {
           ? <DirectionsContainer
               newGrowPlant={this.state.newGrowPlant}
               handlePhClick={this.updatePhBalance}
-              isBalanced={this.state.isBalanced}
-              selectedChamber={this.state.updatingThisPlant.chamberId}
-              showPlantsDirections={false}
-              plant={this.state.updatingThisPlant.fullName}
               handlePlantClick={this.completeExisitingGrow}
               handleNextClick={this.completeExisitingGrow}
+              isBalanced={this.state.isBalanced}
+              plant={this.state.updatingThisChamber.fullName}
+              selectedChamber={parseInt(this.state.updatingThisChamber.chamberId, 10)}
+              showPlantsDirections={false}
             />
           : null
         }

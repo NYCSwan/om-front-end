@@ -12,6 +12,10 @@ class PlantContainer extends Component {
     details: PropTypes.object
   };
 
+  state = {
+    showNotifications: true
+  }
+  
   componentDidMount() {
     console.log('componentDidMount plant container');
     this.props.setTitle('Plant Recipe');
@@ -20,12 +24,23 @@ class PlantContainer extends Component {
     // etc
   }
 
+  close = () => {
+    console.log('close notifications');
+    this.setState({ showNotifications: false });
+  }
+
   render() {
 
     return (
       <div className={styles.plantContainer}>
+      { (this.state.showNotifications === true)
+        ?
         <Notifications
-          notifications={this.props.location.state.notifications} />
+        notifications={this.props.location.state.notifications}
+        close={this.close} />
+        :
+        null
+      }
         <PlantDetails
           details={this.props.history.location.state.details}
           match={this.props.match} />

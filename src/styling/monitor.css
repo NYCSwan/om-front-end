@@ -57,10 +57,16 @@
 }
 
 .waterlevelContainer {
+  composes: background from './variables.css';
   width: 100px;
   height: 100px;
-  top: 300px;
-  right: 430px;
+  top: 400px;
+  right: 433px;
+  border-radius: 50px;
+  background-color: rgba(168,168,168,0.8);
+  background-image: url('../media/waterlevelbtnbackground.png');
+  background-size: 100% 65%;
+  background-position: center bottom;
 }
 
 .waterlevelContainer img {

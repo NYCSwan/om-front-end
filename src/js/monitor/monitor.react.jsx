@@ -5,7 +5,6 @@ import moment from 'moment';
 import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/fontawesome-free-regular';
-import isUndefined from 'lodash/isUndefined';
 import pickBy from 'lodash/pickBy';
 import findKey from 'lodash/findKey';
 
@@ -36,7 +35,8 @@ class Monitor extends Component {
     isloading: true,
     lightOn: true,
     notifications: [],
-    currentPlantName: ''
+    currentPlantName: '',
+    showNotifications: true
   };
 
   async componentDidMount() {
@@ -50,6 +50,7 @@ class Monitor extends Component {
         this.setChambers(chamberResults);
         const sensorResults = await this.getSensorMeasurementData();
         this.setSensorData(sensorResults);
+        this.setCurrentPlantName();
 
         if(this.props.isAuthenticated) {
           this.props.history.push({
@@ -79,8 +80,6 @@ class Monitor extends Component {
     }
 
     this.props.setTitle('Dashboard');
-
-    this.setCurrentPlantName();
     this.setState({ isloading: false });
   }
 
@@ -119,16 +118,21 @@ class Monitor extends Component {
   }
 
   setStateFromHistory = () => {
-    const { chambers, chamberId, currentPlantName, growingPlants, chamberData, notifications } = this.props.history.location.state;
+    const { chambers, chamberId, currentPlantName, growingPlants, notifications } = this.props.history.location.state;
 
     this.setState({
       chamberId,
       growingPlants,
       chambers,
       notifications,
-      chamberData,
       currentPlantName
     })
+
+    if (this.props.history.location.state.chamberData) {
+      this.setState({
+        chamberData: this.props.history.location.state.chamberData
+      });
+    }
   }
 
   setChambers = (chamberResults) => {
@@ -159,6 +163,11 @@ class Monitor extends Component {
       }
     }
   };
+
+  close = () => {
+    console.log('close notifications');
+    this.setState({ showNotifications: false });
+  }
 
   renderLander = () => {
     return (
@@ -205,10 +214,11 @@ class Monitor extends Component {
           key={chamberId}
         />
 
-        { !isUndefined(this.props.location.state)
+        { (this.props.history.location.state.notifications.length >= 1)
           ?
           <Notifications
-            notifications={this.state.notifications} />
+            notifications={this.state.notifications}
+            close={this.close} />
           :
           null
           }

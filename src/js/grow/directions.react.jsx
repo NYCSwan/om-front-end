@@ -11,12 +11,12 @@ import styles from '../../styling/directions.css';
 class Directions extends Component {
   static propTypes = {
     newGrowPlant: PropTypes.object.isRequired,
+    directions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    plant: PropTypes.string.isRequired,
     handlePhClick: PropTypes.func.isRequired,
     handleClick: PropTypes.func.isRequired,
-    isBalanced: PropTypes.bool.isRequired,
-    showPlantsDirections: PropTypes.bool.isRequired,
-    directions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    plant: PropTypes.string.isRequired
+    isBalanced: PropTypes.bool.isRequired
+    // showPlantsDirections: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -26,7 +26,7 @@ class Directions extends Component {
 
   shouldComponentUpdate(newProps, newState) {
     return (
-      this.props.isBalanced !== newProps.isBalanced || this.props.balancing !== newProps.balancing ||       this.props.directions !== newProps.directions
+      this.props.isBalanced !== newProps.isBalanced || this.state.balanced !== newState.balanced ||  this.state.balancing !== newState.balancing ||       this.props.directions !== newProps.directions
     );
   }
 
@@ -39,8 +39,8 @@ class Directions extends Component {
 
   balancingDemo = () => {
     setTimeout(() => {
-      this.setState({ balanced: true });
       console.log('timeout 10000');
+      this.setState({ balanced: true });
     }, 10000);
     this.setState({ balancing: false });
   }
@@ -68,9 +68,10 @@ class Directions extends Component {
               alt="check mark pH is balanced!"
               src={checkmark} />
             <button
+              className={styles.nextBtn}
               onClick={this.handleNextClick}>Next</button>
           </div>
-         :
+        :
           <LoaderButton
             isloading={this.state.balancing}
             onClick={this.handleClickUpdate}

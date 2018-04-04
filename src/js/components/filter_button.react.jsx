@@ -31,8 +31,8 @@ class FilterButtonGroup extends Component {
               key={option.gardenId}
               value={option.plantName || option.chamberName}
               className={styles.chamber}
-              active={this.props.chamberId === parseInt(option.chamberId, 10) ? true : false }
-              checked={this.props.chamberId === parseInt(option.chamberId, 10) ? true : false}
+              active={this.props.chamberId === parseInt(option.chamberId, 10) ? 'true' : 'false'}
+              checked={this.props.chamberId === parseInt(option.chamberId, 10) ? 'true' : 'false'}
               onClick={this.handleClick}
               disabled={!option.isFilled}
             >

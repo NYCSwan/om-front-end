@@ -9,7 +9,6 @@ import styles from '../../styling/directions_container.css';
 class DirectionsContainer extends Component {
   static propTypes = {
     newGrowPlant: PropTypes.object.isRequired,
-    // climates: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedChamber: PropTypes.number.isRequired,
     handlePhClick: PropTypes.func.isRequired,
     handlePlantClick: PropTypes.func.isRequired,
@@ -100,7 +99,6 @@ class DirectionsContainer extends Component {
           <Directions
             newGrowPlant={newGrowPlant}
             directions={directions}
-            showPlantsDirections={showPlantsDirections}
             plant={selectedPlant}
             handlePhClick={handlePhClick}
             handleClick={this.handleNextClick}

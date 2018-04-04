@@ -3,7 +3,7 @@
   .body :global {
     font-weight: normal;
     font-style: normal;
-    font-family: 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font-family: 'Futura-Lig';
     box-sizing: border-box;
   }
 
@@ -16,22 +16,22 @@
   }
 
   h1 :global {
-    font: bold 2em/30px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: bold 2em/30px 'Futura-Lig';
   }
   h2 :global {
-    font: bold 1.5em/24px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: bold 1.5em/24px 'Futura-Lig';
   }
   h3 :global {
-    font: bold 1.25em/20px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: bold 1.25em/20px 'Futura-Lig';
   }
   h4 :global {
-    font: normal 1em/18px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: normal 1em/18px 'Futura-Lig';
   }
   h5 :global {
-    font: normal .8em/16px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: normal .8em/16px 'Futura-Lig';
   }
   p :global {
-    font: normal .75em/14px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+    font: normal .75em/14px 'Futura-Lig';
   }
   /* Tablet screens */
   /* ************ */
@@ -48,26 +48,26 @@
     }
 
     h1 :global {
-      font: bold 1.5em/26px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: bold 1.5em/26px 'Futura-Lig';
       line-height: 28px;
     }
     h2 :global {
-      font: bold 1.25em/20px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: bold 1.25em/20px 'Futura-Lig';
       line-height: 24px;
     }
     h3 :global {
-      font: bold 1em/16px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: bold 1em/16px 'Futura-Lig';
       line-height: 20px;
     }
     h4 :global {
-      font: normal .75em/16px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: normal .75em/16px 'Futura-Lig';
       line-height: 18px;
     }
     h5 :global {
-      font: normal .9em/14px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: normal .9em/14px 'Futura-Lig';
       line-height: 16px;
     }
     p :global {
-      font: normal .75em/12px 'FuturaLightRegular', Fallback, 'Nunito', sans-serif;
+      font: normal .75em/12px 'Futura-Lig';
     }
   }
