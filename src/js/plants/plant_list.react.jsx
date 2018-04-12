@@ -22,9 +22,9 @@ class PlantList extends Component {
 
   async componentDidMount() {
     console.log('componentDidMount plant list');
-    if(!this.props.isAuthenticated) {
-      return;
-    }
+    // if(!this.props.isAuthenticated) {
+    //   return;
+    // }
 
     if (!this.props.history.location.state) {
       try {

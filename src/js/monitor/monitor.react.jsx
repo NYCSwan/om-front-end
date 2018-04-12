@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -214,7 +214,7 @@ class Monitor extends Component {
           key={chamberId}
         />
 
-        { (this.props.history.location.state.notifications.length >= 1)
+        { (this.props.history.location.state && this.props.history.location.state.notifications.length >= 1)
           ?
           <Notifications
             notifications={this.state.notifications}

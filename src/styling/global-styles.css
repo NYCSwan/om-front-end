@@ -3,7 +3,7 @@
   .body :global {
     font-weight: normal;
     font-style: normal;
-    font-family: 'Futura-Lig';
+    font-family: futuraLight, Fallback, 'Nunito', sans-serif;
     box-sizing: border-box;
   }
 
@@ -16,22 +16,22 @@
   }
 
   h1 :global {
-    font: bold 2em/30px 'Futura-Lig';
+    font: bold 2em/30px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   h2 :global {
-    font: bold 1.5em/24px 'Futura-Lig';
+    font: bold 1.5em/24px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   h3 :global {
-    font: bold 1.25em/20px 'Futura-Lig';
+    font: bold 1.25em/20px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   h4 :global {
-    font: normal 1em/18px 'Futura-Lig';
+    font: normal 1em/18px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   h5 :global {
-    font: normal .8em/16px 'Futura-Lig';
+    font: normal .8em/16px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   p :global {
-    font: normal .75em/14px 'Futura-Lig';
+    font: normal .75em/14px futuraLight, Fallback, 'Nunito', sans-serif;
   }
   /* Tablet screens */
   /* ************ */
@@ -48,26 +48,26 @@
     }
 
     h1 :global {
-      font: bold 1.5em/26px 'Futura-Lig';
+      font: bold 1.5em/26px futuraLight, Fallback, 'Nunito', sans-serif;
       line-height: 28px;
     }
     h2 :global {
-      font: bold 1.25em/20px 'Futura-Lig';
+      font: bold 1.25em/20px futuraLight, Fallback, 'Nunito', sans-serif;
       line-height: 24px;
     }
     h3 :global {
-      font: bold 1em/16px 'Futura-Lig';
+      font: bold 1em/16px futuraLight, Fallback, 'Nunito', sans-serif;
       line-height: 20px;
     }
     h4 :global {
-      font: normal .75em/16px 'Futura-Lig';
+      font: normal .75em/16px futuraLight, Fallback, 'Nunito', sans-serif;
       line-height: 18px;
     }
     h5 :global {
-      font: normal .9em/14px 'Futura-Lig';
+      font: normal .9em/14px futuraLight, Fallback, 'Nunito', sans-serif;
       line-height: 16px;
     }
     p :global {
-      font: normal .75em/12px 'Futura-Lig';
+      font: normal .75em/12px futuraLight, Fallback, 'Nunito', sans-serif;
     }
   }

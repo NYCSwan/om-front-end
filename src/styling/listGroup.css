@@ -11,7 +11,7 @@
   }
   .listItemChamber1, .listItemChamber2, .listItemChamber3 {
     position: absolute;
-    font-family: 'Futura-Lig';
+    font-family: futuraLight, Fallback, 'Nunito', sans-serif;
   }
 
   .listItemChamber1 {
@@ -22,12 +22,12 @@
   }
 
   .listItemChamber2 {
-    left:780px;
+    left:880px;
     top: 500px;
   }
 
   .listItemChamber3 {
-    left:470px;
+    left:570px;
     top: 390px;
   }
 

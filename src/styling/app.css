@@ -2,11 +2,10 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    font-family: 'Futura-Lig';
+    font-family: 'futuraLight', Fallback, 'Nunito', sans-serif;
   }
 
   .app {
-    /* font-family: 'Nunito', sans-serif; */
     background-color: #ffffff;
     width: 100%;
     text-align: center;
@@ -35,7 +34,7 @@
     width: 100px;
     text-align: center;
     height: 40px;
-    font-family: 'Futura-Lig';
+    font-family: futuraLight, Fallback, 'Nunito', sans-serif;
     order: 5;
     cursor: pointer;
   }
@@ -149,7 +148,7 @@
 
   .navbar {
     background-color: transparent;
-    font-family: 'Futura Light Regular';
+    font-family: futuraLight, Fallback, 'Nunito', sans-serif;
     border-top:0;
     border-left: 0;
     border-right: 0;
@@ -173,7 +172,7 @@
 
   .topNavNarrow {
     display: inline;
-    font-family: 'Futura-Lig';
+    font-family: futuraLight, Fallback, 'Nunito', sans-serif;
   }
 
   .hamburger {

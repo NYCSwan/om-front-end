@@ -1,15 +1,15 @@
 /* Monitor */
 /************/
 .monitor {
-  min-height: 550px;
+  min-height: 650px;
 }
 
 .bubbles {
   composes: background from './variables.css';
-  background-image: url('../media/dgBubbles.png');
+  background-image: url('../media/BubblesV1Web.png');
   /* opacity: 0.8; */
   width: 100%;
-  height: 500px;
+  height: 750px;
   background-size: 100% 100%;
 }
 
@@ -23,22 +23,22 @@
 }
 
 .humidityContainer {
-  left: 700px;
-  top: 550px;
+  left: 635px;
+  top: 607px;
   width: 75px;
   height: auto;
 }
 
 .turbidityContainer {
-  left: 250px;
-  bottom: 85px;
+  right: 693px;
+  bottom: 130px;
   width: 75px;
   height: auto;
 }
 
 .temperatureContainer {
-  left: 600px;
-  top: 300px;
+  left: 430px;
+  top: 585px;
   width: 90px;
   height: auto;
 }
@@ -50,8 +50,8 @@
 }
 
 .phContainer {
-  right: 100px;
-  bottom: 300px;
+  left: 500px;
+  bottom: 105px;
   width: 75px;
   height: auto;
 }
@@ -60,8 +60,8 @@
   composes: background from './variables.css';
   width: 100px;
   height: 100px;
-  top: 400px;
-  right: 433px;
+  top: 665px;
+  right: 570px;
   border-radius: 50px;
   background-color: rgba(168,168,168,0.8);
   background-image: url('../media/waterlevelbtnbackground.png');
@@ -75,8 +75,8 @@
 }
 
 .dayOfCycle {
-  bottom: 80px;
-  right: 350px;
+  bottom: 150px;
+  right: 460px;
 }
 
 .light {
@@ -84,8 +84,8 @@
   border-radius: 50px;
   width: 100px;
   height: 100px;
-  left: 100px;
-  top: 400px;
+  left: 262px;
+  top: 730px;
 }
 
 .light img {
@@ -120,6 +120,9 @@
 
 .temperaturelink h4, .phlink h4, .waterlevelink h4, .turbiditylink h4, .humiditylink h4 {
   margin-top: 10px;
+}
+.turbiditylink h2, .phlink h2 {
+  margin-bottom: 0;
 }
 /* Tablet screens */
 /* ************ */
@@ -177,6 +180,7 @@
 
   .turbidityContainer {
     left: 12px;
+    right: 0;
     bottom: 100px;
     width: 75px;
     height: 75px;
