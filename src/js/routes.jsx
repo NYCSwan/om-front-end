@@ -15,6 +15,7 @@ import PlantList from './plants/plant_list.react';
 import Monitor from './monitor/monitor.react';
 import Sensor from './monitor/sensors/sensor.react';
 import Progress from './monitor/timelapse/progress.react';
+import DemoContainer from './demo/demo_container.react';
 
 const Routes = (props) => (
   <Switch>
@@ -95,6 +96,13 @@ const Routes = (props) => (
           isAuthenticated={props.isAuthenticated} userHasAuthenticated={props.userHasAuthenticated}
           setTitle={props.setTitle}
           {...routeProps} /> }}
+    />
+    <Route path='/demo' exact render={(routeProps) => { // eslint-disable-line
+      return <DemoContainer
+        openModal={props.openModal}
+        showModal={props.showModal}
+        setTitle={props.setTitle}
+        {...routeProps} /> }}
     />
     <Route component={NotFound} />
   </Switch>

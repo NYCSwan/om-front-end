@@ -1,0 +1,18 @@
+.container {
+  height: 550px;
+}
+
+.demoTitle {
+  font-size: 40px;
+  color:rgb(104,176,77);
+  margin-bottom: 75px;
+}
+
+/* Phone Screens */
+/*****************/
+@media only screen and (min-width: 375px) and (max-width: 807px) {
+
+  .demoTitle {
+    margin-bottom: 50px;
+  }
+}
