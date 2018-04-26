@@ -178,9 +178,28 @@ class Monitor extends Component {
   }
 
 
-  handleLight = () => {
+  handleLightToggle = () => {
     console.log('turn lights on or off');
+    this.publishLightToggle();
+    // debugger
     this.setState({ lightOn: !this.state.lightOn });
+  }
+
+  publishLightToggle = () => {
+    console.log('submit publish to iot to toggle light in chamber');
+    if (this.state.lightOn === true) {
+      return invokeApig({ // eslint-disable-line
+        path: "/light",
+        method: "post",
+        body: { "state": "Off" }
+      })
+    } else {
+      return invokeApig({ // eslint-disable-line
+        path: "/light",
+        method: "post",
+        body: {"state": "On"}
+      })
+    }
   }
 
   renderDayInCycle() {
@@ -230,14 +249,14 @@ class Monitor extends Component {
             { this.state.lightOn ?
               <div
                 className={styles.light}
-                onClick={this.handleLight}>
-                <img src={lightsOn} alt='light on/off' />
+                onClick={this.handleLightToggle}>
+                <img src={lightsOn} alt='light on' />
               </div>
               :
               <div
                 className={styles.light}
-                onClick={this.handleLight}>
-                <img src={lightsOff} alt='light on/off' />
+                onClick={this.handleLightToggle}>
+                <img src={lightsOff} alt='light off' />
               </div>
             }
               <div className={styles.humidityContainer}>

@@ -30,6 +30,8 @@ export async function invokeApig({
     url = config.apiGateway.IMAGES_URL;
   } else if(path.includes('plants')){
     url = config.apiGateway.PLANT_RECIPE_URL;
+  } else if(path.includes('light')){
+    url = config.apiGateway.LIGHT_URL;
   } else {
     console.error('path is missing, no url can be provided.');
   }

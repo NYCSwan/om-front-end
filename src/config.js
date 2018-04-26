@@ -7,7 +7,8 @@ export default {
     IOT_DATA_URL:'https://t2st9y0qa0.execute-api.us-east-1.amazonaws.com/prod',
     SENSORS_URL:'https://c5pkgxc3i4.execute-api.us-east-1.amazonaws.com/prod',
     IMAGES_URL:'https://nkys8rkide.execute-api.us-east-1.amazonaws.com/prod',
-    GARDENS_URL:'https://thkavap862.execute-api.us-east-1.amazonaws.com/prod'
+    GARDENS_URL:'https://thkavap862.execute-api.us-east-1.amazonaws.com/prod',
+    LIGHT_URL: 'https://p49k1nbnw9.execute-api.us-east-1.amazonaws.com/prod'
   },
   cognito: {
     USER_POOL_ID: 'us-east-1_fMacbcERZ',
